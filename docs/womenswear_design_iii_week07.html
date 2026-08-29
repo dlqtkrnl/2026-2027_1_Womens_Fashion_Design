@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta name="robots" content="noindex,nofollow,noarchive"><meta name="googlebot" content="noindex,nofollow"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>女装设计 III｜第07周 春夏系列策划</title><style>
+:root{--paper:#f7f7f5;--ink:#151515;--muted:#59616d;--blue:#1d4ed8;--red:#d61f45;--green:#047857;--line:#cfd4dc;--white:#fff}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--paper);color:var(--ink)}
+body{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;letter-spacing:0}
+.slide{display:none;position:relative;width:100vw;height:100vh;padding:3rem 4rem 4.5rem;overflow:auto;background:var(--paper)}
+.slide.active{display:flex;flex-direction:column}.slide.dark{background:#090909;color:#fff}
+.session{position:absolute;top:1.45rem;right:4rem;color:#7b8491;font-size:0.85rem;font-weight:800}.weekline{font-size:0.85rem;font-weight:900;color:#667085;margin-bottom:1rem}
+.tag{display:inline-block;align-self:flex-start;padding:.34rem .72rem;margin-bottom:.9rem;background:var(--ink);color:#fff;font-size:0.85rem;font-weight:900}.tag.blue{background:var(--blue)}.tag.red{background:var(--red)}
+h1,h2,h3,p{margin-top:0}h1{font-size:4.2rem;line-height:1.02;margin-bottom:1.4rem}h2{font-size:3rem;line-height:1.08;margin-bottom:1rem}h3{font-size:1.35rem;line-height:1.25;margin-bottom:.6rem}
+.lead{font-size:1.28rem;line-height:1.55;color:var(--muted);max-width:76rem;margin-bottom:1.35rem}.dark .lead{color:#cbd5e1}.keyline{border-left:5px solid var(--blue);padding:.8rem 1rem;background:#eef3ff;font-size:1rem;font-weight:900;line-height:1.5}
+.cover-layout{display:grid;grid-template-columns:minmax(0,.95fr) minmax(520px,1.05fr);gap:2.6rem;align-items:center;flex:1;min-height:0}.cover-copy{min-width:0}.cover-copy .subtitle{font-size:1rem;font-weight:900;color:var(--blue);margin-bottom:1.1rem}
+.series-shell{background:#fff;border:1px solid var(--line);padding:.7rem;box-shadow:0 14px 32px rgba(15,23,42,.11);min-height:0}.series-label{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.1rem .15rem .65rem;font-weight:900}.series-label span{font-size:0.85rem;color:var(--blue)}
+.series-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;height:50vh;background:#111827;padding:5px}.cover-layout .series-grid{height:58vh}.series-grid figure,.visual-grid figure{position:relative;margin:0;overflow:hidden;background:#e5e7eb;min-width:0;min-height:0}.series-grid img,.visual-grid img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top;cursor:zoom-in}.visual-grid img{object-fit:contain;object-position:center;background:#fff}
+.series-grid figcaption,.visual-grid figcaption{position:absolute;left:.35rem;bottom:.35rem;background:rgba(15,23,42,.85);color:#fff;padding:.24rem .42rem;font-size:0.85rem;font-weight:900}
+.series-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}.series-points p{margin:0;border-left:4px solid var(--blue);padding:.55rem .75rem;background:#fff;font-size:1rem;line-height:1.45}
+.roadmap-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;flex:1;align-content:center}.roadmap-item{position:relative;background:#fff;border:1px solid var(--line);border-top:6px solid #9ca3af;padding:1rem;min-height:9rem}.roadmap-item.active{border-color:var(--blue);border-top-color:var(--blue);background:#eef3ff}.roadmap-no{font-size:2.15rem;font-weight:900;color:#c7cdd6;line-height:1}.roadmap-item.active .roadmap-no{color:var(--blue)}.roadmap-item strong{display:block;margin-top:1rem;font-size:1.06rem;line-height:1.35}
+.cards-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;flex:1;align-content:center}.cards-grid.count-3{grid-template-columns:repeat(3,minmax(0,1fr))}.cards-grid.count-5{grid-template-columns:repeat(5,minmax(0,1fr))}.cards-grid.count-6{grid-template-columns:repeat(3,minmax(0,1fr))}.cards-grid.count-8{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-top:6px solid var(--blue);padding:1.15rem;min-height:9.2rem;box-shadow:0 8px 18px rgba(15,23,42,.05)}.card:nth-child(3n+2){border-top-color:var(--red)}.card:nth-child(3n){border-top-color:var(--green)}.card p{font-size:1.04rem;line-height:1.5;color:var(--muted);margin:0}
+.compare-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.3rem;flex:1;align-items:stretch}.compare-panel{background:#fff;border-top:7px solid var(--red);padding:1.5rem;border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.compare-panel.good{border-top-color:var(--green)}.compare-panel h3{font-size:1.6rem}.compare-panel ul{margin:1rem 0 0;padding:0;list-style:none;display:grid;gap:.75rem}.compare-panel li{background:#f6f7f9;border-left:4px solid currentColor;padding:.8rem 1rem;font-size:1.15rem;line-height:1.45}
+.process-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem;flex:1;align-items:center}.process-grid.count-4{grid-template-columns:repeat(4,minmax(0,1fr))}.process-grid.count-8{grid-template-columns:repeat(4,minmax(0,1fr))}.process-step{position:relative;background:#fff;border:1px solid var(--line);padding:1rem;min-height:12rem}.process-step .no{font-size:2.5rem;font-weight:900;color:#cad0d9}.process-step strong{display:block;margin:.9rem 0 .55rem;font-size:1.18rem}.process-step p{margin:0;color:var(--muted);font-size:1rem;line-height:1.45}
+.visual-layout{display:grid;grid-template-columns:minmax(420px,1.15fr) minmax(0,.85fr);gap:2rem;flex:1;min-height:0}.visual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;background:#111827;padding:6px;min-height:0}.visual-grid.single{grid-template-columns:1fr}.visual-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.visual-grid figure{min-height:0}.visual-points{display:flex;flex-direction:column;justify-content:center;gap:.8rem}.visual-points p{background:#fff;border-left:5px solid var(--blue);padding:.9rem 1rem;margin:0;font-size:1.08rem;line-height:1.5}
+.workshop-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;flex:1;align-content:center}.phase{background:#fff;border:1px solid var(--line);padding:1.1rem;min-height:12rem}.phase .time{font-size:1.6rem;font-weight:900;color:var(--blue)}.phase strong{display:block;font-size:1.2rem;margin:1rem 0 .6rem}.phase p{color:var(--muted);font-size:1rem}.output{margin-top:1rem;background:#111827;color:#fff;padding:.9rem 1.1rem;font-size:1.08rem;font-weight:900}
+.rubric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;flex:1;align-content:center}.criterion{background:#fff;border:1px solid var(--line);padding:1.2rem;min-height:12rem}.criterion .check{font-size:2.1rem;color:var(--green);font-weight:900}.criterion strong{display:block;font-size:1.25rem;margin:.8rem 0}.criterion p{color:var(--muted);font-size:1rem;line-height:1.5}
+.divider-copy{display:flex;flex:1;flex-direction:column;justify-content:center;max-width:68rem}.divider-copy .eyebrow{color:#60a5fa;font-weight:900;margin-bottom:1rem}.divider-copy h2{font-size:4.6rem}.divider-copy p{font-size:1.5rem;line-height:1.55;color:#cbd5e1}
+.exit-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;flex:1}.exit-prompt{border-left:5px solid #60a5fa;padding-left:1.3rem;font-size:2rem;line-height:1.5}.exit-list{display:grid;gap:.7rem}.exit-list div{border-bottom:1px solid #374151;padding:.7rem 0;font-size:1.1rem}.exit-list b{color:#60a5fa;margin-right:.7rem}
+.nav-controls{position:fixed;right:2rem;bottom:1.6rem;display:flex;gap:.7rem;z-index:1000}.nav-button{width:3.2rem;height:3.2rem;border:1px solid rgba(255,255,255,.35);background:#111827;color:#fff;font-size:1.35rem;font-weight:900;cursor:pointer}.nav-button:hover{background:var(--blue)}.nav-button:disabled{opacity:.35;cursor:default}.progress{position:fixed;left:2rem;bottom:1.9rem;color:#7b8491;font-size:.85rem;font-weight:900;z-index:1000}
+#zoom{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.87);z-index:3000;pointer-events:none}#zoom.active{display:flex}#zoom img{max-width:92vw;max-height:90vh;object-fit:contain;background:#fff;box-shadow:0 22px 70px rgba(0,0,0,.55)}
+@media screen and (max-width:1000px){.slide{padding:2.4rem 2rem 4.5rem}.session{right:2rem}.cover-layout,.visual-layout{grid-template-columns:1fr}.cover-layout .series-grid{height:42vh}.roadmap-grid,.cards-grid,.cards-grid.count-5,.cards-grid.count-6,.cards-grid.count-8,.process-grid,.process-grid.count-8,.rubric-grid,.workshop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:3.4rem}h2{font-size:2.5rem}}
+.score{float:right;color:var(--blue);font-size:.88rem;font-weight:900}
+.g4{display:grid;gap:.75rem;grid-template-columns:repeat(4,1fr);flex:1;min-height:0}.analysis{flex:none;margin-top:.45rem}.analysis div{background:#fff;border-left:5px solid #2563eb;padding:.4rem;font-size:.85rem}.analysis b{display:block}</style><style id="unified-course-map-style">
+.unified-course-map.slide{padding:2.25rem 3.2rem!important;background:#f7f8fa!important;color:#111827!important;overflow:hidden!important;gap:0!important}
+.unified-course-map .ucm-meta{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.7rem;border-bottom:1px solid #d1d5db;font-size:.92rem;font-weight:800;color:#4b5563;letter-spacing:0}
+.unified-course-map .ucm-label{display:inline-flex;align-items:center;background:#1d4ed8;color:#fff;padding:.35rem .72rem;font-size:0.85rem;font-weight:900}
+.unified-course-map h2{margin:.75rem 0 .25rem!important;font-size:2.1rem!important;line-height:1.3!important;font-weight:900!important;letter-spacing:0!important;color:#111827!important;overflow:visible!important}
+.unified-course-map .ucm-lead{margin:0!important;font-size:1.03rem!important;line-height:1.45!important;color:#4b5563!important}
+.unified-course-map .ucm-grid{display:grid;grid-template-columns:minmax(8rem,.62fr) repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr));gap:.55rem;flex:1;min-height:0;margin-top:.85rem}
+.unified-course-map .ucm-phase,.unified-course-map .ucm-week{min-width:0;min-height:0;border:1px solid #d1d5db;background:#fff}
+.unified-course-map .ucm-phase{display:flex;flex-direction:column;justify-content:center;padding:.7rem .78rem;border-left-width:6px}
+.unified-course-map .ucm-phase b{font-size:0.85rem;line-height:1.2;color:#6b7280}
+.unified-course-map .ucm-phase strong{margin-top:.22rem;font-size:1.02rem;line-height:1.25;color:#111827}
+.unified-course-map .ucm-phase.phase-1{border-left-color:#2563eb;background:#eff6ff}.unified-course-map .ucm-phase.phase-2{border-left-color:#059669;background:#ecfdf5}.unified-course-map .ucm-phase.phase-3{border-left-color:#e11d48;background:#fff1f2}.unified-course-map .ucm-phase.phase-4{border-left-color:#111827;background:#f3f4f6}
+.unified-course-map .ucm-week{position:relative;padding:.68rem .78rem;border-top-width:5px;display:flex;flex-direction:column;justify-content:center}
+.unified-course-map .ucm-week.phase-1{border-top-color:#2563eb}.unified-course-map .ucm-week.phase-2{border-top-color:#059669}.unified-course-map .ucm-week.phase-3{border-top-color:#e11d48}.unified-course-map .ucm-week.phase-4{border-top-color:#111827}
+.unified-course-map .ucm-week.past{background:#eef1f5;color:#4b5563}.unified-course-map .ucm-week.future{background:#fff;color:#111827}
+.unified-course-map .ucm-week.current{background:#111827;color:#fff;border-color:#111827;box-shadow:0 8px 20px rgba(17,24,39,.2)}
+.unified-course-map .ucm-no{display:flex;align-items:center;justify-content:space-between;gap:.45rem;font-size:1.3rem;font-weight:900;line-height:1;color:#9ca3af}
+.unified-course-map .ucm-week.current .ucm-no{color:#fff}.unified-course-map .ucm-now{background:#2563eb;color:#fff;padding:.2rem .42rem;font-size:0.85rem;line-height:1;font-weight:900}
+.unified-course-map .ucm-week strong{display:block;margin-top:.42rem;font-size:.92rem;line-height:1.28;letter-spacing:0;overflow-wrap:anywhere}
+.unified-course-map .ucm-legend{display:flex;justify-content:flex-end;gap:1rem;margin-top:.55rem;font-size:0.85rem;color:#6b7280}.unified-course-map .ucm-legend span{display:inline-flex;align-items:center;gap:.3rem}.unified-course-map .ucm-dot{width:.65rem;height:.65rem;border:1px solid #c7cdd4;background:#fff}.unified-course-map .ucm-dot.past{background:#eef1f5}.unified-course-map .ucm-dot.now{background:#111827;border-color:#111827}
+@media screen and (max-width:1100px){.unified-course-map.slide{padding:1.45rem 1.7rem!important}.unified-course-map h2{font-size:1.65rem!important}.unified-course-map .ucm-grid{gap:.38rem;margin-top:.55rem}.unified-course-map .ucm-phase{padding:.48rem}.unified-course-map .ucm-phase strong{font-size:0.85rem}.unified-course-map .ucm-week{padding:.45rem}.unified-course-map .ucm-week strong{font-size:0.85rem}.unified-course-map .ucm-no{font-size:1rem}}
+@media screen and (max-width:760px){.unified-course-map.slide{overflow-y:auto!important}.unified-course-map .ucm-meta{align-items:flex-start;flex-direction:column}.unified-course-map .ucm-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;flex:none}.unified-course-map .ucm-phase{grid-column:1/-1;min-height:3.5rem}.unified-course-map .ucm-week{min-height:6.2rem}.unified-course-map .ucm-week strong{font-size:.86rem}}
+
+.cards-grid{align-content:start;margin-top:.6rem}.cards-grid.count-6{align-content:center}
+.compare-grid{align-items:start;align-content:start;margin-top:.6rem}
+@media print{
+@page{size:1920px 1080px;margin:0}
+html,body{width:1920px!important;height:auto!important;overflow:visible!important;background:#fff!important}
+.nav-controls,.nav-button,.mode-toggle,[id*="rogress"],[id*="btnPrev"],[id*="btnNext"],#prev,#next,#mode-class,#mode-all{display:none!important}
+.slide{display:flex!important;flex-direction:column;opacity:1!important;visibility:visible!important;transform:none!important;transition:none!important;animation:none!important;width:1920px!important;height:1080px!important;min-height:1080px!important;max-height:1080px!important;overflow:hidden!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid;break-after:auto;page-break-after:auto}
+.slide:not(:first-of-type){break-before:page;page-break-before:always}
+*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+a[href]::after{content:none!important}
+}
+
+/* ================================================================
+   全周次技术基线统一（2026-08-28 일괄 정비）
+   W01·W02·W03 에서 세 번 검증된 지반을 그대로 적용한다. 교학 내용은 건드리지 않는다.
+   ================================================================ */
+html{font-size:clamp(14px,calc(11.5px + 0.42vh),19px)}
+.slide.dark .weekline{color:#9aa3b0}
+.slide.dark .session{color:#9aa3b0}
+body.on-dark .progress{color:#9aa3b0}
+.session{color:#5b6472}
+.progress{left:1.4rem;bottom:.7rem;color:#5b6472}
+.nav-controls{right:1.4rem;bottom:.7rem}
+.mode-controls{position:fixed;left:50%;bottom:.7rem;transform:translateX(-50%);display:flex;border:1px solid #111827;background:#fff;z-index:1001}
+.mode-button{height:2.85rem;padding:0 1rem;border:0;border-right:1px solid #111827;background:#fff;color:#4b5563;font-size:.85rem;font-weight:950;cursor:pointer;letter-spacing:0}
+.mode-button:last-child{border-right:0}
+.mode-button.active{background:#111827;color:#fff}
+.mode-button:focus-visible{outline:3px solid #60a5fa;outline-offset:2px}
+.appendix-slide{background:#f7f8fa}
+.appendix-slide .tag{background:#6b7280!important;color:#fff!important}
+.appendix-slide::before{content:"补充资料";position:absolute;right:4rem;top:3.4rem;color:#868f9d;font-size:.9rem;font-weight:950;letter-spacing:.05em}
+#zoom{cursor:zoom-out}
+#zoom.click-open{pointer-events:auto}
+.slide>.series-shell{display:flex;flex-direction:column;flex:1;min-height:0}
+.slide>.series-shell .series-grid{height:auto;flex:1;min-height:0}
+/* 잔여 보정: 표지의 series-shell 은 .cover-layout 안에 중첩돼 있어 `.slide>` 선택자가 닿지 않는다
+   (W01 의 .four-question-layout 과 같은 구조). 死高 vh 만 해제하고 도판 비율은 건드리지 않는다. */
+.cover-layout>.series-shell{display:flex;flex-direction:column;min-height:0}
+.cover-layout>.series-shell .series-grid{height:auto;flex:1;min-height:0}
+/* 대비 공통 보정(전 주차 동일 컴포넌트): 十六周总图의 주차 번호·단계 라벨, 장식용 큰 숫자.
+   수치는 W02·W03 에서 실측 검증된 값. */
+.ucm-no,.unified-course-map .ucm-no{color:#6b7280}
+.ucm-phase b,.unified-course-map .ucm-phase b{font-size:.92rem;color:#5b6472}
+.no,.process-step .no,.demo-step .no,.gate-question .gate-no{color:#7e8894}
+.boundary-no{color:#5b6472}
+
+
+@media screen and (max-height:820px){
+  .slide{padding:2.2rem 3.2rem 4.5rem}
+  .session{right:3.2rem}
+  .appendix-slide::before{right:3.2rem}
+  h1{font-size:3.5rem}
+  h2{font-size:2.45rem}
+  .lead{font-size:1.14rem;line-height:1.48;margin-bottom:1rem}
+  .tag{margin-bottom:.6rem}
+  .weekline{margin-bottom:.6rem}
+  .compare-panel{padding:1.05rem}
+  .compare-panel li{padding:.6rem .8rem;font-size:1.05rem}
+  .card,.phase,.criterion{min-height:0}
+
+  /* W07 잔여: slide-10 우측 .visual-points 의 항목이 높이를 넘겨 도판까지 밀어냈다 */
+  .visual-points{gap:.5rem}
+  .visual-points p{padding:.55rem .7rem;font-size:.92rem;line-height:1.34}
+}
+@media screen and (max-width:1000px){.mode-controls{bottom:.5rem}}
+@media print{html{font-size:16px!important}.mode-controls{display:none!important}}
+
+/* ===== 第07周 内容批次 追加样式 (DECISION.md) ===== */
+
+/* B-01 [P0] 内联 style 38 处 → 类 5 个。
+   **颜色、尺寸与间距全部照搬现值 —— 版面不得变动 1px。**
+   实测对比（白底）：#2563eb 5.17 / #b91c1c 6.47 / #64748b 4.76，均≥4.5，所以不改色。 */
+.card-do,.card-dont{margin-top:.3rem}
+.card-do{color:#2563eb}
+.card-dont{color:#b91c1c}
+.series-points.cols-1{grid-template-columns:1fr;margin-top:.5rem}
+.series-points.cols-2{grid-template-columns:repeat(2,1fr);margin-top:.5rem}
+.series-points.cols-3{grid-template-columns:repeat(3,1fr);margin-top:.5rem}
+.series-points.cols-1.mt-42{margin-top:.42rem}
+
+/* B-02 [P0] 出处行体例统一。本周原本有三种写法：
+   slide-1 类＋内联 / slide-8 内联 / **slide-10 无任何样式（与正文同大）**。
+   没有类就无法用 validate.py 机械地量“图片页出处覆盖率”。 */
+.source-note{margin-top:.4rem;font-size:.85rem;line-height:1.4;color:#5b6472}
+.source-note a{color:#3157a4}
+
+/* A-03 [P0] 两课时节奏条（从第05周移植，同一体例） */
+.lesson-budget{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;margin:0 0 .9rem;
+  background:#111827;color:#fff;padding:.62rem .78rem;font-size:.98rem;line-height:1.25}
+.lesson-budget b{color:#93c5fd;margin-right:.25rem}
+.lesson-budget span{border-left:1px solid #475569;padding-left:.55rem}
+
+/* A-07 [P1] 学情与重难点 */
+.week-context{margin-top:.5rem;background:#f1f3f7;border-radius:.4rem;padding:.45rem .72rem;
+  font-size:.95rem;line-height:1.42;color:#4a525c}
+.week-context b{color:#39414c;margin-right:.35rem}
+
+/* A-04 [P0] 第06周→本周 衔接页 */
+.bridge-grid{display:grid;grid-template-columns:1fr 1.25fr .82fr;gap:.36rem;margin:.55rem 0 .6rem}
+.bridge-cell{display:flex;align-items:center;background:#fff;border:1px solid #cfd4dc;
+  border-radius:.4rem;padding:.62rem .8rem;font-size:1.04rem;line-height:1.32;color:#2b3138}
+.bridge-cell.bridge-head{background:#eceff4;font-weight:900;color:#39414c;font-size:.99rem;letter-spacing:.02em}
+.bridge-cell.bridge-to{color:#1d4ed8;font-weight:800}
+.bridge-cell.bridge-where{color:#6b7280;font-size:.93rem}
+.bridge-cell b{color:#d61f45}
+.bridge-term{background:#f1f3f7;border-left:5px solid #d61f45;border-radius:.35rem;
+  padding:.62rem .92rem;font-size:1rem;line-height:1.45;color:#2b3138;margin-bottom:.46rem}
+.bridge-term b{color:#d61f45;margin-right:.35rem}
+.bridge-open{background:#fff;border:1px dashed #c3cad3;border-radius:.4rem;
+  padding:.62rem .92rem;font-size:.97rem;line-height:1.46;color:#4a525c}
+.bridge-open b{color:#39414c;margin-right:.35rem}
+
+@media screen and (max-height:820px){
+  .lesson-budget{margin-bottom:.58rem;padding:.5rem .7rem;font-size:.88rem}
+  .week-context{padding:.34rem .6rem;font-size:.87rem;line-height:1.34}
+  .source-note{font-size:.8rem;line-height:1.34;margin-top:.32rem}
+}
+@media screen and (min-height:900px){
+  .bridge-grid{gap:.48rem;margin:.72rem 0 .78rem}
+  .bridge-cell{padding:1.3rem .95rem;font-size:1.18rem}
+  .bridge-cell.bridge-head{font-size:1.1rem}
+  .bridge-cell.bridge-where{font-size:1.05rem}
+  .bridge-term{padding:.92rem 1.05rem;font-size:1.12rem;line-height:1.5;margin-bottom:.62rem}
+  .bridge-open{padding:.92rem 1.05rem;font-size:1.08rem;line-height:1.52}
+}
+</style>
+</head>
+<body><section class="slide active" id="slide-1"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="cover-layout"><div class="cover-copy"><div class="subtitle">第07周｜春夏系列策划</div><h1>春夏系列不是五张效果图，而是一个可穿、可做、可选择的系统。</h1><p class="lead">把第06周的三个元素家族编辑成五套造型与明确产品结构。</p><div class="keyline">季节条件 → 系列角色 → 产品矩阵 → 5套阵列 → 2套实物候选</div></div><div class="series-shell"><div class="series-label"><strong>春夏系列参考｜Dolce&amp;Gabbana 2026春夏成衣</strong><span>同一系列 5套造型｜品类分布对照</span></div><div class="series-grid"><figure><img class="zoomable" src="w07_ss26_assets/ss26_01_outerwear_layer.jpg" alt="Dolce&amp;Gabbana 2026春夏成衣 造型 01｜外套层｜风衣＋轻质内搭"><figcaption>01</figcaption></figure><figure><img class="zoomable" src="w07_ss26_assets/ss26_02_shirting_set.jpg" alt="Dolce&amp;Gabbana 2026春夏成衣 造型 02｜衬衫套装｜同料上下装"><figcaption>02</figcaption></figure><figure><img class="zoomable" src="w07_ss26_assets/ss26_03_separates_light.jpg" alt="Dolce&amp;Gabbana 2026春夏成衣 造型 03｜轻量单品｜背心＋印花长裤"><figcaption>03</figcaption></figure><figure><img class="zoomable" src="w07_ss26_assets/ss26_04_tailoring_light.jpg" alt="Dolce&amp;Gabbana 2026春夏成衣 造型 04｜浅色西装｜春夏结构"><figcaption>04</figcaption></figure><figure><img class="zoomable" src="w07_ss26_assets/ss26_05_tailoring_neutral.jpg" alt="Dolce&amp;Gabbana 2026春夏成衣 造型 05｜条纹西装｜中性色系对比"><figcaption>05</figcaption></figure></div><div class="series-source source-note">图像：Dolce&amp;Gabbana 2026春夏成衣（米兰时装周，2025年9月）｜来源：品牌官方发布 dolcegabbana.com｜课堂选取5套用于季节条件与品类分布观察，不代表品牌官方系列结构。</div><div class="g4 analysis"><div><b>常量｜同一条条纹长裤</b>五套里有四套穿同一类条纹长裤。<b>一条裤子撑起整个系列</b>——这就是“重复单品”。</div><div><b>变量｜上装换，下装不换</b>风衣＋背心（01）→ 同料衬衫（02）→ 背心（03）→ 短外套（04）→ 西装（05）。</div><div><b>变量｜覆盖面积</b>露腰（01·03）→ 全覆盖（02）→ 半覆盖（04·05）。春夏的体感差别就落在这一项上。</div><div><b>角色｜梯度</b>02 入口（一套成立、最好卖）；05 高潮；01·04 发展；03 轻量转折。</div></div></div></div></section>
+<section class="slide unified-course-map" id="slide-2"><div class="ucm-meta"><span class="ucm-label">十六周课程路径</span><span>女装设计 III · 第07周 · 第1课时｜45分钟</span></div><h2>十六周不是孤立主题，而是一条连续的设计证据链</h2><p class="ucm-lead">前8周建立方法并完成中期验证；后8周深化春夏与秋冬系列，最终独立完成主题系列与答辩。</p><div class="ucm-grid"><div class="ucm-phase phase-1"><b>01–04</b><strong>判断与定位</strong></div><div class="ucm-week phase-1 past"><div class="ucm-no">01</div><strong>美学·原理·历史</strong></div><div class="ucm-week phase-1 past"><div class="ucm-no">02</div><strong>平面·立体·细节造型</strong></div><div class="ucm-week phase-1 past"><div class="ucm-no">03</div><strong>穿着者与时事主题</strong></div><div class="ucm-week phase-1 past"><div class="ucm-no">04</div><strong>主题板与设计简报</strong></div><div class="ucm-phase phase-2"><b>05–08</b><strong>提取与验证</strong></div><div class="ucm-week phase-2 past"><div class="ucm-no">05</div><strong>元素提取</strong></div><div class="ucm-week phase-2 past"><div class="ucm-no">06</div><strong>元素变形·分解板</strong></div><div class="ucm-week phase-2 current" aria-current="step"><div class="ucm-no">07<span class="ucm-now">本周</span></div><strong>春夏系列策划 V1</strong></div><div class="ucm-week phase-2 future"><div class="ucm-no">08</div><strong>Gate 2：白坯布样与中期评审</strong></div><div class="ucm-phase phase-3"><b>09–12</b><strong>季节系列开发</strong></div><div class="ucm-week phase-3 future"><div class="ucm-no">09</div><strong>Gate 2反馈：春夏再编辑与产品深化</strong></div><div class="ucm-week phase-3 future"><div class="ucm-no">10</div><strong>秋冬系列概念与外套轴</strong></div><div class="ucm-week phase-3 future"><div class="ucm-no">11</div><strong>秋冬材料、体量与样衣验证</strong></div><div class="ucm-week phase-3 future"><div class="ucm-no">12</div><strong>秋冬系列最终编辑与产品开发（Gate 3）</strong></div><div class="ucm-phase phase-4"><b>13–16</b><strong>独立项目与考核</strong></div><div class="ucm-week phase-4 future"><div class="ucm-no">13</div><strong>自定主题：独立方法调用与首次提案</strong></div><div class="ucm-week phase-4 future"><div class="ucm-no">14</div><strong>2D/3D实验与受控修改</strong></div><div class="ucm-week phase-4 future"><div class="ucm-no">15</div><strong>最终系列编辑、作品集与答辩排练</strong></div><div class="ucm-week phase-4 future"><div class="ucm-no">16</div><strong>期末实践考核、答辩与反思</strong></div></div><div class="ucm-legend"><span><i class="ucm-dot past"></i>已完成</span><span><i class="ucm-dot now"></i>本周</span><span><i class="ucm-dot"></i>后续</span></div></section>
+<section class="slide" id="slide-3"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag red">03 学习目标</div><h2>今天要完成春夏五套系列编排V1</h2><p class="lead">每套有角色，整个系列有节奏和制作优先级。</p><div class="lesson-budget"><b>第1课时节奏</b><span>衔接与导入6′</span><span>季节与架果7′</span><span>案例与教材证据12′</span><span>实作20′</span></div><div class="cards-grid count-4"><div class="card"><h3>季节</h3><p>把温度、湿度、日照与维护写进材料和结构。</p><p class="card-do">交什么：一页春夏条件表，每条写出对应的材料或结构决定。</p></div><div class="card"><h3>架构</h3><p>分配开场、中段、收尾和商业入口。</p><p class="card-do">交什么：五套的角色标注，每套一句“它为什么存在”。</p></div><div class="card"><h3>产品</h3><p>规划单品数量、交叉搭配与重复单品。</p><p class="card-do">交什么：产品矩阵一页，标出重复单品和空缺品类。</p></div><div class="card"><h3>选择</h3><p>确定两套差异明确的实物候选。</p><p class="card-do">交什么：两张候选卡，各写清它要验证的那一个问题。</p></div></div><div class="week-context"><b>学情</b>大二，已完成第01—06周，能交出分解板与三个设计家族。当前三个普遍困难，本周已分别用页面给出对照：把五套按“好看程度”排序而不是按角色排（见“五套五种任务”）；五套品类互相重复、矩阵出现空格（见“系列案例 B”的五个品类零重复）；两套实物候选难度相同、验证同一个问题（见“课堂实作”的不合格条）。　<b>教学重点</b>给每套写出“它为什么存在”，并让重复单品把五套连成产品系统。　<b>教学难点</b>两套候选必须验证两个不同的问题，且难度要拉开。</div></section>
+<section class="slide" id="slide-bridge"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag red">第06周→本周</div><h2>今天不从零开始——上周的三个家族，就是今天五套的角色来源</h2><p class="lead">第06周回答“如何有规则地改变元素”；本周回答“把这些变化编成一个能卖、能做的系统”。</p><div class="bridge-grid"><div class="bridge-cell bridge-head">上周带来的</div><div class="bridge-cell bridge-head">今天变成</div><div class="bridge-cell bridge-head">在哪一页用</div><div class="bridge-cell"><b>3个设计家族</b></div><div class="bridge-cell bridge-to">五套里的角色梯度：入口／发展／高潮／转折</div><div class="bridge-cell bridge-where">五套五种任务</div><div class="bridge-cell"><b>12个二维变体</b></div><div class="bridge-cell bridge-to">40张快速草图的起点：先扩到40，再编辑回12</div><div class="bridge-cell bridge-where">1课时检查</div><div class="bridge-cell"><b>6个立体测试</b></div><div class="bridge-cell bridge-to">两套实物候选的依据——哪一套已经证明做得出来</div><div class="bridge-cell bridge-where">两套候选</div><div class="bridge-cell"><b>不变条件</b>（两条）</div><div class="bridge-cell bridge-to">贯穿五套的设计代码，强度可分配但不可消失</div><div class="bridge-cell bridge-where">代码强度分配</div><div class="bridge-cell">分解板上的<b>失败证据</b></div><div class="bridge-cell bridge-to">中期风险清单的第一批条目</div><div class="bridge-cell bridge-where">第08周 Gate 2 预告</div></div><div class="bridge-term"><b>术语接续</b>第06周的“<b>不变条件</b>”在本周叫“<b>设计代码</b>”——同一件事，换了工作位置：上周它是“改变时不能破坏的东西”，本周它是“五套之间保持一致的东西”。</div><div class="bridge-open"><b>开场 3 分钟</b>摊开第06周带来的三样：分解板、3个家族的说明、<b>6个立体测试</b>的记录照片 → 第06周离堂句写的“它形成了 ______ 家族，并将<b>在春夏系列中承担 ______ 角色</b>”，把那两个空抄到今天第一页 → 今天全程用这三个家族，不新起主题。</div></section><section class="slide" id="slide-4"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">04 春夏条件</div><h2>春夏不是少穿几件，而是重新处理身体接口</h2><p class="lead">本地的真实条件：<b>室外 35℃ 以上、湿度高、室内空调 24℃</b>——一天之内要跨过 10 度温差。</p><div class="cards-grid count-5"><div class="card"><h3>热</h3><p>通风、遮阳、排汗和贴肤面积。</p><p class="card-do">验证：抬臂和快走一分钟，看腋下、后背哪里先闷。</p></div><div class="card"><h3>湿</h3><p>干燥速度、黏附感与透明变化。</p><p class="card-do">验证：喷水后看布面变不变透、多久干、贴不贴皮肤。</p></div><div class="card"><h3>光</h3><p>透视、反射、防晒与色彩稳定。</p><p class="card-do">验证：拿到窗边逆光看一次——很多浅色布在阳光下会透。</p></div><div class="card"><h3>转换</h3><p>户外高温与室内冷气的层次。</p><p class="card-do">验证：五套里至少两套要能加一层，加完不能变得笨重。</p></div><div class="card"><h3>维护</h3><p>高频清洗、易皱、收纳和耐用。</p><p class="card-do">验证：揉成一团再展开，看皱痕多久消失。</p></div></div></section>
+<section class="slide" id="slide-5"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">05 系列概念</div><h2>系列编排不是把五张图排在一起</h2><p class="lead">共同规则和角色差异<b>必须同时成立</b>。只有其中一样，出来的都不是系列。</p><div class="compare-grid"><div class="compare-panel "><h3>看似系列</h3><ul><li>同一人物模板和配色</li><li>每套复制同一装饰</li><li>没有产品与难度计划</li><li>五套换的只是长度或颜色</li></ul></div><div class="compare-panel good"><h3>真正系列</h3><ul><li>共享2—3个核心代码</li><li>强度、产品和身体距离变化</li><li>能说明每套为什么存在</li><li>删掉任何一套，系列都会少一项任务</li></ul></div></div><div class="series-points cols-2"><p><b>两个都要过：</b>①遮住四套只看一套，能不能认出属于这个系列？②五套并排，能不能一眼说出谁和谁不同？</p><p><b>只过第①条</b>＝五套太像，是复制；<b>只过第②条</b>＝五套太散，是拼盘。</p></div></section>
+<section class="slide" id="slide-6"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag red">06 角色分配</div><h2>五套造型，五种任务——没有一套是来凑数的</h2><p class="lead">角色可以调整，但<b>不能五套都做同一件事</b>。删掉哪一套，系列就少了哪一项任务？</p><div class="cards-grid count-5"><div class="card"><h3>造型 01｜开场</h3><p>最清楚地宣布主题和轮廓，第一眼就要让人看懂你在做什么。</p></div><div class="card"><h3>造型 02｜入口</h3><p>最易理解、可穿、可购买。<b>这一套决定系列有没有市场。</b></p></div><div class="card"><h3>造型 03｜发展</h3><p>把核心元素扩展到别的品类，证明规则不只适合开场那一套。</p></div><div class="card"><h3>造型 04｜转折</h3><p>改变比例、材料或身体距离，避免中段三套读起来一样。</p></div><div class="card"><h3>造型 05｜收束</h3><p>实验强度最高的一套，同时回响开场，给整组一个记忆点。</p></div></div><div class="series-points cols-1"><p><b>检查：</b>逐套问一句“删掉它，系列少了什么”。答不出来的那一套，就是重复的。</p></div></section>
+<section class="slide" id="slide-7"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">07 系列案例 A</div><h2>前三套压住，后两套放开——这就是节奏</h2><p class="lead">五套共享同一个轮廓关系，<b>差别几乎全部由色彩承担</b>。</p><div class="series-shell"><div class="series-label"><strong>同一系列 5套 · 共同代码与角色差异</strong><span>看共同代码与角色差异</span></div><div class="series-grid"><figure><img class="zoomable" src="w02_07_visual_assets/w06_s04_01.png" alt="五个系列角色样本 造型 01"><figcaption>01</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s04_02.png" alt="五个系列角色样本 造型 02"><figcaption>02</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s04_03.png" alt="五个系列角色样本 造型 03"><figcaption>03</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s04_04.png" alt="五个系列角色样本 造型 04"><figcaption>04</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s04_05.png" alt="五个系列角色样本 造型 05"><figcaption>05</figcaption></figure></div></div><div class="g4 analysis"><div><b>常量｜上紧下张</b>五套都是“上身收紧 + 下摆张开”的同一个轮廓关系，一次都没有改过。</div><div><b>变量｜色</b>黑（01·02·03）→ 米＋棕（04）→ 红＋格纹（05）。<b>前三套故意压平，把力气留到最后。</b></div><div><b>变量｜领口</b>立领 → 双排扣 → 蝴蝶结 → 尖领 → 领带。领口是唯一每套都改的地方。</div><div><b>角色｜梯度</b>01 开场；02·03 入口（可单穿）；04 转折（唯一的长裙与暖色）；05 收束（最强）。</div></div><div class="series-points"><p>课堂回答：贯穿三套以上的设计代码是哪一条？如果把 05 挪到第一位，前面四套还压得住吗？</p></div><div class="source-note">来源：课程 2026–2027 教学资料库｜用途：仅用于“共同轮廓关系与色彩承担差异”的观察；品牌、系列与年份待开课前核实后补注</div></section>
+<section class="slide" id="slide-8"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">08 教材证据</div><h2>先搭产品骨架，再画最终效果图</h2><p class="lead">教材给了一张真实品牌的<b>女装夏季产品结构表</b>——设计从这张表开始，不是从效果图开始。</p><div class="visual-layout"><div class="visual-grid single"><figure><img class="zoomable" src="w09_16_visual_assets/textbook/srcA_p122_product_structure.png" alt="某品牌女装夏季新品开发系列产品结构表"><figcaption>01</figcaption></figure></div><div class="visual-points"><p><b>先数品类，再画图。</b>衬衫 12 款、连衣裙 18 款、半裙 7 款、长裤 5 款——先定每个品类做几款，再决定它长什么样。</p><p><b>基本款多于形象款。</b>夏季 88 款里基本款 52、形象款 36。换算到你的五套：<b>形象款最多两套</b>。</p><p><b>上装多于下装。</b>衬衫＋T恤＋外套合计远超裙与裤——因为一条裤子要配好几件上衣。<b>重复单品就是从这儿来的。</b></p><p>观察任务：照这张表给你的五套列一遍——几件上装、几件下装、几件连衣裙、几件外搭。哪一格是空的？</p><p class="source-note">来源：于芳《服装设计基础与创意实践》（中国纺织出版社，2023），第122页，表7-1。图像按教学需要裁切局部，未改变原始比例。第15周会用同一张表回头核对你的比例。</p></div></div></section>
+<section class="slide" id="slide-9"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag red">09 复杂度</div><h2>每套单品越多，不代表设计越完整</h2><p class="lead">复杂度是<b>成本</b>，不是优点。五套加起来，要能在第08周之前做得完。</p><div class="cards-grid count-4"><div class="card"><h3>低</h3><p>2件；清楚的商业入口。</p><p class="card-do">放在入口款上——它要证明系列能被理解，不需要证明难度。</p></div><div class="card"><h3>中</h3><p>3件；交叉搭配与层次。</p><p class="card-do">放在发展和转折上——层次变化在这里发生。</p></div><div class="card"><h3>高</h3><p>3—4件；承担结构实验或高潮。</p><p class="card-do">整个系列最多两套。超过两套，中期评审就交不出实物。</p></div><div class="card"><h3>警戒</h3><p>所有造型都高复杂度会导致制作失控。</p><p class="card-do">五套全高复杂度的结果不是“更完整”，是两套都做不完。</p></div></div></section>
+<section class="slide" id="slide-10"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">10 教材证据</div><h2>春夏的材料证据有两层：选什么，和把它改成什么</h2><p class="lead">左边是<b>选来的材料</b>，右边是<b>被改造过的材料</b>。春夏尤其需要第二层。</p><div class="visual-layout"><div class="visual-grid"><figure><img class="zoomable" src="w02_08_textbook_assets/sourceB_052_cutout_1.png" alt="Color Story"><figcaption>01</figcaption></figure><figure><img class="zoomable" src="w02_08_textbook_assets/srcA_p080_fabric.png" alt="面料再造：减法工艺的材料证据"><figcaption>02</figcaption></figure></div><div class="visual-points"><p><b>01 色彩与材料板：</b>色卡按明度分组，深色只占最下面一行；橙、红、蓝这些强调色都只有一小块。旁边压着一块皮草——<b>颜色和材料必须一起看</b>，同一个米色在平纹布上和在毛皮上不是一回事。</p><p><b>02 图5-41／5-42 减法面料再造：</b>割纱、抽纱、镂空、烧灼，教材把它们归为“减法”。<b>对春夏来说，减法就是通风</b>——每一个洞既是装饰，也是散热口。</p><p><b>记录要写数值：</b>克重、透光、悬垂长度、拉伸回复秒数。“手感清爽”不是记录。</p><p>观察任务：你的五套里，有没有一处开口<b>同时解决造型和体感</b>？只解决其中一个，就还没到春夏。</p><p class="source-note">来源：01 Steven Faerm《The Fashion Design Course》（Quarto Publishing plc），第52页；02 于芳《服装设计基础与创意实践》（中国纺织出版社，2023），第80页。图像按教学需要裁切局部，未改变原始比例。</p></div></div></section>
+<section class="slide" id="slide-11"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">11 代码分布</div><h2>设计代码要分配强度，不是每套都贴一遍</h2><p class="lead">出现太少＝不成系列；每套一模一样＝复制。<b>下面的次数是可核对的下限。</b></p><div class="process-grid count-5"><div class="process-step"><div class="no">01</div><strong>核心A</strong><p>五套中出现4—5次</p></div><div class="process-step"><div class="no">02</div><strong>核心B</strong><p>出现3—4次</p></div><div class="process-step"><div class="no">03</div><strong>辅助C</strong><p>出现2—3次</p></div><div class="process-step"><div class="no">04</div><strong>变化</strong><p>位置、尺度、材料或身体距离改变</p></div><div class="process-step"><div class="no">05</div><strong>留白</strong><p>至少一套降低强度，形成呼吸</p></div></div><div class="series-points cols-2"><p><b>怎么核对：</b>五套并排，逐条代码数出现次数。数不出来，说明那不是代码，只是某一套的细节。</p><p><b>留白那一套：</b>不是“随便做的那套”，而是<b>有意降低强度</b>的那套——它让其余四套显得更强。</p></div></section>
+<section class="slide" id="slide-12"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag red">12 系列案例 B</div><h2>五套五个品类，没有一个重复——产品矩阵就该长这样</h2><p class="lead">背景和配件都不变，<b>你能看到的差别全是品类差别</b>。</p><div class="series-shell"><div class="series-label"><strong>同一系列 5套 · 品类分布对照</strong><span>看品类分布</span></div><div class="series-grid"><figure><img class="zoomable" src="w02_07_visual_assets/w06_s18_01.jpg" alt="五个系列矩阵样本 造型 01"><figcaption>01</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s18_02.jpg" alt="五个系列矩阵样本 造型 02"><figcaption>02</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s18_03.jpg" alt="五个系列矩阵样本 造型 03"><figcaption>03</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s18_04.jpg" alt="五个系列矩阵样本 造型 04"><figcaption>04</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s18_05.jpg" alt="五个系列矩阵样本 造型 05"><figcaption>05</figcaption></figure></div></div><div class="g4 analysis"><div><b>常量｜场景与配件</b>同一片货架背景、同一类手袋。背景不变，观众才能直接比较品类。</div><div><b>变量｜品类</b>裤装套装 → 衬衫式连衣裙 → 大衣＋半裙 → 西装套装 → 针织连衣裙。<b>五套五个品类。</b></div><div><b>变量｜色彩面积</b>棕 → 黄 → 粉（上下同色）→ 米白 → 黑白条纹。每套只允许一个色彩事件。</div><div><b>角色｜梯度</b>03 高潮（粉色最强）；01·04 入口（最可穿）；02 发展；05 收束（用图案收尾）。</div></div><div class="series-points"><p>课堂练习：把这五套填进产品×代码矩阵，再把你自己的五套填进去。哪一张表的空格更多？</p></div><div class="source-note">来源：课程 2026–2027 教学资料库｜用途：仅用于“五套五个品类零重复”的产品矩阵观察；品牌、系列与年份待开课前核实后补注</div></section>
+<section class="slide" id="slide-13"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">13 1课时检查</div><h2>20分钟：40张快速草图先编辑到12张</h2><p class="lead">先看系统关系，不做效果图细化。</p><div class="workshop-grid"><div class="phase"><div class="time">06分钟</div><strong>三个家族各画8—12张</strong><p>数量</p></div><div class="phase"><div class="time">05分钟</div><strong>删除重复和无来源方案</strong><p>筛选</p></div><div class="phase"><div class="time">05分钟</div><strong>补产品与角色空缺</strong><p>矩阵</p></div><div class="phase"><div class="time">04分钟</div><strong>保留12张候选</strong><p>墙面</p></div></div><div class="output">输出：12张同尺度草图，背面写家族、产品和角色。</div><div class="series-points cols-2"><p><b>不合格：</b>草图尺度不一，或背面没写来源家族——没法比较的草图，编辑环节用不上。</p><p><b>交接第2课时：</b>带着这12张进入五套编辑。少于10张就没有可删的余地，编辑会变成硬凑。</p></div></section>
+<section class="slide dark" id="slide-14"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="divider-copy"><div class="eyebrow">第2课时｜45分钟</div><h2>从方案数量进入系列编辑</h2><p>编辑与矩阵8.5′ → 实作26′ → 讲评8′ → 评价·预告与离堂2.5′</p></div></section>
+<section class="slide" id="slide-15"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag red">15 五套编辑</div><h2>从12张候选到5套系列编排</h2><p class="lead">编辑本身就是设计能力。</p><div class="process-grid count-5"><div class="process-step"><div class="no">01</div><strong>排序</strong><p>按角色与叙事强度排列</p></div><div class="process-step"><div class="no">02</div><strong>去重</strong><p>删除功能相同的造型</p></div><div class="process-step"><div class="no">03</div><strong>补缺</strong><p>补产品与身体距离空位</p></div><div class="process-step"><div class="no">04</div><strong>平衡</strong><p>调整材料、色彩和复杂度</p></div><div class="process-step"><div class="no">05</div><strong>确认</strong><p>每套写一句存在理由</p></div></div><div class="series-points cols-3"><p><b>排序先做，去重后做。</b>顺序定下来，重复的两套自然会挨在一起，一眼就看得出来。</p><p><b>补缺不是补画。</b>先看矩阵哪一格空着（品类？角色？身体距离？），再决定补什么。</p><p><b>“存在理由”写不出来的那一套，就是要删的那一套。</b>五句话都写完，编辑才算结束。</p></div></section>
+<section class="slide" id="slide-16"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">16 交叉搭配</div><h2>重复单品让系列成为产品系统</h2><p class="lead">重复不是偷懒。<b>同一条裤子出现在三套里，系列才有产品逻辑</b>——封面那五套就是这么做的。</p><div class="cards-grid count-4"><div class="card"><h3>核心上装</h3><p>至少进入2套，改变下装与层次。</p><p class="card-do">例：一件衬衫，配长裤是入口，配长裙是发展。同一件，两个角色。</p></div><div class="card"><h3>核心下装</h3><p>与不同上装形成两种角色。</p><p class="card-do">例：一条条纹长裤贯穿三套，上装每次都换。开发量减一半，系列反而更整。</p></div><div class="card"><h3>外层</h3><p>连接室内外温度转换。</p><p class="card-do">本地一天要跨 10 度温差，外层是春夏系列里最被低估的一件。</p></div><div class="card"><h3>变化件</h3><p>承担实验强度，不要求高频重复。</p><p class="card-do">它不必重复，但要能和核心单品搭得上——搭不上的实验件，是孤立的。</p></div></div><div class="series-points cols-1"><p><b>检查：</b>数一数五套里一共有几件不同的单品。超过 12 件，第08周之前做不完；少于 8 件，系列会显得单薄。</p></div></section>
+<section class="slide" id="slide-17"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">17 系列平衡</div><h2>商业入口与实验高潮必须共存</h2><p class="lead">两者共同证明设计系统具有范围。</p><div class="compare-grid"><div class="compare-panel "><h3>入口造型</h3><ul><li>穿着逻辑清楚</li><li>产品与价格可理解</li><li>核心代码强度较低</li></ul></div><div class="compare-panel good"><h3>高潮造型</h3><ul><li>推高体积、材料或细节</li><li>暴露制作风险</li><li>仍保留系列身份</li></ul></div></div><div class="series-points cols-2"><p><b>检查左边：</b>把入口造型的价格说出来。说不出，它就还不是入口。</p><p><b>检查右边：</b>把高潮造型的核心代码指出来。指不出，它只是“做得复杂”，不是高潮。</p></div><div class="series-points cols-1 mt-42"><p><b>比例：</b>五套里入口至少一套、高潮最多两套。全是入口＝没有立场，全是高潮＝做不完也卖不掉。</p></div></section>
+<section class="slide" id="slide-18"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag red">18 实物候选</div><h2>两套候选要证明两个不同的问题</h2><p class="lead">别只选最喜欢或最复杂的。<b>难度一样的两套，等于只验证了一次。</b></p><div class="series-shell"><div class="series-label"><strong>Zomer · 同一系列 5套</strong><span>看制作难度差</span></div><div class="series-grid"><figure><img class="zoomable" src="w02_07_visual_assets/w06_s19_01.png" alt="Zomer · 五个候选比较样本 造型 01"><figcaption>01</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s19_02.png" alt="Zomer · 五个候选比较样本 造型 02"><figcaption>02</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s19_03.png" alt="Zomer · 五个候选比较样本 造型 03"><figcaption>03</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s19_04.png" alt="Zomer · 五个候选比较样本 造型 04"><figcaption>04</figcaption></figure><figure><img class="zoomable" src="w02_07_visual_assets/w06_s19_05.png" alt="Zomer · 五个候选比较样本 造型 05"><figcaption>05</figcaption></figure></div></div><div class="g4 analysis"><div><b>常量｜“系在身上”</b>五套都有一块布被裹、系或搭上去，不是缝死的——这是贯穿全场的手法。</div><div><b>变量｜制作难度</b>拼接裙（02）最难 → 包裹（01·03）中等 → 西装（04）与长外套（05）是常规工艺。</div><div><b>变量｜身体关系</b>遮住腰（01）→ 露出腿（02）→ 缠在胯（03）→ 完全包住（04·05）。</div><div><b>选候选就看这两行</b>一套证明结构（02 或 04），一套证明穿着入口（03 或 05）。<b>难度不能一样。</b></div></div><div class="series-points"><p>课堂回答：如果只能做两套，你选哪两套？说出各自要验证的那<b>一个</b>问题。</p></div><div class="source-note">来源：课程 2026–2027 教学资料库｜用途：仅用于“两套候选各自验证不同问题”的观察；品牌、系列与年份待开课前核实后补注</div></section>
+<section class="slide" id="slide-19"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">19 系列矩阵</div><h2>一页矩阵同时检查六类关系</h2><p class="lead">效果图下面的信息要标准化——<b>五套用同一套字段，才比得出来</b>。</p><div class="cards-grid count-6"><div class="card"><h3>角色</h3><p>开场 / 入口 / 发展 / 转折 / 收束，五套各占一个，不重复。</p></div><div class="card"><h3>产品</h3><p>每套单品与重复单品。</p></div><div class="card"><h3>代码</h3><p>核心和辅助元素的强度。</p></div><div class="card"><h3>材料</h3><p>主、辅、强调材料。</p></div><div class="card"><h3>色彩</h3><p>面积比例与节奏。</p></div><div class="card"><h3>风险</h3><p>纸样、动作、工艺和时间。</p></div></div><div class="series-points cols-2"><p><b>怎么用：</b>先填“角色”和“产品”两列——这两列填完，材料和色彩基本就定了。</p><p><b>“风险”那一列不能空。</b>写不出风险，说明还没想过怎么做，中期评审第一个问的就是它。</p></div></section>
+<section class="slide" id="slide-20"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">20 课堂实作</div><h2>26分钟：完成五套春夏系列编排V1</h2><p class="lead">所有造型使用同一尺度和正面站姿。</p><div class="workshop-grid"><div class="phase"><div class="time">06分钟</div><strong>从12张选5张并排序</strong><p>阵列</p></div><div class="phase"><div class="time">07分钟</div><strong>补产品、角色和代码</strong><p>矩阵</p></div><div class="phase"><div class="time">07分钟</div><strong>调整材料与色彩面积</strong><p>系列节奏</p></div><div class="phase"><div class="time">06分钟</div><strong>选择2套实物候选</strong><p>风险说明</p></div></div><div class="output">输出：5套阵列 + 系列矩阵 + 两套候选卡。</div><div class="series-points cols-2"><p><b>不合格：</b>五套尺度或姿态不统一；矩阵“风险”列留空；两套候选难度相同。</p><p><b>交接第08周：</b>这三样就是中期评审的入场券，缺一项当天无法开始评审。</p></div></section>
+<section class="slide" id="slide-21"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag red">21 同伴讲评</div><h2>系列讲评只做四个动作</h2><p class="lead">每个反馈必须落到<b>一套造型或一个矩阵格</b>上。说不出落点的意见，先记下但不照改。</p><div class="cards-grid count-4"><div class="card"><h3>保留</h3><p>哪套最清楚地证明主题？</p><p class="card-do">要指出是靠哪一条代码证明的，不是“感觉最好看”。</p></div><div class="card"><h3>移动</h3><p>哪套位置改变后节奏更好？</p><p class="card-do">说出移到第几位，以及移完之后开场和收束分别变成谁。</p></div><div class="card"><h3>修改</h3><p>哪套需要调整产品、比例或强度？</p><p class="card-do">三选一：改产品构成、改比例、改代码强度。不要一次提三样。</p></div><div class="card"><h3>删除</h3><p>哪套与其他造型功能重复？</p><p class="card-do">如果删了，矩阵会空出哪一格？空出的格子由谁来补？</p></div></div></section>
+<section class="slide" id="slide-22"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">23 形成性评价</div><h2>第07周检查：系列是否可进入中期实物验证</h2><p class="lead">不看五张图漂不漂亮，只看系统能不能工作。四项<b>全部成立</b>才进入第08周。</p><div class="rubric-grid"><div class="criterion"><div class="check">✓</div><strong>一致</strong><p>核心代码贯穿但不机械复制。</p></div><div class="criterion"><div class="check">✓</div><strong>差异</strong><p>五套角色、产品与强度明确。</p></div><div class="criterion"><div class="check">✓</div><strong>季节</strong><p>春夏身体、材料和维护条件成立。</p></div><div class="criterion"><div class="check">✓</div><strong>可行</strong><p>两套候选具有代表性、差异性和可完成性。</p></div></div><div class="series-points cols-2"><p><b>判定线：</b>“成立”＝别人能自己指出证据；“部分成立”＝要你解释才找得到；“需重做”＝解释了也找不到。</p><p><b>本周成果按平时成绩（40%）计分</b>，并直接进入期末六项标准中的“市场与定位”和“统一与丰富”两项（共 40 分）。</p></div></section>
+<section class="slide" id="slide-23"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><div class="tag blue">24 第08周准备</div><h2>第08周是 Gate 2：从主题到身体证据的完整链条</h2><p class="lead">带齐文件与实物，<b>缺一项当天就无法判断</b>——不是扣分，是评不了。</p><div class="cards-grid count-4"><div class="card"><h3>系列</h3><p>五套阵列V2与矩阵。</p><p class="card-dont"><b>不合格：</b>不合格：V2 与本周 V1 完全一样——说明一周里没有吸收任何反馈。</p></div><div class="card"><h3>图纸</h3><p>两套候选的前后平面图与关键细节。</p><p class="card-dont"><b>不合格：</b>不合格：只有正面图；关键结构没有放大细节。</p></div><div class="card"><h3>实物</h3><p>白坯布样或关键部位全尺寸样。</p><p class="card-dont"><b>不合格：</b>不合格：只做了平面裁片，没有上身或上人台——那不叫实物验证。</p></div><div class="card"><h3>证据</h3><p>前侧后、动作、材料与修改记录。</p><p class="card-dont"><b>不合格：</b>不合格：只拍站姿。抬臂、坐姿缺一项即视为未验证。</p></div></div></section>
+<section class="slide dark" id="slide-24"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第07周</div><h2>离堂句：系列中的每一套都必须有任务</h2><div class="exit-layout"><div class="exit-prompt">“我的五套系列通过 ______ 代码保持一致；其中候选A验证 ______，候选B验证 ______，第08周我最需要暴露的风险是 ______。”</div><div class="exit-list"><div><b>01</b>五套春夏阵列V1</div><div><b>02</b>系列矩阵</div><div><b>03</b>两套候选卡</div><div><b>04</b>中期风险清单</div></div></div></section><section class="slide appendix-slide" id="slide-rubric07"><div class="session">课后查阅｜教学补充</div><div class="weekline">女装设计 III · 第07周</div><div class="tag red">期末评价连接</div><h2>本周成果将进入同一套六项终期评价</h2><p class="lead">平时训练不是零散作业，而是期末系列的证据积累；本页依据《25级〈女装设计〉考核大纲》期末实践考试评分标准（满分100分）。</p><div class="cards-grid count-6"><div class="card"><div class="score">10分</div><h3>时代性与创意</h3><p>主题回应当下，并形成自己的问题与立场。</p></div><div class="card"><div class="score">10分</div><h3>趋势性与元素</h3><p>提炼的设计元素与当季趋势、审美和来源一致。</p></div><div class="card"><div class="score">20分</div><h3>当代女性适配</h3><p>款式回应身体、动作、场景与真实穿着需求。</p></div><div class="card"><div class="score">20分</div><h3>整体造型美感</h3><p>比例、色彩、材料与细节共同形成完整造型。</p></div><div class="card"><div class="score">20分</div><h3>市场与定位</h3><p>顾客、价格、品类和使用情境边界清楚。</p></div><div class="card"><div class="score">20分</div><h3>统一与丰富</h3><p>风格统一，同时具有角色、搭配与造型变化。</p></div></div></section>
+<div class="progress" id="progress" role="status" aria-live="polite" aria-atomic="true"></div><div class="mode-controls" id="mode-controls" role="group" aria-label="资料显示模式"><button class="mode-button active" id="mode-class" data-mode="class" type="button" aria-pressed="true">课堂 <span id="cnt-class"></span></button><button class="mode-button" id="mode-all" data-mode="all" type="button" aria-pressed="false">全部 <span id="cnt-all"></span></button></div><nav class="nav-controls" aria-label="页面导航"><button class="nav-button" id="prev" type="button" title="上一页" aria-label="上一页">&#8592;</button><button class="nav-button" id="next" type="button" title="下一页" aria-label="下一页">&#8594;</button></nav><div id="zoom" role="dialog" aria-modal="true" aria-label="图片放大"><img alt="放大图"></div>
+<script>
+const allSlides=[...document.querySelectorAll('.slide')];
+const progress=document.getElementById('progress');
+const prev=document.getElementById('prev');
+const next=document.getElementById('next');
+const modeControls=document.getElementById('mode-controls');
+const modeClass=document.getElementById('mode-class');
+const modeAll=document.getElementById('mode-all');
+const zoom=document.getElementById('zoom');
+const zoomImage=zoom.querySelector('img');
+/* SC-1 · 附录计数为 0 时不渲染模式按钮（B 的顾虑升格为硬约束） */
+const appendixCount=allSlides.filter(slide=>slide.classList.contains('appendix-slide')).length;
+const hasAppendix=appendixCount>0;
+let showAll=!hasAppendix||new URLSearchParams(location.search).get('mode')==='full';
+let slides=[];
+let current=0;
+function activeSlides(){return showAll?allSlides:allSlides.filter(slide=>!slide.classList.contains('appendix-slide'));}
+/* B-18 前半 · 标签编号运行时生成：课堂 NN、附录 ANN。任何人不得在正文里手写序号 */
+function normalizeTags(){const core=allSlides.filter(slide=>!slide.classList.contains('appendix-slide'));const appendix=allSlides.filter(slide=>slide.classList.contains('appendix-slide'));allSlides.forEach(slide=>{const tag=slide.querySelector('.tag');if(!tag)return;if(!tag.dataset.label)tag.dataset.label=tag.textContent.replace(/^(?:\d+|A\d+)\s*/,'').trim();const inAppendix=slide.classList.contains('appendix-slide');const index=(inAppendix?appendix:core).indexOf(slide)+1;tag.textContent=(inAppendix?'A'+String(index).padStart(2,'0'):String(index).padStart(2,'0'))+' '+tag.dataset.label;});}
+/* SC-1 · 页数只读契约：课堂／全部页数一律运行时计算，代码内不得出现页数字面量 */
+function syncCounts(){const coreCount=allSlides.filter(slide=>!slide.classList.contains('appendix-slide')).length;const allCount=allSlides.length;document.getElementById('cnt-class').textContent=coreCount;document.getElementById('cnt-all').textContent=allCount;modeClass.title='课堂模式：'+coreCount+'页核心内容';modeAll.title='全部模式：含'+(allCount-coreCount)+'页补充资料';}
+function syncMode(){document.body.classList.toggle('full-mode',showAll);document.body.classList.toggle('class-mode',!showAll);modeClass.classList.toggle('active',!showAll);modeAll.classList.toggle('active',showAll);modeClass.setAttribute('aria-pressed',String(!showAll));modeAll.setAttribute('aria-pressed',String(showAll));}
+function show(index){slides=activeSlides();current=Math.max(0,Math.min(index,slides.length-1));allSlides.forEach(slide=>slide.classList.remove('active'));const active=slides[current];active.classList.add('active');progress.textContent='第 '+String(current+1).padStart(2,'0')+' / '+slides.length+' 页'+(hasAppendix?' · '+(showAll?'全部':'课堂'):'');prev.disabled=current===0;next.disabled=current===slides.length-1;/* G1-4 · #progress 不是 .slide 的后代，深色态只能由 body 类同步（B-29） */document.body.classList.toggle('on-dark',active.classList.contains('dark'));}
+function setMode(full){const active=slides[current];showAll=full;const nextSlides=activeSlides();const sameIndex=nextSlides.indexOf(active);slides=nextSlides;current=sameIndex>=0?sameIndex:Math.min(current,slides.length-1);syncMode();try{const url=new URL(location.href);if(showAll)url.searchParams.set('mode','full');else url.searchParams.delete('mode');history.replaceState(null,'',url);}catch(error){}show(current);}
+/* B-04 · 放大层：点击开、点击或 Esc 关；hover 预览保留（hover 态遮罩保持穿透，避免闪烁循环） */
+function openZoom(image,byClick){zoomImage.src=image.src;zoomImage.alt=image.alt||'放大图';zoom.classList.toggle('click-open',!!byClick);zoom.classList.add('active');}
+function closeZoom(){zoom.classList.remove('active');zoom.classList.remove('click-open');}
+document.querySelectorAll('.zoomable').forEach((image)=>{image.addEventListener('click',(event)=>{event.stopPropagation();openZoom(image,true);});image.addEventListener('mouseenter',()=>{if(!zoom.classList.contains('click-open'))openZoom(image,false);});image.addEventListener('mouseleave',()=>{if(!zoom.classList.contains('click-open'))closeZoom();});});
+zoom.addEventListener('click',closeZoom);
+modeClass.addEventListener('click',()=>setMode(false));
+modeAll.addEventListener('click',()=>setMode(true));
+prev.addEventListener('click',()=>show(current-1));
+next.addEventListener('click',()=>show(current+1));
+/* B-04 · 翻页笔（PageUp/PageDown）、上下键、Enter/Backspace/Esc；全部 preventDefault 以消除“先滚半屏再跳页” */
+const KEY_FORWARD=['ArrowRight','ArrowDown','PageDown',' ','Spacebar','Enter'];
+const KEY_BACKWARD=['ArrowLeft','ArrowUp','PageUp','Backspace'];
+window.addEventListener('keydown',(event)=>{
+  if(event.ctrlKey||event.metaKey||event.altKey)return;
+  const key=event.key;
+  if(key==='Escape'||key==='Esc'){event.preventDefault();closeZoom();return;}
+  const forward=KEY_FORWARD.indexOf(key)>=0;
+  const backward=KEY_BACKWARD.indexOf(key)>=0;
+  if(!forward&&!backward&&key!=='Home'&&key!=='End')return;
+  event.preventDefault();
+  closeZoom();
+  if(forward){show(current+1);return;}
+  if(backward){show(current-1);return;}
+  if(key==='Home'){show(0);return;}
+  show(slides.length-1);
+});
+let touchX=0;
+window.addEventListener('touchstart',(event)=>{touchX=event.changedTouches[0].clientX;},{passive:true});
+window.addEventListener('touchend',(event)=>{const delta=event.changedTouches[0].clientX-touchX;if(Math.abs(delta)>55)show(current+(delta<0?1:-1));},{passive:true});
+normalizeTags();
+if(hasAppendix){syncCounts();}else{modeControls.remove();}
+slides=activeSlides();
+syncMode();
+show(0);
+</script></body></html>

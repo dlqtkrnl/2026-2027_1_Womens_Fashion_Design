@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta name="robots" content="noindex,nofollow,noarchive"><meta name="googlebot" content="noindex,nofollow"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>女装设计 III｜第05周 元素提取</title><style>
+:root{--paper:#f7f7f5;--ink:#151515;--muted:#59616d;--blue:#1d4ed8;--red:#d61f45;--green:#047857;--line:#cfd4dc;--white:#fff}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--paper);color:var(--ink)}
+body{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;letter-spacing:0}
+.slide{display:none;position:relative;width:100vw;height:100vh;padding:3rem 4rem 4.5rem;overflow:auto;background:var(--paper)}
+.slide.active{display:flex;flex-direction:column}.slide.dark{background:#090909;color:#fff}
+.session{position:absolute;top:1.45rem;right:4rem;color:#7b8491;font-size:0.85rem;font-weight:800}.weekline{font-size:0.85rem;font-weight:900;color:#667085;margin-bottom:1rem}
+.tag{display:inline-block;align-self:flex-start;padding:.34rem .72rem;margin-bottom:.9rem;background:var(--ink);color:#fff;font-size:0.85rem;font-weight:900}.tag.blue{background:var(--blue)}.tag.red{background:var(--red)}
+h1,h2,h3,p{margin-top:0}h1{font-size:4.2rem;line-height:1.02;margin-bottom:1.4rem}h2{font-size:3rem;line-height:1.08;margin-bottom:1rem}h3{font-size:1.35rem;line-height:1.25;margin-bottom:.6rem}
+.lead{font-size:1.28rem;line-height:1.55;color:var(--muted);max-width:76rem;margin-bottom:1.35rem}.dark .lead{color:#cbd5e1}.keyline{border-left:5px solid var(--blue);padding:.8rem 1rem;background:#eef3ff;font-size:1rem;font-weight:900;line-height:1.5}
+.cover-layout{display:grid;grid-template-columns:minmax(0,.95fr) minmax(520px,1.05fr);gap:2.6rem;align-items:center;flex:1;min-height:0}.cover-copy{min-width:0}.cover-copy .subtitle{font-size:1rem;font-weight:900;color:var(--blue);margin-bottom:1.1rem}
+.series-shell{background:#fff;border:1px solid var(--line);padding:.7rem;box-shadow:0 14px 32px rgba(15,23,42,.11);min-height:0}.series-label{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.1rem .15rem .65rem;font-weight:900}.series-label span{font-size:0.85rem;color:var(--blue)}
+.series-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;height:50vh;background:#111827;padding:5px}.cover-layout .series-grid{height:58vh}.series-grid figure,.visual-grid figure{position:relative;margin:0;overflow:hidden;background:#e5e7eb;min-width:0;min-height:0}.series-grid img,.visual-grid img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top;cursor:zoom-in}
+.series-grid figcaption,.visual-grid figcaption{position:absolute;left:.35rem;bottom:.35rem;background:rgba(15,23,42,.85);color:#fff;padding:.24rem .42rem;font-size:0.85rem;font-weight:900}
+.series-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}.series-points p{margin:0;border-left:4px solid var(--blue);padding:.55rem .75rem;background:#fff;font-size:1rem;line-height:1.45}
+.roadmap-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;flex:1;align-content:center}.roadmap-item{position:relative;background:#fff;border:1px solid var(--line);border-top:6px solid #9ca3af;padding:1rem;min-height:9rem}.roadmap-item.active{border-color:var(--blue);border-top-color:var(--blue);background:#eef3ff}.roadmap-no{font-size:2.15rem;font-weight:900;color:#c7cdd6;line-height:1}.roadmap-item.active .roadmap-no{color:var(--blue)}.roadmap-item strong{display:block;margin-top:1rem;font-size:1.06rem;line-height:1.35}
+.cards-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;flex:1;align-content:center}.cards-grid.count-3{grid-template-columns:repeat(3,minmax(0,1fr))}.cards-grid.count-5{grid-template-columns:repeat(5,minmax(0,1fr))}.cards-grid.count-6{grid-template-columns:repeat(3,minmax(0,1fr))}.cards-grid.count-8{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-top:6px solid var(--blue);padding:1.15rem;min-height:9.2rem;box-shadow:0 8px 18px rgba(15,23,42,.05)}.card:nth-child(3n+2){border-top-color:var(--red)}.card:nth-child(3n){border-top-color:var(--green)}.card p{font-size:1.04rem;line-height:1.5;color:var(--muted);margin:0}
+.compare-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.3rem;flex:1;align-items:stretch}.compare-panel{background:#fff;border-top:7px solid var(--red);padding:1.5rem;border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.compare-panel.good{border-top-color:var(--green)}.compare-panel h3{font-size:1.6rem}.compare-panel ul{margin:1rem 0 0;padding:0;list-style:none;display:grid;gap:.75rem}.compare-panel li{background:#f6f7f9;border-left:4px solid currentColor;padding:.8rem 1rem;font-size:1.15rem;line-height:1.45}
+.process-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem;flex:1;align-items:center}.process-grid.count-4{grid-template-columns:repeat(4,minmax(0,1fr))}.process-grid.count-8{grid-template-columns:repeat(4,minmax(0,1fr))}.process-step{position:relative;background:#fff;border:1px solid var(--line);padding:1rem;min-height:12rem}.process-step .no{font-size:2.5rem;font-weight:900;color:#cad0d9}.process-step strong{display:block;margin:.9rem 0 .55rem;font-size:1.18rem}.process-step p{margin:0;color:var(--muted);font-size:1rem;line-height:1.45}
+.visual-layout{display:grid;grid-template-columns:minmax(420px,1.15fr) minmax(0,.85fr);gap:2rem;flex:1;min-height:0}.visual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;background:#111827;padding:6px;min-height:0}.visual-grid.single{grid-template-columns:1fr}.visual-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.visual-grid figure{min-height:0}.visual-points{display:flex;flex-direction:column;justify-content:center;gap:.8rem}.visual-points p{background:#fff;border-left:5px solid var(--blue);padding:.9rem 1rem;margin:0;font-size:1.08rem;line-height:1.5}
+.workshop-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;flex:1;align-content:center}.phase{background:#fff;border:1px solid var(--line);padding:1.1rem;min-height:12rem}.phase .time{font-size:1.6rem;font-weight:900;color:var(--blue)}.phase strong{display:block;font-size:1.2rem;margin:1rem 0 .6rem}.phase p{color:var(--muted);font-size:1rem}.output{margin-top:1rem;background:#111827;color:#fff;padding:.9rem 1.1rem;font-size:1.08rem;font-weight:900}
+.rubric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;flex:1;align-content:center}.criterion{background:#fff;border:1px solid var(--line);padding:1.2rem;min-height:12rem}.criterion .check{font-size:2.1rem;color:var(--green);font-weight:900}.criterion strong{display:block;font-size:1.25rem;margin:.8rem 0}.criterion p{color:var(--muted);font-size:1rem;line-height:1.5}
+.divider-copy{display:flex;flex:1;flex-direction:column;justify-content:center;max-width:68rem}.divider-copy .eyebrow{color:#60a5fa;font-weight:900;margin-bottom:1rem}.divider-copy h2{font-size:4.6rem}.divider-copy p{font-size:1.5rem;line-height:1.55;color:#cbd5e1}
+.exit-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;flex:1}.exit-prompt{border-left:5px solid #60a5fa;padding-left:1.3rem;font-size:2rem;line-height:1.5}.exit-list{display:grid;gap:.7rem}.exit-list div{border-bottom:1px solid #374151;padding:.7rem 0;font-size:1.1rem}.exit-list b{color:#60a5fa;margin-right:.7rem}
+.nav-controls{position:fixed;right:2rem;bottom:1.6rem;display:flex;gap:.7rem;z-index:1000}.nav-button{width:3.2rem;height:3.2rem;border:1px solid rgba(255,255,255,.35);background:#111827;color:#fff;font-size:1.35rem;font-weight:900;cursor:pointer}.nav-button:hover{background:var(--blue)}.nav-button:disabled{opacity:.35;cursor:default}.progress{position:fixed;left:2rem;bottom:1.9rem;color:#7b8491;font-size:.85rem;font-weight:900;z-index:1000}
+#zoom{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.87);z-index:3000;pointer-events:none}#zoom.active{display:flex}#zoom img{max-width:92vw;max-height:90vh;object-fit:contain;background:#fff;box-shadow:0 22px 70px rgba(0,0,0,.55)}
+@media screen and (max-width:1000px){.slide{padding:2.4rem 2rem 4.5rem}.session{right:2rem}.cover-layout,.visual-layout{grid-template-columns:1fr}.cover-layout .series-grid{height:42vh}.roadmap-grid,.cards-grid,.cards-grid.count-5,.cards-grid.count-6,.cards-grid.count-8,.process-grid,.process-grid.count-8,.rubric-grid,.workshop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:3.4rem}h2{font-size:2.5rem}}
+.score{float:right;color:var(--blue);font-size:.88rem;font-weight:900}
+</style><style id="unified-course-map-style">
+.unified-course-map.slide{padding:2.25rem 3.2rem!important;background:#f7f8fa!important;color:#111827!important;overflow:hidden!important;gap:0!important}
+.unified-course-map .ucm-meta{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.7rem;border-bottom:1px solid #d1d5db;font-size:.92rem;font-weight:800;color:#4b5563;letter-spacing:0}
+.unified-course-map .ucm-label{display:inline-flex;align-items:center;background:#1d4ed8;color:#fff;padding:.35rem .72rem;font-size:0.85rem;font-weight:900}
+.unified-course-map h2{margin:.75rem 0 .25rem!important;font-size:2.1rem!important;line-height:1.3!important;font-weight:900!important;letter-spacing:0!important;color:#111827!important;overflow:visible!important}
+.unified-course-map .ucm-lead{margin:0!important;font-size:1.03rem!important;line-height:1.45!important;color:#4b5563!important}
+.unified-course-map .ucm-grid{display:grid;grid-template-columns:minmax(8rem,.62fr) repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr));gap:.55rem;flex:1;min-height:0;margin-top:.85rem}
+.unified-course-map .ucm-phase,.unified-course-map .ucm-week{min-width:0;min-height:0;border:1px solid #d1d5db;background:#fff}
+.unified-course-map .ucm-phase{display:flex;flex-direction:column;justify-content:center;padding:.7rem .78rem;border-left-width:6px}
+.unified-course-map .ucm-phase b{font-size:0.85rem;line-height:1.2;color:#6b7280}
+.unified-course-map .ucm-phase strong{margin-top:.22rem;font-size:1.02rem;line-height:1.25;color:#111827}
+.unified-course-map .ucm-phase.phase-1{border-left-color:#2563eb;background:#eff6ff}.unified-course-map .ucm-phase.phase-2{border-left-color:#059669;background:#ecfdf5}.unified-course-map .ucm-phase.phase-3{border-left-color:#e11d48;background:#fff1f2}.unified-course-map .ucm-phase.phase-4{border-left-color:#111827;background:#f3f4f6}
+.unified-course-map .ucm-week{position:relative;padding:.68rem .78rem;border-top-width:5px;display:flex;flex-direction:column;justify-content:center}
+.unified-course-map .ucm-week.phase-1{border-top-color:#2563eb}.unified-course-map .ucm-week.phase-2{border-top-color:#059669}.unified-course-map .ucm-week.phase-3{border-top-color:#e11d48}.unified-course-map .ucm-week.phase-4{border-top-color:#111827}
+.unified-course-map .ucm-week.past{background:#eef1f5;color:#4b5563}.unified-course-map .ucm-week.future{background:#fff;color:#111827}
+.unified-course-map .ucm-week.current{background:#111827;color:#fff;border-color:#111827;box-shadow:0 8px 20px rgba(17,24,39,.2)}
+.unified-course-map .ucm-no{display:flex;align-items:center;justify-content:space-between;gap:.45rem;font-size:1.3rem;font-weight:900;line-height:1;color:#9ca3af}
+.unified-course-map .ucm-week.current .ucm-no{color:#fff}.unified-course-map .ucm-now{background:#2563eb;color:#fff;padding:.2rem .42rem;font-size:0.85rem;line-height:1;font-weight:900}
+.unified-course-map .ucm-week strong{display:block;margin-top:.42rem;font-size:.92rem;line-height:1.28;letter-spacing:0;overflow-wrap:anywhere}
+.unified-course-map .ucm-legend{display:flex;justify-content:flex-end;gap:1rem;margin-top:.55rem;font-size:0.85rem;color:#6b7280}.unified-course-map .ucm-legend span{display:inline-flex;align-items:center;gap:.3rem}.unified-course-map .ucm-dot{width:.65rem;height:.65rem;border:1px solid #c7cdd4;background:#fff}.unified-course-map .ucm-dot.past{background:#eef1f5}.unified-course-map .ucm-dot.now{background:#111827;border-color:#111827}
+@media screen and (max-width:1100px){.unified-course-map.slide{padding:1.45rem 1.7rem!important}.unified-course-map h2{font-size:1.65rem!important}.unified-course-map .ucm-grid{gap:.38rem;margin-top:.55rem}.unified-course-map .ucm-phase{padding:.48rem}.unified-course-map .ucm-phase strong{font-size:0.85rem}.unified-course-map .ucm-week{padding:.45rem}.unified-course-map .ucm-week strong{font-size:0.85rem}.unified-course-map .ucm-no{font-size:1rem}}
+@media screen and (max-width:760px){.unified-course-map.slide{overflow-y:auto!important}.unified-course-map .ucm-meta{align-items:flex-start;flex-direction:column}.unified-course-map .ucm-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;flex:none}.unified-course-map .ucm-phase{grid-column:1/-1;min-height:3.5rem}.unified-course-map .ucm-week{min-height:6.2rem}.unified-course-map .ucm-week strong{font-size:.86rem}}
+</style>
+
+<style id="w05-precision-rebuild-style">
+/* W05_PRECISION_REBUILD_START */
+.series-source{margin-top:.38rem;color:#667085;font-size:.92rem;line-height:1.35;font-weight:800}.series-label span{font-size:.96rem}.series-grid figcaption,.visual-grid figcaption{font-size:.9rem}
+.lesson-budget{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;margin:0 0 .9rem;background:#111827;color:#fff;padding:.62rem .78rem;font-size:.98rem;line-height:1.25}.lesson-budget b{color:#93c5fd;margin-right:.25rem}.lesson-budget span{border-left:1px solid #475569;padding-left:.55rem}
+.goal-grid,.lens-grid,.term-grid,.tier-grid,.material-grid{display:grid;gap:.85rem;flex:1;min-height:0;align-items:stretch}.goal-grid,.term-grid,.tier-grid,.material-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.lens-grid{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}
+.goal-card,.lens-card,.term-card,.tier-card,.material-card{display:flex;flex-direction:column;justify-content:center;background:#fff;border-top:6px solid var(--blue);padding:1rem;min-width:0}.goal-card:nth-child(2),.lens-card:nth-child(2),.term-card:nth-child(2),.tier-card:nth-child(2),.material-card:nth-child(2){border-top-color:var(--red)}.goal-card:nth-child(3),.lens-card:nth-child(3),.term-card:nth-child(3),.tier-card:nth-child(3),.material-card:nth-child(3){border-top-color:var(--green)}.goal-card:nth-child(4),.lens-card:nth-child(4),.term-card:nth-child(4),.tier-card:nth-child(4),.material-card:nth-child(4){border-top-color:#111827}.goal-card h3,.lens-card h3,.term-card h3,.tier-card h3,.material-card h3{font-size:1.32rem;margin:0 0 .45rem}.goal-card p,.lens-card p,.term-card p,.tier-card p,.material-card p{font-size:1.07rem;line-height:1.48;color:#4b5563;margin:0}.outcome-strip,.formula-strip,.method-note{margin-top:.72rem;background:#eef3ff;border-left:5px solid var(--blue);padding:.68rem .82rem;font-size:1.02rem;line-height:1.42}.outcome-strip b,.formula-strip b,.method-note b{margin-right:.42rem}
+.extract-demo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;flex:1;min-height:0}.extract-demo{display:flex;flex-direction:column;background:#fff;border-top:7px solid var(--red);padding:1rem;min-width:0}.extract-demo.good{border-top-color:var(--green)}.extract-demo h3{font-size:1.45rem;margin:0 0 .35rem}.extract-demo p{font-size:1.05rem;line-height:1.43;color:#4b5563;margin:0}.motif-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;flex:1;align-items:center;margin-top:.7rem}.motif{position:relative;height:11rem;border:1px solid #d1d5db;background:#f8fafc;overflow:hidden}.motif::before{content:"";position:absolute;width:140%;height:5px;background:#111827;left:-20%;top:50%;transform:rotate(-28deg)}.motif.copy::after{content:"同一图形";position:absolute;left:.45rem;bottom:.45rem;font-size:0.85rem;font-weight:900}.motif.rule-b::before{top:34%;transform:rotate(22deg)}.motif.rule-c::before{top:65%;height:9px;transform:rotate(-8deg)}.motif.rule-a::after,.motif.rule-b::after,.motif.rule-c::after{position:absolute;left:.45rem;bottom:.45rem;font-size:0.85rem;font-weight:900;color:#1d4ed8}.motif.rule-a::after{content:"跨越身体"}.motif.rule-b::after{content:"改变方向"}.motif.rule-c::after{content:"改变位置"}
+.evidence-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.85rem;flex:1;min-height:0}.evidence-step{position:relative;display:flex;flex-direction:column;justify-content:center;background:#fff;border-top:6px solid var(--blue);padding:1.05rem}.evidence-step:not(:last-child)::after{content:"→";position:absolute;right:-.72rem;top:50%;z-index:2;background:var(--paper);font-size:1.5rem;font-weight:900}.evidence-step .no{font-size:2rem;color:#cbd5e1;font-weight:900}.evidence-step h3{font-size:1.3rem;margin:.55rem 0 .35rem}.evidence-step p{font-size:1.05rem;line-height:1.45;color:#4b5563;margin:0}
+.annotated-look{position:relative}.look-marker{position:absolute;z-index:3;background:rgba(17,24,39,.9);color:#fff;padding:.2rem .35rem;font-size:0.85rem;font-weight:900;pointer-events:none}.look-marker.m1{left:.25rem;top:.35rem}.look-marker.m2{right:.25rem;top:46%}.look-marker.m3{left:.25rem;bottom:2.15rem;background:#1d4ed8}
+.element-card-demo{display:grid;grid-template-columns:minmax(320px,.85fr) minmax(320px,.85fr) minmax(0,1.3fr);gap:1rem;flex:1;min-height:0}.card-source,.card-trace,.card-rule{background:#fff;border:1px solid var(--line);padding:.8rem;min-height:0}.card-source{display:flex;flex-direction:column}.card-source figure{position:relative;margin:0;flex:1;min-height:0;overflow:hidden}.card-source img{width:100%;height:100%;object-fit:cover;object-position:center top}.card-label{font-size:0.85rem;color:#667085;font-weight:900;margin-bottom:.5rem}.card-trace{display:flex;flex-direction:column}.trace-board{position:relative;flex:1;background:#f8fafc;border:1px solid #d1d5db;overflow:hidden}.trace-body{position:absolute;left:31%;top:9%;width:38%;height:80%;border:3px solid #111827;border-radius:48% 48% 35% 35%}.trace-line{position:absolute;left:12%;top:46%;width:78%;height:7px;background:#1d4ed8;transform:rotate(-25deg);transform-origin:center}.trace-point{position:absolute;width:1rem;height:1rem;border-radius:50%;background:#d61f45}.trace-point.p1{left:32%;top:31%}.trace-point.p2{right:29%;bottom:27%}.card-rule{display:flex;flex-direction:column;justify-content:center}.rule-sentence{font-size:1.55rem;line-height:1.48;font-weight:900}.rule-sentence b{color:var(--blue)}.rule-checks{display:grid;gap:.55rem;margin-top:1rem}.rule-checks span{background:#f3f4f6;border-left:4px solid var(--green);padding:.55rem .7rem;font-size:1rem;line-height:1.35}
+.scenario-chain{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.72rem;flex:1;min-height:0}.scenario-step{display:flex;flex-direction:column;justify-content:center;background:#fff;border-top:6px solid var(--blue);padding:.9rem}.scenario-step .no{font-size:2rem;color:#cbd5e1;font-weight:900}.scenario-step h3{font-size:1.18rem;margin:.55rem 0 .35rem}.scenario-step p{font-size:1rem;line-height:1.42;color:#4b5563;margin:0}.scenario-summary{margin-top:.7rem;background:#111827;color:#fff;padding:.68rem .82rem;font-size:1.03rem;line-height:1.4}
+.tension-grid .look-marker.m1{background:#111827}.tension-grid .look-marker.m2{background:#d61f45;top:43%}.tension-grid .look-marker.m3{background:#047857}
+.fabric-demo{position:relative;height:8.5rem;margin-bottom:.75rem;background:#f8fafc;border:1px solid #d1d5db;overflow:hidden}.fabric-demo.weight::before{content:"";position:absolute;left:18%;right:18%;top:26%;height:50%;border:7px solid #111827;border-top:0;border-radius:0 0 50% 50%}.fabric-demo.drape::before{content:"";position:absolute;left:10%;right:10%;top:25%;height:50%;background:repeating-linear-gradient(90deg,#1d4ed8 0 7px,#dbeafe 7px 18px);clip-path:polygon(0 0,100% 0,88% 100%,70% 58%,52% 100%,34% 58%,15% 100%)}.fabric-demo.surface{background:repeating-radial-gradient(circle at 30% 40%,#111827 0 3px,#f3f4f6 4px 13px)}.fabric-demo.change::before,.fabric-demo.change::after{content:"";position:absolute;width:52%;height:62%;top:19%;border:4px solid}.fabric-demo.change::before{left:12%;border-color:#1d4ed8;background:rgba(29,78,216,.18)}.fabric-demo.change::after{right:12%;border-color:#d61f45;background:rgba(214,31,69,.16)}
+.china-case-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;height:43vh;background:#111827;padding:5px}.china-case-grid figure{position:relative;margin:0;overflow:hidden}.china-case-grid img{width:100%;height:100%;object-fit:cover;object-position:center top}.matrix-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.65rem;margin-top:.7rem}.matrix-item{background:#fff;border-left:5px solid var(--blue);padding:.55rem .65rem;font-size:.94rem;line-height:1.35}.matrix-item b{display:block;margin-bottom:.15rem}
+.element-wall-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;height:36vh;background:#111827;padding:5px}.element-wall-grid figure{position:relative;margin:0;overflow:hidden}.element-wall-grid img{width:100%;height:100%;object-fit:cover;object-position:center top}.element-matrix{display:grid;grid-template-columns:150px repeat(5,minmax(0,1fr));gap:2px;margin-top:.62rem;background:#d1d5db;border:2px solid #d1d5db}.element-matrix div{background:#fff;padding:.38rem .45rem;text-align:center;font-size:0.85rem;line-height:1.2}.element-matrix .head{background:#111827;color:#fff;font-weight:900}.element-matrix .rowhead{text-align:left;font-weight:900}.dot-on{color:#047857;font-weight:900}.dot-mid{color:#d97706;font-weight:900}.dot-off{color:#cbd5e1}
+.peer-layout{display:grid;grid-template-columns:minmax(340px,.7fr) minmax(0,1.3fr);gap:1rem;flex:1;min-height:0}.peer-protocol{display:flex;flex-direction:column;justify-content:center;background:#111827;color:#fff;padding:1rem}.peer-step{display:grid;grid-template-columns:2rem 1fr;gap:.55rem;padding:.55rem 0;border-top:1px solid #374151;font-size:1.04rem;line-height:1.4}.peer-step b{color:#93c5fd}.peer-questions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.72rem}.peer-question{display:flex;flex-direction:column;justify-content:center;background:#fff;border-top:5px solid var(--blue);padding:.85rem}.peer-question:nth-child(2){border-top-color:var(--red)}.peer-question:nth-child(3){border-top-color:var(--green)}.peer-question:nth-child(4){border-top-color:#111827}.peer-question h3{font-size:1.2rem;margin:0 0 .3rem}.peer-question p{font-size:1.03rem;line-height:1.42;color:#4b5563;margin:0}
+.gate-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.55fr);gap:1rem;flex:1;min-height:0}.gate-criteria{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}.gate-card{display:flex;flex-direction:column;justify-content:center;background:#fff;border-left:6px solid var(--blue);padding:.9rem}.gate-card h3{font-size:1.18rem;margin:0 0 .3rem}.gate-card p{font-size:1.02rem;line-height:1.4;color:#4b5563;margin:0}.gate-decision{display:flex;flex-direction:column;justify-content:center;background:#111827;color:#fff;padding:1rem}.decision{padding:.75rem;margin-top:.65rem;border:1px solid #475569;font-size:1.05rem;line-height:1.4}.decision.pass b{color:#6ee7b7}.decision.revise b{color:#fda4af}
+.next-note{margin-top:.72rem;background:#eef3ff;border-left:5px solid var(--blue);padding:.68rem .82rem;font-size:1.02rem;line-height:1.4}
+.unified-course-map .ucm-week strong{font-size:1rem!important}.unified-course-map .ucm-phase strong{font-size:1.08rem!important}.unified-course-map .ucm-legend{font-size:.85rem!important}
+@media screen and (max-width:1100px){.goal-grid,.term-grid,.tier-grid,.material-grid,.lens-grid,.evidence-flow,.scenario-chain,.matrix-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.extract-demo-grid,.element-card-demo,.peer-layout,.gate-layout{grid-template-columns:1fr}.element-matrix{grid-template-columns:110px repeat(5,minmax(0,1fr))}.lesson-budget{font-size:.86rem}}
+/* W05_PRECISION_REBUILD_END */
+</style>
+<style>
+/* W05_PAGE04_BIFT_CASE_START */
+.bift-case-slide .lead{margin-bottom:.75rem}
+.bift-case-layout{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(24rem,.94fr);gap:1.15rem;flex:1;min-height:0}
+.bift-case-method{display:flex;flex-direction:column;min-height:0;border-top:6px solid var(--blue);background:#fff}
+.bift-case-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.72rem .85rem;border-bottom:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.bift-case-head strong{font-size:1.1rem;color:var(--ink)}
+.bift-case-steps{display:grid;grid-template-rows:repeat(4,minmax(0,1fr));flex:1;min-height:0}
+.bift-case-step{display:grid;grid-template-columns:3.2rem 1fr;gap:.8rem;align-items:center;padding:.72rem .85rem;border-bottom:1px solid var(--line)}
+.bift-case-step:last-child{border-bottom:0}
+.bift-case-step .no{font-size:1.65rem;font-weight:900;color:#b8c0cc;line-height:1}
+.bift-case-step h3{margin:0 0 .24rem;font-size:1.08rem;line-height:1.2}
+.bift-case-step p{margin:0;font-size:.98rem;line-height:1.48;color:#4b5563}
+.bift-project-figure{position:relative;margin:0;min-height:0;overflow:hidden;background:#111827;border:1px solid #111827}
+.bift-project-figure img{width:100%;height:100%;display:block;object-fit:contain;object-position:center;cursor:zoom-in}
+.bift-project-figure figcaption{position:absolute;left:.65rem;right:.65rem;bottom:.65rem;padding:.48rem .62rem;background:rgba(17,24,39,.88);color:#fff;font-size:0.85rem;line-height:1.35}
+.bift-compare{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-top:.72rem}
+.bift-compare div{padding:.62rem .75rem;background:#fff;border-left:5px solid var(--red);font-size:.97rem;line-height:1.42}
+.bift-compare div:last-child{border-left-color:#059669}
+.bift-compare b{display:block;margin-bottom:.1rem;font-size:1rem}
+.bift-source{margin-top:.38rem;font-size:0.85rem;color:#6b7280}
+.bift-source a{color:inherit;text-decoration:none;border-bottom:1px solid #9ca3af}
+@media screen and (max-width:1000px){.bift-case-layout{grid-template-columns:1fr;grid-template-rows:1fr 1.1fr}.bift-case-step{padding:.5rem .65rem}.bift-compare{grid-template-columns:1fr}}
+/* W05_PAGE04_BIFT_CASE_END */
+</style><style>
+/* W05_PAGE17_MATERIAL_EVIDENCE_START */
+.material-evidence-slide .lead{margin-bottom:.7rem}
+.material-evidence-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.72rem;flex:1;min-height:0}
+.material-evidence{display:flex;flex-direction:column;min-width:0;min-height:0;margin:0;background:#fff;border-top:5px solid var(--blue);overflow:hidden}
+.material-evidence:nth-child(2){border-top-color:var(--red)}
+.material-evidence:nth-child(3){border-top-color:#059669}
+.material-evidence:nth-child(4){border-top-color:#111827}
+.material-evidence .image-window{height:38vh;min-height:15rem;overflow:hidden;background:#e5e7eb}
+.material-evidence img{width:100%;height:100%;display:block;object-fit:cover;cursor:zoom-in}
+.material-evidence.drape img{object-position:center 35%}
+.material-evidence.stretch img{object-position:center 16%}
+.material-evidence.surface img{object-position:center 20%;transform:scale(1.75)}
+.material-evidence.layer img{object-position:center 15%}
+.material-evidence figcaption{padding:.62rem .7rem .72rem;min-height:7.7rem}
+.material-evidence h3{margin:0 0 .26rem;font-size:1.08rem;line-height:1.25}
+.material-evidence p{margin:0;font-size:.9rem;line-height:1.42;color:#4b5563}
+.material-evidence p b{color:#111827}
+.material-lab-strip{display:grid;grid-template-columns:1.08fr .92fr;gap:.72rem;margin-top:.7rem}
+.material-lab-strip>div{background:#111827;color:#fff;padding:.62rem .78rem;font-size:.92rem;line-height:1.4}
+.material-lab-strip>div:last-child{background:#eef3ff;color:#111827;border-left:5px solid var(--blue)}
+.material-lab-strip b{display:block;margin-bottom:.13rem;font-size:1rem}
+.material-source{margin-top:.32rem;font-size:0.85rem;color:#6b7280}
+@media screen and (max-width:1000px){.material-evidence-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.material-evidence .image-window{height:23vh;min-height:10rem}.material-evidence figcaption{min-height:0}.material-lab-strip{grid-template-columns:1fr}}
+/* W05_PAGE17_MATERIAL_EVIDENCE_END */
+</style><style>
+/* W05_PAGE10_ELEMENT_CARD_START */
+.element-card-slide .lead{margin-bottom:.72rem}
+.element-card-rebuild{display:grid;grid-template-columns:minmax(25rem,.88fr) minmax(0,1.12fr);gap:1rem;flex:1;min-height:0}
+.element-source-panel{position:relative;min-height:0;background:#111827;border-top:6px solid var(--blue);overflow:hidden}
+.element-source-panel figure{height:100%;margin:0;position:relative}
+.element-source-panel img{width:100%;height:100%;display:block;object-fit:contain;object-position:center;background:#eef1f4;cursor:zoom-in}
+.element-panel-label{position:absolute;z-index:3;top:.7rem;left:.7rem;padding:.36rem .55rem;background:#111827;color:#fff;font-size:.85rem;font-weight:900}
+.source-marker{position:absolute;z-index:3;padding:.25rem .44rem;background:rgba(255,255,255,.92);border-left:4px solid var(--blue);font-size:0.85rem;font-weight:900;color:#111827;box-shadow:0 2px 8px rgba(0,0,0,.14)}
+.source-marker.plane{top:18%;right:4%}.source-marker.layer{top:49%;left:5%;border-left-color:var(--red)}.source-marker.opening{top:70%;right:4%;border-left-color:#059669}
+.element-analysis-stack{display:grid;grid-template-rows:minmax(0,1fr) auto;gap:.8rem;min-height:0}
+.element-analysis-top{display:grid;grid-template-columns:1.08fr .92fr;gap:.8rem;min-height:0}
+.element-analysis-panel{background:#fff;border-top:6px solid var(--red);padding:.78rem;min-height:0}
+.element-analysis-panel.variables{border-top-color:#059669}
+.element-analysis-panel h3,.element-rule-panel h3{margin:0 0 .46rem;font-size:1.12rem;line-height:1.25}
+.relation-diagram{position:relative;height:31vh;min-height:16rem;background:#f7f8fa;border:1px solid #cfd5dd;overflow:hidden}
+.relation-diagram svg{width:100%;height:100%;display:block}
+.relation-grid{stroke:#dfe4ea;stroke-width:1}
+.relation-center-axis{stroke:var(--blue);stroke-width:2.5;stroke-dasharray:8 7}
+.relation-form-outline{fill:#fff;stroke:#171a1f;stroke-width:3;stroke-linejoin:round}
+.relation-fit-zone{fill:#e8f0ff;stroke:#3157a4;stroke-width:2.2}
+.relation-volume-zone{fill:#e9f7ef;stroke:#137a4e;stroke-width:2.5}
+.relation-release-line{stroke:#c92b32;stroke-width:3}
+.relation-release-point{fill:#fff;stroke:#c92b32;stroke-width:3}
+.relation-expansion-line{stroke:#137a4e;stroke-width:2.5}
+.relation-stability-line{stroke:#171a1f;stroke-width:4}
+.relation-callout{stroke:#606975;stroke-width:1.6;fill:none}
+.relation-levels line{stroke:#b8c0ca;stroke-width:1;stroke-dasharray:4 5}.relation-level-labels text{font-size:14px;fill:#68717d;font-weight:800}.relation-fit-field{fill:#e8f0ff;stroke:none}.relation-volume-field{fill:#e9f7ef;stroke:none}.relation-body-reference{fill:none;stroke:#9099a5;stroke-width:2;stroke-dasharray:7 6}.relation-garment-boundary{fill:none;stroke:#171a1f;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.relation-inline-key text{font-size:13px;fill:#68717d;font-weight:700}
+.relation-plane-shoulder{fill:#e8f0ff;stroke:#3157a4;stroke-width:2.5;stroke-linejoin:round}.relation-plane-main{fill:#fff;stroke:#171a1f;stroke-width:2.8;stroke-linejoin:round}.relation-plane-offset{fill:#e9f7ef;stroke:#137a4e;stroke-width:2.5;stroke-linejoin:round}.relation-fold-line{stroke:#c92b32;stroke-width:3}.relation-node{fill:#fff;stroke:#c92b32;stroke-width:3}.relation-dimension{stroke:#3157a4;stroke-width:2.3}
+.flat-title{font-size:14px;fill:#626b77;font-weight:800}.flat-divider{stroke:#cfd5dd;stroke-width:1}.flat-real-outline{fill:none;stroke:#171a1f;stroke-width:2.6;stroke-linejoin:round}.flat-p1-fill{fill:#e8f0ff}.flat-p3-fill{fill:#e9f7ef}.flat-seam{fill:none;stroke:#171a1f;stroke-width:2.1}.flat-stitch{stroke:#69727e;stroke-width:1.4;stroke-dasharray:5 4}.flat-button{fill:#fff;stroke:#171a1f;stroke-width:1.4}.flat-opening{fill:none;stroke:#171a1f;stroke-width:2}.flat-badge{stroke-width:1.8}.flat-badge.p1{fill:#e8f0ff;stroke:#3157a4}.flat-badge.p2{fill:#fff;stroke:#171a1f}.flat-badge.p3{fill:#e9f7ef;stroke:#137a4e}.flat-badge-text{font-size:11px;fill:#171a1f;font-weight:900}.flat-panel{stroke-width:2.3;stroke-linejoin:round}.flat-panel.p1{fill:#e8f0ff;stroke:#3157a4}.flat-panel.p2{fill:#fff;stroke:#171a1f}.flat-panel.p3{fill:#e9f7ef;stroke:#137a4e}.flat-panel-code{font-size:16px;fill:#171a1f;font-weight:900}.flat-label{font-size:13px;fill:#626b77;font-weight:700}.flat-fold{stroke:#c92b32;stroke-width:2.6}.flat-dimension{stroke:#3157a4;stroke-width:2}.flat-shift{stroke:#137a4e;stroke-width:2}.flat-dim-text{font-size:14px;fill:#3157a4;font-weight:900}.flat-dim-text.green{fill:#137a4e}.flat-guide{fill:none;stroke:#8c95a1;stroke-width:1.3;stroke-dasharray:5 4}
+.relation-diagram text{font-family:"Microsoft YaHei","Noto Sans SC",Arial,sans-serif;letter-spacing:0}
+.relation-small{font-size:13px;fill:#68717d;font-weight:700}
+.relation-label{font-size:16px;fill:#171a1f;font-weight:900}
+.relation-red{fill:#b4232a}.relation-green{fill:#137a4e}.relation-blue{fill:#3157a4}
+.diagram-key{display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;margin-top:.42rem;font-size:0.85rem;color:#4b5563}
+.diagram-key span{display:flex;align-items:center;justify-content:center;gap:.28rem;white-space:nowrap}
+.diagram-key i{width:.72rem;height:.18rem;display:inline-block;background:#3157a4}.diagram-key .red{background:#c92b32}.diagram-key .green{background:#137a4e}.variable-list{display:grid;grid-template-rows:repeat(4,minmax(0,1fr));height:calc(100% - 2rem)}
+.variable-row{display:grid;grid-template-columns:5.7rem 1fr;gap:.55rem;align-items:center;border-bottom:1px solid #d8dde5;padding:.52rem 0}
+.variable-row:last-child{border-bottom:0}.variable-row b{font-size:.92rem}.variable-row span{font-size:.88rem;line-height:1.38;color:#4b5563}
+.element-rule-panel{background:#111827;color:#fff;padding:.78rem .86rem}
+.element-rule-panel .rule-main{font-size:1.13rem;line-height:1.5;font-weight:800}
+.element-rule-panel .rule-main b{color:#93c5fd}
+.rule-evidence{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.62rem}
+.rule-evidence span{padding:.42rem .5rem;background:#1f2937;font-size:0.85rem;line-height:1.3;border-left:3px solid #60a5fa}
+.element-card-source{margin-top:.35rem;font-size:0.85rem;color:#6b7280}
+@media screen and (max-width:1000px){.element-card-rebuild{grid-template-columns:1fr;grid-template-rows:1.1fr 1fr}.element-analysis-top{grid-template-columns:1fr 1fr}.relation-diagram{height:22vh;min-height:12rem}.rule-evidence{grid-template-columns:1fr}}
+/* W05_PAGE10_ELEMENT_CARD_END */
+</style><style>
+/* W05_TEACHER_PPTX_AUGMENT_START */
+.augmentation-slide .lead{margin-bottom:.68rem}
+.augment-verdict{margin-top:.66rem;padding:.58rem .76rem;background:#111827;color:#fff;border-left:6px solid var(--blue);font-size:1rem;line-height:1.42;font-weight:800}
+.copy-extract-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;flex:1;min-height:0}
+.copy-extract-column{display:flex;flex-direction:column;min-width:0;background:#fff;border-top:6px solid var(--red);padding:.82rem .9rem}
+.copy-extract-column.extract{border-top-color:var(--blue)}
+.copy-extract-column h3{margin:0 0 .28rem;font-size:1.22rem}.copy-extract-column>p{margin:0;color:#4b5563;font-size:.94rem;line-height:1.42}
+.copy-path{display:grid;grid-template-columns:.72fr 1.28fr;gap:.7rem;align-items:center;flex:1;margin-top:.55rem}
+.source-shape{position:relative;height:12rem;background:#f3f4f6;border:1px solid #d7dce3;overflow:hidden}
+.source-shape .arc{position:absolute;border:7px solid #111827;border-color:#111827 transparent transparent #111827;width:4.5rem;height:4.5rem;transform:rotate(45deg);left:50%;top:50%;margin:-2.25rem}
+.source-shape .axis{position:absolute;left:50%;top:12%;bottom:12%;border-left:2px dashed #8b95a1}
+.copy-results,.extract-results{display:grid;grid-template-columns:repeat(3,1fr);gap:.38rem}
+.copy-result,.extract-result{height:8.8rem;background:#f7f8fa;border:1px solid #d7dce3;position:relative;overflow:hidden}
+.copy-result:before{content:"";position:absolute;width:3.4rem;height:3.4rem;border:5px solid #7f1d1d;border-color:#7f1d1d transparent transparent #7f1d1d;transform:rotate(45deg);left:50%;top:46%;margin:-1.7rem}
+.extract-result:before,.extract-result:after{content:"";position:absolute;background:#3157a4}
+.extract-result:nth-child(1):before{width:70%;height:5px;left:15%;top:35%;transform:rotate(-24deg)}.extract-result:nth-child(1):after{width:5px;height:50%;left:58%;top:30%}
+.extract-result:nth-child(2):before{width:5px;height:68%;left:45%;top:15%;transform:rotate(13deg)}.extract-result:nth-child(2):after{width:62%;height:5px;left:18%;top:64%}
+.extract-result:nth-child(3):before{width:68%;height:5px;left:16%;top:28%}.extract-result:nth-child(3):after{width:68%;height:5px;left:16%;top:61%;transform:rotate(-14deg)}
+.result-label{grid-column:1/-1;font-size:0.85rem;color:#6b7280;line-height:1.35}
+.ai-chain{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin:.3rem 0 .75rem}
+.ai-stage{position:relative;min-height:10.5rem;padding:.78rem;background:#fff;border-top:6px solid #111827}
+.ai-stage:nth-child(2){border-top-color:var(--blue)}.ai-stage:nth-child(3){border-top-color:var(--red)}.ai-stage:nth-child(4){border-top-color:#059669}
+.ai-stage:not(:last-child):after{content:"→";position:absolute;right:-.62rem;top:45%;z-index:2;font-size:1.35rem;font-weight:900;color:#4b5563}
+.ai-stage b{display:block;font-size:1.08rem;margin-bottom:.32rem}.ai-stage p{margin:0;font-size:.91rem;line-height:1.43;color:#4b5563}
+.ai-boundary{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;flex:1;min-height:0}
+.ai-rule{padding:.62rem .68rem;background:#f6f7f9;border-left:5px solid var(--blue);font-size:.88rem;line-height:1.4}.ai-rule:nth-child(2){border-color:#d97706}.ai-rule:nth-child(3){border-color:var(--red)}.ai-rule:nth-child(4){border-color:#059669}.ai-rule b{display:block;font-size:.98rem;margin-bottom:.2rem}
+.context-route{display:grid;grid-template-columns:repeat(4,1fr);gap:.72rem;flex:1;min-height:0}
+.context-step{position:relative;padding:.9rem .78rem .72rem;background:#fff;border-top:6px solid var(--blue)}
+.context-step:nth-child(2){border-top-color:var(--red)}.context-step:nth-child(3){border-top-color:#059669}.context-step:nth-child(4){border-top-color:#111827}
+.context-step .no{font-size:2rem;font-weight:900;color:#cbd1d9}.context-step h3{margin:.05rem 0 .32rem;font-size:1.13rem}.context-step p{margin:0;font-size:.9rem;line-height:1.45;color:#4b5563}
+.context-record{display:grid;grid-template-columns:1.1fr 1fr;gap:.72rem;margin-top:.7rem}.context-record>div{padding:.62rem .75rem;background:#eef3ff;border-left:5px solid var(--blue);font-size:.9rem;line-height:1.42}.context-record>div:last-child{background:#fff1f2;border-color:var(--red)}.context-record b{display:block;margin-bottom:.15rem;font-size:1rem}
+.demo-source{padding:.55rem .75rem;background:#111827;color:#fff;font-size:.92rem;line-height:1.4;margin-bottom:.68rem}.demo-source b{color:#93c5fd}
+.demo-lenses{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem;flex:1;min-height:0}
+.demo-lens{display:flex;flex-direction:column;min-width:0;background:#fff;border-top:6px solid var(--blue);padding:.65rem}
+.demo-lens:nth-child(2){border-top-color:var(--red)}.demo-lens:nth-child(3){border-top-color:#059669}.demo-lens:nth-child(4){border-top-color:#7c3aed}.demo-lens:nth-child(5){border-top-color:#111827}
+.demo-lens h3{margin:0;font-size:1.02rem}.demo-lens p{margin:.35rem 0 0;font-size:.85rem;line-height:1.38;color:#4b5563}
+.demo-schematic{height:9rem;margin:.5rem 0;background:#f6f7f9;border:1px solid #d8dde5;position:relative;overflow:hidden}
+.demo-schematic.silhouette:before{content:"";position:absolute;left:31%;top:13%;width:38%;height:70%;background:#3157a4;clip-path:polygon(42% 0,58% 0,69% 35%,100% 78%,63% 100%,38% 86%,0 68%,32% 34%)}
+.demo-schematic.line:before{content:"";position:absolute;left:12%;top:48%;width:77%;height:6px;background:#c92b32;transform:rotate(-24deg);box-shadow:0 30px 0 #c92b32}
+.demo-schematic.proportion:before{content:"";position:absolute;left:39%;top:10%;width:22%;height:27%;background:#059669}.demo-schematic.proportion:after{content:"";position:absolute;left:20%;top:42%;width:60%;height:48%;background:#9fe0c0;clip-path:polygon(30% 0,70% 0,100% 100%,0 100%)}
+.demo-schematic.color{background:linear-gradient(90deg,#2563eb 0 66%,#111827 66% 82%,#f472b6 82%)}
+.demo-schematic.material:before{content:"";position:absolute;inset:16% 18%;border:3px solid #111827;background:repeating-linear-gradient(135deg,#fff 0 8px,#dfe4ea 8px 11px);transform:skewY(-8deg)}
+.demo-formula{margin-top:.62rem;padding:.52rem .7rem;background:#eef3ff;border-left:5px solid var(--blue);font-size:.94rem;font-weight:800}
+.hybrid-layout{display:grid;grid-template-columns:.82fr 1.18fr;gap:1rem;flex:1;min-height:0}
+.hybrid-mechanisms{display:grid;grid-template-rows:1fr 1fr auto;gap:.62rem}.mechanism-band{padding:.75rem .82rem;background:#fff;border-left:6px solid var(--blue)}.mechanism-band:nth-child(2){border-color:var(--red)}.mechanism-band b{display:block;font-size:1.08rem;margin-bottom:.25rem}.mechanism-band span{font-size:.9rem;line-height:1.42;color:#4b5563}.mechanism-sum{padding:.55rem .7rem;background:#111827;color:#fff;font-size:.92rem;font-weight:800}
+.interface-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.62rem}.interface-item{padding:.75rem;background:#fff;border-top:5px solid #059669}.interface-item h3{margin:0 0 .28rem;font-size:1.05rem}.interface-item p{margin:0;font-size:.88rem;line-height:1.42;color:#4b5563}.hybrid-result{grid-column:1/-1;padding:.6rem .72rem;background:#eef3ff;border-left:5px solid var(--blue);font-size:.92rem;line-height:1.4;font-weight:700}
+.failure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.68rem;flex:1;min-height:0}.failure-column{display:flex;flex-direction:column;background:#fff;border-top:6px solid var(--red);padding:.7rem}.failure-column:nth-child(2){border-top-color:#d97706}.failure-column:nth-child(3){border-top-color:var(--blue)}.failure-column:nth-child(4){border-top-color:#111827}.failure-column .code{font-size:1.8rem;font-weight:900;color:#cbd1d9}.failure-column h3{margin:.05rem 0 .35rem;font-size:1.08rem}.failure-column p{margin:0 0 .38rem;font-size:.87rem;line-height:1.4;color:#4b5563}.failure-column .repair{margin-top:auto;padding:.5rem;background:#f3f4f6;border-left:4px solid #059669;font-size:0.85rem;line-height:1.35}.failure-column .repair b{display:block;color:#111827}
+.library-table{display:grid;grid-template-columns:.48fr 1.05fr 1.45fr 1fr 1.25fr 1.2fr;border-top:5px solid #111827;background:#fff}.library-table>div{padding:.58rem .52rem;border-right:1px solid #d8dde5;border-bottom:1px solid #d8dde5;font-size:0.85rem;line-height:1.36;min-width:0}.library-table>div:nth-child(6n){border-right:0}.library-table .head{background:#111827;color:#fff;font-weight:900;font-size:.85rem}.library-table .sample{min-height:7.2rem}.library-table .blank{min-height:4.4rem;color:#9ca3af}.library-record-footer{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:.7rem}.library-record-footer>div{padding:.6rem .72rem;background:#eef3ff;border-left:5px solid var(--blue);font-size:.87rem;line-height:1.4}.library-record-footer>div:last-child{background:#fff1f2;border-color:var(--red)}.library-record-footer b{display:block;margin-bottom:.15rem;font-size:.96rem}
+@media screen and (max-width:1000px){.copy-extract-grid,.hybrid-layout{grid-template-columns:1fr}.ai-chain,.ai-boundary,.context-route,.failure-grid{grid-template-columns:repeat(2,1fr)}.demo-lenses{grid-template-columns:repeat(3,1fr)}.library-table{grid-template-columns:.5fr 1fr 1.2fr 1fr 1fr 1fr}}
+/* W05_TEACHER_PPTX_AUGMENT_END */
+</style><style>
+/* W05_AUGMENT_QA_DENSITY_START */
+.ai-rule{display:flex;flex-direction:column}
+.ai-list{display:grid;gap:.42rem;margin-top:.7rem}.ai-list span{display:block;padding:.46rem .5rem;background:#fff;border:1px solid #d8dde5;font-size:0.85rem;font-weight:700}.ai-question{margin-top:auto;padding-top:.65rem;font-size:0.85rem;line-height:1.36;color:#4b5563;border-top:1px solid #cfd5dd}
+.context-step{display:flex;flex-direction:column}.context-fields{display:grid;gap:.42rem;margin-top:auto;padding-top:.75rem}.context-fields span{display:block;padding:.46rem .5rem;background:#f6f7f9;border-left:4px solid #9ca3af;font-size:0.85rem;line-height:1.34}.context-fields b{display:block;color:#111827;margin-bottom:.08rem}
+.demo-details{display:grid;gap:.34rem;margin-top:auto;padding-top:.55rem}.demo-details span{display:block;padding:.4rem .42rem;background:#f6f7f9;border-left:4px solid #9ca3af;font-size:0.85rem;line-height:1.3;color:#4b5563}.demo-details b{display:block;color:#111827;margin-bottom:.05rem}
+.library-table{flex:1;min-height:0;grid-template-rows:auto repeat(3,minmax(0,1fr))}.library-table .sample,.library-table .blank{min-height:0}
+/* W05_AUGMENT_QA_DENSITY_END */
+</style><style>
+/* W05_PAGE04_DHU_STUDENT_CASE_START */
+.dhu-concept-slide .lead{margin-bottom:.62rem}
+.dhu-case-layout{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(28rem,.78fr);gap:.85rem;flex:1;min-height:0}
+.dhu-case-evidence,.dhu-case-analysis{min-width:0;min-height:0;background:#fff;border:1px solid #d7dce3}
+.dhu-case-evidence{display:flex;flex-direction:column;padding:.55rem}
+.dhu-case-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.05rem .12rem .48rem}
+.dhu-case-head strong{font-size:1.05rem}.dhu-case-head span{font-size:0.85rem;font-weight:900;color:var(--blue)}
+.dhu-case-media{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:minmax(0,1.03fr) minmax(0,.72fr);gap:5px;flex:1;min-height:0;background:#111827;padding:5px}
+.dhu-case-media figure{position:relative;margin:0;overflow:hidden;background:#f3f4f6;min-height:0}
+.dhu-case-media figure:last-child{grid-column:1/-1}
+.dhu-case-media img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;cursor:zoom-in;background:#f3f4f6}
+.dhu-case-media figcaption{position:absolute;left:.32rem;bottom:.32rem;padding:.2rem .38rem;background:rgba(17,24,39,.84);color:#fff;font-size:0.85rem;font-weight:900}
+.dhu-case-analysis{display:flex;flex-direction:column;padding:.62rem .7rem;border-top:6px solid var(--blue)}
+.dhu-case-analysis h3{margin:0 0 .16rem;font-size:1.16rem}.dhu-case-analysis>p{margin:0 0 .45rem;color:#4b5563;font-size:0.85rem;line-height:1.38}
+.dhu-rule-list{display:grid;gap:.32rem;align-content:start}
+.dhu-rule{display:grid;grid-template-columns:minmax(0,.84fr) 1.16fr;gap:.45rem;align-items:center;padding:.38rem .45rem;background:#f6f7f9;border-left:4px solid #9ca3af;font-size:0.85rem;line-height:1.3}
+.dhu-rule b{color:#374151}.dhu-rule span{color:#153e90;font-weight:800}.dhu-rule span:before{content:'→';margin-right:.28rem;color:var(--blue)}
+.dhu-case-proof{display:grid;gap:.3rem;margin-top:.46rem;padding:.48rem .52rem;background:#111827;color:#fff}.dhu-case-proof>strong{font-size:.88rem;color:#93c5fd}.dhu-case-proof span{font-size:0.85rem;line-height:1.32}.dhu-case-proof b{color:#fff}
+.dhu-copy-check{display:grid;grid-template-columns:1fr 1.25fr;gap:.42rem;margin-top:.46rem}
+.dhu-copy-check div{padding:.42rem .48rem;font-size:0.85rem;line-height:1.34;background:#fff1f2;border-left:4px solid var(--red)}
+.dhu-copy-check div:last-child{background:#eef3ff;border-color:var(--blue)}
+.dhu-copy-check b{display:block;margin-bottom:.08rem;font-size:0.85rem}
+.dhu-case-source{margin-top:.35rem;font-size:0.85rem;line-height:1.25;color:#6b7280}.dhu-case-source a{color:#3157a4;font-weight:800;text-decoration:none}
+.dhu-concept-slide .augment-verdict{margin-top:.5rem;padding:.48rem .68rem;font-size:.89rem}
+@media screen and (max-width:1000px){.dhu-case-layout{grid-template-columns:1fr}.dhu-case-analysis{display:none}.dhu-case-media{min-height:48vh}}
+/* W05_PAGE04_DHU_STUDENT_CASE_END */
+</style><style>
+/* W05_PAGE13_DHU_1961_START */
+.dhu1961-slide .lead{margin-bottom:.45rem}
+.dhu1961-teacher{margin-bottom:.5rem;background:#111827;color:#fff;padding:.4rem .48rem}
+.dhu1961-teacher-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;font-size:0.85rem}.dhu1961-teacher-head span{color:#93c5fd;font-weight:800}
+.dhu1961-teacher-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.32rem}
+.dhu1961-teacher-grid>div{display:grid;gap:.08rem;padding:.28rem .36rem;background:#1f2937;border-left:3px solid #60a5fa;min-width:0}
+.dhu1961-teacher-grid b{font-size:0.85rem}.dhu1961-teacher-grid span{font-size:0.85rem;line-height:1.25;color:#e5e7eb}.dhu1961-teacher-grid em{font-size:0.85rem;font-style:normal;color:#93c5fd}
+.dhu1961-layout{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(31rem,.94fr);gap:.72rem;flex:1;min-height:0}
+.dhu1961-evidence,.dhu1961-analysis{min-width:0;min-height:0;background:#fff;border:1px solid #d7dce3}
+.dhu1961-evidence{display:flex;flex-direction:column;padding:.5rem}
+.dhu1961-head{display:flex;justify-content:space-between;align-items:center;gap:.8rem;padding:.02rem .1rem .4rem}.dhu1961-head strong{font-size:.98rem}.dhu1961-head span{font-size:0.85rem;font-weight:900;color:var(--blue)}
+.dhu1961-media{display:grid;grid-template-columns:.78fr 1.22fr;grid-template-rows:minmax(0,.92fr) minmax(0,1.08fr);gap:5px;flex:1;min-height:0;background:#111827;padding:5px}
+.dhu1961-media figure{position:relative;margin:0;overflow:hidden;background:#f3f4f6;min-height:0}.dhu1961-media figure:last-child{grid-column:1/-1}
+.dhu1961-media img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;cursor:zoom-in;background:#f3f4f6}
+.dhu1961-media figcaption{position:absolute;left:.3rem;bottom:.3rem;padding:.2rem .36rem;background:rgba(17,24,39,.86);color:#fff;font-size:0.85rem;font-weight:900}
+.dhu1961-analysis{display:flex;flex-direction:column;padding:.5rem .58rem;border-top:6px solid var(--blue)}
+.dhu1961-analysis-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.7rem;margin-bottom:.35rem}.dhu1961-analysis-head strong{font-size:1.05rem}.dhu1961-analysis-head p{margin:.1rem 0 0;font-size:0.85rem;line-height:1.3;color:#6b7280}.dhu1961-analysis-head>span{white-space:nowrap;padding:.2rem .34rem;background:#eef3ff;color:#153e90;font-size:0.85rem;font-weight:900}
+.dhu1961-lenses{display:grid;gap:.3rem;flex:1;align-content:stretch}
+.dhu1961-lens{display:grid;grid-template-columns:2rem minmax(0,1fr) auto;gap:.42rem;align-items:center;padding:.35rem .42rem;background:#f6f7f9;border-left:4px solid #9ca3af;min-height:0}
+.dhu1961-lens.official{background:#eef3ff;border-color:var(--blue)}.dhu1961-lens .no{font-size:1.15rem;font-weight:900;color:#a5adb8}.dhu1961-lens.official .no{color:#3157a4}
+.dhu1961-lens h3{margin:0 0 .08rem;font-size:.9rem}.dhu1961-lens p{margin:0;font-size:0.85rem;line-height:1.3;color:#4b5563}.dhu1961-lens em{font-size:0.85rem;font-style:normal;font-weight:900;color:#6b7280;white-space:nowrap}.dhu1961-lens.official em{color:#153e90}
+.dhu1961-source{margin-top:.3rem;font-size:0.85rem;line-height:1.24;color:#6b7280}.dhu1961-source a{color:#3157a4;font-weight:800;text-decoration:none}
+.dhu1961-slide .demo-formula{margin-top:.45rem;padding:.45rem .62rem;font-size:.88rem;line-height:1.35}
+@media screen and (max-width:1000px){.dhu1961-teacher-grid{grid-template-columns:repeat(2,1fr)}.dhu1961-layout{grid-template-columns:1fr}.dhu1961-analysis{display:none}.dhu1961-media{min-height:45vh}}
+/* W05_PAGE13_DHU_1961_END */
+</style><style>
+/* W05_PAGE03_GOAL_REBUILD_START */
+.w05-goal-slide .lead{margin-bottom:.55rem}
+.w05-goal-slide .lesson-budget{margin-bottom:.58rem;padding:.52rem .72rem;font-size:.9rem}
+.w05-goal-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(23rem,.62fr);gap:.78rem;flex:1;min-height:0}
+.w05-goal-path{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:.62rem;min-height:0}
+.w05-goal-step{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:.82rem .9rem;background:#fff;border-top:7px solid var(--blue)}
+.w05-goal-step.red{border-color:var(--red)}.w05-goal-step.green{border-color:var(--green)}.w05-goal-step.black{border-color:#111827}
+.w05-goal-step-head{display:flex;align-items:baseline;gap:.65rem;margin-bottom:.42rem}.w05-goal-step-head span{font-size:1.82rem;line-height:1;font-weight:900;color:#c6ccd5}.w05-goal-step h3{margin:0;font-size:1.46rem}
+.w05-goal-step p{margin:0 0 .62rem;font-size:1.08rem;line-height:1.46;color:#4b5563}.w05-goal-step>b{margin-top:auto;padding-top:.48rem;border-top:1px solid #d7dce3;font-size:.86rem;line-height:1.38;color:#27364b}
+.w05-goal-results{display:flex;flex-direction:column;min-width:0;min-height:0;padding:.8rem .88rem;background:#111827;color:#fff}
+.w05-goal-results-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:.55rem;border-bottom:1px solid #374151}.w05-goal-results-head strong{font-size:1.18rem}.w05-goal-results-head span{font-size:0.85rem;color:#93c5fd;font-weight:900}
+.w05-goal-result{padding:.72rem 0;border-bottom:1px solid #374151}.w05-goal-result>span{display:block;margin-bottom:.22rem;font-size:0.85rem;font-weight:900;color:#93c5fd}.w05-goal-result.second>span{color:#86efac}.w05-goal-result strong{display:block;font-size:1.23rem;line-height:1.3}.w05-goal-result p{margin:.28rem 0 0;font-size:.88rem;line-height:1.4;color:#cbd5e1}
+.w05-goal-check{display:grid;gap:.32rem;margin-top:auto;padding-top:.62rem}.w05-goal-check b{font-size:.9rem;color:#fff}.w05-goal-check span{padding:.36rem .45rem;background:#1f2937;border-left:3px solid #60a5fa;font-size:0.85rem;font-weight:800}
+.w05-goal-footer{display:flex;align-items:center;gap:.72rem;margin-top:.55rem;padding:.52rem .7rem;background:#eef3ff;border-left:5px solid var(--blue);font-size:.9rem;line-height:1.35}.w05-goal-footer>b{font-size:.98rem}.w05-goal-footer>span{padding:.18rem .36rem;background:#fff;color:#153e90;font-weight:900}.w05-goal-footer p{margin:0 0 0 auto;color:#374151}
+@media screen and (max-width:1100px){.w05-goal-layout{grid-template-columns:1fr}.w05-goal-results{display:none}.w05-goal-footer p{display:none}}
+/* W05_PAGE03_GOAL_REBUILD_END */
+</style><style id="w05-restructure-final">
+.slide{overflow:hidden!important;padding:2.3rem 3.4rem 4.4rem!important}.slide h2{font-size:2.6rem!important;margin-bottom:.5rem!important}.slide .lead{font-size:1.16rem!important;line-height:1.42!important;margin-bottom:.72rem!important;max-width:90rem!important}.core-series{flex:1;min-height:0;display:flex;flex-direction:column}.core-series .series-grid{height:auto!important;flex:1;min-height:0}.core-series img{object-fit:contain!important;background:#111827}.series-source{font-size:0.85rem!important}.g2,.g3,.g4,.split,.hi,.proof,.gate{display:grid;gap:.75rem;flex:1;min-height:0}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.split{grid-template-columns:1.35fr .65fr}.hi{grid-template-columns:1.2fr .8fr}.proof,.gate{grid-template-columns:1fr 1fr}.p{background:#fff;border-top:6px solid #2563eb;padding:.8rem;min-height:0}.p.red{border-top-color:#d61f45}.p.green{border-top-color:#047857}.p.dark{background:#111827;color:#fff}.p h3{font-size:1.2rem;margin:.25rem 0}.p p{font-size:.95rem;line-height:1.36;color:#4b5563}.p.dark p{color:#e5e7eb}.line{margin-top:.55rem;background:#111827;color:#fff;padding:.58rem .72rem;font-size:.94rem;font-weight:900}.week{display:grid;grid-template-columns:3rem 1fr;gap:.5rem;padding:.45rem 0;border-top:1px solid #475569}.week b{color:#93c5fd;font-size:1.25rem}.demo{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;height:15rem}.demo i{background:#f8fafc;border:1px solid #cbd5e1;position:relative}.demo i:after{content:"";position:absolute;width:70%;height:8px;left:15%;top:48%;background:#111827;transform:rotate(-25deg)}.good .demo i:nth-child(2):after{transform:rotate(18deg);width:50%}.good .demo i:nth-child(3):after{transform:rotate(-3deg);top:68%;width:88%;left:6%}.media3{display:grid;grid-template-columns:1.1fr 1.25fr .9fr;gap:5px;background:#111827;padding:5px;min-height:0}.media3 figure,.proof figure{margin:0;position:relative;overflow:hidden}.media3 img{width:100%;height:100%;object-fit:contain;background:#fff}.media3 figcaption,.proof figcaption{position:absolute;left:.3rem;bottom:.3rem;background:#111827;color:#fff;padding:.25rem .4rem;font-size:0.85rem;font-weight:900}.rules{display:grid;gap:.38rem;align-content:center}.rules div{background:#fff;border-left:5px solid #2563eb;padding:.5rem}.rules b{display:block}.rules span{font-size:.86rem;color:#4b5563}.rules .dark{background:#111827;color:#fff;border-left-color:#10b981}.rules .dark span{color:#d1fae5}.lens{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;flex:1}.lens article{background:#fff;border-top:5px solid #2563eb;padding:.65rem}.lens b{font-size:1.4rem;color:#94a3b8}.lens h3{font-size:1.08rem;margin:.2rem 0}.lens p{font-size:.88rem;line-height:1.3;color:#4b5563}.lens em{font-style:normal;color:#1d4ed8;font-size:0.85rem;font-weight:900}.flow article{background:#111827;color:#fff;display:flex;flex-direction:column;justify-content:center}.flow article b{font-size:1.6rem;color:#93c5fd}.flow article p{color:#e5e7eb}.flow article span{color:#6ee7b7;font-weight:900}.srcpic{margin:0;background:#111827;overflow:hidden}.srcpic img{width:100%;height:100%;object-fit:contain}.notes{display:grid;gap:.45rem}.notes div{background:#fff;border-left:5px solid #2563eb;padding:.65rem}.notes p{font-size:.94rem;line-height:1.35;color:#4b5563}.formula{background:#111827;color:#fff;padding:1rem;display:flex;flex-direction:column;justify-content:center}.formula strong{font-size:1.4rem;line-height:1.5}.formula b{color:#93c5fd}.formula p{color:#cbd5e1}.vars{display:grid;grid-template-columns:repeat(2,1fr);gap:.45rem;background:#fff;padding:.6rem}.vars div{background:#f8fafc;border-top:4px solid #2563eb;padding:.55rem}.vars b{display:block}.vars span{font-size:.88rem;color:#4b5563}.vars .wide{grid-column:1/-1;background:#eef3ff;border-left:5px solid #2563eb}.hier{display:grid;grid-template-columns:repeat(2,1fr);gap:.38rem}.hier div{background:#fff;border-left:5px solid #2563eb;padding:.48rem}.hier b{display:block}.hier span{font-size:0.85rem;color:#4b5563}.hier .wide{grid-column:1/-1;background:#111827;color:#fff;border-left-color:#10b981}.hier .wide span{color:#d1fae5}.note{margin-top:.45rem;background:#fff7ed;border-left:5px solid #ea580c;padding:.46rem .6rem;font-size:0.85rem;font-weight:800}.ctx div{background:#fff;border-top:5px solid #2563eb;padding:.65rem}.ctx b{font-size:1.4rem;color:#cbd5e1}.ctx h3{font-size:1.06rem}.ctx p,.ctx li{font-size:.85rem;line-height:1.3}.ctx ul{padding-left:1rem}.conds{display:grid;gap:.35rem;align-content:center}.conds div{background:#fff;border-left:5px solid #2563eb;padding:.45rem}.conds b{display:block}.conds span{font-size:0.85rem;color:#4b5563}.analysis{flex:none;margin-top:.45rem}.analysis div{background:#fff;border-left:5px solid #2563eb;padding:.4rem;font-size:0.85rem}.analysis b{display:block}.proof img{width:100%;height:100%;object-fit:cover}.method{display:grid;grid-template-rows:.85fr 1.15fr;gap:.45rem}.tests{display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem}.tests div{background:#fff;border-top:4px solid #2563eb;padding:.45rem;font-size:0.85rem}.tests b{display:block}.tests .wide{grid-column:1/-1;background:#111827;color:#fff;border-top-color:#10b981}.fail{display:grid;grid-template-columns:.9fr 1.1fr;background:#fff;border:1px solid #d1d5db}.bad,.fix{padding:.65rem;display:flex;flex-direction:column;justify-content:center}.bad{background:#fff1f2}.bad b{color:#be123c}.fix{border-left:5px solid #047857}.fix b{color:#047857}.bad p,.fix p{font-size:0.85rem;line-height:1.28;color:#4b5563}.preview{background:#fff;border:1px solid #cbd5e1;padding:.6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem}.preview div{border:1px solid #cbd5e1;padding:.45rem;font-size:0.85rem}.preview b{display:block;color:#1d4ed8}.action,.aside{background:#111827;color:#fff;padding:1rem;display:flex;flex-direction:column;justify-content:center}.action p,.aside p{color:#d1d5db}.action a{background:#2563eb;color:#fff;text-decoration:none;padding:.65rem .8rem;font-weight:900;align-self:flex-start}.queue{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem}.queue div{background:#fff;border-top:4px solid #2563eb;padding:.5rem}.queue b{display:block}.queue span{font-size:0.85rem;color:#4b5563}.aside b{color:#6ee7b7}.appendix-slide:before{content:"附录";position:absolute;top:1.25rem;left:3.4rem;background:#475569;color:#fff;padding:.2rem .45rem;font-size:0.85rem;font-weight:900}.appendix-slide .weekline{margin-left:3.3rem}.appendix-slide h2{font-size:2.25rem!important}.appendix-slide .lead{font-size:1.03rem!important}@media screen and (max-width:1100px){.slide{overflow:auto!important}.g2,.g3,.g4,.split,.hi,.proof,.gate{grid-template-columns:1fr}.lens{grid-template-columns:repeat(2,1fr)}}
+</style><style id="w05-material-proof-fix">.proof{min-height:0!important;overflow:hidden}.proof>*,.method,.method>*,.tests{min-height:0!important;overflow:hidden}.method{grid-template-rows:minmax(0,.85fr) minmax(0,1.15fr)!important}.proof figure{position:relative;min-height:0!important}.proof figure img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}.tests{grid-auto-rows:minmax(0,1fr)}</style><style id="w05-visual-fill-fix">.hi>div:first-child{display:flex;flex-direction:column;min-height:0}.hi>div:first-child .core-series{height:100%}.fail{min-height:0}.fail .bad,.fail .fix{justify-content:flex-start;padding:.75rem}.fail h3{font-size:1.02rem;margin:.1rem 0 .35rem}.fail .fieldrow{display:grid;grid-template-columns:4.5rem 1fr;gap:.35rem;border-top:1px solid #d1d5db;padding:.36rem 0;font-size:0.85rem;line-height:1.28}.fail .fieldrow b{color:#64748b}.fail .fix .fieldrow b{color:#047857}.fail .status{margin-top:auto;padding:.35rem .45rem;background:#111827;color:#fff;font-size:0.85rem;font-weight:900}</style><style id="w05-slide4-visual-fix">
+.concept-case{display:grid;grid-template-columns:.82fr 1.18fr;gap:1rem;flex:1;min-height:0}
+.concept-look{margin:0;position:relative;min-height:0;background:#111;overflow:hidden;border-top:7px solid #111827}
+.concept-look img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.concept-look figcaption{position:absolute;left:0;right:0;bottom:0;padding:.55rem .7rem;background:rgba(0,0,0,.82);color:#fff;font-size:.86rem;line-height:1.35}
+.concept-analysis{display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:.55rem;min-height:0}
+.concept-judge{background:#fff;border-left:7px solid #be123c;padding:.62rem .78rem}
+.concept-judge.good{border-left-color:#047857}
+.concept-judge b{display:block;font-size:1.16rem;margin-bottom:.2rem}.concept-judge p{margin:0;font-size:1rem;line-height:1.4;color:#374151}
+.concept-rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;min-height:0}
+.concept-rule{background:#fff;border-top:5px solid #3157a4;padding:.9rem 1rem;min-height:0;display:flex;flex-direction:column;justify-content:center}
+.concept-rule span{display:block;color:#3157a4;font-weight:900;font-size:.9rem}.concept-rule b{display:block;margin:.28rem 0 .42rem;font-size:1.28rem}
+.concept-rule p{margin:0;color:#4b5563;font-size:1rem;line-height:1.42}
+.concept-test{background:#111827;color:#fff;padding:.65rem .8rem;font-weight:900;font-size:1.05rem}
+.concept-source{font-size:0.85rem;color:#6b7280;margin-top:.35rem}.concept-source a{color:#3157a4}
+</style><style id="w05-slide26-gzarts">
+.gzarts-case-layout{display:grid;grid-template-columns:1.12fr .88fr;gap:1rem;flex:1;min-height:0}
+.gzarts-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:.5rem;min-height:0}
+.gzarts-gallery figure{margin:0;position:relative;min-height:0;background:#eef1f5;overflow:hidden;border-top:5px solid #3157a4}
+.gzarts-gallery img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
+.gzarts-gallery .look img{object-fit:contain;object-position:center;background:#f2eff8}
+.gzarts-gallery figcaption{position:absolute;left:.38rem;bottom:.35rem;background:rgba(17,24,39,.88);color:#fff;padding:.22rem .38rem;font-size:0.85rem;font-weight:900}
+.gzarts-method{display:grid;grid-template-rows:repeat(4,minmax(0,1fr)) auto;gap:.46rem;min-height:0}
+.gzarts-step{background:#fff;border-left:6px solid #3157a4;padding:.58rem .72rem;display:grid;grid-template-columns:2.3rem 1fr;gap:.55rem;align-items:center;min-height:0}
+.gzarts-step .no{font-size:1.45rem;font-weight:950;color:#3157a4}.gzarts-step h3{margin:0 0 .16rem;font-size:1.05rem}
+.gzarts-step p{margin:0;color:#4b5563;font-size:.88rem;line-height:1.34}
+.gzarts-compare{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+.gzarts-compare div{padding:.5rem .6rem;background:#fff;border-top:5px solid #be123c;font-size:0.85rem;line-height:1.34}
+.gzarts-compare div:last-child{border-top-color:#047857}.gzarts-compare b{display:block;margin-bottom:.12rem;font-size:.92rem}
+.gzarts-source{font-size:0.85rem;color:#6b7280;margin-top:.32rem}.gzarts-source a{color:#3157a4}
+</style><style id="w05-closing-preview">
+.closing-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.72rem;flex:1;min-height:0;margin:.8rem 0}
+.closing-card{border-top:6px solid #60a5fa;background:rgba(255,255,255,.08);padding:1rem;display:flex;flex-direction:column;justify-content:center}
+.closing-card span{font-size:0.85rem;color:#93c5fd;font-weight:900}.closing-card h3{font-size:1.28rem;margin:.28rem 0 .45rem;color:#fff}
+.closing-card p{font-size:1rem;line-height:1.48;color:#dbeafe;margin:0}
+.closing-exit{border-left:6px solid #f43f5e;padding:.8rem 1rem;background:rgba(255,255,255,.07);font-size:1.08rem;line-height:1.48;font-weight:900}
+.preview-bridge{display:grid;grid-template-columns:.82fr 1.18fr;gap:.9rem;margin-bottom:.75rem}
+.preview-bridge>div{padding:.72rem .86rem;background:#fff;border-top:6px solid #047857}
+.preview-bridge>div:last-child{border-top-color:#3157a4}.preview-bridge b{display:block;font-size:1.1rem;margin-bottom:.24rem}
+.preview-bridge p{margin:0;color:#4b5563;font-size:.96rem;line-height:1.4}
+.preview-path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.65rem;flex:1;min-height:0}
+.preview-step{position:relative;background:#fff;border-top:6px solid #3157a4;padding:.9rem;display:flex;flex-direction:column;justify-content:center}
+.preview-step:not(:last-child)::after{content:"→";position:absolute;right:-.62rem;top:45%;z-index:3;background:#f3f4f6;color:#111827;font-size:1.25rem;font-weight:950;padding:.12rem}
+.preview-step .big{font-size:2.6rem;font-weight:950;color:#3157a4;line-height:1}.preview-step h3{font-size:1.22rem;margin:.35rem 0}
+.preview-step p{margin:0;color:#4b5563;font-size:.92rem;line-height:1.38}
+.preview-pack{margin-top:.75rem;background:#111827;color:#fff;padding:.62rem .78rem;font-size:.96rem;font-weight:900}
+</style><style id="w05-closing-density-fix">
+.closing-summary{flex:none;height:17rem;margin:.65rem 0}
+.closing-card{justify-content:space-between}.closing-card h3{font-size:1.52rem}.closing-card p{font-size:1.06rem}
+.closing-bottom{display:grid;grid-template-columns:1fr 1fr;gap:.72rem;flex:1;min-height:0;margin-bottom:.65rem}
+.closing-panel{background:rgba(255,255,255,.08);padding:.75rem .9rem;display:flex;flex-direction:column;justify-content:center}
+.closing-panel h3{font-size:1.18rem;margin:0 0 .42rem;color:#93c5fd}
+.closing-row{display:grid;grid-template-columns:2rem 1fr;gap:.5rem;border-top:1px solid rgba(255,255,255,.18);padding:.4rem 0;font-size:.96rem;color:#e5e7eb}
+.closing-row b{color:#fff}.closing-exit{font-size:1rem;padding:.62rem .82rem}
+.preview-step{justify-content:flex-start;padding:1rem}.preview-step .big{font-size:2.9rem}.preview-step h3{font-size:1.3rem;margin:.35rem 0 .18rem}
+.preview-step p{font-size:.95rem}.preview-step ul{list-style:none;margin:.65rem 0 0;padding:0;display:grid;gap:.3rem}
+.preview-step li{border-top:1px solid #d1d5db;padding:.34rem 0;font-size:.88rem;color:#374151;font-weight:800}
+</style><style id="w05-preview-timeline">
+.preview-timeline{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.38rem;margin-top:.62rem}
+.preview-timeline div{background:#e5e7eb;border-top:4px solid #64748b;padding:.42rem .5rem;display:grid;grid-template-columns:2.2rem 1fr;gap:.28rem;align-items:center}
+.preview-timeline div:nth-child(-n+3){border-top-color:#3157a4}.preview-timeline div:nth-child(n+4){border-top-color:#047857}
+.preview-timeline b{font-size:1rem;color:#111827}.preview-timeline span{font-size:0.85rem;line-height:1.28;font-weight:800;color:#374151}
+
+@media print{
+@page{size:1920px 1080px;margin:0}
+html,body{width:1920px!important;height:auto!important;overflow:visible!important;background:#fff!important}
+.nav-controls,.nav-button,.mode-toggle,[id*="rogress"],[id*="btnPrev"],[id*="btnNext"],#prev,#next,#mode-class,#mode-all{display:none!important}
+.slide{display:flex!important;flex-direction:column;opacity:1!important;visibility:visible!important;transform:none!important;transition:none!important;animation:none!important;width:1920px!important;height:1080px!important;min-height:1080px!important;max-height:1080px!important;overflow:hidden!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid;break-after:auto;page-break-after:auto}
+.slide:not(:first-of-type){break-before:page;page-break-before:always}
+*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+a[href]::after{content:none!important}
+}
+
+/* ================================================================
+   全周次技术基线统一（2026-08-28 일괄 정비）
+   W01·W02·W03 에서 세 번 검증된 지반을 그대로 적용한다. 교학 내용은 건드리지 않는다.
+   ================================================================ */
+html{font-size:clamp(14px,calc(11.5px + 0.42vh),19px)}
+.slide.dark .weekline{color:#9aa3b0}
+.slide.dark .session{color:#9aa3b0}
+body.on-dark .progress{color:#9aa3b0}
+.session{color:#5b6472}
+.progress{left:1.4rem;bottom:.7rem;color:#5b6472}
+.nav-controls{right:1.4rem;bottom:.7rem}
+.mode-controls{position:fixed;left:50%;bottom:.7rem;transform:translateX(-50%);display:flex;border:1px solid #111827;background:#fff;z-index:1001}
+.mode-button{height:2.85rem;padding:0 1rem;border:0;border-right:1px solid #111827;background:#fff;color:#4b5563;font-size:.85rem;font-weight:950;cursor:pointer;letter-spacing:0}
+.mode-button:last-child{border-right:0}
+.mode-button.active{background:#111827;color:#fff}
+.mode-button:focus-visible{outline:3px solid #60a5fa;outline-offset:2px}
+.appendix-slide{background:#f7f8fa}
+.appendix-slide .tag{background:#6b7280!important;color:#fff!important}
+.appendix-slide::before{content:"补充资料";position:absolute;right:4rem;top:3.4rem;color:#868f9d;font-size:.9rem;font-weight:950;letter-spacing:.05em}
+#zoom{cursor:zoom-out}
+#zoom.click-open{pointer-events:auto}
+.slide>.series-shell{display:flex;flex-direction:column;flex:1;min-height:0}
+.slide>.series-shell .series-grid{height:auto;flex:1;min-height:0}
+/* 잔여 보정: 표지의 series-shell 은 .cover-layout 안에 중첩돼 있어 `.slide>` 선택자가 닿지 않는다
+   (W01 의 .four-question-layout 과 같은 구조). 死高 vh 만 해제하고 도판 비율은 건드리지 않는다. */
+.cover-layout>.series-shell{display:flex;flex-direction:column;min-height:0}
+.cover-layout>.series-shell .series-grid{height:auto;flex:1;min-height:0}
+/* W05 고유 대비 보정: 흰 배경 위 장식 숫자·상태 기호만. 어두운 배경 위 텍스트(.dark .lead,
+   .divider-copy p 등)는 대비가 충분하므로 건드리지 않는다. */
+.roadmap-no,.evidence-step .no,.scenario-step .no,.context-step .no,.failure-column .code{color:#7e8894}
+.dot-mid{color:#8f4700}
+
+/* 대비 공통 보정(전 주차 동일 컴포넌트): 十六周总图의 주차 번호·단계 라벨, 장식용 큰 숫자.
+   수치는 W02·W03 에서 실측 검증된 값. */
+.ucm-no,.unified-course-map .ucm-no{color:#6b7280}
+.ucm-phase b,.unified-course-map .ucm-phase b{font-size:.92rem;color:#5b6472}
+.no,.process-step .no,.demo-step .no,.gate-question .gate-no{color:#7e8894}
+.boundary-no{color:#5b6472}
+
+/* W05: .element-wall-grid 의 figcaption 만 다른 그리드와 달리 정적 배치라 figure(overflow:hidden)
+   밖으로 밀려 잘렸다(720p·1080p 모두). 구조적 수정이므로 해상도 조건 없이 적용한다. */
+.element-wall-grid figcaption{position:absolute;left:.35rem;bottom:.35rem;background:rgba(15,23,42,.85);color:#fff;padding:.2rem .38rem;font-size:.85rem;font-weight:900}
+
+@media screen and (max-height:820px){
+  .slide{padding:2.2rem 3.2rem 4.5rem}
+  .session{right:3.2rem}
+  .appendix-slide::before{right:3.2rem}
+  h1{font-size:3.5rem}
+  h2{font-size:2.45rem}
+  .lead{font-size:1.14rem;line-height:1.48;margin-bottom:1rem}
+  .tag{margin-bottom:.6rem}
+  .weekline{margin-bottom:.6rem}
+  .compare-panel{padding:1.05rem}
+  .compare-panel li{padding:.6rem .8rem;font-size:1.05rem}
+  .card,.phase,.criterion{min-height:0}
+}
+@media screen and (max-width:1000px){.mode-controls{bottom:.5rem}}
+@media print{html{font-size:16px!important}.mode-controls{display:none!important}}
+
+/* ===== 第05周 内容批次 追加样式 (DECISION.md) ===== */
+
+/* B-01 [P0] 附录徐记冲突解除。
+   本周固有的旧规则 .appendix-slide:before{content:"附录";left:3.4rem;background:#475569;padding:...}
+   与 2026-08-28 一括整备的新规则重叠，新规则只覆盖了 content/top/color，
+   left 与 background/padding 存活 → left+right 同时生效，徐记变成宽 1171px 的横条，
+   并且 top:3.4rem 与 .tag 同高，遮住附录 5 页的标签。实测确认（appx_probe.html）。 */
+.appendix-slide::before{left:auto!important;right:3.2rem!important;top:3.4rem!important;
+  background:transparent!important;padding:0!important;color:#868f9d!important}
+
+/* B-02 [P0] 封面图片可见比 0.40。一括整备写的是 .cover-layout>.series-shell，
+   但本周 slide-1 的结构是 .cover-layout > div > .series-shell，子选择器构不到，
+   只剩 .cover-layout .series-grid{height:58vh} 生效。改为后代选择器。图片与比例不变。 */
+.cover-layout .series-shell{display:flex;flex-direction:column;min-height:0}
+.cover-layout .series-shell .series-grid{height:auto!important;flex:1;min-height:0}
+
+/* B-03 [P1] slide-29 死高 36vh 造成约 90px 空带（填充率 0.73@1080p）。 */
+.element-wall-grid{height:auto!important;flex:1;min-height:0}
+
+/* B-05 [P1] slide-18 “规则句”黑块过大空白。行比反转：
+   上格（过程照片）变大、下格（表）变小。附带改善 _02 的可见比。 */
+.method{grid-template-rows:minmax(0,1.15fr) minmax(0,.85fr)!important}
+
+/* B-04 [P1] slide-25 “成衣验证” 2 张（0.35 竖幅）在 contain 下只画到 79px 宽。
+   改用 cover + center top（与 slide-29 同一处理），全身确认交给点击放大。 */
+.gzarts-gallery{grid-template-rows:minmax(0,1.15fr) minmax(0,.85fr)}
+.gzarts-gallery .look img{object-fit:cover!important;object-position:center 32%!important;background:#f2eff8}
+
+/* B-06 [P1] 对比度 4 处。slide-4 的 .concept-look figcaption 是探测误报（黑幕上白字），不动。 */
+.w05-goal-step-head span{color:#8a929c!important}
+.lens article b{color:#6b7280!important}
+.g4.ctx div b{color:#6b7280!important}
+.fail .fieldrow b{color:#525c6b!important}
+
+/* B-07 [P2] slide-10 的内联 style="flex:1" 改为类。 */
+.media3.grow{flex:1}
+
+/* A-01 [P0] 第04周→本周 衔接页 */
+.bridge-grid{display:grid;grid-template-columns:1.05fr 1.15fr .8fr;gap:.38rem;margin:.55rem 0 .6rem}
+.bridge-cell{display:flex;align-items:center;background:var(--white);border:1px solid var(--line);
+  border-radius:.4rem;padding:.55rem .8rem;font-size:1.04rem;line-height:1.34;color:#2b3138}
+.bridge-cell.bridge-head{background:#eceff4;font-weight:900;color:#39414c;font-size:1rem;letter-spacing:.02em}
+.bridge-cell.bridge-to{color:var(--blue);font-weight:800}
+.bridge-cell.bridge-where{color:#6b7280;font-size:.94rem}
+.bridge-cell b{color:var(--red)}
+.bridge-stance{background:#f1f3f7;border-left:5px solid var(--red);border-radius:.35rem;
+  padding:.58rem .9rem;font-size:1rem;line-height:1.44;color:#2b3138;margin-bottom:.48rem}
+.bridge-stance b{color:var(--red);margin-right:.4rem}
+.bridge-open{background:var(--white);border:1px dashed #c3cad3;border-radius:.4rem;
+  padding:.58rem .9rem;font-size:.97rem;line-height:1.45;color:#4a525c}
+.bridge-open b{color:#39414c;margin-right:.4rem}
+
+/* A-01 신설 페이지는 720p 에서 0.87 로 적정하나 1080p 에서 0.60 으로 비었다.
+   단축병 규칙이 아니라 **고해상도에서만** 키운다(720p 는 그대로 둔다). */
+@media screen and (min-height:900px){
+  .bridge-grid{gap:.55rem;margin:.8rem 0 .85rem}
+  .bridge-cell{padding:1.5rem .95rem;font-size:1.2rem}
+  .bridge-cell.bridge-head{font-size:1.12rem}
+  .bridge-cell.bridge-where{font-size:1.08rem}
+  .bridge-stance{padding:1rem 1.1rem;font-size:1.14rem;line-height:1.5;margin-bottom:.7rem}
+  .bridge-open{padding:1rem 1.1rem;font-size:1.1rem;line-height:1.52}
+}
+
+/* A-05 [P1] 学情与重难点 */
+.week-context{margin-top:.5rem;background:#f1f3f7;border-radius:.4rem;padding:.45rem .72rem;
+  font-size:.95rem;line-height:1.42;color:#4a525c}
+.week-context b{color:#39414c;margin-right:.35rem}
+
+@media screen and (max-height:820px){
+  /* A-05 가필분을 그 페이지 안에서 회수한다(720p 에서 53px 넘침이 나왔다) */
+  .week-context{padding:.28rem .6rem;font-size:.8rem;line-height:1.28}
+  .w05-goal-results{padding:.55rem .7rem}
+  .w05-goal-result{padding:.42rem 0}
+  .w05-goal-result p{font-size:.82rem;line-height:1.34;margin-top:.2rem}
+  .w05-goal-result strong{font-size:1.1rem;line-height:1.26}
+  .w05-goal-check{padding-top:.4rem;gap:.24rem}
+  .w05-goal-check span{padding:.28rem .42rem;font-size:.8rem}
+}
+</style></head>
+<body><section class="slide active" id="slide-1"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="cover-layout"><div class="cover-copy"><div class="subtitle">第05周｜元素提取</div><h1>元素提取不是复制图形，而是把证据变成可操作规则。</h1><p class="lead">从第04周主题板中提取轮廓、线条、比例、色彩、材料与细节，并建立优先级。</p><div class="keyline">观察 → 命名 → 抽象 → 规则化 → 元素库</div></div><div><div class="series-shell"><div class="series-label"><strong>Roksanda · 2026秋冬成衣</strong><span>同一系列 5套完整造型</span></div><div class="series-grid"><figure class=""><img class="zoomable" src="w05_final_assets/cover_01.png" alt="Roksanda 2026秋冬成衣 造型 01"><figcaption>01</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/cover_02.png" alt="Roksanda 2026秋冬成衣 造型 02"><figcaption>02</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/cover_03.png" alt="Roksanda 2026秋冬成衣 造型 03"><figcaption>03</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/cover_04.png" alt="Roksanda 2026秋冬成衣 造型 04"><figcaption>04</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/cover_05.png" alt="Roksanda 2026秋冬成衣 造型 05"><figcaption>05</figcaption></figure></div></div><div class="series-source">Roksanda / Roksanda Ilinčić｜2026秋冬成衣｜来源：Vogue Runway</div></div></div></section>
+<section class="slide " id="slide-2"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">02 课程位置</div><h2>课程位置</h2><p class="lead">只看本周与前后关系，先知道今天为什么要做元素库。</p><div class="g3"><div class="p"><b>已完成｜01—04周</b><h3>从判断走到主题证据</h3><p>美学与造型 → 穿着者与主题 → 主题板与设计简报。</p></div><div class="p dark"><b>当前｜05—08周</b><h3>提取、变形、验证</h3><div class="week"><b>05</b><strong>元素提取</strong></div><div class="week"><b>06</b><strong>元素变形·分解板</strong></div><div class="week"><b>07</b><strong>春夏系列策划 V1</strong></div><div class="week"><b>08</b><strong>Gate 2：白坯布样</strong></div></div><div class="p"><b>后续｜09—16周</b><h3>深化与独立项目</h3><p>春夏再编辑 → 秋冬系列 → 自定主题 → 最终系列、作品集与答辩。</p></div></div><div class="line">第04周主题板是来源，第06周变形板是去向；元素库负责连接两者。</div></section>
+<section class="slide" id="slide-bridge"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag red">第04周→本周</div><h2>今天不从零开始——上周的简报，已经写好了元素卡的前两栏</h2><p class="lead">第04周回答“我承诺做什么”；本周回答“用哪些可重复的规则去做”。</p><div class="bridge-grid"><div class="bridge-cell bridge-head">上周简报上的</div><div class="bridge-cell bridge-head">今天变成</div><div class="bridge-cell bridge-head">在哪一页用</div><div class="bridge-cell">45字<b>概念句</b></div><div class="bridge-cell bridge-to">元素卡的“核心规则”一栏</div><div class="bridge-cell bridge-where">元素卡 2｜操作与变量</div><div class="bridge-cell"><b>8—12张已编号资料</b></div><div class="bridge-cell bridge-to">元素卡的“来源”一栏（编号＋局部）</div><div class="bridge-cell bridge-where">元素卡 1｜来源与观察</div><div class="bridge-cell"><b>设计简报</b>的“形”与“材”</div><div class="bridge-cell bridge-to">六类观察中的廓形／线条／材料</div><div class="bridge-cell bridge-where">六类观察镜头</div><div class="bridge-cell"><b>设计简报</b>的“验”</div><div class="bridge-cell bridge-to">变量与失败条件</div><div class="bridge-cell bridge-where">六类分析与分级</div><div class="bridge-cell"><b>Gate 1</b> 的可追溯／可操作／可变化</div><div class="bridge-cell bridge-to">本周 Gate 的同名三条</div><div class="bridge-cell bridge-where">修订与Gate</div></div><div class="bridge-stance"><b>立场句第五次升级</b>第04周“我的主题板证明 ______；因此简报承诺通过 ______ 的形式规则” → <b>本周“我的核心元素来自 ______；生成规则是 ______；它可以通过 ______ 产生变化。”</b></div><div class="bridge-open"><b>开场 3 分钟</b>摊开第04周带来的四样：主题板打印稿、带编号的设计简报、8—12张已编号资料、描图纸与剪刀胶带 → 在简报上圈出<b>概念句</b>，它就是今天第一张元素卡的核心规则 → 第04周离堂句写的“要先提取 ______ 作为可变形的元素”，现在把那一项抄到卡片顶端。</div></section><section class="slide w05-goal-slide" id="slide-3"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag red">03 学习目标</div><h2>今天要完成一套可继续变形的元素库</h2><p class="lead">元素必须来自第04周主题板的证据，并能写成下一周可执行的动作。</p><div class="lesson-budget"><b>第1课时节奏</b><span>衔接与导入5′</span><span>概念7′</span><span>案例与方法12′</span><span>卡片格式4′</span><span>实作16′</span><span>小结1′</span></div><div class="w05-goal-layout"><div class="w05-goal-path"><div class="w05-goal-step blue"><div class="w05-goal-step-head"><span>01</span><h3>观察</h3></div><p>从资料中标出重复形式、身体位置与材料行为。</p><b>直接输出｜圈出至少3处可追溯证据</b></div><div class="w05-goal-step red"><div class="w05-goal-step-head"><span>02</span><h3>命名</h3></div><p>用准确名词、位置、方向和动词描述元素。</p><b>直接输出｜一条不依赖原图的描述句</b></div><div class="w05-goal-step green"><div class="w05-goal-step-head"><span>03</span><h3>抽象</h3></div><p>去除具体款式，保留比例、方向、连接和物理关系。</p><b>直接输出｜同一规则的3个不同变体</b></div><div class="w05-goal-step black"><div class="w05-goal-step-head"><span>04</span><h3>分级</h3></div><p>确定核心、辅助、语境与禁用元素，并说明理由。</p><b>直接输出｜核心2—3个，其余进入相应层级</b></div></div><aside class="w05-goal-results"><div class="w05-goal-results-head"><strong>两课时成果</strong><span>本周完成线</span></div><div class="w05-goal-result first"><span>第1课时</span><strong>3张合格元素卡<br>＋1条核心规则</strong><p>先证明来源、抽象方式与下一步动作。</p></div><div class="w05-goal-result second"><span>第2课时</span><strong>8—10张元素卡<br>＋1张层级矩阵</strong><p>把单张卡扩展成可以支持系列设计的系统。</p></div><div class="w05-goal-check"><b>离开课堂前必须能回答</b><span>来自哪一条证据？</span><span>允许改变什么？</span><span>为什么值得保留？</span></div></aside></div><div class="w05-goal-footer"><b>合格标准</b><span>可追溯</span><span>可操作</span><span>可变化</span><p>不是“找到了一个漂亮图形”，而是“建立了一条能够继续生成的规则”。</p></div><div class="week-context"><b>学情</b>大二，已完成第01—04周，能交出主题板与八项设计简报。当前三个普遍困难，本周“失败卡诊断”页已按 F1—F3 逐条给出修复方法：把“好看的形状”当成元素（F1 复制图形）、四级分层时全部标成核心（F2 没有优先级）、不定义变量轴因而无法转移到其他品类（F3 不能扩展）。　<b>教学重点</b>把证据写成“名词＋位置＋方向＋动作”的操作句，并给出至少3个只改一个变量的变体。　<b>教学难点</b>分级——判断“删除后身份是否改变”，从而决定什么才是核心。</div></section>
+<section class="slide " id="slide-4">
+  <div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div>
+  <div class="tag red">04 概念校正</div><h2>复制“长相”，还是提取“生成规则”？</h2>
+  <p class="lead">先看真实服装，再判断哪些信息能离开原图继续生成新的高级女装造型。</p>
+  <div class="concept-case">
+    <figure class="concept-look">
+      <img class="zoomable" src="w05_final_assets/bift_wang_qingcheng_project.jpeg" alt="北京服装学院王清程毕业设计《看似枯萎》秀场作品">
+      <figcaption>王清程《看似枯萎》｜北京服装学院毕业设计<br>将中国画笔势、材料骨架与表面肌理转译为服装关系</figcaption>
+    </figure>
+    <div class="concept-analysis">
+      <div class="concept-judge"><b>错误路径｜复制完整图形</b><p>照搬这一套的蓬大裙形、黑白墨迹和完整搭配，只改变颜色、大小或位置。</p></div>
+      <div class="concept-rules">
+        <div class="concept-rule"><span>01 方向</span><b>笔势 → 斜向动势</b><p>角度、起点和终点可以变化；“运动方向”保持可读。</p></div>
+        <div class="concept-rule"><span>02 结构</span><b>骨架 → 离体支撑</b><p>固定点、支撑范围和离体距离成为可调变量。</p></div>
+        <div class="concept-rule"><span>03 表面</span><b>墨迹 → 疏密层次</b><p>不用复制花纹，改用透明度、密度和边界变化。</p></div>
+        <div class="concept-rule"><span>04 身体</span><b>体积 → 局部扩张</b><p>肩、腰、髋或下摆可以轮换，身体关系仍然一致。</p></div>
+      </div>
+      <div class="concept-judge good"><b>正确路径｜提取可操作关系</b><p>用“方向＋固定点＋材料行为＋身体位置”写成规则，再改变尺度、位置与数量。</p></div>
+      <div class="concept-test">遮住照片后测试：能否用同一句规则生成3套不同造型？能，才是“元素提取”。</div>
+    </div>
+  </div>
+  <div class="concept-source">来源：<a href="https://www.bift.edu.cn/xwgg/bfxw/84ac6e924e7a41ca967819f248228b01.htm" target="_blank" rel="noopener">北京服装学院《直击北服时装周｜传承与创新服装设计专业方向》</a></div>
+</section>
+<section class="slide " id="slide-5"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">05 高校学生案例</div><h2>高校学生案例</h2><p class="lead">东华大学肖宜昀《故乡痕迹》把调研对象转译为曲率、悬挂、层叠和色彩关系。</p><div class="split"><div class="media3"><figure><img class="zoomable" src="w05_final_assets/dhu_hometown_grain_01_crop.png" alt="故乡痕迹调研"><figcaption>01 调研证据</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/dhu_hometown_grain_02_crop.png" alt="故乡痕迹六套系列"><figcaption>02 六套系列</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/dhu_hometown_grain_03_crop.png" alt="故乡痕迹成衣"><figcaption>03 成衣验证</figcaption></figure></div><div class="rules"><div><b>树枝弧度</b><span>连续曲线／离体轮廓</span></div><div><b>许愿牌悬挂</b><span>固定点／垂直方向</span></div><div><b>木雕与建筑</b><span>层叠／边界转折</span></div><div><b>旧照片色调</b><span>低饱和＋蓝紫强调</span></div><div class="dark"><b>不是复制</b><span>六套共享关系，不重复完整图形。</span></div></div></div><div class="series-source">来源：<a href="https://scf.dhu.edu.cn/2026/0513/c17478a375932/page.htm" target="_blank">东华大学上海国际时尚创意学院</a></div></section>
+<section class="slide " id="slide-6"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">06 六类观察镜头</div><h2>六类观察镜头</h2><p class="lead">统一使用六类：廓形、线条、比例、色彩、材料、细节。它们是观察镜头，不等于都成为核心。</p><div class="lens"><article><b>01</b><h3>廓形</h3><p>身体距离、体量、长度。</p><em>肩部向外释放</em></article><article><b>02</b><h3>线条</h3><p>方向、连续、断裂。</p><em>斜线跨越中心</em></article><article><b>03</b><h3>比例</h3><p>上下、内外、局部尺度。</p><em>上窄下放 1:3</em></article><article><b>04</b><h3>色彩</h3><p>主辅强调、面积、明度。</p><em>5%强调色</em></article><article><b>05</b><h3>材料</h3><p>重量、挺度、透明、弹性。</p><em>硬壳承托软层</em></article><article><b>06</b><h3>细节</h3><p>开口、连接、边缘、调节。</p><em>固定点重复</em></article></div><div class="line">每类先找2—3项，再按证据强度与系列潜力筛选。</div></section>
+<section class="slide " id="slide-7"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">07 过程证据</div><h2>过程证据</h2><p class="lead">研究、生成、选择与修订要按顺序留下痕迹。</p><div class="g4 flow"><article class="p"><b>01</b><h3>研究</h3><p>编号资料，圈出身体位置和材料行为。</p><span>证据编号</span></article><article class="p"><b>02</b><h3>生成</h3><p>改变方向、位置和尺度。</p><span>3个变体</span></article><article class="p"><b>03</b><h3>选择</h3><p>按来源、身体与简报筛选。</p><span>保留理由</span></article><article class="p"><b>04</b><h3>修订</h3><p>记录删除、降级和待测试。</p><span>下一步动作</span></article></div><div class="line">只展示最后一张漂亮图，不能证明设计过程。</div></section>
+<section class="slide " id="slide-8"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag red">08 元素卡 1｜来源与观察</div><h2>元素卡 1｜来源与观察</h2><p class="lead">先回答“我看见了什么”，不要直接跳到完整设计。</p><div class="g2"><figure class="srcpic"><img class="zoomable" src="w05_final_assets/page10_issey_miyake_plane.png" alt="Issey Miyake来源图"></figure><div class="notes"><div><h3>01 可见关系</h3><p><b>横向肩面</b>跨越身体；垂直主体形成窄长轴。</p></div><div><h3>02 身体与方向</h3><p>肩向两侧扩张，前身叠层错位，开口向下。</p></div><div><h3>03 事实与推测</h3><p>图像支持轮廓与叠层；版型、材料和工艺需测试。</p></div></div></div><div class="note">课堂抽象，不代表品牌官方版型图。</div><div class="series-source">来源：Issey Miyake 官方公开图像｜本页仅作“可见关系→身体与方向→事实与推测”的课堂观察</div></section>
+<section class="slide " id="slide-9"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">09 元素卡 2｜操作与变量</div><h2>元素卡 2｜操作与变量</h2><p class="lead">用“名词＋位置＋方向＋动作＋关系”写操作句。</p><div class="g2"><div class="formula"><h3>操作句</h3><strong>“将<b>肩部平面</b>横向放大，以三层错位面板包围前身，并保留中心开口。”</strong><p>名词：平面／面板／开口<br>动作：放大／错位／包围</p></div><div class="vars"><div><b>尺度</b><span>×1.2／×1.6／×2.0</span></div><div><b>位置</b><span>中心／偏左／偏右</span></div><div><b>数量</b><span>2层／3层／4层</span></div><div><b>材料</b><span>挺度／重量／透明度</span></div><div class="wide"><b>不变项</b>横向平面与垂直主体对照，并保留穿脱开口。</div></div></div><div class="line">证据 → 关系 → 操作句 → 变量 → 不变项 → 待验证条件</div></section>
+<section class="slide " id="slide-10"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">10 高校学生验证</div><h2>高校学生验证</h2><p class="lead">东华大学郭曼宜《1961》展示研究板、六套系列与成衣。</p><div class="media3 grow"><figure><img class="zoomable" src="w05_final_assets/dhu_1961_01_crop.png" alt="1961研究"><figcaption>01 研究板</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/dhu_1961_02_crop.png" alt="1961系列"><figcaption>02 六套系列</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/dhu_1961_03_crop.png" alt="1961成衣"><figcaption>03 成衣验证</figcaption></figure></div><div class="series-points"><p>官方说明：黏土模型、建筑感线条。</p><p>硬朗结构与柔软负空间。</p></div><div class="series-source">来源：<a href="https://scf.dhu.edu.cn/2026/0513/c17478a375932/page.htm" target="_blank">东华大学上海国际时尚创意学院</a></div></section>
+<section class="slide " id="slide-11"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">11 六类分析与分级</div><h2>六类分析与分级</h2><p class="lead">六类观察保持一致；进入元素库时，再分核心、辅助、语境和禁用。</p><div class="g2"><figure class="srcpic"><img class="zoomable" src="w05_final_assets/dhu_1961_02_crop.png" alt="1961系列分析"></figure><div class="hier"><div><b>廓形｜核心</b><span>离体弧面包围身体。</span></div><div><b>线条｜核心</b><span>连续弧线与开口。</span></div><div><b>比例｜辅助</b><span>放大体量对照窄主体。</span></div><div><b>色彩｜语境</b><span>低饱和维持语气。</span></div><div><b>材料｜待验证</b><span>硬结构×柔软负空间。</span></div><div><b>细节｜辅助／禁用</b><span>单次出现先降级。</span></div><div class="wide"><b>四级结果</b><span>核心2—3｜辅助3—5｜语境｜禁用。删除后身份不变，就不是核心。</span></div></div></div><div class="note">课堂反向分析，不宣称是作者本人或学校发布的分类结论。</div><div class="series-source">来源：<a href="https://scf.dhu.edu.cn/2026/0513/c17478a375932/page.htm" target="_blank">东华大学上海国际时尚创意学院</a>｜与“高校学生验证”页同一出处，此处为课堂反向分析用途</div></section>
+<section class="slide " id="slide-12"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag red">12 资料来源与伦理</div><h2>资料来源与伦理</h2><p class="lead">地方资料先记录来源、功能、使用者和意义边界，再提取形式规律。</p><div class="g4 ctx"><div><b>01</b><h3>来源</h3><p>作者、机构、地区、年代、日期。</p><ul><li>证据编号</li><li>原始链接</li></ul></div><div><b>02</b><h3>语境</h3><p>原始功能、使用者、场合。</p><ul><li>仪式与身份</li><li>意义边界</li></ul></div><div><b>03</b><h3>提取</h3><p>比例、节奏、结构、工艺。</p><ul><li>不贴民族符号</li><li>不编造寓意</li></ul></div><div><b>04</b><h3>责任</h3><p>许可、风险、修改、责任人。</p><ul><li>风险则降级</li><li>必要时禁用</li></ul></div></div><div class="line">完整检查表见“学生用元素库模板”页。</div></section>
+<section class="slide " id="slide-13"><div class="session">第1课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">13 第1课时实作</div><h2>第1课时实作</h2><p class="lead">16分钟：完成3张合格元素卡，先证明质量。</p><div class="workshop-grid"><div class="phase"><div class="time">04分钟</div><strong>圈3处证据</strong><p>编号＋位置＋关系</p></div><div class="phase"><div class="time">04分钟</div><strong>写3条操作句</strong><p>名词＋位置＋动作</p></div><div class="phase"><div class="time">05分钟</div><strong>每条3个变体</strong><p>只改一个变量</p></div><div class="phase"><div class="time">03分钟</div><strong>初步分级</strong><p>核心／辅助／语境／禁用</p></div></div><div class="output">输出：3张元素卡＋1条核心规则。</div></section>
+<section class="slide dark" id="slide-14"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="divider-copy"><div class="eyebrow">第2课时｜45分钟</div><h2>从3张元素卡进入可编辑的元素系统</h2><p>案例与方法9′ → 制作17′ → 同伴讲评9′ → 修订与Gate 6′ → 模板与总结4′</p></div></section>
+<section class="slide " id="slide-15"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">15 高端女装条件</div><h2>高端女装条件</h2><p class="lead">高端女装不是“更华丽”，而是身体、结构、材料、制作与系列一致性都能被验证。</p><div class="hi"><div><div class="series-shell core-series"><div class="series-label"><strong>Issey Miyake · 2026秋冬成衣</strong><span>同一系列 5套对照</span></div><div class="series-grid"><figure><img class="zoomable" src="w05_final_assets/issey_highend_01.png" alt="Issey Miyake · 2026秋冬成衣 01"><figcaption>01</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/issey_highend_02.png" alt="Issey Miyake · 2026秋冬成衣 02"><figcaption>02</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/issey_highend_03.png" alt="Issey Miyake · 2026秋冬成衣 03"><figcaption>03</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/issey_highend_04.png" alt="Issey Miyake · 2026秋冬成衣 04"><figcaption>04</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/issey_highend_05.png" alt="Issey Miyake · 2026秋冬成衣 05"><figcaption>05</figcaption></figure></div></div><div class="series-source"><a href="https://www.vogue.com/fashion-shows/fall-2026-ready-to-wear/issey-miyake" target="_blank">Vogue Runway</a>｜课堂反向观察</div></div><div class="conds"><div><b>身体关系</b><span>围绕身体生长，保留动作。</span></div><div><b>结构控制</b><span>体量、开口、支点可解释。</span></div><div><b>材料行为</b><span>硬表面与软织物对照。</span></div><div><b>制作证据</b><span>纸层、漆面、褶裥支持形态。</span></div><div><b>系列连续性</b><span>弧面、错位跨套变化。</span></div></div></div></section>
+<section class="slide " id="slide-16"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag red">16 替换案例｜高级定制</div><h2>替换案例｜高级定制</h2><p class="lead">Ashi Studio 2026秋冬高级定制比原The Garment更能说明结构、材料与工艺。</p><div class="series-shell core-series"><div class="series-label"><strong>Ashi Studio · 2026秋冬高级定制</strong><span>同一系列 5套对照</span></div><div class="series-grid"><figure><img class="zoomable" src="w05_final_assets/ashi_couture_01.png" alt="Ashi Studio · 2026秋冬高级定制 01"><figcaption>01</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/ashi_couture_02.png" alt="Ashi Studio · 2026秋冬高级定制 02"><figcaption>02</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/ashi_couture_03.png" alt="Ashi Studio · 2026秋冬高级定制 03"><figcaption>03</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/ashi_couture_04.png" alt="Ashi Studio · 2026秋冬高级定制 04"><figcaption>04</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/ashi_couture_05.png" alt="Ashi Studio · 2026秋冬高级定制 05"><figcaption>05</figcaption></figure></div></div><div class="series-source"><a href="https://www.vogue.com/fashion-shows/fall-2026-couture/ashi-studio" target="_blank">Vogue Runway</a>｜Fall 2026 Couture</div><div class="g4 analysis"><div><b>硬壳</b>漆面皮革界定边界。</div><div><b>雕塑比例</b>肩腰臀局部放大。</div><div><b>软性边缘</b>羽毛流苏向外释放。</div><div><b>工艺接口</b>连接与边缘转折。</div></div><div class="note">材料与工艺来自官方报道；“硬壳／释放”是课堂反向分析。</div></section>
+<section class="slide " id="slide-17"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">17 张力元素</div><h2>张力元素</h2><p class="lead">Alaïa的“固定／伸展／释放”是教师分析框架，不是品牌官方术语。</p><div class="series-shell core-series"><div class="series-label"><strong>Alaïa · 2026秋冬成衣</strong><span>同一系列 5套对照</span></div><div class="series-grid"><figure><img class="zoomable" src="w05_final_assets/alaia_01.png" alt="Alaïa · 2026秋冬成衣 01"><figcaption>01</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/alaia_02.png" alt="Alaïa · 2026秋冬成衣 02"><figcaption>02</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/alaia_03.png" alt="Alaïa · 2026秋冬成衣 03"><figcaption>03</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/alaia_04.png" alt="Alaïa · 2026秋冬成衣 04"><figcaption>04</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/alaia_05.png" alt="Alaïa · 2026秋冬成衣 05"><figcaption>05</figcaption></figure></div></div><div class="series-source"><a href="https://www.vogue.com/fashion-shows/fall-2026-ready-to-wear/azzedine-alaia" target="_blank">Vogue Runway</a>｜Pieter Mulier</div><div class="series-points"><p><b>固定</b>肩、颈或腰建立支点。</p><p><b>伸展→释放</b>沿躯干延展，在下摆释放。</p></div><div class="note">先提出力的分区假设，再用样布、接缝与动作测试。</div></section>
+<section class="slide " id="slide-18"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">18 材料验证｜高校课堂</div><h2>材料验证｜高校课堂</h2><p class="lead">秀场图只能提出假设；真实实验要改变一个变量、记录结果并写明失败条件。</p><div class="proof"><figure><img class="zoomable" src="w05_final_assets/hhdu_material_test_01_crop.jpg" alt="学生植物转印染结果"><figcaption>实际结果｜不同条件的转印差异</figcaption></figure><div class="method"><figure><img class="zoomable" src="w05_final_assets/hhdu_material_test_02.jpg" alt="学生采集植物"><figcaption>实际过程｜采集、筛选、准备</figcaption></figure><div class="tests"><div><b>材料</b>厚度／含水量／色素</div><div><b>工艺</b>温度／时间／压力</div><div><b>记录</b>清晰度／色差／稳定性</div><div class="wide"><b>规则句</b>同一羊毛底布只改变压力，记录叶脉清晰度与色素扩散。</div></div></div></div><div class="series-source">来源：<a href="https://ys.hhdu.edu.cn/info/1037/4709.htm" target="_blank">哈尔滨华德学院《服装面料再造》课程</a></div></section>
+<section class="slide " id="slide-19"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">19 设计师系列案例</div><h2>设计师系列案例</h2><p class="lead">Susan Fang上海2026秋冬通过层叠、悬挂、扩张与收束形成重复和微差。</p><div class="series-shell core-series"><div class="series-label"><strong>Susan Fang · Shanghai Fall 2026</strong><span>同一系列 5套对照</span></div><div class="series-grid"><figure><img class="zoomable" src="w05_final_assets/susan_01.png" alt="Susan Fang · Shanghai Fall 2026 01"><figcaption>01</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/susan_02.png" alt="Susan Fang · Shanghai Fall 2026 02"><figcaption>02</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/susan_03.png" alt="Susan Fang · Shanghai Fall 2026 03"><figcaption>03</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/susan_04.png" alt="Susan Fang · Shanghai Fall 2026 04"><figcaption>04</figcaption></figure><figure><img class="zoomable" src="w05_final_assets/susan_05.png" alt="Susan Fang · Shanghai Fall 2026 05"><figcaption>05</figcaption></figure></div></div><div class="series-source"><a href="https://www.vogue.com/fashion-shows/shanghai-fall-2026/susan-fang" target="_blank">Vogue Runway</a>｜课堂反向分析</div><div class="g4 analysis"><div><b>核心｜层叠</b>褶片与花瓣。</div><div><b>动作｜悬挂</b>从肩胸向下。</div><div><b>变化</b>扩张／收束。</div><div><b>语境</b>透明与粉彩。</div></div></section>
+<section class="slide " id="slide-20">
+  <div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div>
+  <div class="tag red">20 失败卡诊断</div><h2>失败卡诊断</h2>
+  <p class="lead">先定位卡片中缺失的字段，再做最小修复；不要直接重画整套设计。</p>
+  <div class="g2">
+    <div class="fail">
+      <div class="bad"><h3>F1｜复制图形</h3><div class="fieldrow"><b>来源</b><span>传统花纹</span></div><div class="fieldrow"><b>观察</b><span>像花，所以放大贴在肩部</span></div><div class="fieldrow"><b>操作</b><span>放大</span></div><div class="fieldrow"><b>问题</b><span>复制了外形，没有提取结构关系</span></div><div class="status">不可进入造型生成</div></div>
+      <div class="fix"><h3>修复｜从图形改为关系</h3><div class="fieldrow"><b>观察</b><span>中心固定、四向展开、层层错位</span></div><div class="fieldrow"><b>操作</b><span>悬挂 + 错位 + 重复</span></div><div class="fieldrow"><b>变量</b><span>间距 / 长度 / 层数</span></div><div class="fieldrow"><b>验证</b><span>至少生成3种肩部结构</span></div><div class="status">关系可被系列化</div></div>
+    </div>
+    <div class="fail">
+      <div class="bad"><h3>F2｜没有优先级</h3><div class="fieldrow"><b>核心</b><span>纹样、颜色、材质、故事、轮廓全部保留</span></div><div class="fieldrow"><b>问题</b><span>信息竞争，5套之间无法建立主线</span></div><div class="fieldrow"><b>结果</b><span>每套都像不同主题</span></div><div class="status">删减前不得进入系列</div></div>
+      <div class="fix"><h3>修复｜2 + 2 + 1 分级</h3><div class="fieldrow"><b>核心</b><span>展开关系 + 错位层次</span></div><div class="fieldrow"><b>辅助</b><span>半透明材质 + 局部硬挺</span></div><div class="fieldrow"><b>语境</b><span>低饱和色</span></div><div class="fieldrow"><b>验证</b><span>遮住来源图仍能说出系列规则</span></div><div class="status">主次关系清晰</div></div>
+    </div>
+    <div class="fail">
+      <div class="bad"><h3>F3｜不能扩展</h3><div class="fieldrow"><b>操作</b><span>只在一件礼服腰部做一次褶皱</span></div><div class="fieldrow"><b>变量</b><span>未定义</span></div><div class="fieldrow"><b>问题</b><span>无法转移到上装、裙装或外套</span></div><div class="status">单件效果，不是系统</div></div>
+      <div class="fix"><h3>修复｜建立变量轴</h3><div class="fieldrow"><b>位置</b><span>肩 / 腰 / 下摆</span></div><div class="fieldrow"><b>尺度</b><span>局部 / 半身 / 全身</span></div><div class="fieldrow"><b>数量</b><span>1 / 3 / 连续重复</span></div><div class="fieldrow"><b>验证</b><span>同一规则生成至少5套不同造型</span></div><div class="status">可进入系列矩阵</div></div>
+    </div>
+    <div class="fail">
+      <div class="bad"><h3>F4｜脱离简报</h3><div class="fieldrow"><b>造型</b><span>巨大硬质结构包围手臂</span></div><div class="fieldrow"><b>场景</b><span>需要行走、抬臂、独立穿脱</span></div><div class="fieldrow"><b>问题</b><span>视觉效果与穿着条件冲突</span></div><div class="status">缺少身体测试</div></div>
+      <div class="fix"><h3>修复｜绑定身体条件</h3><div class="fieldrow"><b>固定点</b><span>肩点与侧腰两处</span></div><div class="fieldrow"><b>活动量</b><span>抬臂90°不受阻</span></div><div class="fieldrow"><b>穿脱</b><span>3分钟内独立完成</span></div><div class="fieldrow"><b>验证</b><span>坯布样衣拍摄正 / 侧 / 动态</span></div><div class="status">证据通过后保留</div></div>
+    </div>
+  </div>
+</section>
+<section class="slide " id="slide-21"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">21 第2课时实作</div><h2>第2课时实作</h2><p class="lead">17分钟：把3张卡扩展成可评审的最小系统，课后再补数量。</p><div class="workshop-grid"><div class="phase"><div class="time">05分钟</div><strong>每张再做1个变体</strong><p>3张 → 6张</p></div><div class="phase"><div class="time">04分钟</div><strong>六类检查</strong><p>找缺失镜头</p></div><div class="phase"><div class="time">04分钟</div><strong>四级分层</strong><p>核心／辅助／语境／禁用</p></div><div class="phase"><div class="time">04分钟</div><strong>材料假设</strong><p>变量＋失败条件</p></div></div><div class="output">输出：6张元素卡＋层级表＋1条材料测试计划；课后补至8—10张。</div></section>
+<section class="slide " id="slide-22"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">22 学生用元素库模板</div><h2>学生用元素库模板</h2><p class="lead">六栏表改为可打印、可填写的独立学生用模板。</p><div class="g2"><div class="preview"><div><b>编号／层级</b>E-03｜核心</div><div><b>来源</b>A-12 局部②</div><div><b>规则</b>名词＋位置＋动作</div><div><b>应用</b>身体／结构／材料</div><div><b>变化</b>尺度／位置／数量</div><div><b>不变项</b>身份条件</div><div><b>AI记录</b>工具／提示／采用</div><div><b>版权</b>作者／机构／日期</div><div><b>文化风险</b>语境／禁用判断</div></div><div class="action"><h3>《第05周 元素库记录表》</h3><p>A4横向打印版：记录证据、规则、变量、不变项、AI使用与文化责任。</p><a href="w05_element_library_template.html" target="_blank">打开学生用模板</a></div></div></section>
+<section class="slide " id="slide-23"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">23 同伴讲评</div><h2>同伴讲评</h2><p class="lead">10分钟四人小组：每人1分钟说明＋1分钟反馈，另留2分钟换位与记录。</p><div class="peer-layout"><div class="peer-protocol"><h3>四人循环</h3><div class="peer-step"><b>01</b><span>指出核心、来源、操作句。</span></div><div class="peer-step"><b>02</b><span>三人同时记录。</span></div><div class="peer-step"><b>03</b><span>只给一条可执行修改。</span></div><div class="peer-step"><b>04</b><span>圈两项修改和时间。</span></div></div><div class="peer-questions"><div class="peer-question"><h3>来源</h3><p>哪张证据、哪个局部？</p></div><div class="peer-question"><h3>抽象</h3><p>脱离完整款式了吗？</p></div><div class="peer-question"><h3>变化</h3><p>至少3个方案？</p></div><div class="peer-question"><h3>层级</h3><p>核心是否过多？</p></div></div></div></section>
+<section class="slide " id="slide-24"><div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div><div class="tag red">24 修订与Gate</div><h2>修订与Gate</h2><p class="lead">8分钟不做全班逐人长讲评：先自检、互检，教师只处理高风险和边界案例。</p><div class="gate"><div class="queue"><div><b>0—2分钟｜自检</b><span>给2张核心卡打勾，标缺证。</span></div><div><b>2—5分钟｜互检</b><span>确认证据与变化。</span></div><div><b>5—8分钟｜教师抽检</b><span>优先看风险卡。</span></div><div><b>可追溯</b><span>编号＋局部。</span></div><div><b>可操作</b><span>位置＋方向＋动作。</span></div><div><b>可变化</b><span>3个变体保留身份。</span></div></div><div class="aside"><h3>两种判定</h3><p><b>通过</b><br>至少2个核心满足标准。</p><p><b>修改后通过</b><br>写明补证动作与时间，课后上传复核。</p></div></div></section>
+<section class="slide appendix-slide" id="slide-25">
+  <div class="session">课后查阅｜教学补充</div><div class="weekline">女装设计 III · 第05周</div>
+  <div class="tag blue">25 补充案例｜广州美术学院</div>
+  <h2>《碎瓷织序》：提取“工艺逻辑”，而不是粘贴瓷片纹样</h2>
+  <p class="lead">林芝伊从潮汕嵌瓷中提取支撑、黏合与有序排布，把传统工艺关系转成服装结构和材料实验。</p>
+  <div class="gzarts-case-layout">
+    <div class="gzarts-gallery">
+      <figure><img class="zoomable" src="w05_final_assets/gzarts_woven_detail_01.png" alt="广州美术学院《碎瓷织序》服装局部"><figcaption>结构与表面局部</figcaption></figure>
+      <figure><img class="zoomable" src="w05_final_assets/gzarts_woven_detail_02.jpg" alt="《碎瓷织序》瓷片与网格材料细节"><figcaption>材料连接细节</figcaption></figure>
+      <figure class="look"><img class="zoomable" src="w05_final_assets/gzarts_woven_look_01.jpg" alt="《碎瓷织序》成衣造型一"><figcaption>成衣验证 01（点击放大）</figcaption></figure>
+      <figure class="look"><img class="zoomable" src="w05_final_assets/gzarts_woven_look_02.jpg" alt="《碎瓷织序》成衣造型二"><figcaption>成衣验证 02（点击放大）</figcaption></figure>
+    </div>
+    <div class="gzarts-method">
+      <div class="gzarts-step"><div class="no">01</div><div><h3>解构原工艺</h3><p>骨架支撑／灰泥黏合／碎瓷有序排布。</p></div></div>
+      <div class="gzarts-step"><div class="no">02</div><div><h3>写成抽象规则</h3><p>网格承重＋穿孔连接＋硬片按密度排列。</p></div></div>
+      <div class="gzarts-step"><div class="no">03</div><div><h3>转译材料与结构</h3><p>网格面料、手工编织、瓷片拼接与UV覆膜皮革。</p></div></div>
+      <div class="gzarts-step"><div class="no">04</div><div><h3>验证视觉秩序</h3><p>蓝、粉、白并置；硬片和柔性织物形成层次与张力。</p></div></div>
+      <div class="gzarts-compare"><div><b>复制</b>直接印嵌瓷图案，或随机粘贴瓷片。</div><div><b>提取</b>支撑—连接—排布成为可变化的系统。</div></div>
+    </div>
+  </div>
+  <div class="gzarts-source">来源：<a href="https://sid.gzarts.edu.cn/info/2608/64174.htm" target="_blank" rel="noopener">广州美术学院工业设计学院毕业设计展《碎瓷织序》</a></div>
+</section><section class="slide augmentation-slide appendix-slide" id="slide-26"><div class="session">课后查阅｜教学补充</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">26 AI协同边界</div><h2>AI可以扩大候选，不可以替代来源判断</h2><p class="lead">A0人工观察必须先于AI；所有建议都要回到原始证据，被保留、修改或否决。</p><div class="ai-chain"><div class="ai-stage"><b>A0｜人工观察</b><p>给证据编号，先写身体位置、方向、重复关系与材料行为。</p></div><div class="ai-stage"><b>A1｜AI候选</b><p>协助分类词汇、聚类相似关系，并提出尺度或位置变化。</p></div><div class="ai-stage"><b>A2｜回看原证据</b><p>逐条检查候选是否能在图像、实物或调研记录中被指出。</p></div><div class="ai-stage"><b>A3｜人工决定</b><p>说明保留、删除与修改理由，再确定层级和下一步验证。</p></div></div><div class="ai-boundary"><div class="ai-rule"><b>可用</b>分类线条、比例、材料词和细节动词。<div class="ai-list"><span>词汇归类</span><span>重复关系聚类</span><span>参数候选</span></div><div class="ai-question">检查：每一项都能回到证据编号吗？</div></div><div class="ai-rule"><b>需说明</b>生成抽象变体时保留提示、版本与筛选过程。<div class="ai-list"><span>完整提示语</span><span>版本对照</span><span>保留／删除理由</span></div><div class="ai-question">检查：人工修改发生在哪里？</div></div><div class="ai-rule"><b>禁止</b>复制文化纹样、品牌标识或编造不存在的证据。<div class="ai-list"><span>文化纹样替换</span><span>品牌标识挪用</span><span>虚构来源与工艺</span></div><div class="ai-question">检查：是否制造了无法核验的事实？</div></div><div class="ai-rule"><b>提交记录</b>工具、提示、采用内容与人工修改理由。<div class="ai-list"><span>工具／模型</span><span>输入与输出版本</span><span>最终责任人</span></div><div class="ai-question">结论：AI只扩大候选，教师评价人工判断。</div></div></div></section><section class="slide appendix-slide" id="slide-27"><div class="session">课后查阅｜教学补充</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">27 反例｜完整造型不可搬用</div><h2>Miu Miu：不要把完整造型当成元素直接搬走</h2><p class="lead">五套完整造型一起看，才能区分系列规则与某一套的偶然细节。</p><div class="series-shell"><div class="series-label"><strong>Miu Miu · 2026秋冬成衣</strong><span>同一系列 5套完整造型</span></div><div class="series-grid"><figure class=""><img class="zoomable" src="w05_final_assets/miu_01.png" alt="Miu Miu 2026秋冬成衣 造型 01"><figcaption>01</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/miu_02.png" alt="Miu Miu 2026秋冬成衣 造型 02"><figcaption>02</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/miu_03.png" alt="Miu Miu 2026秋冬成衣 造型 03"><figcaption>03</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/miu_04.png" alt="Miu Miu 2026秋冬成衣 造型 04"><figcaption>04</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/miu_05.png" alt="Miu Miu 2026秋冬成衣 造型 05"><figcaption>05</figcaption></figure></div></div><div class="series-points"><p>圈出跨越至少三套的共同关系，才进入核心候选。</p><p>只出现一次的装饰先放入候选区，不把整套造型当作元素。</p></div><div class="series-source">Miu Miu / Miuccia Prada｜2026秋冬成衣｜来源：Vogue Runway</div></section><section class="slide appendix-slide" id="slide-28"><div class="session">课后查阅｜教学补充</div><div class="weekline">女装设计 III · 第05周</div><div class="tag red">28 基础标注练习</div><h2>Toteme：同一系列中如何标注身体距离、主线与连接</h2><p class="lead">本页五张均来自Toteme 2026秋冬成衣；每套只标三项，避免分析重新变成装饰。</p><div class="series-shell"><div class="series-label"><strong>Toteme · 2026秋冬成衣</strong><span>三项标注覆盖在图像上</span></div><div class="series-grid"><figure class="annotated-look"><img class="zoomable" src="w05_final_assets/toteme_01.png" alt="Toteme 2026秋冬成衣 造型 01"><figcaption>01</figcaption><span class="look-marker m1">离体</span><span class="look-marker m2">纵向</span><span class="look-marker m3">包围领</span></figure><figure class="annotated-look"><img class="zoomable" src="w05_final_assets/toteme_02.png" alt="Toteme 2026秋冬成衣 造型 02"><figcaption>02</figcaption><span class="look-marker m1">顺体</span><span class="look-marker m2">垂直</span><span class="look-marker m3">前襟</span></figure><figure class="annotated-look"><img class="zoomable" src="w05_final_assets/toteme_03.png" alt="Toteme 2026秋冬成衣 造型 03"><figcaption>03</figcaption><span class="look-marker m1">离体</span><span class="look-marker m2">斜向</span><span class="look-marker m3">肩—侧缝</span></figure><figure class="annotated-look"><img class="zoomable" src="w05_final_assets/toteme_04.png" alt="Toteme 2026秋冬成衣 造型 04"><figcaption>04</figcaption><span class="look-marker m1">贴体</span><span class="look-marker m2">连续</span><span class="look-marker m3">领—袖</span></figure><figure class="annotated-look"><img class="zoomable" src="w05_final_assets/toteme_05.png" alt="Toteme 2026秋冬成衣 造型 05"><figcaption>05</figcaption><span class="look-marker m1">离体</span><span class="look-marker m2">垂坠</span><span class="look-marker m3">前中开合</span></figure></div></div><div class="series-points"><p>先读身体距离，再找贯穿全身的主线方向。</p><p>最后确认线条在哪个结构或边缘发生连接。</p></div><div class="series-source">Toteme / Elin Kling &amp; Karl Lindman｜2026秋冬成衣｜来源：Vogue Runway</div></section><section class="slide appendix-slide" id="slide-29"><div class="session">课后查阅｜教学补充</div><div class="weekline">女装设计 III · 第05周</div><div class="tag blue">29 元素墙矩阵</div><h2>Khaite：元素墙必须显示“哪一套用了什么”</h2><p class="lead">五套均为Khaite Resort 2027；下方矩阵把重复与变化变成可检查的分布。</p><div class="element-wall-grid"><figure class=""><img class="zoomable" src="w05_final_assets/khaite_01.png" alt="Khaite Resort 2027 造型 01"><figcaption>01</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/khaite_02.png" alt="Khaite Resort 2027 造型 02"><figcaption>02</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/khaite_03.png" alt="Khaite Resort 2027 造型 03"><figcaption>03</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/khaite_04.png" alt="Khaite Resort 2027 造型 04"><figcaption>04</figcaption></figure><figure class=""><img class="zoomable" src="w05_final_assets/khaite_05.png" alt="Khaite Resort 2027 造型 05"><figcaption>05</figcaption></figure></div><div class="element-matrix"><div class="head">元素／造型</div><div class="head">01</div><div class="head">02</div><div class="head">03</div><div class="head">04</div><div class="head">05</div><div class="rowhead">核心｜肩部毛绒体积</div><div class="dot-on">●</div><div class="dot-on">●</div><div class="dot-on">●</div><div class="dot-on">●</div><div class="dot-on">●</div><div class="rowhead">辅助｜窄长下装</div><div class="dot-on">●</div><div class="dot-mid">◐</div><div class="dot-on">●</div><div class="dot-on">●</div><div class="dot-mid">◐</div><div class="rowhead">语境｜黑／米／酒红</div><div class="dot-mid">◐</div><div class="dot-on">●</div><div class="dot-on">●</div><div class="dot-on">●</div><div class="dot-on">●</div></div><div class="series-source">Khaite / Catherine Holstein｜Resort 2027｜来源：Vogue Runway　●明确使用　◐弱化／变化</div></section><section class="slide appendix-slide" id="slide-rubric05">
+  <div class="session">课后查阅｜教学补充</div><div class="weekline">女装设计 III · 第05周</div>
+  <div class="tag red">30 期末评价连接</div><h2>本周成果将进入同一套六项终期评价</h2><p class="lead">平时训练不是零散作业，而是期末系列的证据积累；本页依据《25级〈女装设计〉考核大纲》期末实践考试评分标准（满分100分）。</p><div class="cards-grid count-6"><div class="card"><div class="score">10分</div><h3>时代性与创意</h3><p>主题回应当下，并形成自己的问题与立场。</p></div><div class="card"><div class="score">10分</div><h3>趋势性与元素</h3><p>提炼的设计元素与当季趋势、审美和来源一致。</p></div><div class="card"><div class="score">20分</div><h3>当代女性适配</h3><p>款式回应身体、动作、场景与真实穿着需求。</p></div><div class="card"><div class="score">20分</div><h3>整体造型美感</h3><p>比例、色彩、材料与细节共同形成完整造型。</p></div><div class="card"><div class="score">20分</div><h3>市场与定位</h3><p>顾客、价格、品类和使用情境边界清楚。</p></div><div class="card"><div class="score">20分</div><h3>统一与丰富</h3><p>风格统一，同时具有角色、搭配与造型变化。</p></div></div></section><section class="slide dark" id="slide-30">
+  <div class="session">第2课时｜45分钟</div><div class="weekline">女装设计 III · 第05周</div>
+  <div class="tag blue">31 第05周总结</div>
+  <h2>元素不是一张图，而是一套可以继续生成的规则</h2>
+  <p class="lead">本周完成了“证据 → 观察 → 抽象 → 分级 → 验证”的元素库闭环。</p>
+  <div class="closing-summary">
+    <div class="closing-card"><span>01 EVIDENCE</span><h3>证据可追溯</h3><p>每张卡都有来源编号、局部位置与使用语境。</p></div>
+    <div class="closing-card"><span>02 LENSES</span><h3>六类观察</h3><p>轮廓、结构、线条、细节、材料、色彩分别判断。</p></div>
+    <div class="closing-card"><span>03 SYSTEM</span><h3>四级分层</h3><p>核心／辅助／语境／禁用，避免所有元素同时发声。</p></div>
+    <div class="closing-card"><span>04 TEST</span><h3>规则可验证</h3><p>至少3个变体，并写清变量、不变项和失败条件。</p></div>
+  </div>
+  <div class="closing-bottom">
+    <div class="closing-panel"><h3>本周提交</h3><div class="closing-row"><b>01</b><span>课堂完成6张元素卡，课后补至8—10张。</span></div><div class="closing-row"><b>02</b><span>四级层级表＋来源编号＋AI使用记录。</span></div><div class="closing-row"><b>03</b><span>2张核心卡各写两条不变条件。</span></div></div>
+    <div class="closing-panel"><h3>进入第06周前的 Gate</h3><div class="closing-row"><b>✓</b><span>遮住原图，仍能说出生成规则。</span></div><div class="closing-row"><b>✓</b><span>同一规则至少产生3个不同结果。</span></div><div class="closing-row"><b>✓</b><span>文化来源、材料风险和失败条件可说明。</span></div></div>
+  </div>
+  <div class="closing-exit">离堂句：“我的核心元素来自 ______；生成规则是 ______；它可以通过 ______ 产生变化。第06周我要先改变 ______，同时保持 ______ 不变。”</div>
+</section><section class="slide" id="slide-31">
+  <div class="session">课程连接</div><div class="weekline">女装设计 III · 第05周 → 第06周</div>
+  <div class="tag red">32 第06周预告</div>
+  <h2>下一周：把元素库变成可比较的变形家族</h2>
+  <p class="lead">第05周回答“提取什么”；第06周回答“如何有规则地改变它”。</p>
+  <div class="preview-bridge">
+    <div><b>本周带走</b><p>2张核心元素卡＋层级表＋来源编号＋两条不变条件。</p></div>
+    <div><b>下周完成</b><p>一张可比较的变形·分解板；每个结果都记录改变了什么、保留了什么。</p></div>
+  </div>
+  <div class="preview-path">
+    <div class="preview-step"><div class="big">08</div><h3>变形操作</h3><p>先在抽象元素上操作。</p><ul><li>尺度／方向</li><li>切分／重组</li><li>重复／错位</li></ul></div>
+    <div class="preview-step"><div class="big">12</div><h3>二维变体</h3><p>同一A5尺度并列比较。</p><ul><li>A组：4个尺度·方向</li><li>B组：4个切分·重组</li><li>C组：4个重复·错位</li></ul></div>
+    <div class="preview-step"><div class="big">03</div><h3>设计家族</h3><p>按规则聚类，不挑“最好看”。</p><ul><li>共同生成规则</li><li>家族内部差异</li><li>身体关系一致</li></ul></div>
+    <div class="preview-step"><div class="big">3D</div><h3>材料验证</h3><p>让身体与重力淘汰方案。</p><ul><li>重力与体积</li><li>固定点与连接</li><li>动作与可穿性</li></ul></div>
+  </div>
+  <div class="preview-timeline">
+    <div><b>10′</b><span>确认规则与不变项</span></div>
+    <div><b>20′</b><span>完成12个二维变体</span></div>
+    <div><b>15′</b><span>编号并横向比较</span></div>
+    <div><b>20′</b><span>三维材料测试</span></div>
+    <div><b>15′</b><span>形成3个家族</span></div>
+    <div><b>10′</b><span>讲评与Gate</span></div>
+  </div>
+  <div class="preview-pack">下周携带：2张核心元素卡／描图纸与A3底板／剪刀与胶／基础坯布或候选材料。</div>
+</section>
+<div class="progress" id="progress" role="status" aria-live="polite" aria-atomic="true"></div><div class="mode-controls" id="mode-controls" role="group" aria-label="资料显示模式"><button class="mode-button active" id="mode-class" data-mode="class" type="button" aria-pressed="true">课堂 <span id="cnt-class"></span></button><button class="mode-button" id="mode-all" data-mode="all" type="button" aria-pressed="false">全部 <span id="cnt-all"></span></button></div><nav class="nav-controls" aria-label="页面导航"><button class="nav-button" id="prev" type="button" title="上一页" aria-label="上一页">&#8592;</button><button class="nav-button" id="next" type="button" title="下一页" aria-label="下一页">&#8594;</button></nav><div id="zoom" role="dialog" aria-modal="true" aria-label="图片放大"><img alt="放大图"></div>
+<script>
+const allSlides=[...document.querySelectorAll('.slide')];
+const progress=document.getElementById('progress');
+const prev=document.getElementById('prev');
+const next=document.getElementById('next');
+const modeControls=document.getElementById('mode-controls');
+const modeClass=document.getElementById('mode-class');
+const modeAll=document.getElementById('mode-all');
+const zoom=document.getElementById('zoom');
+const zoomImage=zoom.querySelector('img');
+/* SC-1 · 附录计数为 0 时不渲染模式按钮（B 的顾虑升格为硬约束） */
+const appendixCount=allSlides.filter(slide=>slide.classList.contains('appendix-slide')).length;
+const hasAppendix=appendixCount>0;
+let showAll=!hasAppendix||new URLSearchParams(location.search).get('mode')==='full';
+let slides=[];
+let current=0;
+function activeSlides(){return showAll?allSlides:allSlides.filter(slide=>!slide.classList.contains('appendix-slide'));}
+/* B-18 前半 · 标签编号运行时生成：课堂 NN、附录 ANN。任何人不得在正文里手写序号 */
+function normalizeTags(){const core=allSlides.filter(slide=>!slide.classList.contains('appendix-slide'));const appendix=allSlides.filter(slide=>slide.classList.contains('appendix-slide'));allSlides.forEach(slide=>{const tag=slide.querySelector('.tag');if(!tag)return;if(!tag.dataset.label)tag.dataset.label=tag.textContent.replace(/^(?:\d+|A\d+)\s*/,'').trim();const inAppendix=slide.classList.contains('appendix-slide');const index=(inAppendix?appendix:core).indexOf(slide)+1;tag.textContent=(inAppendix?'A'+String(index).padStart(2,'0'):String(index).padStart(2,'0'))+' '+tag.dataset.label;});}
+/* SC-1 · 页数只读契约：课堂／全部页数一律运行时计算，代码内不得出现页数字面量 */
+function syncCounts(){const coreCount=allSlides.filter(slide=>!slide.classList.contains('appendix-slide')).length;const allCount=allSlides.length;document.getElementById('cnt-class').textContent=coreCount;document.getElementById('cnt-all').textContent=allCount;modeClass.title='课堂模式：'+coreCount+'页核心内容';modeAll.title='全部模式：含'+(allCount-coreCount)+'页补充资料';}
+function syncMode(){document.body.classList.toggle('full-mode',showAll);document.body.classList.toggle('class-mode',!showAll);modeClass.classList.toggle('active',!showAll);modeAll.classList.toggle('active',showAll);modeClass.setAttribute('aria-pressed',String(!showAll));modeAll.setAttribute('aria-pressed',String(showAll));}
+function show(index){slides=activeSlides();current=Math.max(0,Math.min(index,slides.length-1));allSlides.forEach(slide=>slide.classList.remove('active'));const active=slides[current];active.classList.add('active');progress.textContent='第 '+String(current+1).padStart(2,'0')+' / '+slides.length+' 页'+(hasAppendix?' · '+(showAll?'全部':'课堂'):'');prev.disabled=current===0;next.disabled=current===slides.length-1;/* G1-4 · #progress 不是 .slide 的后代，深色态只能由 body 类同步（B-29） */document.body.classList.toggle('on-dark',active.classList.contains('dark'));}
+function setMode(full){const active=slides[current];showAll=full;const nextSlides=activeSlides();const sameIndex=nextSlides.indexOf(active);slides=nextSlides;current=sameIndex>=0?sameIndex:Math.min(current,slides.length-1);syncMode();try{const url=new URL(location.href);if(showAll)url.searchParams.set('mode','full');else url.searchParams.delete('mode');history.replaceState(null,'',url);}catch(error){}show(current);}
+/* B-04 · 放大层：点击开、点击或 Esc 关；hover 预览保留（hover 态遮罩保持穿透，避免闪烁循环） */
+function openZoom(image,byClick){zoomImage.src=image.src;zoomImage.alt=image.alt||'放大图';zoom.classList.toggle('click-open',!!byClick);zoom.classList.add('active');}
+function closeZoom(){zoom.classList.remove('active');zoom.classList.remove('click-open');}
+document.querySelectorAll('.zoomable').forEach((image)=>{image.addEventListener('click',(event)=>{event.stopPropagation();openZoom(image,true);});image.addEventListener('mouseenter',()=>{if(!zoom.classList.contains('click-open'))openZoom(image,false);});image.addEventListener('mouseleave',()=>{if(!zoom.classList.contains('click-open'))closeZoom();});});
+zoom.addEventListener('click',closeZoom);
+modeClass.addEventListener('click',()=>setMode(false));
+modeAll.addEventListener('click',()=>setMode(true));
+prev.addEventListener('click',()=>show(current-1));
+next.addEventListener('click',()=>show(current+1));
+/* B-04 · 翻页笔（PageUp/PageDown）、上下键、Enter/Backspace/Esc；全部 preventDefault 以消除“先滚半屏再跳页” */
+const KEY_FORWARD=['ArrowRight','ArrowDown','PageDown',' ','Spacebar','Enter'];
+const KEY_BACKWARD=['ArrowLeft','ArrowUp','PageUp','Backspace'];
+window.addEventListener('keydown',(event)=>{
+  if(event.ctrlKey||event.metaKey||event.altKey)return;
+  const key=event.key;
+  if(key==='Escape'||key==='Esc'){event.preventDefault();closeZoom();return;}
+  const forward=KEY_FORWARD.indexOf(key)>=0;
+  const backward=KEY_BACKWARD.indexOf(key)>=0;
+  if(!forward&&!backward&&key!=='Home'&&key!=='End')return;
+  event.preventDefault();
+  closeZoom();
+  if(forward){show(current+1);return;}
+  if(backward){show(current-1);return;}
+  if(key==='Home'){show(0);return;}
+  show(slides.length-1);
+});
+let touchX=0;
+window.addEventListener('touchstart',(event)=>{touchX=event.changedTouches[0].clientX;},{passive:true});
+window.addEventListener('touchend',(event)=>{const delta=event.changedTouches[0].clientX-touchX;if(Math.abs(delta)>55)show(current+(delta<0?1:-1));},{passive:true});
+normalizeTags();
+if(hasAppendix){syncCounts();}else{modeControls.remove();}
+slides=activeSlides();
+syncMode();
+show(0);
+</script></body></html>

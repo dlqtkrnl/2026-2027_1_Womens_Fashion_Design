@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="robots" content="noindex,nofollow,noarchive"><meta name="googlebot" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>女装设计 III | 第08周 Gate 2 中期评审</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-studio: #F9F8F6;
+            --text-main: #1A1A1A;
+            --accent-blue: #2563EB;
+            --accent-red: #E11D48;
+            --accent-emerald: #059669;
+            --accent-gold: #D97706;
+        }
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-studio);
+            color: var(--text-main);
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Slide Container */
+        .slide {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            padding: 3.5rem 4rem;
+            box-sizing: border-box;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            overflow-y: auto;
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Editorial Layout Elements */
+        .tag {
+            display: inline-block;
+            background: var(--text-main);
+            color: white;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+        .tag.blue { background: var(--accent-blue); }
+        .tag.red { background: var(--accent-red); }
+        .tag.emerald { background: var(--accent-emerald); }
+        
+        .acid-border { border-left: 6px solid var(--accent-red); padding-left: 1.5rem; }
+        .blue-border { border-left: 6px solid var(--accent-blue); padding-left: 1.5rem; }
+
+        .image-placeholder {
+            background-color: #E5E7EB;
+            border: 1px solid #D1D5DB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #6B7280;
+            font-size: 0.875rem;
+            padding: 1.5rem;
+            height: 100%;
+            min-height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-placeholder::after {
+            content: "MID-REVIEW EVIDENCE";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 10px;
+            font-weight: bold;
+            background: #000;
+            color: #fff;
+            padding: 2px 6px;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 250px;
+            max-height: 380px;
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+        .btn-nav {
+            padding: 0.75rem 1.5rem;
+            background: var(--text-main);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+        }
+        .btn-nav:hover { background: var(--accent-blue); }
+        
+        .progress-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 0.2em;
+            color: #9CA3AF;
+            z-index: 1000;
+        }
+        
+        .session-marker {
+            position: absolute;
+            top: 2rem;
+            right: 4rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        .spec-table th, .spec-table td {
+            border: 1px solid #E5E7EB;
+            padding: 1rem;
+            text-align: left;
+        }
+        .spec-table th {
+            background-color: #F3F4F6;
+            font-weight: bold;
+        }
+
+
+        /* W08_VISUAL_SYSTEM_START */
+        .series-reference-card {
+            background: #fff;
+            border: 1px solid #D1D5DB;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+            padding: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            min-height: 0;
+            height: 100%;
+        }
+        .series-copy {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 0.8rem;
+            border-bottom: 1px solid #E5E7EB;
+            padding-bottom: 0.45rem;
+        }
+        .series-copy strong {
+            font-size: 1rem;
+            font-weight: 900;
+            color: #111827;
+        }
+        .series-kicker {
+            font-size: 0.85rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            color: #2563EB;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .series-note {
+            font-size: 0.85rem;
+            color: #6B7280;
+            line-height: 1.35;
+        }
+        .case-series {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 5px;
+            min-height: 0;
+            flex: 1;
+        }
+        .case-series.tall { height: 43vh; }
+        .case-series.compact { height: 28vh; }
+        .case-look {
+            position: relative;
+            overflow: hidden;
+            background: #F3F4F6;
+            border: 1px solid rgba(17, 24, 39, 0.12);
+            min-width: 0;
+            min-height: 0;
+            cursor: zoom-in;
+        }
+        .case-look img,
+        .zoomable-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .case-look img {
+            object-fit: cover;
+            object-position: center top;
+        }
+        .case-look figcaption {
+            position: absolute;
+            left: 5px;
+            bottom: 5px;
+            background: rgba(17, 24, 39, 0.82);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 900;
+            padding: 2px 5px;
+            line-height: 1;
+        }
+        .zoomable-image { cursor: zoom-in; }
+        .evidence-board {
+            background: #fff;
+            border: 1px solid #D1D5DB;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+            padding: 1.25rem;
+        }
+        .evidence-row {
+            display: grid;
+            grid-template-columns: 88px minmax(0, 1fr) 110px;
+            gap: 0.75rem;
+            align-items: center;
+            border-bottom: 1px solid #E5E7EB;
+            padding: 0.65rem 0;
+            font-size: 0.85rem;
+        }
+        .evidence-row:last-child { border-bottom: 0; }
+        .zoom-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.78);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            padding: 4vh 4vw;
+        }
+        .zoom-overlay.active { display: flex; }
+        .zoom-overlay img {
+            max-width: 92vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.45);
+            background: #fff;
+        }
+        /* W08_VISUAL_SYSTEM_END */
+    
+@media print{
+@page{size:1920px 1080px;margin:0}
+html,body{width:1920px!important;height:auto!important;overflow:visible!important;background:#fff!important}
+.nav-controls,.nav-button,.mode-toggle,[id*="rogress"],[id*="btnPrev"],[id*="btnNext"],#prev,#next,#mode-class,#mode-all{display:none!important}
+.slide{display:flex!important;flex-direction:column;opacity:1!important;visibility:visible!important;transform:none!important;transition:none!important;animation:none!important;width:1920px!important;height:1080px!important;min-height:1080px!important;max-height:1080px!important;overflow:hidden!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid;break-after:auto;page-break-after:auto}
+.slide:not(:first-of-type){break-before:page;page-break-before:always}
+*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+a[href]::after{content:none!important}
+}
+
+/* ===== 第08周 内容批次 追加样式 (DECISION.md) ===== */
+/* B-01 [P0] 本周两个文件都没有接受 2026-08-28 的全周次技术地基一括整备。
+   其他 15 个周次在 720p 下根字体降到 14.524px，本周固定 16px → 版面直接溢出。
+   注：本周使用 Tailwind，rem 工具类（text-6xl / p-7 / gap-7）会一起缩小，
+   效果比其他周次大，所以插入后必须三档分辨率全数重测。 */
+html{font-size:clamp(14px,calc(11.5px + 0.42vh),19px)}
+
+/* B-02 [P0] 头条 2 处对比度 2.39。#9CA3AF 在白底上只有 2.32。
+   这不是装饰，是全页面共用的头条。 */
+.progress-indicator,.session-marker{color:#6B7280}
+
+/* B-03 [P1] 已核查并**排除**：spill_probe 报告的 6 处“标题内 SPAN 溢出 8~15px”
+   是浏览器内联盒的字形度量特性（Tailwind text-6xl/5xl/4xl 的 line-height:1 与中文 font-black 字形），
+   **渲染上不会被裁切**（已截图确认）。试过 line-height:1.18，溢出数不变 ——
+   因为行高变大时父子同时变大，差值保持。**故不加无效的 CSS。** */
+
+/* A-03 [P0] 第07周→本周 衔接页 + A-04 学情 */
+.w08-bridge-grid{display:grid;grid-template-columns:1fr 1.25fr 1.1fr;gap:.4rem;margin:.6rem 0 .7rem}
+.w08-bridge-cell{display:flex;align-items:center;background:#fff;border:1px solid #D1D5DB;border-radius:.4rem;
+  padding:.7rem .85rem;font-size:1.02rem;line-height:1.34;color:#1F2937}
+.w08-bridge-cell.w08-bridge-head{background:#E5E7EB;font-weight:900;color:#374151;font-size:.98rem}
+.w08-bridge-cell.w08-bridge-to{color:#1D4ED8;font-weight:800}
+.w08-bridge-cell.w08-bridge-where{color:#6B7280;font-size:.94rem}
+.w08-bridge-cell b{color:#BE123C}
+.w08-bridge-term{background:#F3F4F6;border-left:5px solid #BE123C;border-radius:.35rem;
+  padding:.7rem .95rem;font-size:1rem;line-height:1.45;color:#1F2937;margin-bottom:.55rem}
+.w08-bridge-term b{color:#BE123C;margin-right:.35rem}
+.w08-week-context{background:#F3F4F6;border-radius:.4rem;padding:.6rem .85rem;
+  font-size:.95rem;line-height:1.44;color:#4B5563}
+.w08-week-context b{color:#374151;margin-right:.35rem}
+/* B-04 [P0] 附录图片出处行（沿用第07周建立的 .source-note 体例） */
+.source-note{margin-top:.5rem;font-size:.85rem;line-height:1.4;color:#5B6472}
+
+/* --- 대비 교정(WCAG AA) · 2026-08-29 --------------------------------------
+   근거: _w08_agentteam/contrast_path08.html#apx 실측(1280x720, 전 슬라이드).
+   Tailwind 색 유틸리티를 .slide 스코프(0,2,0)로 덮는다 — CDN 이 런타임에
+   주입하는 0,1,0 규칙보다 강해야 하기 때문이다.
+   어두운 면(slide-16 bg-gray-900 / slide-24 bg-black / slide-5 안의
+   .bg-gray-900 카드)에서는 같은 클래스가 "밝은 글자" 역할이므로 반대로 되돌린다. */
+.slide .text-gray-200{color:#6b7280}
+.slide .text-gray-400{color:#4b5563}
+.slide .text-gray-500{color:#4b5563}
+.slide .text-emerald-500,.slide .text-emerald-600{color:#047857}
+.slide .text-blue-500{color:#2563eb}
+.slide .text-rose-500{color:#e11d48}
+.slide .text-rose-600{color:#be123c}
+.slide.bg-black .text-gray-400,.slide.bg-gray-900 .text-gray-400,
+.slide.bg-black .text-gray-500,.slide.bg-gray-900 .text-gray-500,
+.slide.bg-black .session-marker,.slide.bg-gray-900 .session-marker,
+.slide .bg-black .text-gray-400,.slide .bg-gray-900 .text-gray-400,
+.slide .bg-black .text-gray-500,.slide .bg-gray-900 .text-gray-500,
+.slide .bg-black .text-gray-600,.slide .bg-gray-900 .text-gray-600{color:#9ca3af}
+/* 어두운 면에서는 500단계가 "밝은 글자" 역할이다 — 내리면 오히려 깨진다.
+   400단계로 되돌린다(모두 #292f3d/#000 위에서 4.9 이상). */
+.slide.bg-gray-900 .text-emerald-500,.slide.bg-gray-900 .text-emerald-600,
+.slide .bg-gray-900 .text-emerald-500,.slide .bg-black .text-emerald-500{color:#34d399}
+.slide.bg-gray-900 .text-blue-500,.slide .bg-gray-900 .text-blue-500,
+.slide .bg-black .text-blue-500{color:#60a5fa}
+.slide.bg-gray-900 .text-rose-500,.slide.bg-gray-900 .text-rose-600,
+.slide .bg-gray-900 .text-rose-500,.slide .bg-black .text-rose-500{color:#fb7185}
+
+/* --- slide-17(教师检查清单) 720p 넘침 53px --------------------------------
+   5행 카드(p-5)＋space-y-4＋mb-10/mb-8 누적이 원인이다.
+   id 셀렉터를 만들지 않는다는 규칙에 따라 페이지 단위 "클래스"로만 조인다.
+   전역 Tailwind 유틸리티는 그대로 둔다. */
+.slide.apx-tight h2{margin-bottom:1.1rem}
+.slide.apx-tight > p{margin-bottom:1rem}
+.slide.apx-tight .space-y-4 > * + *{margin-top:.65rem}
+.slide.apx-tight .p-5{padding:.9rem 1.25rem}
+
+/* --- 图片放大层(부록 이식) · 2026-08-29 ------------------------------------
+   부록에는 zoomable-image 가 15장 붙어 있었는데 오버레이도 스크립트도 없어
+   클래스가 죽어 있었다. 본편과 같은 규칙/동작을 옮긴다. */
+#imageZoomOverlay { position: fixed; inset: 0; z-index: 5000; pointer-events: none; display: none; align-items: center; justify-content: center; }
+#imageZoomOverlay.active { display: flex; background: rgba(0,0,0,0.85); pointer-events: auto;}
+#imageZoomOverlay img { max-width: 92vw; max-height: 88vh; object-fit: contain; background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+</style>
+</head>
+<body class="antialiased">
+
+    <!-- 01: Cover -->
+    <div class="slide active" id="slide-1">
+        <div class="session-marker mono text-rose-600">Gate 2 · 配套运行文档</div>
+        <div class="flex justify-between items-start">
+            <div class="mono text-xs">课程：女装设计 III</div>
+            <div class="mono text-xs">第08周：Gate 2 中期评审</div>
+        </div>
+        <div class="mt-auto mb-auto">
+            <h1 class="text-[7vw] font-black leading-none mb-8 tracking-tighter">
+                GATE 2:<br><span class="text-rose-600 italic">中期评审</span>
+            </h1>
+            <p class="text-3xl font-light max-w-4xl leading-relaxed">
+                5套造型编辑 · 平面到立体证据 · 2套实物确定。<br>
+                中期评审检查的不是“谁的效果图最漂亮”，而是<span class="font-bold border-b-4 border-rose-600">你的开发逻辑是否足够可靠。</span>
+            </p>
+        <p class="mt-4 text-sm" style="color:#4B5563">本文档与《第08周 Gate 2 中期评审》正课<b>配套使用</b>；在正课<b>第2课时的评审环节</b>同时打开。本文档不占用单独课时。 <a href="womenswear_design_iii_week08.html" style="color:#1D4ED8;font-weight:800;text-decoration:underline">→ 回到正课</a></p></div>
+        <div class="flex justify-between items-end">
+            <div class="text-5xl font-black text-rose-600">第08周 / 核心问题</div>
+            <div class="text-right mono text-xs leading-relaxed font-bold text-gray-500">
+                “哪 5 套造型继续保留？哪 2 套造型值得<br>进入真实制作？证据是什么？”
+            </div>
+        </div>
+    </div>
+
+    <!-- 02: Position in 16 weeks -->
+    <div class="slide" id="slide-2">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">02 时间线</div>
+        <div class="flex flex-col h-full justify-center">
+            <h2 class="text-4xl font-black mb-12">Gate 2 评审目的：设计风险控制</h2>
+            <div class="grid grid-cols-6 gap-4 mb-12">
+                <div class="p-4 bg-gray-100 border-t-4 border-gray-300">
+                    <strong class="mono block mb-1 text-xs">第04周 Gate 1</strong>
+                    <span class="text-xs text-gray-500">设计简报通过</span>
+                </div>
+                <div class="p-4 bg-gray-100 border-t-4 border-gray-300">
+                    <strong class="mono block mb-1 text-xs">W05</strong>
+                    <span class="text-xs text-gray-500">元素提取</span>
+                </div>
+                <div class="p-4 bg-gray-100 border-t-4 border-gray-300">
+                    <strong class="mono block mb-1 text-xs">W06</strong>
+                    <span class="text-xs text-gray-500">元素变形·分解板</span>
+                </div>
+                <div class="p-4 bg-gray-100 border-t-4 border-gray-300">
+                    <strong class="mono block mb-1 text-xs">W07</strong>
+                    <span class="text-xs text-gray-500">5套阵列 V1</span>
+                </div>
+                <div class="p-4 bg-white shadow-xl border-t-4 border-rose-600 transform scale-105 z-10">
+                    <strong class="mono block mb-1 text-xs text-rose-600">第08周 今天</strong>
+                    <span class="text-xs font-bold text-rose-600">Gate 2 中期评审</span>
+                </div>
+                <div class="p-4 bg-gray-100 border-t-4 border-gray-300">
+                    <strong class="mono block mb-1 text-xs">第09周 下周</strong>
+                    <span class="text-xs text-gray-500">试穿修正</span>
+                </div>
+            </div>
+            <div class="acid-border bg-rose-50 p-6">
+                <strong class="block mb-2 text-lg text-rose-800">通过逻辑：不是“看起来像”，而是“能被验证”。</strong>
+                <p class="text-sm text-gray-800">如果证据不足，先补 prototype、材料样片或开合验证，绝不能急着裁正式面料。通过 Gate 2 以后，第09周 才进入真正的 试穿与纸样修正。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 03: From Image to 证据 -->
+    <div class="slide" id="slide-3">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">03 可验证判断</div>
+        <h2 class="text-4xl font-black mb-12">不是看效果图，而是看证据</h2>
+        <div class="grid grid-cols-4 gap-6 h-64">
+            <div class="bg-gray-100 p-6 border-t-4 border-gray-400 flex flex-col justify-center opacity-70">
+                <span class="text-xs font-mono text-gray-500 mb-2">01 视觉假设</span>
+                <strong class="text-xl mb-2">视觉假设</strong>
+                <p class="text-xs text-gray-600">只能说明方向，不能独自证明结构、材料、身体与生产可行性。</p>
+            </div>
+            <div class="bg-white shadow p-6 border-t-4 border-blue-500 flex flex-col justify-center">
+                <span class="text-xs font-mono text-blue-500 mb-2">02 平面证据</span>
+                <strong class="text-xl mb-2 text-blue-700">承诺结构</strong>
+                <p class="text-xs text-gray-600">技术平面图、纸样、成衣尺寸表与结构标注必须相互一致。</p>
+            </div>
+            <div class="bg-white shadow p-6 border-t-4 border-rose-500 flex flex-col justify-center transform scale-105">
+                <span class="text-xs font-mono text-rose-500 mb-2">03 立体证据</span>
+                <strong class="text-xl mb-2 text-rose-700">验证身体</strong>
+                <p class="text-xs text-gray-800 font-bold">toile、动作照片、失败记录，让设计风险完全可见。</p>
+            </div>
+            <div class="bg-white shadow p-6 border-t-4 border-emerald-500 flex flex-col justify-center">
+                <span class="text-xs font-mono text-emerald-500 mb-2">04 制作可行性</span>
+                <strong class="text-xl mb-2 text-emerald-700">控制成本</strong>
+                <p class="text-xs text-gray-600">材料、工艺、时间、预算决定是否能进入实物制作。</p>
+            </div>
+        </div>
+        <p class="mt-12 text-center text-lg font-bold text-gray-800 bg-gray-50 py-3 rounded">
+            Gate 2 评审提问法：“你保留什么？改掉什么？下一步用什么证据证明？”
+        </p>
+    </div>
+
+    <!-- 04: Mid Review Board Structure -->
+    <div class="slide" id="slide-4">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">04 评审板结构</div>
+        <div class="grid grid-cols-2 gap-12 h-full items-center">
+            <div class="bg-gray-100 p-8 border-2 border-dashed border-gray-400">
+                <h3 class="text-xl font-bold mb-6 text-gray-500 uppercase tracking-widest text-center">评审板布局图</h3>
+                <div class="grid grid-cols-2 gap-4 text-sm text-center">
+                    <div class="bg-white p-4 shadow-sm"><strong>A. 5套造型阵列 v2</strong><br><span class="text-[10px] text-gray-500">角色/构成/节奏</span></div>
+                    <div class="bg-white p-4 shadow-sm border border-blue-400"><strong>B. 平面到立体证据</strong><br><span class="text-[10px] text-blue-500">平面图／纸样／白坯样</span></div>
+                    <div class="bg-white p-4 shadow-sm border border-rose-400 col-span-2"><strong>C. 2套实物候选</strong><br><span class="text-[10px] text-rose-500">为什么进入真实制作</span></div>
+                    <div class="bg-white p-4 shadow-sm"><strong>D. 制作风险</strong><br><span class="text-[10px] text-gray-500">材料/时间/预算</span></div>
+                    <div class="bg-gray-800 text-white p-4 shadow-sm"><strong>E. 行动地图</strong><br><span class="text-[10px] text-gray-300">下一版任务</span></div>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-4xl font-black mb-8">一张板必须讲清四件事</h2>
+                <p class="text-gray-600 mb-6 leading-relaxed">评审板 = 主张 + 证据 + 判断 + 下一步动作</p>
+                <div class="p-5 border-l-4 border-rose-600 bg-rose-50">
+                    <strong class="block text-rose-800 mb-2">板面排版原则：</strong>
+                    <ul class="text-sm text-rose-900 space-y-2 list-disc pl-4">
+                        <li>先排证据，再考虑美化。</li>
+                        <li>所有结论都必须能追溯到图纸、样衣、材料或计划。</li>
+                        <li>不要贴多余的灵感图，这里是技术和逻辑的审计场。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 05: 5套造型 Architecture Review -->
+    <div class="slide" id="slide-5">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">05 系列编排评审</div>
+        <h2 class="text-4xl font-black mb-5">为什么这 5 套造型必须在一起？</h2>
+        <p class="text-lg text-gray-600 mb-5 max-w-5xl leading-relaxed">中期评审不是问“哪一张最好看”，而是检查每套造型在系列里承担什么角色。学生要能说明：同一系列基因如何通过不同角色、材料强度和产品层级被分配。</p>
+        <div class="grid gap-6 flex-1 min-h-0" style="grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);">
+            <div class="series-reference-card">
+                <div class="series-copy">
+                    <span class="series-kicker">视觉参考 / 5套造型</span>
+                    <strong>Carven Pre-Fall 2026：用相近语法做出角色差异</strong>
+                </div>
+                <div class="series-note">观察同一系列如何通过长度、身体距离、材料重量和开合位置制造差异。课堂讨论时不要只说“统一”，要指出每套造型承担的具体功能。</div>
+                <div class="case-series tall">
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s05_01.jpg" alt="Carven Pre-Fall 2026 Gate 2 系列编排 reference 造型 1" loading="eager"><figcaption>L01</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s05_02.jpg" alt="Carven Pre-Fall 2026 Gate 2 系列编排 reference 造型 2" loading="eager"><figcaption>L02</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s05_03.jpg" alt="Carven Pre-Fall 2026 Gate 2 系列编排 reference 造型 3" loading="eager"><figcaption>L03</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s05_04.jpg" alt="Carven Pre-Fall 2026 Gate 2 系列编排 reference 造型 4" loading="eager"><figcaption>L04</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s05_05.jpg" alt="Carven Pre-Fall 2026 Gate 2 系列编排 reference 造型 5" loading="eager"><figcaption>L05</figcaption></figure>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 min-h-0">
+                <div class="bg-white p-4 border border-gray-200 shadow-sm"><span class="text-3xl font-black text-gray-200">01</span><strong class="block text-lg text-blue-700">主视觉款</strong><p class="text-sm text-gray-600">建立系列最强记忆点。</p></div>
+                <div class="bg-white p-4 border border-gray-200 shadow-sm"><span class="text-3xl font-black text-gray-200">02</span><strong class="block text-lg text-blue-700">核心产品款</strong><p class="text-sm text-gray-600">最能被真实穿着和销售。</p></div>
+                <div class="bg-white p-4 border border-gray-200 shadow-sm"><span class="text-3xl font-black text-gray-200">03</span><strong class="block text-lg">比例变化款</strong><p class="text-sm text-gray-600">调整长度、体积或层次。</p></div>
+                <div class="bg-white p-4 border border-gray-200 shadow-sm"><span class="text-3xl font-black text-gray-200">04</span><strong class="block text-lg">连接款</strong><p class="text-sm text-gray-600">连接强款与日常款。</p></div>
+                <div class="bg-white p-4 border border-gray-200 shadow-sm"><span class="text-3xl font-black text-gray-200">05</span><strong class="block text-lg text-emerald-700">商业入口款</strong><p class="text-sm text-gray-600">降低穿着门槛。</p></div>
+                <div class="bg-gray-900 text-white p-4 border border-gray-700 shadow-md"><span class="text-3xl font-black text-gray-600">06</span><strong class="block text-lg text-rose-400">收束款</strong><p class="text-sm text-gray-300">完成主题记忆点。</p></div>
+            </div>
+        </div>
+    <p class="source-note">图像：Carven 2026早秋系列｜仅用于“系列编排”的课堂反向分析，不代表品牌官方版型说明。</p></div>
+
+    <!-- 06: 造型 Review Card -->
+    <div class="slide" id="slide-6">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">06 单个造型检查</div>
+        <div class="grid grid-cols-2 gap-12 h-full items-center">
+            <div>
+                <h2 class="text-4xl font-black mb-8">每套造型必须被同一套问题检查</h2>
+                <div class="space-y-4">
+                    <div class="p-3 bg-white border border-gray-200 shadow-sm flex"><span class="font-bold text-blue-600 w-24">01 角色</span><span class="text-sm text-gray-700">它在 5 套造型里承担什么功能？</span></div>
+                    <div class="p-3 bg-white border border-gray-200 shadow-sm flex"><span class="font-bold text-blue-600 w-24">02 产品</span><span class="text-sm text-gray-700">由哪些单品构成？是否有主次？</span></div>
+                    <div class="p-3 bg-white border border-gray-200 shadow-sm flex"><span class="font-bold text-blue-600 w-24">03 廓形</span><span class="text-sm text-gray-700">轮廓与身体距离如何变化？</span></div>
+                    <div class="p-3 bg-white border border-gray-200 shadow-sm flex"><span class="font-bold text-blue-600 w-24">04 材料</span><span class="text-sm text-gray-700">主材料、辅材料与支撑关系是否清楚？</span></div>
+                    <div class="p-3 bg-white border border-gray-200 shadow-sm flex"><span class="font-bold text-rose-600 w-24">05 证据</span><span class="text-sm text-gray-800 font-bold">平面图、纸样、白坯布样中哪一项最强？</span></div>
+                    <div class="p-3 bg-rose-50 border border-rose-200 shadow-sm flex"><span class="font-bold text-rose-600 w-24">06 风险</span><span class="text-sm text-rose-800">还不能进入真实制作的原因是什么？</span></div>
+                </div>
+            </div>
+            <div class="evidence-board">
+                <h3 class="text-2xl font-black mb-2">造型检查卡示例</h3>
+                <p class="text-sm text-gray-500 mb-5">学生可以照这个顺序讲，不要从“灵感故事”开始。</p>
+                <div class="evidence-row"><strong>角色</strong><span>主视觉款 / 核心产品款 / 变化款 / 连接款 / 商业入口款 / 收束款</span><span class="text-blue-600 font-bold">必须写</span></div>
+                <div class="evidence-row"><strong>产品构成</strong><span>上装、下装、外套、裙装、内层、配件之间的关系</span><span class="text-blue-600 font-bold">可检查</span></div>
+                <div class="evidence-row"><strong>平面证据</strong><span>正背面平面图、关键结构线、开合位置、纸样风险</span><span class="text-rose-600 font-bold">高优先</span></div>
+                <div class="evidence-row"><strong>立体证据</strong><span>白坯布样、动作照片、失败点、下一版修改变量</span><span class="text-rose-600 font-bold">高优先</span></div>
+                <div class="evidence-row"><strong>制作判断</strong><span>材料、工艺、预算、外协、完成时间是否可控</span><span class="text-emerald-600 font-bold">通行条件</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 07: 2D 证据 -->
+    <div class="slide" id="slide-7">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">07 平面证据</div>
+        <h2 class="text-4xl font-black mb-8">平面图与纸样 要承诺同一件衣服</h2>
+        <p class="text-gray-500 mb-10 text-sm">纸面证据如果不统一，打版师将无法工作。</p>
+        
+        <div class="grid grid-cols-3 gap-6">
+            <div class="bg-white p-6 shadow-sm border-t-4 border-gray-800">
+                <h4 class="font-bold text-lg mb-4">技术平面图</h4>
+                <p class="text-xs text-gray-500 mb-4">正面 / 背面 / 细节</p>
+                <p class="text-sm text-gray-700">必须清晰交代轮廓、结构线、开合方式、口袋位置与下摆处理。</p>
+            </div>
+            <div class="bg-white p-6 shadow-sm border-t-4 border-blue-600">
+                <h4 class="font-bold text-lg mb-4 text-blue-800">纸样计划</h4>
+                <p class="text-xs text-gray-500 mb-4">布纹 / 缝线 / 省道</p>
+                <p class="text-sm text-gray-700">必须展示裁片拆解逻辑、余量分配、布纹方向与版本号。</p>
+            </div>
+            <div class="bg-white p-6 shadow-sm border-t-4 border-emerald-600">
+                <h4 class="font-bold text-lg mb-4 text-emerald-800">关键尺寸点逻辑</h4>
+                <p class="text-xs text-gray-500 mb-4">测量点</p>
+                <p class="text-sm text-gray-700">必须标注关键尺寸点 (Point of Measure) 与身体的测量关系。</p>
+            </div>
+        </div>
+        <div class="mt-10 bg-rose-50 p-4 border border-rose-200 text-center">
+            <strong class="text-rose-600">审计红线：</strong>如果 平面图、纸样与关键尺寸点 说的是三件不同的衣服，Gate 2 不应通过。
+        </div>
+    </div>
+
+    <!-- 08: 3D 证据 -->
+    <div class="slide" id="slide-8">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag red">08 立体证据</div>
+        <div class="grid grid-cols-2 gap-8 h-full items-center">
+            <div class="series-reference-card">
+                <div class="series-copy">
+                    <span class="series-kicker">观察训练 / 5套造型</span>
+                    <strong>Proenza Schouler Fall 2026：身体距离与材料重量</strong>
+                </div>
+                <div class="series-note">这组图用于训练观察身体距离、重力、开合和活动余量；学生提交时必须换成自己的白坯布样、动作照片和失败记录。</div>
+                <div class="case-series tall">
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s08_01.jpg" alt="Proenza Schouler Fall 2026 body distance evidence reference 造型 1" loading="eager"><figcaption>L01</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s08_02.jpg" alt="Proenza Schouler Fall 2026 body distance evidence reference 造型 2" loading="eager"><figcaption>L02</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s08_03.jpg" alt="Proenza Schouler Fall 2026 body distance evidence reference 造型 3" loading="eager"><figcaption>L03</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s08_04.jpg" alt="Proenza Schouler Fall 2026 body distance evidence reference 造型 4" loading="eager"><figcaption>L04</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s08_05.jpg" alt="Proenza Schouler Fall 2026 body distance evidence reference 造型 5" loading="eager"><figcaption>L05</figcaption></figure>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-4xl font-black mb-8">白坯布样不是成品，<br>而是身体上的证据</h2>
+                <p class="text-gray-500 mb-8 leading-relaxed">中期评审需要看结构承诺是否站得住。照片必须能回答比例、重力、活动和穿脱问题。</p>
+                <ul class="space-y-4 text-sm text-gray-800 font-bold">
+                    <li class="flex items-center"><span class="w-24 inline-block text-blue-600">1 正面</span>比例 / 中心线 / 开合是否平衡</li>
+                    <li class="flex items-center"><span class="w-24 inline-block text-blue-600">2 侧面</span>身体距离 / 前后重心平衡</li>
+                    <li class="flex items-center"><span class="w-24 inline-block text-blue-600">3 背面</span>肩背贴合 / 后片余量 / 收省</li>
+                    <li class="flex items-center"><span class="w-24 inline-block text-blue-600">4 45度</span>体积转折 / 最真实的视觉角度</li>
+                    <li class="flex items-center"><span class="w-24 inline-block text-rose-600">5 动作</span>坐下 / 抬臂 / 行走 / 口袋使用</li>
+                </ul>
+                <p class="mt-6 text-xs text-rose-600 bg-white p-3 border border-rose-100">失败也必须上板：它说明下一版该改哪里，而不是假装没发生。</p>
+            </div>
+        </div>
+    <p class="source-note">图像：Proenza Schouler 2026秋冬系列｜仅用于“身体距离证据”的课堂判读，不代表品牌官方说明。</p></div>
+
+    <!-- 09: 材料策略 -->
+    <div class="slide" id="slide-9">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">09 材料策略</div>
+        <h2 class="text-4xl font-black mb-8">材料不是颜色，而是结构条件</h2>
+        <p class="text-gray-500 mb-8 text-sm">不要只贴漂亮色卡，要评估材料的物理行为。</p>
+        
+        <div class="grid grid-cols-5 gap-4">
+            <div class="bg-white p-4 shadow text-center border-t-2 border-gray-300">
+                <span class="text-3xl font-black text-gray-200 block mb-2">1</span>
+                <strong class="block text-sm mb-2">挺括度<br>(Stiffness)</strong>
+                <p class="text-[10px] text-gray-500">能否支撑离体体积？</p>
+            </div>
+            <div class="bg-white p-4 shadow text-center border-t-2 border-gray-300">
+                <span class="text-3xl font-black text-gray-200 block mb-2">2</span>
+                <strong class="block text-sm mb-2">垂坠<br>(Drape)</strong>
+                <p class="text-[10px] text-gray-500">褶、摆、悬挂如何形成？</p>
+            </div>
+            <div class="bg-white p-4 shadow text-center border-t-2 border-gray-300">
+                <span class="text-3xl font-black text-gray-200 block mb-2">3</span>
+                <strong class="block text-sm mb-2">厚度<br>(Thickness)</strong>
+                <p class="text-[10px] text-gray-500">接缝叠厚与活动限制？</p>
+            </div>
+            <div class="bg-white p-4 shadow text-center border-t-2 border-gray-300">
+                <span class="text-3xl font-black text-gray-200 block mb-2">4</span>
+                <strong class="block text-sm mb-2">弹性<br>(Stretch)</strong>
+                <p class="text-[10px] text-gray-500">合体、压力与恢复？</p>
+            </div>
+            <div class="bg-white p-4 shadow text-center border-t-2 border-gray-300">
+                <span class="text-3xl font-black text-gray-200 block mb-2">5</span>
+                <strong class="block text-sm mb-2">表面处理<br>(Finish)</strong>
+                <p class="text-[10px] text-gray-500">反光、摩擦、耐久与维护？</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10: Body and Movement 证据 -->
+    <div class="slide" id="slide-10">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag red">10 动作证据</div>
+        <div class="grid grid-cols-2 gap-12 h-full items-center">
+            <div class="chart-container">
+                 <canvas id="chartMovement证据"></canvas>
+            </div>
+            <div>
+                <h2 class="text-4xl font-black mb-8">身体不是静态展示架</h2>
+                <p class="text-gray-500 mb-6 text-sm">只拍站立照片不足以证明衣服可穿。</p>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 shadow-sm border-l-4 border-gray-800"><strong class="text-gray-800">站立:</strong> <span class="text-sm text-gray-600">比例与静态平衡。</span></div>
+                    <div class="bg-white p-4 shadow-sm border-l-4 border-blue-500"><strong class="text-blue-700">坐下:</strong> <span class="text-sm text-gray-600">腰腹压力与下摆堆积。</span></div>
+                    <div class="bg-white p-4 shadow-sm border-l-4 border-emerald-500"><strong class="text-emerald-700">行走:</strong> <span class="text-sm text-gray-600">开合稳定性与步幅空间。</span></div>
+                    <div class="bg-white p-4 shadow-sm border-l-4 border-rose-500"><strong class="text-rose-700">抬臂:</strong> <span class="text-sm text-gray-600">肩袖拉扯与领口位移。</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11: Production Feasibility -->
+    <div class="slide" id="slide-11">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">11 制作可行性</div>
+        <h2 class="text-4xl font-black mb-8">能做出来，才允许进入真实面料</h2>
+        <p class="text-gray-500 mb-8 text-sm">没有生产计划的造型 只能停留在图纸上。</p>
+        
+        <div class="grid grid-cols-3 gap-6 mb-8">
+            <div class="bg-rose-50 border border-rose-200 p-6 flex flex-col justify-center">
+                <strong class="text-xl text-rose-700 mb-2">高风险</strong>
+                <p class="text-xs text-rose-900">高难结构 / 新工艺 / 昂贵材料</p>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 p-6 flex flex-col justify-center">
+                <strong class="text-xl text-blue-700 mb-2">中风险</strong>
+                <p class="text-xs text-blue-900">需要样片验证 / 可局部外协</p>
+            </div>
+            <div class="bg-gray-100 border border-gray-300 p-6 flex flex-col justify-center">
+                <strong class="text-xl text-gray-700 mb-2">低风险</strong>
+                <p class="text-xs text-gray-600">已试过 / 工艺稳定 / 时间可控</p>
+            </div>
+        </div>
+        
+        <div class="bg-white shadow p-6 border-t-2 border-black">
+            <h4 class="font-bold mb-4">中期评审必须回答的制作问题：</h4>
+            <ol class="text-sm space-y-2 list-decimal pl-5 text-gray-700">
+                <li>还能不能在 第13周–14 按时完成？</li>
+                <li>材料、辅料、外协是否已估算并预留预算？</li>
+                <li>学生本人能否完成关键工艺（不能全靠外包）？</li>
+                <li>是否需要特殊机器、特殊熨烫或大裁床？</li>
+                <li class="font-bold text-rose-600">如果第一版正式面料失败，有没有简化的 备用方案？</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- 12: Choosing 2套造型 -->
+    <div class="slide" id="slide-12">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">12 选择实物候选</div>
+        <h2 class="text-4xl font-black mb-5">两套实物为什么是这两套？</h2>
+        <p class="text-lg text-gray-600 mb-5 max-w-5xl leading-relaxed">选择不是奖励“最漂亮”，而是选择最能证明系列广度、身体逻辑和制作能力的两套。两套造型之间要有清楚对比，不能都卡在同一种风险里。</p>
+        <div class="grid gap-6 flex-1 min-h-0" style="grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);">
+            <div class="series-reference-card">
+                <div class="series-copy">
+                    <span class="series-kicker">候选判断 / 5套造型</span>
+                    <strong>Toteme Fall 2026：在克制系列里判断差异</strong>
+                </div>
+                <div class="series-note">观察哪两套最适合进入实物：一套证明结构控制，一套证明材料/穿着逻辑。不要选择两套功能完全相同的造型。</div>
+                <div class="case-series tall">
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s12_01.jpg" alt="Toteme Fall 2026 candidate selection reference 造型 1" loading="eager"><figcaption>L01</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s12_02.jpg" alt="Toteme Fall 2026 candidate selection reference 造型 2" loading="eager"><figcaption>L02</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s12_03.jpg" alt="Toteme Fall 2026 candidate selection reference 造型 3" loading="eager"><figcaption>L03</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s12_04.jpg" alt="Toteme Fall 2026 candidate selection reference 造型 4" loading="eager"><figcaption>L04</figcaption></figure>
+                    <figure class="case-look"><img class="zoomable-image" src="w08_visual_assets/w08_s12_05.jpg" alt="Toteme Fall 2026 candidate selection reference 造型 5" loading="eager"><figcaption>L05</figcaption></figure>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 min-h-0">
+                <div class="bg-white p-6 shadow border-t-8 border-blue-600 flex flex-col">
+                    <h3 class="text-2xl font-black text-blue-800 mb-4">候选 A</h3>
+                    <strong class="text-sm mb-2 text-gray-800">适合进入实物的理由：</strong>
+                    <ul class="text-sm space-y-2 text-gray-600 list-disc pl-4">
+                        <li>代表系列核心廓形。</li>
+                        <li>纸样风险已经可控。</li>
+                        <li>核心材料样片已通过测试。</li>
+                        <li>能展示结构或剪裁能力。</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 shadow border-t-8 border-emerald-600 flex flex-col">
+                    <h3 class="text-2xl font-black text-emerald-800 mb-4">候选 B</h3>
+                    <strong class="text-sm mb-2 text-gray-800">适合进入实物的理由：</strong>
+                    <ul class="text-sm space-y-2 text-gray-600 list-disc pl-4">
+                        <li>与候选 A 对比明显。</li>
+                        <li>能展示材料或垂坠能力。</li>
+                        <li>身体活动接口已初步验证。</li>
+                        <li>生产时间在剩余周数内可控。</li>
+                    </ul>
+                </div>
+                <div class="col-span-2 bg-rose-50 border border-rose-200 p-5">
+                    <strong class="text-rose-700 block mb-2">不能选择的组合</strong>
+                    <p class="text-sm text-rose-900">两套都只漂亮但没有证据；两套风险都过高；两套功能太像，无法证明系列广度。</p>
+                </div>
+            </div>
+        </div>
+    <p class="source-note">图像：Toteme 2026秋冬系列｜仅用于“候选选择对照”的课堂判读，不代表品牌官方说明。</p></div>
+
+    <!-- 13: Contrast Logic -->
+    <div class="slide" id="slide-13">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">13 对比逻辑</div>
+        <div class="grid grid-cols-2 gap-12 h-full items-center">
+            <div class="chart-container">
+                 <canvas id="chartContrastLogic"></canvas>
+            </div>
+            <div>
+                <h2 class="text-4xl font-black mb-8">两套实物要证明系列的广度</h2>
+                <p class="text-gray-500 mb-6 leading-relaxed">两套实物应该位于能力雷达的不同象限。</p>
+                <div class="space-y-4">
+                    <div class="bg-blue-50 p-4 border border-blue-200">
+                        <strong class="text-blue-800 block mb-1">A. 结构控制 (剪裁/支撑)</strong>
+                        <span class="text-sm text-blue-900">证明你可以用纸样和骨架抵抗重力。</span>
+                    </div>
+                    <div class="bg-emerald-50 p-4 border border-emerald-200">
+                        <strong class="text-emerald-800 block mb-1">B. 材料流动 (垂坠/动作)</strong>
+                        <span class="text-sm text-emerald-900">证明你可以理解并引导面料的自然重力行为。</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 14: What Must Be Cut -->
+    <div class="slide" id="slide-14">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag red">14 下周动作</div>
+        <h2 class="text-4xl font-black mb-10">下周必须进入哪一种制作？</h2>
+        <p class="text-gray-500 mb-8">Gate 2 之后不应“重新开始”，应把未验证的问题转化为明确制作任务。</p>
+        
+        <div class="grid grid-cols-5 gap-4">
+            <div class="bg-white shadow p-4 border-t-2 border-black">
+                <strong class="text-sm block mb-2">01. 正式面料样片</strong>
+                <p class="text-[10px] text-gray-500">缝份／边缘／闭合／支撑样片的测试。</p>
+            </div>
+            <div class="bg-white shadow p-4 border-t-2 border-black">
+                <strong class="text-sm block mb-2">02. 白坯样 v2</strong>
+                <p class="text-[10px] text-gray-500">根据 Gate 2 反馈，修正关键部位的大关系。</p>
+            </div>
+            <div class="bg-white shadow p-4 border-t-2 border-blue-600">
+                <strong class="text-sm text-blue-700 block mb-2">03. 全尺寸样衣验证</strong>
+                <p class="text-[10px] text-gray-600">只针对入选 2套造型 的核心风险部位做全尺寸白坯。</p>
+            </div>
+            <div class="bg-white shadow p-4 border-t-2 border-black">
+                <strong class="text-sm block mb-2">04. 材料测试</strong>
+                <p class="text-[10px] text-gray-500">缩水、熨烫、厚度、叠缝、垂坠的极限测试。</p>
+            </div>
+            <div class="bg-white shadow p-4 border-t-2 border-black">
+                <strong class="text-sm block mb-2">05. 试穿准备</strong>
+                <p class="text-[10px] text-gray-500">确定试穿模特、尺码表与具体的动作测试清单。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 15: What Must Be Developed -->
+    <div class="slide" id="slide-15">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag red">15 开发清单</div>
+        <h2 class="text-4xl font-black mb-8">还没有证据的地方不能假装成立</h2>
+        <p class="text-gray-500 mb-6 text-sm">本页不是行政表格，而是防止“未验证问题被带进最终面料”的设计安全网。</p>
+        
+        <div class="overflow-x-auto shadow-sm rounded border border-gray-300">
+            <table class="spec-table bg-white text-sm">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="w-1/4">未验证点</th>
+                        <th class="w-1/4">缺失证据</th>
+                        <th class="w-1/3">开发动作</th>
+                        <th class="w-1/6">负责人/日期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-bold">后片结构</td>
+                        <td class="text-rose-600">只有正面 效果图</td>
+                        <td>补 back flat + 制作半身 toile 验证背宽</td>
+                        <td class="text-gray-400">____ / ____</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">开合路径</td>
+                        <td class="text-rose-600">穿脱顺序未证明</td>
+                        <td>制作 1:1 closure sample 验证拉链平整度</td>
+                        <td class="text-gray-400">____ / ____</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">材料支撑</td>
+                        <td class="text-rose-600">正式面料未测试</td>
+                        <td>测试 3 种不同厚度的硬衬 / 里布 / 重量</td>
+                        <td class="text-gray-400">____ / ____</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">动作范围</td>
+                        <td class="text-rose-600">只有站立照片</td>
+                        <td>补充 行走 / 坐下 / 抬臂 动态记录</td>
+                        <td class="text-gray-400">____ / ____</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 16: Critique Rules -->
+    <div class="slide bg-gray-900 text-white" id="slide-16">
+        <div class="session-marker mono text-gray-400">第2课时 · 评审环节</div>
+        <div class="tag red">16 讲评规则</div>
+        <div class="flex flex-col h-full justify-center items-center text-center">
+            <h2 class="text-5xl font-black mb-8">评审语言必须指向证据</h2>
+            <p class="text-xl text-rose-400 font-bold mb-12 tracking-widest uppercase">没有证据，就不要只谈风格感受</p>
+            
+            <div class="grid grid-cols-4 gap-4 w-full max-w-5xl">
+                <div class="bg-white/10 p-6 border-t-4 border-gray-500 text-left">
+                    <span class="text-3xl font-black text-gray-500 mb-2 block">1</span>
+                    <strong class="block mb-2 text-lg">先说事实</strong>
+                    <p class="text-sm text-gray-300">我看见了 `________`。</p>
+                </div>
+                <div class="bg-white/10 p-6 border-t-4 border-blue-500 text-left">
+                    <span class="text-3xl font-black text-blue-500 mb-2 block">2</span>
+                    <strong class="block mb-2 text-lg text-blue-300">再说判断</strong>
+                    <p class="text-sm text-gray-300">这说明 `________` 可能成立/不成立。</p>
+                </div>
+                <div class="bg-white/10 p-6 border-t-4 border-rose-500 text-left transform scale-105 shadow-xl">
+                    <span class="text-3xl font-black text-rose-500 mb-2 block">3</span>
+                    <strong class="block mb-2 text-lg text-rose-300">提出问题</strong>
+                    <p class="text-sm text-gray-300 font-bold">你能用什么证据证明 `________`？</p>
+                </div>
+                <div class="bg-white/10 p-6 border-t-4 border-emerald-500 text-left">
+                    <span class="text-3xl font-black text-emerald-500 mb-2 block">4</span>
+                    <strong class="block mb-2 text-lg text-emerald-300">给出动作</strong>
+                    <p class="text-sm text-gray-300">下一版应保持 `______`，改变 `______`。</p>
+                </div>
+            </div>
+            <p class="mt-12 text-gray-400 text-sm">禁止只说：高级、有感觉、很强、很女性。必须说明可见证据。</p>
+        </div>
+    </div>
+
+    <!-- 17: Teacher Panel Checklist -->
+    <div class="slide apx-tight" id="slide-17">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">17 教师检查清单</div>
+        <h2 class="text-4xl font-black mb-10">教师评审看哪五项？</h2>
+        <p class="text-gray-500 mb-8 text-sm">通过 / 条件通过 / 暂缓</p>
+        
+        <div class="space-y-4 max-w-4xl">
+            <div class="bg-white p-5 shadow-sm border border-gray-200 flex justify-between items-center">
+                <div>
+                    <strong class="block text-lg mb-1">01. 系列逻辑</strong>
+                    <span class="text-sm text-gray-600">5套造型 是否共享 DNA 且有明确的角色分工？</span>
+                </div>
+                <div class="w-8 h-8 rounded-full border-2 border-gray-300"></div>
+            </div>
+            <div class="bg-white p-5 shadow-sm border border-gray-200 flex justify-between items-center">
+                <div>
+                    <strong class="block text-lg mb-1 text-blue-700">02. 平面到立体证明</strong>
+                    <span class="text-sm text-gray-600">平面图、纸样、白坯样三者是否对应且承诺一致？</span>
+                </div>
+                <div class="w-8 h-8 rounded-full border-2 border-gray-300"></div>
+            </div>
+            <div class="bg-white p-5 shadow-sm border border-gray-200 flex justify-between items-center">
+                <div>
+                    <strong class="block text-lg mb-1 text-emerald-700">03. 材料策略</strong>
+                    <span class="text-sm text-gray-600">材料属性是否真正支撑了设计的体积、功能与维护？</span>
+                </div>
+                <div class="w-8 h-8 rounded-full border-2 border-gray-300"></div>
+            </div>
+            <div class="bg-white p-5 shadow-sm border border-gray-200 flex justify-between items-center">
+                <div>
+                    <strong class="block text-lg mb-1 text-rose-700">04. 身体证据</strong>
+                    <span class="text-sm text-gray-600 font-bold">动作、穿脱顺序、压力点与身体覆盖是否被物理验证？</span>
+                </div>
+                <div class="w-8 h-8 rounded-full border-2 border-gray-300"></div>
+            </div>
+            <div class="bg-white p-5 shadow-sm border border-gray-200 flex justify-between items-center">
+                <div>
+                    <strong class="block text-lg mb-1">05. 制作计划</strong>
+                    <span class="text-sm text-gray-600">剩余时间、成本预算、工艺能力、外包风险是否可控？</span>
+                </div>
+                <div class="w-8 h-8 rounded-full border-2 border-gray-300"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 18: 5-minute Presentation -->
+    <div class="slide" id="slide-18">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag red">18 5分钟陈述</div>
+        <div class="flex flex-col h-full justify-center">
+            <h2 class="text-4xl font-black mb-8 text-center">5 分钟如何讲清楚？</h2>
+            <p class="text-gray-500 mb-12 text-center text-lg">5 分钟不是讲完所有过程，而是讲清最关键的 5 个判断。</p>
+            
+            <div class="relative w-full max-w-4xl mx-auto">
+                <div class="absolute top-1/2 left-0 w-full h-1 bg-gray-300 -translate-y-1/2 z-0"></div>
+                <div class="grid grid-cols-5 gap-2 relative z-10 text-center">
+                    <div class="bg-white p-2">
+                        <span class="text-xs font-mono text-gray-500 font-bold">0:00–0:40</span>
+                        <div class="w-4 h-4 bg-black rounded-full mx-auto my-2"></div>
+                        <strong class="block text-sm">系列问题</strong>
+                        <span class="text-[10px] text-gray-500">我的系列回应什么生活与身体条件？</span>
+                    </div>
+                    <div class="bg-white p-2">
+                        <span class="text-xs font-mono text-gray-500 font-bold">0:40–1:30</span>
+                        <div class="w-4 h-4 bg-black rounded-full mx-auto my-2"></div>
+                        <strong class="block text-sm">5套造型编辑</strong>
+                        <span class="text-[10px] text-gray-500">这 5 个造型 为什么在一起？</span>
+                    </div>
+                    <div class="bg-white p-2 transform scale-110 shadow-lg border border-blue-200 rounded">
+                        <span class="text-xs font-mono text-blue-600 font-bold">1:30–2:45</span>
+                        <div class="w-5 h-5 bg-blue-600 rounded-full mx-auto my-2 shadow"></div>
+                        <strong class="block text-sm text-blue-800">证据</strong>
+                        <span class="text-[10px] font-bold text-gray-700">2D–3D 证据最强的 2–3 项是什么？</span>
+                    </div>
+                    <div class="bg-white p-2 transform scale-110 shadow-lg border border-emerald-200 rounded">
+                        <span class="text-xs font-mono text-emerald-600 font-bold">2:45–3:45</span>
+                        <div class="w-5 h-5 bg-emerald-600 rounded-full mx-auto my-2 shadow"></div>
+                        <strong class="block text-sm text-emerald-800">2套造型</strong>
+                        <span class="text-[10px] font-bold text-gray-700">为什么这两套进入真实制作？</span>
+                    </div>
+                    <div class="bg-white p-2">
+                        <span class="text-xs font-mono text-rose-600 font-bold">3:45–5:00</span>
+                        <div class="w-4 h-4 bg-rose-600 rounded-full mx-auto my-2 shadow ring-2 ring-rose-200"></div>
+                        <strong class="block text-sm text-rose-700">风险与下一步</strong>
+                        <span class="text-[10px] text-gray-800 font-bold">下周要解决什么物理风险？</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 19: Revision Map After Gate 2 -->
+    <div class="slide" id="slide-19">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">19 修改地图</div>
+        <div class="grid grid-cols-2 gap-12 h-full items-center">
+            <div class="chart-container">
+                 <canvas id="chartRevisionMap"></canvas>
+            </div>
+            <div>
+                <h2 class="text-4xl font-black mb-6">反馈如何变成下一步动作？</h2>
+                <p class="text-gray-500 mb-8 text-sm">From critique to 第09周 fitting plan. 不能只记“老师说要改”。</p>
+                <div class="space-y-4">
+                    <div class="p-4 bg-emerald-50 border-l-4 border-emerald-500"><strong class="text-emerald-800 block mb-1">保留</strong><span class="text-xs text-gray-600">保留已被证据支持的系列 DNA / 结构 / 材料。</span></div>
+                    <div class="p-4 bg-blue-50 border-l-4 border-blue-500"><strong class="text-blue-800 block mb-1">修改</strong><span class="text-xs text-gray-600">修改不成立或风险过高的具体变量。</span></div>
+                    <div class="p-4 bg-yellow-50 border-l-4 border-yellow-500"><strong class="text-yellow-800 block mb-1">再证明</strong><span class="text-xs text-gray-800 font-bold">需要用 toile / sample / fitting 重新验证的点。</span></div>
+                    <div class="p-4 bg-gray-100 border-l-4 border-gray-500"><strong class="text-gray-800 block mb-1">删除</strong><span class="text-xs text-gray-600">删除不服务主题、证据不足或成本过高的设计。</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 20: Conditional Approval Examples -->
+    <div class="slide" id="slide-20">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag red">20 通过状态</div>
+        <h2 class="text-4xl font-black mb-10">什么叫“条件通过”？</h2>
+        <p class="text-gray-500 mb-8">Gate 2 结果不是单纯的分数，而是通行许可。</p>
+        
+        <div class="grid grid-cols-3 gap-6">
+            <div class="bg-white p-6 shadow-md border-t-8 border-emerald-500">
+                <h3 class="text-2xl font-black text-emerald-700 mb-4">通过 (PASS)</h3>
+                <strong class="block text-sm mb-2 text-gray-800">证据链完整</strong>
+                <p class="text-sm text-gray-600 mb-6">5套造型 逻辑清楚；2套造型 有 toile、材料样片与生产计划。</p>
+                <div class="mt-auto bg-emerald-50 text-emerald-800 p-2 text-center text-xs font-bold border border-emerald-200">
+                    继续进入 第09周 fitting
+                </div>
+            </div>
+            <div class="bg-white p-6 shadow-xl border-t-8 border-blue-500 transform scale-105">
+                <h3 class="text-2xl font-black text-blue-700 mb-4">条件通过 (COND.)</h3>
+                <strong class="block text-sm mb-2 text-gray-800">有方向，但有关键缺口</strong>
+                <p class="text-sm text-gray-600 mb-6">后片不明、开合未证明、材料重量未测试或生产风险过高。</p>
+                <div class="mt-auto bg-blue-50 text-blue-800 p-2 text-center text-xs font-bold border border-blue-200">
+                    补齐特定证据后再裁正式布
+                </div>
+            </div>
+            <div class="bg-white p-6 shadow-md border-t-8 border-rose-600">
+                <h3 class="text-2xl font-black text-rose-700 mb-4">暂缓 (POSTPONE)</h3>
+                <strong class="block text-sm mb-2 text-gray-800">风险不可控</strong>
+                <p class="text-sm text-gray-600 mb-6">看不到 2D–3D 对应，或完全无法穿脱，没有任何生产计划。</p>
+                <div class="mt-auto bg-rose-50 text-rose-800 p-2 text-center text-xs font-bold border border-rose-200">
+                    先回到 样衣验证阶段
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 21: Student Worksheet -->
+    <div class="slide" id="slide-21">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">21 工作页</div>
+        <h2 class="text-4xl font-black mb-8">Gate 2 中期评审 Board Builder</h2>
+        <p class="text-gray-500 mb-6 text-sm">课堂动作：用 12 分钟把你的中评板结构草图画出来，确定信息位置，不要先做装饰。</p>
+        
+        <div class="bg-gray-100 p-8 border-2 border-dashed border-gray-400 max-w-4xl mx-auto h-[400px] flex flex-col relative">
+            <span class="absolute top-2 left-2 text-[10px] text-gray-400 mono font-bold">评审板线框</span>
+            <div class="grid grid-cols-4 gap-4 flex-1">
+                <div class="bg-white shadow-sm flex items-center justify-center text-xs text-gray-400 border border-gray-200">
+                    A. 5套造型阵列 v2<br>(角色/强度)
+                </div>
+                <div class="col-span-2 bg-white shadow-sm flex flex-col items-center justify-center text-xs text-blue-500 border border-blue-200">
+                    <span class="font-bold mb-2">B. 2D & C. 3D 证据</span>
+                    <span>平面图 / 纸样 / 白坯布样 / 动作</span>
+                </div>
+                <div class="bg-white shadow-sm flex items-center justify-center text-xs text-emerald-500 border border-emerald-200">
+                    D. 材料策略<br>(主料/样片)
+                </div>
+                <div class="col-span-2 bg-rose-50 shadow-sm flex items-center justify-center text-xs text-rose-600 font-bold border border-rose-200">
+                    E. 2套实物判断<br>(选择理由/对比逻辑)
+                </div>
+                <div class="col-span-2 bg-gray-800 text-white shadow-sm flex items-center justify-center text-xs">
+                    F. 修改地图<br>(保留 / 修改 / 再证明 / 删除)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 22: Deliverables Checklist -->
+    <div class="slide" id="slide-22">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">22 提交清单</div>
+        <h2 class="text-4xl font-black mb-10">Gate 2 提交清单</h2>
+        <p class="text-gray-500 mb-8 text-sm">没有证据的空讲将不被接受。</p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 h-48 text-sm">
+            <div class="bg-white p-4 border border-gray-200 shadow-sm flex flex-col">
+                <strong class="text-blue-600 mb-1 border-b pb-1">01 主评审板</strong>
+                <span class="text-[10px] text-gray-600">一张能讲清 主张 + 证据 + 判断 的综合大板。</span>
+            </div>
+            <div class="bg-white p-4 border border-gray-200 shadow-sm flex flex-col">
+                <strong class="text-blue-600 mb-1 border-b pb-1">02 5套造型 v2</strong>
+                <span class="text-[10px] text-gray-600">包含每个造型 的 角色 / 产品 / 材料。</span>
+            </div>
+            <div class="bg-white p-4 border border-gray-200 shadow-sm flex flex-col">
+                <strong class="text-blue-600 mb-1 border-b pb-1">03 2D-3D 证据</strong>
+                <span class="text-[10px] text-gray-600">平面图、纸样、白坯样照片、修正记录。</span>
+            </div>
+            <div class="bg-rose-50 p-4 border border-rose-200 shadow-sm flex flex-col transform scale-105 z-10">
+                <strong class="text-rose-600 mb-1 border-b border-rose-200 pb-1">04 2套实物候选</strong>
+                <span class="text-[10px] text-rose-800 font-bold">明确候选，并写清选择理由与对比逻辑。</span>
+            </div>
+            <div class="bg-white p-4 border border-gray-200 shadow-sm flex flex-col">
+                <strong class="text-blue-600 mb-1 border-b pb-1">05 材料策略</strong>
+                <span class="text-[10px] text-gray-600">主辅料方案与实体样片测试。</span>
+            </div>
+            <div class="bg-white p-4 border border-gray-200 shadow-sm flex flex-col">
+                <strong class="text-blue-600 mb-1 border-b pb-1">06 制作风险</strong>
+                <span class="text-[10px] text-gray-600">时间、预算、工艺、外协评估。</span>
+            </div>
+            <div class="bg-black text-white p-4 shadow-sm flex flex-col col-span-2">
+                <strong class="text-gray-300 mb-1 border-b border-gray-700 pb-1">07 修改行动计划</strong>
+                <span class="text-[10px] text-gray-400">基于评审反馈的 第09周 fitting 任务。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 23: Next Week Bridge -->
+    <div class="slide" id="slide-23">
+        <div class="session-marker mono text-blue-600">第2课时 · 评审环节</div>
+        <div class="tag blue">23 下周连接</div>
+        <div class="grid grid-cols-2 gap-12 h-full items-center">
+            <div class="evidence-board">
+                <h3 class="text-2xl font-black mb-2">第09周试穿修正准备</h3>
+                <p class="text-sm text-gray-500 mb-5">中期评审结束后，不再继续扩散新灵感，而是把反馈转成身体、纸样和材料的修正任务。</p>
+                <div class="evidence-row"><strong>试穿对象</strong><span>模特尺寸、穿着顺序、动作清单</span><span class="text-blue-600 font-bold">课前确认</span></div>
+                <div class="evidence-row"><strong>纸样修正</strong><span>肩线、袖窿、腰臀余量、开合路径</span><span class="text-rose-600 font-bold">优先</span></div>
+                <div class="evidence-row"><strong>材料样片</strong><span>缩水、熨烫、叠缝、支撑、垂坠</span><span class="text-emerald-600 font-bold">必须带</span></div>
+                <div class="evidence-row"><strong>版本记录</strong><span>保留什么、改变什么、再次证明什么、删除什么</span><span class="text-gray-800 font-bold">同步写</span></div>
+            </div>
+            <div>
+                <h2 class="text-4xl font-black mb-8">下一步：试穿与纸样修正</h2>
+                <p class="text-gray-600 mb-6 leading-relaxed">从中期评审进入身体修正。第09周的任务不是继续画新图，而是让设计真正贴合身体并能被制作。</p>
+                <div class="bg-gray-50 border-l-4 border-black p-6">
+                    <strong class="block mb-4 text-lg">下周核心任务：</strong>
+                    <ol class="text-sm space-y-3 text-gray-800 font-bold list-decimal pl-5">
+                        <li>把 Gate 2 反馈转成试穿检查清单。</li>
+                        <li>对入选 2 套造型做严密的纸样修正。</li>
+                        <li>用身体动作验证开合、压力与支撑点。</li>
+                        <li>将修改参数写入版本记录。</li>
+                        <li class="text-blue-600">为第10周结构样片准备材料。</li>
+                    </ol>
+                </div>
+                <p class="mt-6 text-xs text-rose-600 font-bold">纪律：下周起，每一次修改都必须回到身体、纸样和材料证据。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 24: Exit Ticket -->
+    <div class="slide bg-black text-white" id="slide-24">
+        <div class="session-marker mono text-gray-500">第08周结束 / Gate 2</div>
+        <div class="flex flex-col items-center justify-center h-full text-center">
+            <h4 class="mono text-sm tracking-[0.4em] mb-12 opacity-50 text-rose-400">离场句</h4>
+            <p class="text-2xl md:text-3xl font-black mb-12 italic max-w-4xl leading-relaxed text-left bg-white/10 p-8 rounded border border-white/20">
+                我决定<span class="text-emerald-400">保留</span> 造型 ____，因为证据显示 ____；<br><br>
+                我决定让 造型 ____ <span class="text-blue-400">进入真实制作</span>，因为它证明 ____；<br><br>
+                我决定<span class="text-rose-400">暂缓/删除</span> 造型 ____，因为风险是 ____。
+            </p>
+            
+            <div class="text-sm text-gray-300 font-bold bg-rose-900/50 p-4 border border-rose-500/30 rounded inline-block">
+                Gate 2 的核心：不是选择最漂亮的造型，而是选择证据最能支撑继续制作的造型。
+            </div>
+            
+            <p class="mt-12 text-sm text-gray-500 mono uppercase tracking-widest">下一阶段：制作与完善（第09-12周）</p>
+        </div>
+    </div>
+
+    <div class="zoom-overlay" id="imageOverlay"><img id="imageOverlayImg" alt="放大参考图"></div>
+
+    <!-- Shared UI Controls -->
+    <div class="progress-indicator" id="slideProgress">第 01 / 24 页</div>
+    <div class="nav-controls">
+        <button class="btn-nav" id="btnPrev">上一页</button>
+        <button class="btn-nav" id="btnNext">下一页</button>
+    </div>
+
+    <div id="imageZoomOverlay"><img alt=""/></div>
+<script>
+        // Slide Navigation Logic
+        let currentSlide = 1;
+        const totalSlides = 24;
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('slideProgress');
+
+        function updateSlide(n) {
+            slides.forEach(s => s.classList.remove('active'));
+            const target = document.getElementById(`slide-${n}`);
+            if(target) {
+                target.classList.add('active');
+                progress.innerText = `第 ${String(n).padStart(2, '0')} / ${totalSlides} 页`;
+                currentSlide = n;
+            }
+        }
+
+        document.getElementById('btnNext').addEventListener('click', () => {
+            if (currentSlide < totalSlides) updateSlide(currentSlide + 1);
+        });
+
+        document.getElementById('btnPrev').addEventListener('click', () => {
+            if (currentSlide > 1) updateSlide(currentSlide - 1);
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                if (currentSlide < totalSlides) updateSlide(currentSlide + 1);
+            }
+            if (e.key === 'ArrowLeft') {
+                if (currentSlide > 1) updateSlide(currentSlide - 1);
+            }
+        });
+
+
+
+        // Image hover zoom
+        const imageOverlay = document.getElementById('imageOverlay');
+        const imageOverlayImg = document.getElementById('imageOverlayImg');
+        document.querySelectorAll('img.zoomable-image').forEach((img) => {
+            img.addEventListener('mouseenter', () => {
+                imageOverlayImg.src = img.src;
+                imageOverlay.classList.add('active');
+            });
+            img.addEventListener('mouseleave', () => {
+                imageOverlay.classList.remove('active');
+                imageOverlayImg.removeAttribute('src');
+            });
+        });
+
+        // Chart.js Label Wrapping Helper
+        function wrapLabel(label) {
+            if (typeof label !== 'string' || label.length <= 16) return label;
+            const words = label.split(' ');
+            let lines = [], currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const commonTooltip = {
+            callbacks: {
+                title: function(ctx) {
+                    let lbl = ctx[0].chart.data.labels[ctx[0].dataIndex];
+                    return Array.isArray(lbl) ? lbl.join(' ') : lbl;
+                }
+            }
+        };
+
+        // Slide 10: Movement 证据 Radar Chart
+        new Chart(document.getElementById('chartMovement证据'), {
+            type: 'radar',
+            data: {
+                labels: [wrapLabel('站立平衡 (Stand)'), wrapLabel('坐姿宽容度 (Sit)'), wrapLabel('步幅空间 (Walk)'), wrapLabel('肩袖伸展 (Raise Arm)'), wrapLabel('开口与取物 (Use)')],
+                datasets: [
+                    { label: '造型 A (结构型)', data: [95, 60, 70, 50, 80], borderColor: '#2563EB', backgroundColor: 'rgba(37,99,235,0.2)' },
+                    { label: '造型 B (垂坠型)', data: [80, 90, 85, 95, 60], borderColor: '#059669', backgroundColor: 'rgba(5,150,105,0.2)' }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: { r: { beginAtZero: true, max: 100 } },
+                plugins: { tooltip: commonTooltip, legend: { position: 'bottom' } }
+            }
+        });
+
+        // Slide 13: Contrast Logic Scatter/Bubble Chart
+        new Chart(document.getElementById('chartContrastLogic'), {
+            type: 'bubble',
+            data: {
+                datasets: [
+                    { label: '造型 A (结构验证)', data: [{x: 85, y: 30, r: 20}], backgroundColor: '#2563EB' },
+                    { label: '造型 B (材料验证)', data: [{x: 20, y: 80, r: 20}], backgroundColor: '#059669' },
+                    { label: '未选 造型', data: [{x: 50, y: 50, r: 10}, {x: 40, y: 60, r: 10}, {x: 60, y: 40, r: 10}], backgroundColor: '#9CA3AF' }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    x: { min: 0, max: 100, title: {display: true, text: 'Tailoring & Structure (结构控制)'} },
+                    y: { min: 0, max: 100, title: {display: true, text: 'Drape & Material Behavior (材料流动)'} }
+                },
+                plugins: { tooltip: commonTooltip, legend: { position: 'bottom' } }
+            }
+        });
+
+        // Slide 19: Revision Map Bar Chart (Impact ≠ Feasibility)
+        new Chart(document.getElementById('chartRevisionMap'), {
+            type: 'bar',
+            data: {
+                labels: [wrapLabel('保留 (KEEP)'), wrapLabel('修改 (CHANGE)'), wrapLabel('再证明 (PROVE)'), wrapLabel('删除 (DROP)')],
+                datasets: [
+                    { label: '对最终成果的影响力 (Impact)', data: [90, 80, 85, 40], backgroundColor: '#E11D48' },
+                    { label: '执行可行性 (Feasibility)', data: [95, 60, 50, 100], backgroundColor: '#1A1A1A' }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, max: 100 } },
+                plugins: { tooltip: commonTooltip, legend: { position: 'bottom' } }
+            }
+        });
+
+
+        /* --- 图片放大：hover 미리보기 ＋ 클릭 고정, 클릭/Esc 로 닫기 ------------
+           클릭으로 연 경우에는 mouseleave 로 닫지 않는다(눌러서 크게 본 뒤
+           마우스를 떼면 사라지는 문제를 막는다). 다른 주차와 동작을 맞춘다. */
+        (function () {
+            const overlay = document.getElementById('imageZoomOverlay');
+            if (!overlay) return;
+            const overlayImg = overlay.querySelector('img');
+            function open(img, byClick) {
+                overlayImg.src = img.currentSrc || img.src;
+                overlayImg.alt = img.alt || '';
+                overlay.classList.toggle('click-open', !!byClick);
+                overlay.classList.add('active');
+            }
+            function close() { overlay.classList.remove('active', 'click-open'); }
+            document.querySelectorAll('img.zoomable-image').forEach((img) => {
+                img.addEventListener('click', (e) => { e.stopPropagation(); open(img, true); });
+                img.addEventListener('mouseenter', () => { if (!overlay.classList.contains('click-open')) open(img, false); });
+                img.addEventListener('mouseleave', () => { if (!overlay.classList.contains('click-open')) close(); });
+            });
+            overlay.addEventListener('click', close);
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' || e.key === 'Esc') close();
+            });
+        })();
+    </script>
+</body>
+</html>

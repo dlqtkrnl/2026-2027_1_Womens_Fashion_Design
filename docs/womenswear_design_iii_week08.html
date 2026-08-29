@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head><meta name="robots" content="noindex,nofollow,noarchive"><meta name="googlebot" content="noindex,nofollow">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>女装设计 III | 第08周 Gate 2 中期评审</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --bg-studio: #F9F8F6;
+            --text-main: #1A1A1A;
+            --accent-blue: #2563EB;
+            --accent-red: #E11D48;
+            --accent-green: #059669;
+        }
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-studio);
+            color: var(--text-main);
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .slide {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            padding: 3rem 4rem;
+            box-sizing: border-box;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            overflow-y: auto;
+        }
+        .slide.active { display: flex; opacity: 1; }
+        
+        .chart-container { position: relative; width: 100%; height: 100%; min-height: 250px; max-height: 400px; }
+        
+        .tag {
+            display: inline-block;
+            background: var(--text-main);
+            color: white;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+        .tag.blue { background: var(--accent-blue); }
+        .tag.red { background: var(--accent-red); }
+
+        .image-placeholder {
+            background-color: #E5E7EB; border: 2px dashed #9CA3AF; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: #6B7280; font-size: 0.875rem; padding: 1.5rem; height: 100%; min-height: 200px; position: relative;
+        }
+
+        .case-series { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; padding: 6px; background: #111827; min-height: 0; }
+        .case-series.classic { height: 49vh; }
+        .case-series.emerging { height: 42vh; }
+        .case-look { overflow: hidden; background: #F3F4F6; min-width: 0; min-height: 0; cursor: zoom-in; }
+        .case-look img, .zoomable-image { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center top; }
+        
+        #imageZoomOverlay {
+            position: fixed; inset: 0; z-index: 5000; pointer-events: none; display: none; align-items: center; justify-content: center;
+        }
+        #imageZoomOverlay.active { display: flex; background: rgba(0,0,0,0.85); pointer-events: auto;}
+        #imageZoomOverlay img { max-width: 92vw; max-height: 88vh; object-fit: contain; background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+
+        /* Custom Layouts */
+        .student-hero-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.85fr); gap: 2.2rem; height: 100%; align-items: center; }
+        .student-en-note { font-size: 0.88rem; color: #6B7280; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+        .student-series { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px; min-height: 0; }
+        .student-series.tall { height: 54vh; }
+        .student-series.mid { height: 34vh; }
+        .student-series.short { height: 22vh; }
+        .student-look { position: relative; min-width: 0; min-height: 0; overflow: hidden; background: #F3F4F6; border: 1px solid rgba(17, 24, 39, 0.12); }
+        .student-look img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+        .student-look figcaption { position: absolute; left: 5px; bottom: 5px; background: rgba(17, 24, 39, 0.82); color: #fff; font-size: 0.85rem; font-weight: 900; line-height: 1; padding: 3px 5px; }
+        
+        .student-visual-card { background: #fff; border: 1px solid #D1D5DB; box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08); overflow: hidden; min-height: 0; display: flex; flex-direction: column;}
+        .student-card-label { padding: 0.8rem 0.95rem; border-top: 1px solid #E5E7EB; font-size: 0.92rem; line-height: 1.35; font-weight: 800; color: #111827; background: #fff; }
+        .student-keyline { display: inline-flex; align-items: center; gap: 0.55rem; border-left: 5px solid #2563EB; background: #EFF6FF; color: #1E3A8A; padding: 0.75rem 1rem; font-weight: 900; line-height: 1.3; }
+        .student-quick-list li { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.7rem 0.9rem; background: #fff; border: 1px solid #E5E7EB; font-size: 1.02rem; line-height: 1.35; font-weight: 700; }
+        .student-quick-list b { color: #2563EB; min-width: 2.1rem; }
+
+        .w01-process-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.85rem; height: 50vh; min-height: 0; }
+        .w01-process-panel { position: relative; overflow: hidden; background: #F8FAFC; border: 1px solid #CBD5E1; box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08); }
+        .w01-process-panel img { width: 100%; height: 100%; object-fit: cover; }
+        .w01-process-label { position: absolute; left: 0.7rem; right: 0.7rem; bottom: 0.7rem; background: rgba(255,255,255,0.93); border-left: 5px solid #2563EB; padding: 0.65rem 0.8rem; font-size: 0.98rem; font-weight: 800; }
+        
+        .contrast-card { display: flex; flex-direction: column; min-height: 0; background: #fff; overflow: hidden; }
+        .contrast-gallery { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; padding: 6px; height: 47vh; background: #111827; }
+        .contrast-card-body { padding: 1.35rem 1.55rem; flex: 1; overflow: hidden; }
+
+        .nav-controls { position: fixed; bottom: 2rem; right: 2rem; display: flex; gap: 1rem; z-index: 1000; }
+        .btn-nav { width: 3.25rem; height: 3.25rem; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: var(--text-main); color: #fff; font-size: 1.35rem; font-weight: bold; cursor: pointer; border: 1px solid rgba(255,255,255,.35); transition: background 0.2s, opacity 0.2s; }
+        .btn-nav:hover { background: var(--accent-blue); }
+        .btn-nav:disabled { opacity: .35; cursor: default; }
+        .progress-indicator { position: fixed; bottom: 2rem; left: 2rem; font-size: 0.85rem; font-weight: bold; letter-spacing: 0.2em; color: #9CA3AF; z-index: 1000; }
+        .session-marker { position: absolute; top: 2rem; right: 4rem; font-size: 0.85rem; font-weight: bold; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.1em; }
+
+        /* Decision Chain */
+        .decision-chain-board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; min-height: 34vh; }
+        .decision-step-card { position: relative; background: #fff; border: 1px solid #D1D5DB; box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08); padding: 1.1rem; display: flex; flex-direction: column; gap: 0.85rem; }
+        .decision-step-card::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: var(--step-color, #111827); }
+        .decision-step-no { font-size: 2.6rem; line-height: 0.85; font-weight: 900; color: color-mix(in srgb, var(--step-color, #111827) 22%, #fff); }
+        .decision-block { border-left: 4px solid var(--step-color, #111827); background: #F8FAFC; padding: 0.68rem 0.78rem; }
+        .decision-block strong { display: block; font-size: 0.86rem; color: var(--step-color, #111827); margin-bottom: 0.25rem; }
+
+        .w01-diagnosis-board { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: 1.12fr 0.95fr; gap: 0.85rem; height: 57vh; min-height: 0; }
+        .w01-diagnosis-card { position: relative; overflow: hidden; background: #fff; border: 1px solid #CBD5E1; }
+        .w01-diagnosis-card img { width: 100%; height: 100%; object-fit: cover; }
+        .w01-diagnosis-letter { position: absolute; left: 0.65rem; top: 0.65rem; width: 2.2rem; height: 2.2rem; display: flex; align-items: center; justify-content: center; background: #111827; color: #fff; font-weight: 900; font-size: 1.2rem; z-index: 2; }
+    
+        /* W08_FINAL_MERGE_20260819_START */
+        .slide h1, .slide h2, .slide h3 { letter-spacing: 0 !important; }
+        .slide .text-xs { font-size: 0.9rem !important; line-height: 1.4 !important; }
+        .slide .text-sm { font-size: 1rem !important; line-height: 1.45 !important; }
+        .slide .text-base { font-size: 1.12rem !important; line-height: 1.5 !important; }
+        .slide .text-lg { font-size: 1.2rem !important; line-height: 1.5 !important; }
+        .slide .text-xl { font-size: 1.42rem !important; line-height: 1.38 !important; }
+        .slide .text-2xl { font-size: 1.8rem !important; line-height: 1.25 !important; }
+        .slide .text-3xl { font-size: 2.3rem !important; line-height: 1.18 !important; }
+        .slide .text-4xl { font-size: 3rem !important; line-height: 1.08 !important; }
+        .slide .text-5xl { font-size: 3.85rem !important; line-height: 1.02 !important; }
+        .slide .text-6xl { font-size: 4.55rem !important; line-height: 1 !important; }
+        .tag, .session-marker, .progress-indicator, .btn-nav { font-size: 0.88rem !important; }
+        .w08-series-card { background:#fff; border:1px solid #D1D5DB; box-shadow:0 12px 28px rgba(15,23,42,.09); padding:.7rem; display:flex; flex-direction:column; gap:.55rem; min-height:0; overflow:hidden; }
+        .w08-series-meta { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; border-bottom:1px solid #E5E7EB; padding:.15rem .15rem .55rem; }
+        .w08-series-meta strong { font-size:1.05rem; font-weight:900; color:#111827; }
+        .w08-series-meta span { font-size:0.85rem; font-weight:900; color:#2563EB; white-space:nowrap; }
+        .w08-series-note { font-size:.9rem; line-height:1.35; color:#4B5563; }
+        .w08-series-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:5px; min-height:0; height:34vh; background:#111827; padding:5px; }
+        .w08-series-grid.tall { height:40vh; }
+        .w08-series-grid.compact { height:33vh; }
+        .w08-series-grid figure { position:relative; overflow:hidden; min-width:0; min-height:0; background:#F3F4F6; }
+        .w08-series-grid img { width:100%; height:100%; object-fit:cover; object-position:center top; cursor:zoom-in; display:block; }
+        .w08-series-grid figcaption { position:absolute; left:5px; bottom:5px; padding:3px 6px; background:rgba(17,24,39,.84); color:#fff; font-size:0.85rem; line-height:1; font-weight:900; }
+        .w08-dual-series { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; min-height:0; flex:1; }
+        .w08-dual-series .w08-series-card { height:100%; }
+        .w08-tech-layout { display:grid; grid-template-columns:minmax(0,.88fr) minmax(420px,1.12fr); gap:2.2rem; flex:1; min-height:0; align-items:center; }
+        .w08-tech-layout.reverse { grid-template-columns:minmax(420px,1.12fr) minmax(0,.88fr); }
+        .w08-tech-frame { height:100%; min-height:0; background:#111827; border:1px solid #374151; padding:.65rem; display:grid; grid-template-rows:minmax(0,1fr) auto; box-shadow:0 12px 28px rgba(15,23,42,.12); }
+        .w08-tech-frame img { width:100%; height:100%; object-fit:contain; background:#111827; cursor:zoom-in; }
+        .w08-tech-frame figcaption { background:#fff; color:#111827; padding:.7rem .8rem; font-size:.9rem; line-height:1.35; font-weight:800; }
+        .w08-flat-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:1rem; }
+        .w08-flat-item { border-top:5px solid var(--item-color,#111827); padding-top:.75rem; }
+        .w08-flat-item b { display:block; font-size:1.18rem; margin-bottom:.45rem; }
+        .w08-flat-item p { font-size:1rem; line-height:1.4; color:#4B5563; }
+        .w08-status-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.1rem; margin-top:1.2rem; }
+        .w08-status { border-top:6px solid var(--status-color,#111827); padding:1rem 0; }
+        .w08-status strong { display:block; font-size:1.35rem; margin-bottom:.45rem; }
+        .w08-status p { font-size:1rem; line-height:1.4; color:#4B5563; }
+        .w08-source-line { margin-top:.45rem; font-size:0.85rem; color:#6B7280; }
+        .student-hero-layout .w08-series-grid.tall { flex:1; height:auto; }
+        .w08-dual-series .w08-series-grid.compact { height:48vh; }
+        .w08-audit-fill { align-items:stretch; min-height:0; }
+        .w08-audit-fill .w08-flat-item { background:#fff; border:1px solid #D1D5DB; border-top:6px solid var(--item-color,#111827); padding:1rem; display:flex; flex-direction:column; box-shadow:0 10px 22px rgba(15,23,42,.07); }
+        .w08-audit-fill .w08-flat-item b { font-size:1.3rem; }
+        .w08-audit-fill .w08-flat-item p { font-size:1.08rem; line-height:1.5; }
+        .w08-audit-fill .w08-flat-item::after { content:'证据图 → 判断句 → 下一步'; margin-top:auto; padding-top:1rem; border-top:1px solid #D1D5DB; color:var(--item-color,#111827); font-size:.88rem; font-weight:900; }        .w08-audit-fill ul { display:grid; gap:.6rem; margin-top:1.1rem; }
+        .w08-audit-fill li { background:#F8FAFC; border-left:3px solid var(--item-color,#111827); padding:.55rem .65rem; font-size:.9rem; line-height:1.35; color:#374151; }        /* W08_FINAL_MERGE_20260819_END */
+    .g4{display:grid;gap:.75rem;grid-template-columns:repeat(4,1fr);flex:1;min-height:0}.analysis{flex:none;margin-top:.45rem}.analysis div{background:#fff;border-left:5px solid #2563eb;padding:.4rem;font-size:.85rem}.analysis b{display:block}.slide .g4.analysis{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.45rem;flex:none}.slide .g4.analysis div{background:#fff;border-left:5px solid #2563eb;padding:.34rem .5rem;font-size:.8rem!important;line-height:1.32!important}.slide .g4.analysis b{display:block}.slide .chart-container{max-height:300px}</style>
+<style id="unified-course-map-style">
+.unified-course-map.slide{padding:2.25rem 3.2rem!important;background:#f7f8fa!important;color:#111827!important;overflow:hidden!important;gap:0!important}
+.unified-course-map .ucm-meta{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.7rem;border-bottom:1px solid #d1d5db;font-size:.92rem;font-weight:800;color:#4b5563;letter-spacing:0}
+.unified-course-map .ucm-label{display:inline-flex;align-items:center;background:#1d4ed8;color:#fff;padding:.35rem .72rem;font-size:0.85rem;font-weight:900}
+.unified-course-map h2{margin:.75rem 0 .25rem!important;font-size:2.1rem!important;line-height:1.3!important;font-weight:900!important;letter-spacing:0!important;color:#111827!important;overflow:visible!important}
+.unified-course-map .ucm-lead{margin:0!important;font-size:1.03rem!important;line-height:1.45!important;color:#4b5563!important}
+.unified-course-map .ucm-grid{display:grid;grid-template-columns:minmax(8rem,.62fr) repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr));gap:.55rem;flex:1;min-height:0;margin-top:.85rem}
+.unified-course-map .ucm-phase,.unified-course-map .ucm-week{min-width:0;min-height:0;border:1px solid #d1d5db;background:#fff}
+.unified-course-map .ucm-phase{display:flex;flex-direction:column;justify-content:center;padding:.7rem .78rem;border-left-width:6px}
+.unified-course-map .ucm-phase b{font-size:0.85rem;line-height:1.2;color:#6b7280}
+.unified-course-map .ucm-phase strong{margin-top:.22rem;font-size:1.02rem;line-height:1.25;color:#111827}
+.unified-course-map .ucm-phase.phase-1{border-left-color:#2563eb;background:#eff6ff}.unified-course-map .ucm-phase.phase-2{border-left-color:#059669;background:#ecfdf5}.unified-course-map .ucm-phase.phase-3{border-left-color:#e11d48;background:#fff1f2}.unified-course-map .ucm-phase.phase-4{border-left-color:#111827;background:#f3f4f6}
+.unified-course-map .ucm-week{position:relative;padding:.68rem .78rem;border-top-width:5px;display:flex;flex-direction:column;justify-content:center}
+.unified-course-map .ucm-week.phase-1{border-top-color:#2563eb}.unified-course-map .ucm-week.phase-2{border-top-color:#059669}.unified-course-map .ucm-week.phase-3{border-top-color:#e11d48}.unified-course-map .ucm-week.phase-4{border-top-color:#111827}
+.unified-course-map .ucm-week.past{background:#eef1f5;color:#4b5563}.unified-course-map .ucm-week.future{background:#fff;color:#111827}
+.unified-course-map .ucm-week.current{background:#111827;color:#fff;border-color:#111827;box-shadow:0 8px 20px rgba(17,24,39,.2)}
+.unified-course-map .ucm-no{display:flex;align-items:center;justify-content:space-between;gap:.45rem;font-size:1.3rem;font-weight:900;line-height:1;color:#9ca3af}
+.unified-course-map .ucm-week.current .ucm-no{color:#fff}.unified-course-map .ucm-now{background:#2563eb;color:#fff;padding:.2rem .42rem;font-size:0.85rem;line-height:1;font-weight:900}
+.unified-course-map .ucm-week strong{display:block;margin-top:.42rem;font-size:.92rem;line-height:1.28;letter-spacing:0;overflow-wrap:anywhere}
+.unified-course-map .ucm-legend{display:flex;justify-content:flex-end;gap:1rem;margin-top:.55rem;font-size:0.85rem;color:#6b7280}.unified-course-map .ucm-legend span{display:inline-flex;align-items:center;gap:.3rem}.unified-course-map .ucm-dot{width:.65rem;height:.65rem;border:1px solid #c7cdd4;background:#fff}.unified-course-map .ucm-dot.past{background:#eef1f5}.unified-course-map .ucm-dot.now{background:#111827;border-color:#111827}
+@media screen and (max-width:1100px){.unified-course-map.slide{padding:1.45rem 1.7rem!important}.unified-course-map h2{font-size:1.65rem!important}.unified-course-map .ucm-grid{gap:.38rem;margin-top:.55rem}.unified-course-map .ucm-phase{padding:.48rem}.unified-course-map .ucm-phase strong{font-size:0.85rem}.unified-course-map .ucm-week{padding:.45rem}.unified-course-map .ucm-week strong{font-size:0.85rem}.unified-course-map .ucm-no{font-size:1rem}}
+@media screen and (max-width:760px){.unified-course-map.slide{overflow-y:auto!important}.unified-course-map .ucm-meta{align-items:flex-start;flex-direction:column}.unified-course-map .ucm-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;flex:none}.unified-course-map .ucm-phase{grid-column:1/-1;min-height:3.5rem}.unified-course-map .ucm-week{min-height:6.2rem}.unified-course-map .ucm-week strong{font-size:.86rem}}
+
+@media print{
+@page{size:1920px 1080px;margin:0}
+html,body{width:1920px!important;height:auto!important;overflow:visible!important;background:#fff!important}
+.nav-controls,.nav-button,.mode-toggle,[id*="rogress"],[id*="btnPrev"],[id*="btnNext"],#prev,#next,#mode-class,#mode-all{display:none!important}
+.slide{display:flex!important;flex-direction:column;opacity:1!important;visibility:visible!important;transform:none!important;transition:none!important;animation:none!important;width:1920px!important;height:1080px!important;min-height:1080px!important;max-height:1080px!important;overflow:hidden!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid;break-after:auto;page-break-after:auto}
+.slide:not(:first-of-type){break-before:page;page-break-before:always}
+*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+a[href]::after{content:none!important}
+}
+
+/* ===== 第08周 内容批次 追加样式 (DECISION.md) ===== */
+/* B-01 [P0] 本周两个文件都没有接受 2026-08-28 的全周次技术地基一括整备。
+   其他 15 个周次在 720p 下根字体降到 14.524px，本周固定 16px → 版面直接溢出。
+   注：本周使用 Tailwind，rem 工具类（text-6xl / p-7 / gap-7）会一起缩小，
+   效果比其他周次大，所以插入后必须三档分辨率全数重测。 */
+html{font-size:clamp(14px,calc(11.5px + 0.42vh),19px)}
+
+/* B-02 [P0] 头条 2 处对比度 2.39。#9CA3AF 在白底上只有 2.32。
+   这不是装饰，是全页面共用的头条。 */
+.progress-indicator,.session-marker{color:#6B7280}
+
+/* B-03 [P1] 已核查并**排除**：spill_probe 报告的 6 处“标题内 SPAN 溢出 8~15px”
+   是浏览器内联盒的字形度量特性（Tailwind text-6xl/5xl/4xl 的 line-height:1 与中文 font-black 字形），
+   **渲染上不会被裁切**（已截图确认）。试过 line-height:1.18，溢出数不变 ——
+   因为行高变大时父子同时变大，差值保持。**故不加无效的 CSS。** */
+
+/* A-03 [P0] 第07周→本周 衔接页 + A-04 学情 */
+.w08-bridge-grid{display:grid;grid-template-columns:1fr 1.25fr 1.1fr;gap:.4rem;margin:.6rem 0 .7rem}
+.w08-bridge-cell{display:flex;align-items:center;background:#fff;border:1px solid #D1D5DB;border-radius:.4rem;
+  padding:.7rem .85rem;font-size:1.02rem;line-height:1.34;color:#1F2937}
+.w08-bridge-cell.w08-bridge-head{background:#E5E7EB;font-weight:900;color:#374151;font-size:.98rem}
+.w08-bridge-cell.w08-bridge-to{color:#1D4ED8;font-weight:800}
+.w08-bridge-cell.w08-bridge-where{color:#6B7280;font-size:.94rem}
+.w08-bridge-cell b{color:#BE123C}
+.w08-bridge-term{background:#F3F4F6;border-left:5px solid #BE123C;border-radius:.35rem;
+  padding:.7rem .95rem;font-size:1rem;line-height:1.45;color:#1F2937;margin-bottom:.55rem}
+.w08-bridge-term b{color:#BE123C;margin-right:.35rem}
+.w08-week-context{background:#F3F4F6;border-radius:.4rem;padding:.6rem .85rem;
+  font-size:.95rem;line-height:1.44;color:#4B5563}
+.w08-week-context b{color:#374151;margin-right:.35rem}
+/* B-04 [P0] 附录图片出处行（沿用第07周建立的 .source-note 体例） */
+.source-note{margin-top:.5rem;font-size:.85rem;line-height:1.4;color:#5B6472}
+
+/* --- 대비 교정(WCAG AA) · 2026-08-29 --------------------------------------
+   근거: _w08_agentteam/contrast_path08.html 실측(1280x720, 전 슬라이드).
+   색은 같은 Tailwind 계단 안에서 기준을 통과하는 "가장 가까운" 값으로만 내렸다
+   — 색상 정체성을 바꾸지 않기 위해서다.
+   제외(오탐 3건): .w08-series-grid / .w08-tech-frame 컨테이너의 1.02 는
+   figcaption 이 자기 배경(rgba(17,24,39,.84))을 따로 깔고 있는데 프로브가
+   컨테이너 배경을 잡은 것이다 — VERIFICATION N1 과 동형. 고치지 않는다. */
+/* 원본이 .unified-course-map 접두(0,2,0)라 같은 특이도로 맞춰야 이긴다 */
+.unified-course-map .ucm-no{color:#4b5563}
+.unified-course-map .ucm-week.current .ucm-no{color:#fff}
+.unified-course-map .ucm-phase b{color:#4b5563}
+.series-source{font-size:.85rem;color:#475569;margin-top:.4rem}
+.slide .text-emerald-600{color:#047857}
+.slide .text-rose-600{color:#be123c}
+.slide.bg-blue-600 .text-blue-100{color:#eff6ff}
+
+/* --- 인라인 style= → 클래스 (판면 불변) · 2026-08-29 ----------------------
+   선언은 한 글자도 바꾸지 않고 옮겼다. 캐리어는 전부 class 가 없는
+   <div>/<p> 라 변형 손실이 없다. CSS 커스텀 속성(--item-color/--status-color/
+   --step-color)은 인스턴스 "값"이므로 인라인으로 남긴다. */
+.w08-note{background:#fff;border-left:5px solid #2563eb;padding:.5rem .7rem;font-size:.95rem;line-height:1.4}
+.w08-note.red{border-left-color:#b91c1c}
+.w08-note.lg{padding:.9rem 1rem;margin:0;font-size:1.08rem;line-height:1.45}
+.w08-note-grid{display:grid;gap:.7rem;margin-top:.7rem;flex:none}
+.w08-note-grid.cols-1{grid-template-columns:repeat(1,1fr)}
+.w08-note-grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.w08-note-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+
+/* --- 부록 기제 이식(W01–W16 공통) · 2026-08-29 ---------------------------
+   期末评价连接 를 课后查阅 으로 강등하기 위해 모드 기제를 옮겨 온다.
+   페이지 수는 전부 런타임 계산이다 — 코드에 페이지 수 리터럴을 두지 않는다. */
+.mode-controls{position:fixed;left:50%;bottom:.7rem;transform:translateX(-50%);display:flex;border:1px solid #111827;background:#fff;z-index:1001}
+.mode-button{font:inherit;font-size:.78rem;font-weight:800;letter-spacing:.04em;padding:.32rem .8rem;border:0;background:#fff;color:#374151;cursor:pointer}
+.mode-button+.mode-button{border-left:1px solid #111827}
+.mode-button.active{background:#111827;color:#fff}
+.appendix-slide{background:#f7f8fa}
+.appendix-slide .tag{background:#6b7280!important;color:#fff!important}
+/* ::before 배지는 넣지 않는다 — W08 은 .slide 가 flex 라 .tag 가
+   전폭 띄로 늘어난다. right:4rem/top:3.4rem 에 놓으면 그 띄와 겹친다
+   (실측: 배지 y 49–68px, 띄 y 65–92px → 3px 중복).
+   다른 주차는 .tag 가 작은 칩이라 만나지 않는다 — W08 전용 차이다.
+   대신 session-marker 텍스트(课后查阅｜教学补充)와 회색 .tag 가 같은 역할을 한다. */
+@media print{.mode-controls{display:none!important}}
+</style>
+</head>
+<body class="antialiased">
+<!-- S01: Cover -->
+<div class="slide active" id="slide-1">
+<div class="session-marker mono">第1课时 / 45分钟</div>
+<div class="flex justify-between items-start">
+<div class="mono text-xs">女装设计 III / 第08周</div>
+<div class="mono text-xs">Gate 2 中期评审</div>
+</div>
+<div class="student-hero-layout">
+<div>
+<div class="student-en-note mb-4">核心概念：三维物理验证</div>
+<h1 class="text-6xl font-black mb-7">白坯布样把纸面假设，<br/><span class="text-blue-600">变成可检查的身体证据。</span></h1>
+<p class="text-2xl text-gray-700 leading-snug mb-6">本周同时复核系列关系、纸样逻辑、试衣结果与制作风险，决定哪两套造型可以继续进入真实面料。</p>
+<div class="student-keyline">判断顺序：系列角色 → 技术平面图与纸样 → 白坯布样 → 动作与材料 → 下一步修改</div>
+</div>
+<div class="w08-series-card h-full">
+<div class="w08-series-meta"><strong>Carven · 2026早秋系列</strong><span>同一系列 5套｜看层次与内搭复用</span></div>
+<div class="w08-series-note">先观察长度、身体距离与材料重量的变化，再判断系列内部哪些结构值得进入白坯布验证。</div>
+<div class="w08-series-grid tall">
+<figure><img alt="Carven 2026早秋造型 01" class="zoomable-image" loading="eager" src="w08_visual_assets/final_20260819/cover_carven_01.jpg"/><figcaption>01</figcaption></figure>
+<figure><img alt="Carven 2026早秋造型 02" class="zoomable-image" loading="eager" src="w08_visual_assets/final_20260819/cover_carven_02.jpg"/><figcaption>02</figcaption></figure>
+<figure><img alt="Carven 2026早秋造型 03" class="zoomable-image" loading="eager" src="w08_visual_assets/final_20260819/cover_carven_03.jpg"/><figcaption>03</figcaption></figure>
+<figure><img alt="Carven 2026早秋造型 04" class="zoomable-image" loading="eager" src="w08_visual_assets/final_20260819/cover_carven_04.jpg"/><figcaption>04</figcaption></figure>
+<figure><img alt="Carven 2026早秋造型 05" class="zoomable-image" loading="eager" src="w08_visual_assets/final_20260819/cover_carven_05.jpg"/><figcaption>05</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="series-source">图像：Carven 2026早秋系列｜课堂反向分析，不代表品牌官方版型说明。</div><div class="g4 analysis"><div><b>常量｜同一位模特、同一片白背景</b>拍摄条件被固定住，五套的差别只剩衣服本身——这正是白坯样比较该有的条件。</div><div><b>变量｜层次数量</b>大衣＋裤（01）→ 针织＋蕾丝内裙（02）→ 包裹上衣＋裤（03）→ 西装＋腰封＋裤（04）→ 无袖连衣裙＋内裙（05）。</div><div><b>变量｜内裙露出多少</b>02 与 05 用同一条蕾丝内裙，一次露到小腿、一次只露下摆。<b>同一件单品，两个角色。</b></div><div><b>看点｜哪两套值得做白坯</b>03 的包裹和 04 的腰封是纸面上最说不清的两处——这类结构才需要实物验证。</div></div></div>
+<div class="slide unified-course-map" id="slide-2"><div class="ucm-meta"><span class="ucm-label">十六周课程路径</span><span>女装设计 III · 第08周 · 第1课时 / 45分钟</span></div><h2>十六周不是孤立主题，而是一条连续的设计证据链</h2><p class="ucm-lead">前8周建立方法并完成中期验证；后8周深化春夏与秋冬系列，最终独立完成主题系列与答辩。</p><div class="ucm-grid"><div class="ucm-phase phase-1"><b>01-04</b><strong>判断与定位</strong></div><div class="ucm-week phase-1 past"><div class="ucm-no">01</div><strong>美学·原理·历史</strong></div><div class="ucm-week phase-1 past"><div class="ucm-no">02</div><strong>平面·立体·细节造型</strong></div><div class="ucm-week phase-1 past"><div class="ucm-no">03</div><strong>穿着者与时事主题</strong></div><div class="ucm-week phase-1 past"><div class="ucm-no">04</div><strong>主题板与设计简报</strong></div><div class="ucm-phase phase-2"><b>05-08</b><strong>提取与验证</strong></div><div class="ucm-week phase-2 past"><div class="ucm-no">05</div><strong>元素提取</strong></div><div class="ucm-week phase-2 past"><div class="ucm-no">06</div><strong>元素变形·分解板</strong></div><div class="ucm-week phase-2 past"><div class="ucm-no">07</div><strong>春夏系列策划 V1</strong></div><div class="ucm-week phase-2 current" aria-current="step"><div class="ucm-no">08<span class="ucm-now">本周</span></div><strong>Gate 2：白坯布样与中期评审</strong></div><div class="ucm-phase phase-3"><b>09-12</b><strong>季节系列开发</strong></div><div class="ucm-week phase-3 future"><div class="ucm-no">09</div><strong>Gate 2反馈：春夏再编辑与产品深化</strong></div><div class="ucm-week phase-3 future"><div class="ucm-no">10</div><strong>秋冬系列概念与外套轴</strong></div><div class="ucm-week phase-3 future"><div class="ucm-no">11</div><strong>秋冬材料、体量与样衣验证</strong></div><div class="ucm-week phase-3 future"><div class="ucm-no">12</div><strong>秋冬系列最终编辑与产品开发（Gate 3）</strong></div><div class="ucm-phase phase-4"><b>13-16</b><strong>独立项目与考核</strong></div><div class="ucm-week phase-4 future"><div class="ucm-no">13</div><strong>自定主题：独立方法调用与首次提案</strong></div><div class="ucm-week phase-4 future"><div class="ucm-no">14</div><strong>2D/3D实验与受控修改</strong></div><div class="ucm-week phase-4 future"><div class="ucm-no">15</div><strong>最终系列编辑、作品集与答辩排练</strong></div><div class="ucm-week phase-4 future"><div class="ucm-no">16</div><strong>期末实践考核、答辩与反思</strong></div></div><div class="ucm-legend"><span><i class="ucm-dot past"></i>已完成</span><span><i class="ucm-dot now"></i>本周</span><span><i class="ucm-dot"></i>后续</span></div></div>
+<!-- S02b: W07 bridge -->
+<div class="slide" id="slide-bridge"><div class="session-marker">第1课时 / 45分钟</div><div class="text-sm font-bold mb-2" style="color:#6B7280">女装设计 III&nbsp;&nbsp;/&nbsp;&nbsp;第08周</div><h2 class="text-4xl font-black mb-5">入场券三样——没带齐，今天的评审无法开始</h2><p class="text-lg mb-5" style="color:#374151">第07周离堂时写明：“这三样就是中期评审的入场券，<b>缺一项当天无法开始评审</b>。”</p><div class="w08-bridge-grid"><div class="w08-bridge-cell w08-bridge-head">第07周带来的</div><div class="w08-bridge-cell w08-bridge-head">本周叫它</div><div class="w08-bridge-cell w08-bridge-head">在哪一环节用</div><div class="w08-bridge-cell"><b>5套阵列</b></div><div class="w08-bridge-cell w08-bridge-to">系列编排（评审板 A 区）</div><div class="w08-bridge-cell w08-bridge-where">系列机制 / 系列角色与候选</div><div class="w08-bridge-cell"><b>系列矩阵</b></div><div class="w08-bridge-cell w08-bridge-to">产品与角色对照表</div><div class="w08-bridge-cell w08-bridge-where">系列角色与候选</div><div class="w08-bridge-cell"><b>两套候选卡</b></div><div class="w08-bridge-cell w08-bridge-to"><b>实物候选</b>（本周统一用这个词）</div><div class="w08-bridge-cell w08-bridge-where">选择实物候选 / 评审结果</div><div class="w08-bridge-cell">中期风险清单</div><div class="w08-bridge-cell w08-bridge-to">风险与制作可行性</div><div class="w08-bridge-cell w08-bridge-where">物理边界 / 制作可行性</div></div><div class="w08-bridge-term"><b>术语对照（只说一次）</b>第07周的“两套候选卡”＝本周的“<b>实物候选</b>”。本周全程用“实物候选”这个词。</div><div class="w08-week-context"><b>学情</b>大二，已完成第01—07周，能交出五套春夏编排 V1。Gate 2 是中期评审，困难不在“画得好不好”，而在“带不齐就无法开始”。　<b>教学重点</b>把纸面假设转成白坯布样上可检查的身体证据。　<b>教学难点</b>两套实物候选必须验证不同问题，并写出制作风险。</div></div>
+
+<div class="slide" id="slide-3">
+<div class="session-marker mono">第1课时 / 45分钟</div>
+<div class="tag blue">03 核心转变</div>
+<div class="w08-tech-layout">
+<div>
+<h2 class="text-5xl font-black mb-7">效果图提出假设，<br/><span class="text-blue-600">白坯布样负责否证。</span></h2>
+<div class="space-y-5">
+<div class="border-l-4 border-gray-400 pl-5"><strong class="text-xl">01 技术平面图</strong><p class="text-base text-gray-600 mt-2">说明结构线、开合与前后关系，不能只描述外观。</p></div>
+<div class="border-l-4 border-blue-600 pl-5"><strong class="text-xl">02 纸样</strong><p class="text-base text-gray-600 mt-2">把体积来源、松量与支撑转成可以裁剪的二维条件。</p></div>
+<div class="border-l-4 border-rose-600 pl-5"><strong class="text-xl">03 白坯布样</strong><p class="text-base text-gray-600 mt-2">让重力、身体和动作暴露纸面假设中的错误。</p></div>
+</div>
+</div>
+<figure class="w08-tech-frame">
+<img alt="服装内部结构观察图" class="zoomable-image" src="w08_visual_assets/final_20260819/inner-structure.png"/>
+<figcaption>观察任务：指出外部廓形需要哪些固定点、释放量与内部支撑。</figcaption>
+</figure>
+</div>
+<div class="w08-note-grid cols-3"><div class="w08-note"><b>技术平面图 回答：</b>结构线在哪、怎么开合、前后怎么接——不是画外观。</div><div class="w08-note"><b>纸样 回答：</b>体积从哪来、松量放多少、支撑靠什么——可以裁的条件。</div><div class="w08-note"><b>白坯样 回答：</b>上面两项在重力和动作下还成不成立。</div></div></div>
+<div class="slide" id="slide-4">
+<div class="session-marker mono">第1课时 / 45分钟</div>
+<div class="tag red">04 审计标准</div>
+<h2 class="text-4xl font-black mb-4">中期评审检查的是一条完整证据链</h2>
+<div class="grid grid-cols-2 gap-12 flex-1 min-h-0 items-center">
+<div>
+<div class="w08-flat-grid" style="grid-template-columns:1fr; gap:.7rem;">
+<div class="w08-flat-item" style="--item-color:#2563EB"><b>系列关系</b><p>五套造型是否共享同一设计语言，并承担不同角色？</p></div>
+<div class="w08-flat-item" style="--item-color:#111827"><b>平面与纸样</b><p>技术平面图、纸样和开合方式是否指向同一件衣服？</p></div>
+<div class="w08-flat-item" style="--item-color:#E11D48"><b>白坯与身体</b><p>体积、平衡线、活动松量是否已经经过试穿验证？</p></div>
+<div class="w08-flat-item" style="--item-color:#059669"><b>材料与制作</b><p>正式面料、工艺、时间与成本风险是否可控？</p></div>
+<div class="w08-flat-item" style="--item-color:#7C3AED"><b>下一步行动</b><p>反馈是否被转成具体的保留、修改、删除和再验证？</p></div>
+</div>
+</div>
+<div class="chart-container"><canvas id="chartMidtermAudit"></canvas></div>
+</div>
+<div class="w08-note-grid cols-2"><div class="w08-note red"><b>四项全过才叫通过。</b>任何一项答不上来，Gate 2 结果就是“条件通过”或“重新验证”。</div><div class="w08-note red"><b>最常卡住的是第四项。</b>材料与制作风险写不出来，说明还没算过时间和成本。</div></div></div>
+<div class="slide" id="slide-5">
+<div class="session-marker mono">第1课时 / 45分钟</div>
+<div class="tag blue">05 试衣判断链</div>
+<h2 class="text-4xl font-black mb-5">试衣(Fitting)是一场严谨的外科手术</h2>
+<p class="text-gray-600 mb-6 max-w-5xl">不要在模特身上盲目拉扯布料。每次插针（Pinning）都必须对应纸样上的明确修改。</p>
+<div class="decision-chain-board">
+<div class="decision-step-card" style="--step-color:#111827;">
+<div class="decision-step-no">01</div>
+<h4>识别问题</h4>
+<div class="decision-block"><strong>观察现象</strong><span>出现多余的褶皱（Drag lines），或者布料勒紧身体。</span></div>
+<div class="decision-block"><strong>判断根源</strong><span>是纸样长短不对，还是省道角度问题？</span></div>
+</div>
+<div class="decision-step-card" style="--step-color:#2563EB;">
+<div class="decision-step-no">02</div>
+<h4>物理操作</h4>
+<div class="decision-block"><strong>剪开或捏合</strong><span>在张力过大的地方剪开(Slash)，在松量过大的地方捏合(Pin)。</span></div>
+<div class="decision-block"><strong>标记变量</strong><span>用马克笔在布上画出新的腰线或省道点。</span></div>
+</div>
+<div class="decision-step-card" style="--step-color:#BE123C;">
+<div class="decision-step-no">03</div>
+<h4>纸样修正</h4>
+<div class="decision-block"><strong>转译回 2D</strong><span>拆开改过的白坯布，拓印到原纸样上。</span></div>
+<div class="decision-block"><strong>圆顺线条</strong><span>使用曲线尺重新整理版型线条(Trueing)。</span></div>
+</div>
+<div class="decision-step-card" style="--step-color:#047857;">
+<div class="decision-step-no">04</div>
+<h4>二次验证</h4>
+<div class="decision-block"><strong>制作白坯样第二版</strong><span>切忌直接裁减昂贵的正式面料。</span></div>
+<div class="decision-block"><strong>再次试衣</strong><span>验证上一步的修改是否解决了问题。</span></div>
+</div>
+</div>
+</div>
+<!-- S06: Case Intro -->
+<div class="slide" id="slide-6">
+<div class="session-marker mono">第1课时 / 45分钟</div>
+<div class="tag blue">06 系列机制</div>
+<div class="grid gap-7 flex-1 min-h-0" style="grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);">
+<div class="flex flex-col justify-center">
+<h2 class="text-4xl font-black mb-6">纸样工程控制的不是外观，<br/>而是身体周围的空间。</h2>
+<p class="text-lg text-gray-600 mb-6">以 Issey Miyake 2026秋冬成衣为例，比较同一系列如何改变固定点、释放方向、层次和材料张力。</p>
+<ul class="student-quick-list space-y-3">
+<li><b>01</b><span>先找服装与身体接触的固定点。</span></li>
+<li><b>02</b><span>再找体积被释放、折叠或悬挂的位置。</span></li>
+<li><b>03</b><span>最后判断材料是否支持预期空间。</span></li>
+</ul>
+</div>
+<div class="w08-series-card">
+<div class="w08-series-meta"><strong>Issey Miyake · 2026秋冬成衣</strong><span>同一系列 5套造型</span></div>
+<div class="w08-series-grid tall">
+<figure><img alt="Issey Miyake 2026秋冬造型 01" class="zoomable-image" src="w08_visual_assets/final_20260819/s06_issey_01.png"/><figcaption>固定</figcaption></figure>
+<figure><img alt="Issey Miyake 2026秋冬造型 02" class="zoomable-image" src="w08_visual_assets/final_20260819/s06_issey_02.png"/><figcaption>折叠</figcaption></figure>
+<figure><img alt="Issey Miyake 2026秋冬造型 03" class="zoomable-image" src="w08_visual_assets/final_20260819/s06_issey_03.png"/><figcaption>扩张</figcaption></figure>
+<figure><img alt="Issey Miyake 2026秋冬造型 04" class="zoomable-image" src="w08_visual_assets/final_20260819/s06_issey_04.png"/><figcaption>支撑</figcaption></figure>
+<figure><img alt="Issey Miyake 2026秋冬造型 05" class="zoomable-image" src="w08_visual_assets/final_20260819/s06_issey_05.png"/><figcaption>展开</figcaption></figure>
+</div>
+<div class="w08-source-line">视觉资料：课程本地 2026/27 秀场图像库</div>
+</div>
+</div>
+<div class="g4 analysis"><div><b>常量｜体积从肩线悬挂</b>五套的重量都由肩承担，腰以下不做固定——这是同一套结构逻辑。</div><div><b>变量｜固定点</b>颈（01）→ 肩（02）→ 肩线外扩到手臂（03）→ 领口翻折（04）→ 肩到下摆连续（05）。</div><div><b>变量｜释放方向</b>向前包（01）→ 环绕（02）→ 左右展开（03）→ 向上立起（04）→ 向下展开（05）。</div><div><b>看点｜支撑原理不同</b>03 的酒红大衣靠面料自重下垂，05 靠褶裥回弹。<b>同一个体积，两种原理。</b></div></div></div>
+<div class="slide" id="slide-7">
+<div class="session-marker mono">第1课时 / 45分钟</div>
+<div class="tag blue">07 案例 A</div>
+<div class="grid gap-7 flex-1 min-h-0" style="grid-template-columns:minmax(0,.68fr) minmax(0,1.32fr);">
+<div class="flex flex-col justify-center">
+<h2 class="text-4xl font-black mb-5">Balenciaga 2026秋冬高定：<br/><span class="text-blue-600">离体体积如何被支撑</span></h2>
+<p class="text-lg text-gray-600 mb-6">这里不把当代造型冒充创始人的历史作品。观察当前系列如何用肩部、腰部、下摆或材料硬度建立离体空间。</p>
+<div class="space-y-4 text-lg">
+<p><strong>固定点：</strong>重量首先落在哪里？</p>
+<p><strong>体积来源：</strong>展开、褶量、填充还是内部骨架？</p>
+<p><strong>试衣问题：</strong>体积是否妨碍抬臂、坐姿与行走？</p>
+</div>
+</div>
+<div class="w08-series-card">
+<div class="w08-series-meta"><strong>Balenciaga · 2026秋冬高级定制</strong><span>结构比较 5套</span></div>
+<div class="w08-series-grid tall">
+<figure><img alt="Balenciaga 2026秋冬高定造型 01" class="zoomable-image" src="w08_visual_assets/final_20260819/s07_balenciaga_01.png"/><figcaption>01</figcaption></figure>
+<figure><img alt="Balenciaga 2026秋冬高定造型 02" class="zoomable-image" src="w08_visual_assets/final_20260819/s07_balenciaga_02.png"/><figcaption>02</figcaption></figure>
+<figure><img alt="Balenciaga 2026秋冬高定造型 03" class="zoomable-image" src="w08_visual_assets/final_20260819/s07_balenciaga_03.png"/><figcaption>03</figcaption></figure>
+<figure><img alt="Balenciaga 2026秋冬高定造型 04" class="zoomable-image" src="w08_visual_assets/final_20260819/s07_balenciaga_04.png"/><figcaption>04</figcaption></figure>
+<figure><img alt="Balenciaga 2026秋冬高定造型 05" class="zoomable-image" src="w08_visual_assets/final_20260819/s07_balenciaga_05.png"/><figcaption>05</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="g4 analysis"><div><b>常量｜体积离开身体</b>五套都在身体外侧建立空间，没有一套是贴体的。</div><div><b>变量｜重量落点</b>臀（01）→ 整件（02）→ 肩（03）→ 腰（04）→ 背（05），受力位置每套只有一处。</div><div><b>变量｜体积来源</b>堆褶（01）→ 硬挺羽状边（02）→ 廓形放量（03）→ 内部骨架（04）→ 蝴蝶结外挂（05）。</div><div><b>试衣要问</b>这些体积会不会挡住抬臂、坐姿和步幅？<b>高定可以牺牲动作，你的作业不能。</b></div></div></div>
+<div class="slide" id="slide-8">
+<div class="session-marker mono">第1课时 / 45分钟</div>
+<div class="tag red">08 案例 B</div>
+<div class="grid gap-7 flex-1 min-h-0" style="grid-template-columns:minmax(0,.68fr) minmax(0,1.32fr);">
+<div class="flex flex-col justify-center">
+<h2 class="text-4xl font-black mb-5">Alaïa 2026秋冬成衣：<br/><span class="text-rose-600">贴体结构如何分配松量</span></h2>
+<p class="text-lg text-gray-600 mb-6">贴合不等于把身体勒紧。多片式裁片与接缝线把松量分散到身体曲面，并同时控制动作和视觉比例。</p>
+<div class="space-y-4 text-lg">
+<p><strong>曲面分割：</strong>接缝线是否顺着身体转折？</p>
+<p><strong>弹性方向：</strong>伸缩性是否放在需要动作的位置？</p>
+<p><strong>试衣问题：</strong>贴体轮廓能否保持呼吸、坐姿和步幅？</p>
+</div>
+</div>
+<div class="w08-series-card">
+<div class="w08-series-meta"><strong>Alaïa · 2026秋冬成衣</strong><span>贴体结构 5套</span></div>
+<div class="w08-series-grid tall">
+<figure><img alt="Alaïa 2026秋冬造型 01" class="zoomable-image" src="w08_visual_assets/final_20260819/s08_alaia_01.png"/><figcaption>01</figcaption></figure>
+<figure><img alt="Alaïa 2026秋冬造型 02" class="zoomable-image" src="w08_visual_assets/final_20260819/s08_alaia_02.png"/><figcaption>02</figcaption></figure>
+<figure><img alt="Alaïa 2026秋冬造型 03" class="zoomable-image" src="w08_visual_assets/final_20260819/s08_alaia_03.png"/><figcaption>03</figcaption></figure>
+<figure><img alt="Alaïa 2026秋冬造型 04" class="zoomable-image" src="w08_visual_assets/final_20260819/s08_alaia_04.png"/><figcaption>04</figcaption></figure>
+<figure><img alt="Alaïa 2026秋冬造型 05" class="zoomable-image" src="w08_visual_assets/final_20260819/s08_alaia_05.png"/><figcaption>05</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="g4 analysis"><div><b>常量｜同一条针织筒裙</b>五套是同一个版型，<b>差别只有长度和颜色</b>——这是最纯粹的对照实验。</div><div><b>变量｜长度</b>及膝（03）→ 中长（01·04）→ 及踝（02·05）。长度一变，步幅立刻受影响。</div><div><b>变量｜色的重量</b>米白 → 灰 → 浅蓝 → 粉 → 姜黄。贴体轮廓下，深浅直接改变体量的观感。</div><div><b>松量在哪里</b>不靠加放，靠<b>针织弹性和接缝走向</b>把松量分散到曲面上——这是贴体结构唯一的解法。</div></div></div>
+<div class="slide" id="slide-9">
+<div class="session-marker mono">第1课时 / 45分钟</div>
+<div class="tag blue">09 系列角色与候选</div>
+<h2 class="text-4xl font-black mb-4">先确认每套造型的角色，再选择两套实物候选</h2>
+<p class="text-lg text-gray-600 mb-5">两套候选不能做同一件事：一套证明结构主张，另一套证明穿着入口或材料逻辑。</p>
+<div class="w08-series-card mb-5">
+<div class="w08-series-meta"><strong>Toteme · 2026秋冬成衣</strong><span>候选判断 5套</span></div>
+<div class="w08-series-grid compact">
+<figure><img alt="Toteme 2026秋冬造型 01" class="zoomable-image" src="w08_visual_assets/final_20260819/s09_toteme_01.jpg"/><figcaption>01</figcaption></figure>
+<figure><img alt="Toteme 2026秋冬造型 02" class="zoomable-image" src="w08_visual_assets/final_20260819/s09_toteme_02.jpg"/><figcaption>02</figcaption></figure>
+<figure><img alt="Toteme 2026秋冬造型 03" class="zoomable-image" src="w08_visual_assets/final_20260819/s09_toteme_03.jpg"/><figcaption>03</figcaption></figure>
+<figure><img alt="Toteme 2026秋冬造型 04" class="zoomable-image" src="w08_visual_assets/final_20260819/s09_toteme_04.jpg"/><figcaption>04</figcaption></figure>
+<figure><img alt="Toteme 2026秋冬造型 05" class="zoomable-image" src="w08_visual_assets/final_20260819/s09_toteme_05.jpg"/><figcaption>05</figcaption></figure>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-5">
+<div class="border-t-4 border-rose-600 pt-3"><strong class="text-lg">形象款</strong><p class="text-sm text-gray-600 mt-2">证明系列最强主张</p></div>
+<div class="border-t-4 border-blue-600 pt-3"><strong class="text-lg">核心款</strong><p class="text-sm text-gray-600 mt-2">平衡识别度与可穿性</p></div>
+<div class="border-t-4 border-emerald-600 pt-3"><strong class="text-lg">入口款</strong><p class="text-sm text-gray-600 mt-2">结构简化且可生产</p></div>
+<div class="border-t-4 border-gray-500 pt-3"><strong class="text-lg">连接款</strong><p class="text-sm text-gray-600 mt-2">稳定系列节奏</p></div>
+</div>
+<div class="g4 analysis"><div><b>常量｜黑与中性</b>五套压在黑、藏青、米白、棕之间，颜色不承担变化，全部交给品类。</div><div><b>变量｜品类</b>短大衣（01）→ 西装套装（02）→ 伞形大衣（03）→ 针织＋皮裤（04）→ 皮草大衣（05）。</div><div><b>变量｜制作难度</b>02 与 04 工艺常规；03 的伞形展开与 05 的皮草处理最难。<b>难度差就是选候选的依据。</b></div><div><b>怎么选两套</b>一套选<b>说不清的结构</b>（03），一套选<b>要验证穿着的</b>（02）。难度相同的两套等于只验证一次。</div></div></div>
+<div class="slide" id="slide-10">
+<div class="session-marker mono">第1课时 / 45分钟</div>
+<div class="tag blue">10 结构阅读法</div>
+<div class="w08-tech-layout">
+<div>
+<h2 class="text-4xl font-black mb-6">阅读白坯布样：<br/>不要先看好不好看，先看力从哪里来。</h2>
+<div class="space-y-5 text-lg">
+<p><strong class="text-blue-600">横向拉扯：</strong>围度或活动松量不足。</p>
+<p><strong class="text-rose-600">纵向坠塌：</strong>肩颈、腰部或内部支撑失效。</p>
+<p><strong class="text-emerald-600">斜向褶皱：</strong>省道方向、长度或平衡线发生偏移。</p>
+</div>
+<div class="student-keyline mt-7">课堂动作：在照片上画出褶皱方向，再沿反方向寻找纸样原因。</div>
+</div>
+<figure class="w08-tech-frame">
+<img alt="服装张力地图" class="zoomable-image" src="w08_visual_assets/final_20260819/tension-map.png"/>
+<figcaption>张力地图：把褶皱当作力的方向，而不是表面装饰。</figcaption>
+</figure>
+</div>
+<div class="w08-note-grid cols-3"><div class="w08-note"><b>横向拉扯 → </b>加围度或活动松量。先量净围，再决定加在哪一片。</div><div class="w08-note"><b>纵向坠塌 → </b>补支撑：肩线、腰线或内部衬布，三者只改一处。</div><div class="w08-note"><b>斜向褶皱 → </b>省道方向或平衡线偏了。转移省量，不要直接剪掉。</div></div></div>
+<div class="slide" id="slide-11">
+<div class="session-marker mono">第1课时 / 45分钟</div>
+<div class="tag red">11 物理边界</div>
+<div class="w08-tech-layout reverse">
+<figure class="w08-tech-frame">
+<img alt="材料行为比较图" class="zoomable-image" src="w08_visual_assets/final_20260819/material-behavior.png"/>
+<figcaption>同一纸样换成不同材料后，体积、垂坠和伸缩都会改变。</figcaption>
+</figure>
+<div>
+<h2 class="text-5xl font-black mb-7">AI图像不能替代<br/><span class="text-rose-600">材料实测。</span></h2>
+<p class="text-xl text-gray-700 mb-6">图像可以帮助发散，但不能证明重量、回弹、透明度、接缝厚度和长期变形。</p>
+<ul class="student-quick-list space-y-3">
+<li><b>01</b><span>先测悬垂、拉伸和回弹，再决定廓形。</span></li>
+<li><b>02</b><span>体积需要支撑时，说明骨架或衬布位置。</span></li>
+<li><b>03</b><span>正式面料与白坯布差异必须进入风险清单。</span></li>
+</ul>
+</div>
+</div>
+<div class="w08-note-grid cols-3"><div class="w08-note"><b>先测三项，再画廓形。</b>悬垂长度、拉伸回复秒数、单位克重——写数值，不写形容词。</div><div class="w08-note red"><b>AI 图不能替代实测。</b>它算不出重量、回弹、接缝厚度和长期变形。</div><div class="w08-note red"><b>白坯与正料的差必须入清单。</b>差多少写多少；写不出差值，就还没测过。</div></div></div>
+<div class="slide" id="slide-12">
+<div class="session-marker mono">第1课时 / 45分钟</div>
+<div class="tag red">12 结构对比验证</div>
+<h2 class="text-4xl font-black mb-4">两套样衣必须证明不同的身体—空间逻辑</h2>
+<p class="text-lg text-gray-600 mb-5">左侧验证建筑性离体体积，右侧验证顺体流动与动作余量。两组图片均为不同造型，不重复使用。</p>
+<div class="w08-dual-series">
+<div class="w08-series-card">
+<div class="w08-series-meta"><strong>建筑性离体体积</strong><span>Balenciaga 2026高定</span></div>
+<div class="w08-series-note">看固定点、肩部或下摆支撑、体积与身体之间的距离。</div>
+<div class="w08-series-grid compact">
+<figure><img alt="Balenciaga 建筑性体积造型 01" class="zoomable-image" src="w08_visual_assets/final_20260819/s12_arch_01.png"/><figcaption>01</figcaption></figure>
+<figure><img alt="Balenciaga 建筑性体积造型 02" class="zoomable-image" src="w08_visual_assets/final_20260819/s12_arch_02.png"/><figcaption>02</figcaption></figure>
+<figure><img alt="Balenciaga 建筑性体积造型 03" class="zoomable-image" src="w08_visual_assets/final_20260819/s12_arch_03.png"/><figcaption>03</figcaption></figure>
+<figure><img alt="Balenciaga 建筑性体积造型 04" class="zoomable-image" src="w08_visual_assets/final_20260819/s12_arch_04.png"/><figcaption>04</figcaption></figure>
+<figure><img alt="Balenciaga 建筑性体积造型 05" class="zoomable-image" src="w08_visual_assets/final_20260819/s12_arch_05.png"/><figcaption>05</figcaption></figure>
+</div>
+</div>
+<div class="w08-series-card">
+<div class="w08-series-meta"><strong>顺体流动与动态余量</strong><span>Proenza Schouler 2026秋冬</span></div>
+<div class="w08-series-note">看垂坠方向、步幅、下摆变化和材料沿身体移动的方式。</div>
+<div class="w08-series-grid compact">
+<figure><img alt="Proenza Schouler 流动造型 01" class="zoomable-image" src="w08_visual_assets/final_20260819/s12_flow_01.png"/><figcaption>01</figcaption></figure>
+<figure><img alt="Proenza Schouler 流动造型 02" class="zoomable-image" src="w08_visual_assets/final_20260819/s12_flow_02.png"/><figcaption>02</figcaption></figure>
+<figure><img alt="Proenza Schouler 流动造型 03" class="zoomable-image" src="w08_visual_assets/final_20260819/s12_flow_03.png"/><figcaption>03</figcaption></figure>
+<figure><img alt="Proenza Schouler 流动造型 04" class="zoomable-image" src="w08_visual_assets/final_20260819/s12_flow_04.png"/><figcaption>04</figcaption></figure>
+<figure><img alt="Proenza Schouler 流动造型 05" class="zoomable-image" src="w08_visual_assets/final_20260819/s12_flow_05.png"/><figcaption>05</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<div class="slide bg-blue-600 text-white" id="slide-13">
+<div class="session-marker mono text-white opacity-50">第1课时结束</div>
+<div class="flex flex-col items-center justify-center h-full text-center">
+<div class="student-en-note text-blue-100 mb-6">进入试衣间</div>
+<h2 class="text-6xl font-black mb-8 italic">停止解释，穿上它。</h2>
+<p class="text-3xl max-w-4xl font-light leading-snug">
+                下半节课进行 <strong class="font-black underline decoration-4">现场试衣诊断（Live Fitting）</strong>。<br/>
+                让布料上的张力线（Drag Lines）告诉你纸样哪里做错了。
+            </p>
+</div>
+</div>
+<!-- S14: Protocol -->
+<div class="slide" id="slide-14">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag red">14 试衣间守则</div>
+<h2 class="text-4xl font-black mb-8">专业试衣不仅是看，而是科学诊断。</h2>
+<div class="grid grid-cols-2 gap-8">
+<div class="p-6 bg-white shadow-sm border-l-4 border-rose-600">
+<h4 class="font-black text-xl mb-3">01 寻找张力线 (Drag Lines)</h4>
+<p class="text-sm text-gray-600">任何不自然的横向、纵向或斜向拉扯褶皱，都代表该部位缺少松量（Ease）或省道角度错误。找出源头，不要只看表面。</p>
+</div>
+<div class="p-6 bg-white shadow-sm border-l-4 border-blue-600">
+<h4 class="font-black text-xl mb-3">02 平衡线检查 (Balance Lines)</h4>
+<p class="text-sm text-gray-600">白坯布上的 水平平衡线（HBL）和直丝绺（Grainline） 穿在模特身上必须绝对垂直和水平。一旦歪斜，整个版型无效。</p>
+</div>
+<div class="p-6 bg-white shadow-sm border-l-4 border-emerald-600">
+<h4 class="font-black text-xl mb-3">03 动态测试 (Dynamic Test)</h4>
+<p class="text-sm text-gray-600">服装是为人设计的。让模特坐下、抬起双臂、跨步。如果在运动中产生勒痕或暴露不当位置，结构就不及格。</p>
+</div>
+<div class="p-6 bg-white shadow-sm border-l-4 border-gray-900">
+<h4 class="font-black text-xl mb-3">04 只修改一侧 (Half-Body Pinning)</h4>
+<p class="text-sm text-gray-600">试衣时只在人体的右侧进行插针和剪开调整，保留左侧作为原始对照。确认后再对称修改纸样。</p>
+</div>
+</div>
+<div class="student-keyline mt-8">尊重模特：提前说明操作，插针时手背贴近人体以防止扎伤，切勿评判模特的身材。</div>
+</div>
+<!-- S15: 4-Layer Audit -->
+<div class="slide" id="slide-15">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag red">15 Gate 2 评价标准</div>
+<h2 class="text-4xl font-black mb-5">四层技术审计之外，还要说明它在系列中的角色</h2>
+<div class="grid grid-cols-2 gap-12 flex-1 min-h-0 items-center">
+<div class="chart-container"><canvas id="chartCriteria"></canvas></div>
+<div class="space-y-5">
+<div class="border-l-4 border-blue-600 pl-5"><strong class="text-xl">纸样技术</strong><p class="text-base text-gray-600 mt-2">平衡线、丝绺、省道、接缝与开合位置正确。</p></div>
+<div class="border-l-4 border-rose-600 pl-5"><strong class="text-xl">身体工学</strong><p class="text-base text-gray-600 mt-2">颈部、袖窿、腰臀和动作余量经过试穿。</p></div>
+<div class="border-l-4 border-gray-800 pl-5"><strong class="text-xl">比例美学</strong><p class="text-base text-gray-600 mt-2">肩、腰线、长度与体积强度服务于系列角色。</p></div>
+<div class="border-l-4 border-emerald-600 pl-5"><strong class="text-xl">制作工艺</strong><p class="text-base text-gray-600 mt-2">缝份、剪口、拉链、衬布和工序可实际执行。</p></div>
+<div class="student-keyline">补充判断：这套造型为什么必须存在于五套系列中？</div>
+</div>
+</div>
+<div class="w08-note-grid cols-1"><div class="w08-note red"><b>四层之外还要答一句：</b>这套造型为什么必须存在于五套系列中？答不出，技术再好也不通过。</div></div></div>
+<div class="slide" id="slide-16">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag blue">16 中期诊断任务</div>
+<h2 class="text-4xl font-black mb-4">五项诊断任务同时构成 Gate 2 评审板</h2>
+<p class="text-lg text-gray-600 mb-8">每一项都必须留下三部分：证据图、判断句、下一步动作。</p>
+<div class="w08-flat-grid w08-audit-fill flex-1">
+<div class="w08-flat-item" style="--item-color:#2563EB"><b>A 张力线</b><p>圈出异常褶皱，判断力的方向与源头。</p><ul><li>证据：前 / 侧局部照片</li><li>判断：拉扯从哪里开始？</li><li>修改：释放、转移或重画</li></ul></div>
+<div class="w08-flat-item" style="--item-color:#E11D48"><b>B 平衡线</b><p>检查前中、后中、胸腰臀水平线。</p><ul><li>证据：基准线正侧面照片</li><li>判断：旋转还是前后失衡？</li><li>修改：长度、角度或省量</li></ul></div>
+<div class="w08-flat-item" style="--item-color:#059669"><b>C 纸样修正</b><p>把插针和剪开结果准确转回二维纸样。</p><ul><li>证据：样衣标记与原纸样</li><li>判断：哪个变量改变？</li><li>修改：留日期与版本号</li></ul></div>
+<div class="w08-flat-item" style="--item-color:#7C3AED"><b>D 动作测试</b><p>抬臂、坐姿和步幅至少验证三种动作。</p><ul><li>证据：三种动作连续照片</li><li>判断：哪里受限或移位？</li><li>修改：增加动态松量</li></ul></div>
+<div class="w08-flat-item" style="--item-color:#111827"><b>E 材料风险</b><p>预测厚度、垂坠、弹性与透明度变化。</p><ul><li>证据：正式面料小样测试</li><li>判断：白坯结果会否改变？</li><li>修改：衬布、工艺或结构</li></ul></div>
+</div>
+<div class="grid grid-cols-3 gap-8 border-t border-gray-300 pt-6 mt-4">
+<div><strong class="text-lg">证据图</strong><p class="text-sm text-gray-600 mt-2">前、侧、后、动作与标注照片</p></div>
+<div><strong class="text-lg">判断句</strong><p class="text-sm text-gray-600 mt-2">因为观察到……所以判断……</p></div>
+<div><strong class="text-lg">下一步</strong><p class="text-sm text-gray-600 mt-2">保留 / 修改 / 删除 / 再验证</p></div>
+</div>
+</div>
+<div class="slide" id="slide-17">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag red">17 任务 A</div>
+<div class="w08-tech-layout">
+<div>
+<h2 class="text-4xl font-black mb-6">从褶皱方向回到纸样原因</h2>
+<p class="text-xl text-gray-700 mb-7">不要只圈出“不好看”的地方。先描述位置与方向，再提出可以验证的纸样原因。</p>
+<div class="bg-gray-100 border-l-4 border-rose-600 p-6 text-lg leading-relaxed">“我观察到腋下出现 <strong>斜向拉扯</strong>；因此判断袖窿深度或袖山角度需要复核。下一版只修改一个变量，并重新试穿。”</div>
+<div class="student-keyline mt-7">课堂要求：诊断句中必须出现“观察—判断—修改—复测”。</div>
+</div>
+<figure class="w08-tech-frame">
+<img alt="错误穿着与张力区域诊断图" class="zoomable-image" src="w08_visual_assets/final_20260819/miswear-system.png"/>
+<figcaption>练习：标出问题部位，并把每条张力线连接到可能的纸样原因。</figcaption>
+</figure>
+</div>
+<div class="w08-note-grid cols-2"><div class="w08-note"><b>诊断句必须四段齐全：</b>观察—判断—修改—复测。少一段，助教会退回重写。</div><div class="w08-note red"><b>一版只改一个变量。</b>同时改两处，就分不清是哪一处起的作用。</div></div></div>
+<div class="slide" id="slide-18">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag blue">18 任务 B</div>
+<div class="w08-tech-layout reverse">
+<figure class="w08-tech-frame">
+<img alt="身体基准线检查图" class="zoomable-image" src="w08_visual_assets/final_20260819/body-script.png"/>
+<figcaption>平衡线是坐标系：上身后仍应保持水平或垂直。</figcaption>
+</figure>
+<div>
+<h2 class="text-4xl font-black mb-6">平衡线是穿在身体上的坐标系</h2>
+<div class="space-y-5 text-lg">
+<p><strong>胸、腰、臀水平线：</strong>前后翘起通常说明长度或体积不足。</p>
+<p><strong>前中与后中线：</strong>偏向一侧时，检查左右不对称和侧缝拉扯。</p>
+<p><strong>直丝绺方向：</strong>扭转时，检查裁片方向与接缝受力。</p>
+</div>
+<div class="student-keyline mt-7">只在一侧插针修改，另一侧保留原始状态作为对照。</div>
+</div>
+</div>
+<div class="w08-note-grid cols-2"><div class="w08-note red"><b>平衡线歪了，其余全部免谈。</b>先把它调正，再看褶皱——顺序反了会白改一整轮。</div><div class="w08-note"><b>只在右侧插针。</b>左侧留作原始对照，确认后再对称修改纸样。</div></div></div>
+<div class="slide" id="slide-19">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag blue">19 任务 C</div>
+<div class="w08-tech-layout">
+<div>
+<h2 class="text-4xl font-black mb-6">三维修改必须回到二维纸样，再做第二版验证</h2>
+<div class="space-y-6">
+<div><strong class="text-xl text-blue-600">01 立体标定</strong><p class="text-base text-gray-600 mt-2">插针、剪开或补布，并在白坯布上画出新线。</p></div>
+<div><strong class="text-xl text-rose-600">02 平面修正</strong><p class="text-base text-gray-600 mt-2">拆下白坯布，转回纸样，重新圆顺接缝与对位点。</p></div>
+<div><strong class="text-xl text-emerald-600">03 二次验证</strong><p class="text-base text-gray-600 mt-2">制作第二版白坯布样，确认问题是否真正消失。</p></div>
+</div>
+</div>
+<figure class="w08-tech-frame">
+<img alt="纸样思考与修正图" class="zoomable-image" src="w08_visual_assets/final_20260819/pattern-thinking.png"/>
+<figcaption>版本记录：纸样 V1 → 试穿标记 → 纸样 V2 → 白坯布样 V2。</figcaption>
+</figure>
+</div>
+<div class="w08-note-grid cols-2"><div class="w08-note"><b>拆下来之前先拍照。</b>插针状态一旦拆开就复原不了，照片是唯一的中间证据。</div><div class="w08-note red"><b>每一版写日期和修改点。</b>V1 → V2 的差别说不出来，等于没有做修改。</div></div></div>
+<div class="slide" id="slide-20">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag blue">20 任务 D</div>
+<h2 class="text-4xl font-black mb-4">动态松量必须在移动中被看见</h2>
+<p class="text-lg text-gray-600 mb-5">Proenza Schouler 2026秋冬成衣的行走状态用于观察下摆、袖窿与身体距离如何随动作变化。</p>
+<div class="w08-series-card mb-5">
+<div class="w08-series-meta"><strong>Proenza Schouler · 2026秋冬成衣</strong><span>动作观察 5套</span></div>
+<div class="w08-series-grid compact">
+<figure><img alt="Proenza Schouler 动态造型 01" class="zoomable-image" src="w08_visual_assets/final_20260819/s20_motion_01.png"/><figcaption>抬臂</figcaption></figure>
+<figure><img alt="Proenza Schouler 动态造型 02" class="zoomable-image" src="w08_visual_assets/final_20260819/s20_motion_02.png"/><figcaption>转身</figcaption></figure>
+<figure><img alt="Proenza Schouler 动态造型 03" class="zoomable-image" src="w08_visual_assets/final_20260819/s20_motion_03.png"/><figcaption>步幅</figcaption></figure>
+<figure><img alt="Proenza Schouler 动态造型 04" class="zoomable-image" src="w08_visual_assets/final_20260819/s20_motion_04.png"/><figcaption>下摆</figcaption></figure>
+<figure><img alt="Proenza Schouler 动态造型 05" class="zoomable-image" src="w08_visual_assets/final_20260819/s20_motion_05.png"/><figcaption>身体距</figcaption></figure>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-8">
+<div class="border-t-4 border-blue-600 pt-3"><strong class="text-lg">抬臂</strong><p class="text-sm text-gray-600 mt-2">衣身是否整体上移？</p></div>
+<div class="border-t-4 border-rose-600 pt-3"><strong class="text-lg">坐姿</strong><p class="text-sm text-gray-600 mt-2">腰臀和大腿是否被勒紧？</p></div>
+<div class="border-t-4 border-emerald-600 pt-3"><strong class="text-lg">步幅</strong><p class="text-sm text-gray-600 mt-2">开衩和下摆是否允许行走？</p></div>
+</div>
+<div class="g4 analysis"><div><b>常量｜同一条走动路线</b>五套在同一场地、同一步速下拍摄，动作差别才有可比性。</div><div><b>变量｜下摆自由度</b>直筒（01）→ A字（02）→ 大摆（03）→ 褶裥（04）→ 直筒裤（05），摆量决定步幅上限。</div><div><b>变量｜袖窿</b>无袖（01）→ 合体长袖（02·03）→ 短袖（04）→ 合体长袖（05）。袖窿深浅决定抬臂是否带动衣身。</div><div><b>拍自己时</b>同一姿势、同一角度、同一距离连拍三种动作。<b>换了机位的照片不能拿来比较。</b></div></div></div>
+<div class="slide" id="slide-21">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag red">21 常见死角 1</div>
+<h2 class="text-4xl font-black mb-5">袖子出现螺旋褶皱时，先检查角度，不要先改宽度</h2>
+<p class="text-xl text-gray-700 mb-10 max-w-5xl">袖子是带有方向的圆柱体。袖山角度、袖窿深度与前后对位点共同决定自然下垂方向。</p>
+<div class="grid grid-cols-3 gap-10 flex-1 items-center">
+<div class="border-t-8 border-blue-600 pt-6"><strong class="text-2xl">观察</strong><p class="text-lg text-gray-600 mt-4">褶皱是前向后旋转，还是后向前旋转？衣身是否随抬臂上移？</p></div>
+<div class="border-t-8 border-rose-600 pt-6"><strong class="text-2xl">判断</strong><p class="text-lg text-gray-600 mt-4">复核袖山角度、袖窿深度、前后袖山长度和对位点。</p></div>
+<div class="border-t-8 border-emerald-600 pt-6"><strong class="text-2xl">修改</strong><p class="text-lg text-gray-600 mt-4">一次只改一个变量，再以自然垂臂和抬臂动作复测。</p></div>
+</div>
+<div class="w08-note-grid cols-1"><div class="w08-note"><b>复测方式：</b>自然垂臂和抬臂各拍一张，同一角度。只看一种姿势判断不了袖子。</div></div></div>
+<div class="slide" id="slide-22">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag red">22 常见死角 2</div>
+<h2 class="text-4xl font-black mb-5">省道尖端不能指向胸点：它要在曲面形成前停止</h2>
+<div class="grid grid-cols-2 gap-14 flex-1 items-center">
+<div>
+<div class="text-[8rem] font-black text-blue-800 leading-none mb-3">1.5–2.5</div>
+<div class="text-3xl font-black text-blue-600">厘米</div>
+<p class="text-lg text-gray-600 mt-5">常规练习中，省道缝合尖端通常在胸点前停止；最终距离仍需根据杯型、面料和设计验证。</p>
+</div>
+<div class="space-y-7">
+<div class="border-l-4 border-blue-600 pl-5"><strong class="text-xl">退回</strong><p class="text-base text-gray-600 mt-2">避免胸前形成尖锐凸起。</p></div>
+<div class="border-l-4 border-rose-600 pl-5"><strong class="text-xl">渐薄</strong><p class="text-base text-gray-600 mt-2">缝线逐渐靠近折边，省尖不要回针堆厚。</p></div>
+<div class="border-l-4 border-emerald-600 pl-5"><strong class="text-xl">转移</strong><p class="text-base text-gray-600 mt-2">可转入公主线、领口褶皱或其他结构线，但容量必须守恒。</p></div>
+</div>
+</div>
+<div class="w08-note-grid cols-1"><div class="w08-note"><b>为什么留 1.5–2.5 厘米：</b>省尖直接到胸点，会在最凸处形成尖角。<b>最终距离仍需按杯型、面料实测确定。</b></div></div></div>
+<div class="slide" id="slide-23">
+<div class="tag blue">23 教材证据</div>
+<h2 style="font-size:2.65rem;line-height:1.08;margin:0 0 .7rem;font-weight:900">从创意到实物：这一步才真正检验设计构思</h2>
+<p style="font-size:1.18rem;line-height:1.45;color:#59616d;margin:0 0 1rem">教材把这一环写得很直接：<b>实物涉及真实的比例、面料成型效果和立体层次</b>——效果图上看不出来的，全在这里暴露。</p>
+<div style="display:grid;grid-template-columns:minmax(520px,1.15fr) minmax(0,.85fr);gap:2rem;flex:1;min-height:0">
+<div style="background:#fff;border:1px solid #cfd4dc;padding:.7rem;min-height:0"><img alt="正式面料仍要重新验证厚度、悬垂与边缘处理" class="zoomable-image" src="w02_08_textbook_assets/srcA_p088_concept_to_object.png" style="width:100%;height:100%;object-fit:contain;cursor:zoom-in"/></div>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:.8rem"><p class="w08-note lg"><b>图6-1 的两件外套“看似相似，实型差异很大”。</b>a：肩线平且加宽、垫肩明显、肩到袖转折成尖角，配收腰，读起来硬朗果断。</p><p class="w08-note lg">b：在肩、袖做多处分割，轮廓转折呈圆弧，读起来低调、舒适、柔和。<b>差别只在肩这一小段，效果图上画不出来。</b></p><p class="w08-note lg"><b>这就是白坯样的意义：</b>把“看似相似”变成“量得出差别”。正式面料还会再改变一次重量、摩擦与视觉体量。</p><p style="background:#fff;border-left:5px solid #94a3b8;padding:.6rem .9rem;margin:0;font-size:.9rem;color:#475569">来源：于芳《服装设计基础与创意实践》（中国纺织出版社，2023），第88页，图6-1。图像按教学需要裁切局部，未改变原始比例。</p></div>
+</div></div>
+<div class="slide" id="slide-24">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag blue">24 面料风险图谱</div>
+<h2 class="text-4xl font-black mb-8">在剪切前，定位你的材料风险</h2>
+<div class="grid grid-cols-2 gap-12 h-full items-center">
+<div class="chart-container">
+<canvas id="chartMaterialRisk"></canvas>
+</div>
+<div>
+<p class="text-lg text-gray-600 mb-8">不同特性的材料，在从白坯布转换时面临的物理失效风险完全不同。</p>
+<div class="space-y-4">
+<div class="student-keyline" style="border-left-color:#1A1A1A; background:#f3f4f6; color:#111827;">
+                        挺括型 (Crisp) → 致命弱点是体积过大、接缝僵硬。
+                    </div>
+<div class="student-keyline" style="border-left-color:#E11D48; background:#FFF1F2; color:#9F1239;">
+                        垂坠型 (Drape) → 致命弱点是失去支撑、长度变形。
+                    </div>
+<div class="student-keyline" style="border-left-color:#2563EB; background:#EFF6FF; color:#1E3A8A;">
+                        弹性型 (Stretch) → 致命弱点是尺寸难以控制、缝线断裂。
+                    </div>
+<div class="student-keyline" style="border-left-color:#D1D5DB; background:#ffffff; color:#4B5563; border: 1px solid #e5e7eb; border-left: 5px solid #9CA3AF">
+                        透明型 (Sheer) → 致命弱点是内部缝份(Seam allowance)完全暴露。
+                    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- S25: Working Habits -->
+<div class="slide" id="slide-25">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag red">25 专业素养</div>
+<div class="flex flex-col items-center justify-center h-full text-center">
+<h2 class="text-5xl font-black mb-8">工作习惯是设计的隐形基础设施</h2>
+<div class="grid grid-cols-2 gap-8 max-w-4xl text-left mt-8">
+<div class="p-6 bg-gray-50 border-l-4 border-blue-600">
+<h4 class="font-bold mb-2">文件与纸样版本 (Versioning)</h4>
+<p class="text-sm text-gray-500">严禁丢弃旧版纸样。<code>V01 → V02 → V03</code> 的更迭本身就是解决问题的诊断证据。每份纸样必须写明日期和修改点。</p>
+</div>
+<div class="p-6 bg-gray-50 border-l-4 border-rose-600">
+<h4 class="font-bold mb-2">不可逆操作铁律</h4>
+<p class="text-sm text-gray-500">小样片测试 (Swatch test) → 白坯布验证（白坯样） → 试衣通过 (Gate 2) → 才允许剪裁正式面料。</p>
+</div>
+<div class="p-6 bg-gray-50 border-l-4 border-emerald-600">
+<h4 class="font-bold mb-2">缝份与标记 (Notches &amp; Seam Allowance)</h4>
+<p class="text-sm text-gray-500">没有缝份的纸样不是纸样，是废纸。所有对位点(Notches)、直丝绺线(Grainline)必须清晰无误。</p>
+</div>
+<div class="p-6 bg-gray-50 border-l-4 border-black">
+<h4 class="font-bold mb-2">工艺单 (Spec Sheet)</h4>
+<p class="text-sm text-gray-500">提前列出所需的所有拉链、内衬、纽扣及长度。不要等到衣服做了一半才去市场找辅料。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- S26: Practice - Fitting Report -->
+<div class="slide" id="slide-26">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag blue">26 课堂练习</div>
+<div class="w08-tech-layout">
+<div>
+<h2 class="text-4xl font-black mb-5">用5分钟讲清一次试衣诊断</h2>
+<p class="text-lg text-gray-600 mb-6">陈述不是讲灵感故事，而是用证据说明问题、原因、修改和下一步。</p>
+<div class="space-y-4">
+<div class="border-l-4 border-blue-600 pl-4"><strong class="text-lg">1分钟｜系列角色</strong><p class="text-sm text-gray-600 mt-1">这套造型在五套系列中负责什么？</p></div>
+<div class="border-l-4 border-rose-600 pl-4"><strong class="text-lg">2分钟｜试衣证据</strong><p class="text-sm text-gray-600 mt-1">展示前侧后、动作照片和张力线标注。</p></div>
+<div class="border-l-4 border-emerald-600 pl-4"><strong class="text-lg">1分钟｜纸样修改</strong><p class="text-sm text-gray-600 mt-1">指出修改位置、数值与版本。</p></div>
+<div class="border-l-4 border-gray-800 pl-4"><strong class="text-lg">1分钟｜风险与行动</strong><p class="text-sm text-gray-600 mt-1">说明正式面料风险和W09优先动作。</p></div>
+</div>
+</div>
+<figure class="w08-tech-frame">
+<img alt="试衣证据归档与版本记录图" class="zoomable-image" src="w08_visual_assets/final_20260819/narrative-archive.png"/>
+<figcaption>评审板最低结构：系列位置 + 多角度证据 + 纸样版本 + 修改地图。</figcaption>
+</figure>
+</div>
+</div>
+<div class="slide" id="slide-27">
+<div class="tag blue">27 教材证据</div>
+<h2 style="font-size:2.65rem;line-height:1.08;margin:0 0 .7rem;font-weight:900">设计日志：反馈必须变成可追踪的修改记录</h2>
+<p style="font-size:1.18rem;line-height:1.45;color:#59616d;margin:0 0 1rem">每次试衣都保存问题、原因、动作、版本和复验结果，避免只留下漂亮的最后一版。</p>
+<div style="display:grid;grid-template-columns:minmax(520px,1.15fr) minmax(0,.85fr);gap:2rem;flex:1;min-height:0">
+<div style="background:#fff;border:1px solid #cfd4dc;padding:.7rem;min-height:0"><img alt="设计过程板：研究、技术与成品的可追踪路径" class="zoomable-image" src="w02_08_textbook_assets/srcA_p092_process.png" style="width:100%;height:100%;object-fit:contain;cursor:zoom-in"/></div>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:.8rem"><p class="w08-note lg"><b>这张板把四步压在一页上：</b>主题说明 → 效果图（正背面）→ 工艺图（标注刺绣、领型、透明纱位置）→ 成衣照片。每一步都能对回上一步。</p><p class="w08-note lg"><b>关键是箭头。</b>板上的箭头写明了“哪一处灵感变成了哪一处工艺”——没有箭头的板，只是把图排在一起。</p><p class="w08-note lg"><b>你的试衣日志照这个格式：</b>问题（看见什么）→ 判断（为什么）→ 动作（改哪一个变量）→ 复验（同姿势同角度再拍）。</p><p style="background:#fff;border-left:5px solid #94a3b8;padding:.6rem .9rem;margin:0;font-size:.9rem;color:#475569">来源：于芳《服装设计基础与创意实践》（中国纺织出版社，2023），第92页。图像按教学需要裁切局部，未改变原始比例。</p></div>
+</div></div>
+<div class="slide" id="slide-28">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag red">28 评审结果</div>
+<div class="grid grid-cols-2 gap-12 flex-1 min-h-0 items-center">
+<div class="chart-container"><canvas id="chartStudentRadar"></canvas></div>
+<div>
+<h2 class="text-4xl font-black mb-5">Gate 2 的结果不是一个分数，而是下一步许可</h2>
+<div class="w08-status-grid" style="grid-template-columns:1fr; gap:.4rem;">
+<div class="w08-status" style="--status-color:#059669"><strong>通过</strong><p>系列关系和两套候选的结构证据成立，可以进入正式面料。</p></div>
+<div class="w08-status" style="--status-color:#D97706"><strong>条件通过</strong><p>限定时间内补齐指定纸样、动作或材料测试后再确认。</p></div>
+<div class="w08-status" style="--status-color:#E11D48"><strong>重新验证</strong><p>关键结构或穿着风险尚未解决，先完成白坯布样第二版。</p></div>
+</div>
+</div>
+</div>
+<div class="w08-note-grid cols-3"><div style="background:#fff;border-left:5px solid #15803d;padding:.5rem .7rem;font-size:.95rem;line-height:1.4"><b>通过 →</b>可以裁正式面料。</div><div class="w08-note"><b>条件通过 →</b>限期补齐指定项，补齐前不许下料。</div><div class="w08-note red"><b>重新验证 →</b>先做白坯样第二版；这一档不影响平时分，但会占用第09周时间。</div></div><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-top:.6rem;flex:none"><div class="w08-note"><b>结果当场写在评审表上，</b>并注明证据位置。没有记录证据位置的评分，合议时不作依据。</div><div class="w08-note red"><b>三档都不影响平时分。</b>它决定的是<b>下一步许可</b>——能不能在第09周之前动剪刀裁正式面料。</div></div><p class="mt-3 text-sm" style="color:#4B5563">评审运行文档（时间线·评审板·讲评规则·提交清单）见配套附录：<a href="womenswear_design_iii_week08_gate2_appendix.html" style="color:#1D4ED8;font-weight:800;text-decoration:underline">→ Gate 2 运行文档</a></p></div>
+<div class="slide appendix-slide" id="slide-rubric08">
+<div class="session-marker mono">课后查阅｜教学补充</div>
+<div class="tag red">29 期末评价连接</div><h2 class="text-4xl font-black mb-3">本周成果将进入同一套六项终期评价</h2><p class="mb-4" style="color:#475569">平时训练不是零散作业，而是期末系列的证据积累；本页依据《25级〈女装设计〉考核大纲》期末实践考试评分标准（满分100分）。</p><div class="w08-status-grid" style="grid-template-columns:repeat(3,1fr);gap:.6rem"><div class="w08-status" style="--status-color:#2563eb"><strong>10分 时代性与创意</strong><p>主题回应当下，并形成自己的问题与立场。</p></div><div class="w08-status" style="--status-color:#2563eb"><strong>10分 趋势性与元素</strong><p>提炼的设计元素与当季趋势、审美和来源一致。</p></div><div class="w08-status" style="--status-color:#2563eb"><strong>20分 当代女性适配</strong><p>款式回应身体、动作、场景与真实穿着需求。</p></div><div class="w08-status" style="--status-color:#2563eb"><strong>20分 整体造型美感</strong><p>比例、色彩、材料与细节共同形成完整造型。</p></div><div class="w08-status" style="--status-color:#2563eb"><strong>20分 市场与定位</strong><p>顾客、价格、品类和使用情境边界清楚。</p></div><div class="w08-status" style="--status-color:#2563eb"><strong>20分 统一与丰富</strong><p>风格统一，同时具有角色、搭配与造型变化。</p></div></div></div><div class="slide" id="slide-29">
+<div class="session-marker mono">第2课时 / 45分钟</div>
+<div class="tag blue">30 课程总结</div>
+<div class="flex flex-col justify-center h-full">
+<h2 class="text-5xl font-black mb-10 leading-tight">服装是关于<span class="text-blue-600">物理法则</span>的艺术。</h2>
+<div class="grid grid-cols-3 gap-8">
+<div class="bg-white p-8 border border-gray-200 shadow-sm">
+<h3 class="font-black text-2xl text-blue-600 mb-4">01. 尊重重力</h3>
+<p class="text-gray-600 leading-relaxed">衣服最终是要穿在人身上走入现实的。没有内部支撑和正确的丝绺，二维的幻想在三维世界一秒钟就会崩塌。</p>
+</div>
+<div class="bg-white p-8 border border-gray-200 shadow-sm">
+<h3 class="font-black text-2xl text-rose-600 mb-4">02. 诚实诊断</h3>
+<p class="text-gray-600 leading-relaxed">白坯布上的每一个不平顺，都是纸样错误的客观反映。不要掩饰褶皱，顺着张力线去寻找并修正根源。</p>
+</div>
+<div class="bg-white p-8 border border-gray-200 shadow-sm">
+<h3 class="font-black text-2xl text-gray-900 mb-4">03. 严谨流转</h3>
+<p class="text-gray-600 leading-relaxed">设计—打版—试衣—修改，这是一个不可逆的闭环。只有确认了 3D 体积和尺寸完全正确，才能动剪刀剪下昂贵的正料。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- S30: Exit Ticket & Next Week -->
+<div class="slide bg-black text-white" id="slide-30">
+<div class="session-marker mono text-gray-400">第08周结束</div>
+<div class="tag blue">离堂回顾</div>
+<h2 class="text-4xl font-black mb-5">提交的是完整证据链，不是一张漂亮的中期板</h2>
+<div class="grid grid-cols-2 gap-14 flex-1 items-center">
+<div>
+<div class="space-y-4 text-lg">
+<p><strong class="text-blue-400">01</strong> 五套系列编排第二版与角色说明</p>
+<p><strong class="text-blue-400">02</strong> 两套候选白坯布样的前、侧、后与动作证据</p>
+<p><strong class="text-blue-400">03</strong> 标注技术平面图、纸样第二版与修改数值</p>
+<p><strong class="text-blue-400">04</strong> 试衣诊断报告与正式面料风险测试</p>
+<p><strong class="text-blue-400">05</strong> 保留、修改、删除、再验证的W09行动地图</p>
+</div>
+<div class="mt-8 text-sm text-gray-400">文件名：学号_姓名_W08_Gate2中期评审.pdf</div>
+</div>
+<div class="border-l border-gray-700 pl-10">
+<div class="text-sm text-blue-400 font-bold mb-5">离堂句</div>
+<p class="text-3xl font-light leading-relaxed">“我今天确认的最大物理问题是 ______；在进入正式面料前，我将先修改 ______，并用 ______ 重新验证。”</p>
+<div class="mt-8 border-t border-gray-700 pt-6">
+<strong class="text-xl">第09周准备</strong>
+<p class="text-base text-gray-300 mt-3">修正纸样、材料样片测试、工艺与辅料清单。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="progress-indicator mono" id="slideProgress">第 01 / 30 页</div>
+<div class="mode-controls" id="mode-controls" role="group" aria-label="资料显示模式"><button class="mode-button active" id="mode-class" data-mode="class" type="button" aria-pressed="true">课堂 <span id="cnt-class"></span></button><button class="mode-button" id="mode-all" data-mode="all" type="button" aria-pressed="false">全部 <span id="cnt-all"></span></button></div><nav aria-label="页面导航" class="nav-controls">
+<button aria-label="上一页" class="btn-nav" id="btnPrev" title="上一页" type="button">←</button>
+<button aria-label="下一页" class="btn-nav" id="btnNext" title="下一页" type="button">→</button>
+</nav>
+<div id="imageZoomOverlay"><img alt=""/></div>
+<script>
+        /* --- 페이지 시퀀스 · 모드 (W01–W16 공통 기제 이식) · 2026-08-29 -------
+           이전 구현은 document.getElementById("slide-"+n) 로 1..totalSlides 를 훑았다.
+           그런데 이 파일의 id 는
+             slide-1, slide-2, slide-bridge, slide-3 … slide-28,
+             slide-rubric08, slide-29, slide-30
+           이라 두 가지가 실제로 깨져 있었다.
+             (1) slide-bridge 와 slide-rubric08 은 어떤 방법으로도 열리지 않았다.
+             (2) n=31 에서 getElementById 가 null 을 돌려주어 예외가 나고,
+                 마지막 두 장에 도달할 수 없었다.
+           DOM 순서 시퀀스로 바꿔 둘 다 해소하고, 그 위에 课堂/全部 모드를 얹는다.
+           페이지 수는 전부 런타임 계산이다 — 코드에 페이지 수 리터럴을 두지 않는다. */
+        const allSlides = [...document.querySelectorAll('.slide')];
+        const progress = document.getElementById('slideProgress');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const modeControls = document.getElementById('mode-controls');
+        const modeClass = document.getElementById('mode-class');
+        const modeAll = document.getElementById('mode-all');
+        const appendixCount = allSlides.filter(s => s.classList.contains('appendix-slide')).length;
+        const hasAppendix = appendixCount > 0;
+        let showAll = !hasAppendix || new URLSearchParams(location.search).get('mode') === 'full';
+        let slides = [];
+        let current = 0;
+
+        function activeSlides() {
+            return showAll ? allSlides : allSlides.filter(s => !s.classList.contains('appendix-slide'));
+        }
+        /* 태그 번호는 런타임 생성이다. 본문에 손으로 쓴 번호를 남기지 않는다.
+           강등으로 번호가 비는 문제(28 다음이 30)가 이것으로 사라진다. */
+        function normalizeTags() {
+            const core = allSlides.filter(s => !s.classList.contains('appendix-slide'));
+            const appendix = allSlides.filter(s => s.classList.contains('appendix-slide'));
+            allSlides.forEach(slide => {
+                const tag = slide.querySelector('.tag');
+                if (!tag) return;
+                if (!tag.dataset.label) tag.dataset.label = tag.textContent.replace(/^(?:\d+|A\d+)\s*/, '').trim();
+                const inAppendix = slide.classList.contains('appendix-slide');
+                const index = (inAppendix ? appendix : core).indexOf(slide) + 1;
+                tag.textContent = (inAppendix ? 'A' + String(index).padStart(2, '0')
+                                              : String(index).padStart(2, '0')) + ' ' + tag.dataset.label;
+            });
+        }
+        function syncCounts() {
+            const coreCount = allSlides.filter(s => !s.classList.contains('appendix-slide')).length;
+            const allCount = allSlides.length;
+            document.getElementById('cnt-class').textContent = coreCount;
+            document.getElementById('cnt-all').textContent = allCount;
+            modeClass.title = '课堂模式：' + coreCount + '页核心内容';
+            modeAll.title = '全部模式：含' + (allCount - coreCount) + '页补充资料';
+        }
+        function syncMode() {
+            document.body.classList.toggle('full-mode', showAll);
+            document.body.classList.toggle('class-mode', !showAll);
+            modeClass.classList.toggle('active', !showAll);
+            modeAll.classList.toggle('active', showAll);
+            modeClass.setAttribute('aria-pressed', String(!showAll));
+            modeAll.setAttribute('aria-pressed', String(showAll));
+        }
+        function show(index) {
+            slides = activeSlides();
+            current = Math.max(0, Math.min(index, slides.length - 1));
+            allSlides.forEach(s => s.classList.remove('active'));
+            const active = slides[current];
+            active.classList.add('active');
+            progress.innerText = '第 ' + String(current + 1).padStart(2, '0') + ' / ' + slides.length + ' 页'
+                               + (hasAppendix ? ' · ' + (showAll ? '全部' : '课堂') : '');
+            btnPrev.disabled = current === 0;
+            btnNext.disabled = current === slides.length - 1;
+        }
+        function setMode(full) {
+            const active = slides[current];
+            showAll = full;
+            const nextSlides = activeSlides();
+            const sameIndex = nextSlides.indexOf(active);
+            slides = nextSlides;
+            current = sameIndex >= 0 ? sameIndex : Math.min(current, slides.length - 1);
+            syncMode();
+            try {
+                const url = new URL(location.href);
+                if (showAll) url.searchParams.set('mode', 'full'); else url.searchParams.delete('mode');
+                history.replaceState(null, '', url);
+            } catch (error) {}
+            show(current);
+        }
+        modeClass.addEventListener('click', () => setMode(false));
+        modeAll.addEventListener('click', () => setMode(true));
+        btnNext.addEventListener('click', () => show(current + 1));
+        btnPrev.addEventListener('click', () => show(current - 1));
+
+        /* 翻页笔(PageUp/PageDown)·상하키·Home/End·Esc 추가 — 이전에는 좌우/스페이스뿐이었다 */
+        const KEY_FORWARD = ['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Spacebar', 'Enter'];
+        const KEY_BACKWARD = ['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'];
+        window.addEventListener('keydown', (event) => {
+            if (event.ctrlKey || event.metaKey || event.altKey) return;
+            const key = event.key;
+            if (key === 'Escape' || key === 'Esc') {
+                event.preventDefault();
+                const ov = document.getElementById('imageZoomOverlay');
+                if (ov) ov.classList.remove('active');
+                return;
+            }
+            const forward = KEY_FORWARD.indexOf(key) >= 0;
+            const backward = KEY_BACKWARD.indexOf(key) >= 0;
+            if (!forward && !backward && key !== 'Home' && key !== 'End') return;
+            event.preventDefault();
+            if (forward) { show(current + 1); return; }
+            if (backward) { show(current - 1); return; }
+            if (key === 'Home') { show(0); return; }
+            show(slides.length - 1);
+        });
+
+        normalizeTags();
+        if (hasAppendix) { syncCounts(); } else { modeControls.remove(); }
+        slides = activeSlides();
+        syncMode();
+        show(0);
+
+        // Chart.js Configuration
+        function wrapLabel(label) {
+            if (typeof label !== 'string' || label.length <= 16) return label;
+            const words = label.split(' ');
+            let lines = [], currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const commonTooltip = {
+            callbacks: {
+                title: function(ctx) {
+                    let lbl = ctx[0].chart.data.labels[ctx[0].dataIndex];
+                    return Array.isArray(lbl) ? lbl.join(' ') : lbl;
+                }
+            }
+        };
+
+        // Chart 1: S04 Midterm Audit Radar
+        const ctxAudit = document.getElementById('chartMidtermAudit');
+        if(ctxAudit) {
+            new Chart(ctxAudit, {
+                type: 'radar',
+                data: {
+                    labels: ['系列关系', '平面与纸样', '白坯与身体', '材料与制作', '下一步行动'],
+                    datasets: [{
+                        label: 'Gate 2 审计要求',
+                        data: [4.5, 4.8, 4.0, 4.5, 4.2],
+                        borderColor: '#2563EB',
+                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#2563EB'
+                    }]
+                },
+                options: { maintainAspectRatio: false, scales: { r: { max: 5, min: 0, ticks: { display: false } } }, plugins: { legend: { display: false }, tooltip: commonTooltip } }
+            });
+        }
+
+        // Chart 2: S15 4-Layer Criteria Polar Area
+        const ctxCriteria = document.getElementById('chartCriteria');
+        if(ctxCriteria) {
+            new Chart(ctxCriteria, {
+                type: 'polarArea',
+                data: {
+                    labels: [wrapLabel('纸样技术'), wrapLabel('身体工学'), wrapLabel('比例美学'), wrapLabel('制作工艺')],
+                    datasets: [{
+                        data: [35, 30, 15, 20], // Adjusted for W08 focus (high tech/body focus)
+                        backgroundColor: ['rgba(37, 99, 235, 0.7)', 'rgba(225, 29, 72, 0.7)', 'rgba(26, 26, 26, 0.7)', 'rgba(5, 150, 105, 0.7)']
+                    }]
+                },
+                options: { maintainAspectRatio: false, plugins: { tooltip: commonTooltip } }
+            });
+        }
+
+        // Chart 3: S24 Material Risk Bar
+        const ctxMaterial = document.getElementById('chartMaterialRisk');
+        if(ctxMaterial) {
+            new Chart(ctxMaterial, {
+                type: 'bar',
+                data: {
+                    labels: [wrapLabel('挺括材料'), wrapLabel('垂坠材料'), wrapLabel('弹性材料'), wrapLabel('透明材料')],
+                    datasets: [{
+                        label: '物理控制失效风险指数',
+                        data: [65, 80, 75, 90],
+                        backgroundColor: ['#1A1A1A', '#E11D48', '#2563EB', '#D1D5DB']
+                    }]
+                },
+                options: { maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false }, tooltip: commonTooltip } }
+            });
+        }
+
+        // Chart 4: S28 Student Diagnosis Radar
+        const ctxStudentRadar = document.getElementById('chartStudentRadar');
+        if(ctxStudentRadar) {
+            new Chart(ctxStudentRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['平面制版', '立体裁剪', '试衣修改', '空间判断', '材料判断', '缝制工艺'],
+                    datasets: [{
+                        label: '中期目标 (Target)',
+                        data: [4, 4, 4, 4, 4, 4],
+                        borderColor: '#2563EB',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        borderWidth: 1,
+                        pointBackgroundColor: '#2563EB'
+                    }, {
+                        label: '当前个人水平',
+                        data: [3.5, 2, 2.5, 3, 2, 3.5],
+                        borderColor: '#E11D48',
+                        backgroundColor: 'rgba(225, 29, 72, 0.3)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#E11D48'
+                    }]
+                },
+                options: { maintainAspectRatio: false, scales: { r: { max: 5, min: 0 } }, plugins: { legend: { position: 'bottom' }, tooltip: commonTooltip } }
+            });
+        }
+
+
+        /* --- 图片放大：hover 미리보기 ＋ 클릭 고정, 클릭/Esc 로 닫기 ------------
+           클릭으로 연 경우에는 mouseleave 로 닫지 않는다(눌러서 크게 본 뒤
+           마우스를 떼면 사라지는 문제를 막는다). 다른 주차와 동작을 맞춘다. */
+        (function () {
+            const overlay = document.getElementById('imageZoomOverlay');
+            if (!overlay) return;
+            const overlayImg = overlay.querySelector('img');
+            function open(img, byClick) {
+                overlayImg.src = img.currentSrc || img.src;
+                overlayImg.alt = img.alt || '';
+                overlay.classList.toggle('click-open', !!byClick);
+                overlay.classList.add('active');
+            }
+            function close() { overlay.classList.remove('active', 'click-open'); }
+            document.querySelectorAll('img.zoomable-image').forEach((img) => {
+                img.addEventListener('click', (e) => { e.stopPropagation(); open(img, true); });
+                img.addEventListener('mouseenter', () => { if (!overlay.classList.contains('click-open')) open(img, false); });
+                img.addEventListener('mouseleave', () => { if (!overlay.classList.contains('click-open')) close(); });
+            });
+            overlay.addEventListener('click', close);
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' || e.key === 'Esc') close();
+            });
+        })();
+    </script>
+</body>
+</html>

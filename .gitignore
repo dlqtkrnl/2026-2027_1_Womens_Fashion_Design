@@ -1,0 +1,5 @@
+# 배포에 필요한 것만 담는다
+*.pyc
+__pycache__/
+.DS_Store
+Thumbs.db
