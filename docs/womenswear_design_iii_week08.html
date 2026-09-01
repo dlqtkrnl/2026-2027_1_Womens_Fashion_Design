@@ -323,7 +323,7 @@ html{font-size:clamp(14px,calc(7.5px + 0.972vh),22px)}
 </div>
 </div>
 <figure class="w08-tech-frame">
-<img alt="服装内部结构观察图" class="zoomable-image" src="w08_visual_assets/final_20260819/inner-structure.png"/>
+<img alt="服装内部结构观察图" class="zoomable-image" src="w08_visual_assets/final_20260819/inner-structure.svg"/>
 <figcaption>观察任务：指出外部廓形需要哪些固定点、释放量与内部支撑。</figcaption>
 </figure>
 </div>
@@ -490,7 +490,7 @@ html{font-size:clamp(14px,calc(7.5px + 0.972vh),22px)}
 <div class="student-keyline mt-7">课堂动作：在照片上画出褶皱方向，再沿反方向寻找纸样原因。</div>
 </div>
 <figure class="w08-tech-frame">
-<img alt="服装张力地图" class="zoomable-image" src="w08_visual_assets/final_20260819/tension-map.png"/>
+<img alt="服装张力地图" class="zoomable-image" src="w08_visual_assets/final_20260819/tension-map.svg"/>
 <figcaption>张力地图：把褶皱当作力的方向，而不是表面装饰。</figcaption>
 </figure>
 </div>
@@ -500,7 +500,7 @@ html{font-size:clamp(14px,calc(7.5px + 0.972vh),22px)}
 <div class="tag red">11 物理边界</div>
 <div class="w08-tech-layout reverse">
 <figure class="w08-tech-frame">
-<img alt="材料行为比较图" class="zoomable-image" src="w08_visual_assets/final_20260819/material-behavior.png"/>
+<img alt="材料行为比较图" class="zoomable-image" src="w08_visual_assets/final_20260819/material-behavior.svg"/>
 <figcaption>同一纸样换成不同材料后，体积、垂坠和伸缩都会改变。</figcaption>
 </figure>
 <div>
@@ -625,7 +625,7 @@ html{font-size:clamp(14px,calc(7.5px + 0.972vh),22px)}
 <div class="student-keyline mt-7">课堂要求：诊断句中必须出现“观察—判断—修改—复测”。</div>
 </div>
 <figure class="w08-tech-frame">
-<img alt="错误穿着与张力区域诊断图" class="zoomable-image" src="w08_visual_assets/final_20260819/miswear-system.png"/>
+<img alt="错误穿着与张力区域诊断图" class="zoomable-image" src="w08_visual_assets/final_20260819/miswear-system.svg"/>
 <figcaption>练习：标出问题部位，并把每条张力线连接到可能的纸样原因。</figcaption>
 </figure>
 </div>
@@ -635,7 +635,7 @@ html{font-size:clamp(14px,calc(7.5px + 0.972vh),22px)}
 <div class="tag blue">18 任务 B</div>
 <div class="w08-tech-layout reverse">
 <figure class="w08-tech-frame">
-<img alt="身体基准线检查图" class="zoomable-image" src="w08_visual_assets/final_20260819/body-script.png"/>
+<img alt="身体基准线检查图" class="zoomable-image" src="w08_visual_assets/final_20260819/body-script.svg"/>
 <figcaption>平衡线是坐标系：上身后仍应保持水平或垂直。</figcaption>
 </figure>
 <div>
@@ -662,7 +662,7 @@ html{font-size:clamp(14px,calc(7.5px + 0.972vh),22px)}
 </div>
 </div>
 <figure class="w08-tech-frame">
-<img alt="纸样思考与修正图" class="zoomable-image" src="w08_visual_assets/final_20260819/pattern-thinking.png"/>
+<img alt="纸样思考与修正图" class="zoomable-image" src="w08_visual_assets/final_20260819/pattern-thinking.svg"/>
 <figcaption>版本记录：纸样 V1 → 试穿标记 → 纸样 V2 → 白坯样衣 V2。</figcaption>
 </figure>
 </div>
@@ -793,7 +793,7 @@ html{font-size:clamp(14px,calc(7.5px + 0.972vh),22px)}
 </div>
 </div>
 <figure class="w08-tech-frame">
-<img alt="试衣证据归档与版本记录图" class="zoomable-image" src="w08_visual_assets/final_20260819/narrative-archive.png"/>
+<img alt="试衣证据归档与版本记录图" class="zoomable-image" src="w08_visual_assets/final_20260819/narrative-archive.svg"/>
 <figcaption>评审板最低结构：系列位置 + 多角度证据 + 纸样版本 + 修改地图。</figcaption>
 </figure>
 </div>
@@ -1129,6 +1129,8 @@ html{font-size:clamp(14px,calc(7.5px + 0.972vh),22px)}
 
 
 
+
+
 <style id="deck-design-layer">
 /* DECK_DESIGN_LAYER_START — 2026-09-01 · 전면 시각 재설계
    ────────────────────────────────────────────────────────────
@@ -1427,6 +1429,14 @@ body{font-family:'DeckNum',"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","S
 .unified-course-map .ucm-dot{border-color:var(--rule)}
 .unified-course-map .ucm-dot.past{background:var(--rule-2)}
 .unified-course-map .ucm-dot.now{background:#141414;border-color:#141414}
+
+
+/* ── W08 기술 도해 마운트 ────────────────────────────────────────
+   어두운 액자(#111827)가 크림 지면 위에서 홀로 튀었다. 지면 톤 + 헤어라인으로. */
+.slide .w08-tech-frame{background:transparent!important;border:0!important;padding:0!important}
+.slide .w08-tech-frame img{background:transparent!important}
+.slide .w08-tech-frame figcaption{background:transparent!important;color:var(--ink-2)!important;
+  border-top:1px solid var(--rule);padding:.5rem 0 0;font-size:.9rem;font-weight:700;line-height:1.4}
 
 /* ── 크롬(내비게이션) ────────────────────────────────────────  */
 .nav-button{border:1px solid #2a2a2a;background:#141414}
