@@ -572,6 +572,10 @@ show(0);
 
 
 
+
+
+
+
 <style id="deck-design-layer">
 /* DECK_DESIGN_LAYER_START — 2026-09-01 · 전면 시각 재설계
    ────────────────────────────────────────────────────────────
@@ -618,7 +622,19 @@ show(0);
 html,body{background:var(--paper)}
 body{font-family:'DeckNum',"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",Arial,sans-serif;
   color:var(--ink);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
-.slide{background:var(--paper);padding:2.5rem 3.4rem 4.4rem}
+/* 배경을 유틸 클래스로 직접 지정한 페이지(W08 계열의 bg-black·bg-blue-600)는 건드리지 않는다.
+   덮어쓰면 흰 글자만 남아 안 읽힌다. */
+.slide{padding:2.5rem 3.4rem 4.4rem}
+.slide:not([class*="bg-"]){background:var(--paper)}
+/* 그 어두운 페이지들은 .slide.dark 와 같이 취급한다 */
+.slide[class*="bg-black"] .tag,.slide[class*="bg-blue-6"] .tag,
+.slide[class*="bg-gray-9"] .tag,.slide[class*="bg-slate-9"] .tag{
+  color:#fff!important;border-left-color:#9ab6ff!important}
+.slide[class*="bg-black"] .weekline,.slide[class*="bg-blue-6"] .weekline,
+.slide[class*="bg-gray-9"] .weekline,.slide[class*="bg-slate-9"] .weekline{
+  color:#9aa3b0;border-bottom-color:rgba(255,255,255,.22)}
+.slide[class*="bg-black"] .session-marker,.slide[class*="bg-blue-6"] .session-marker{
+  color:rgba(255,255,255,.62)}
 .slide.dark{background:#101010}
 
 /* ── 마스트헤드 ───────────────────────────────────────────────
@@ -806,6 +822,20 @@ body{font-family:'DeckNum',"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","S
 .slide .eg{color:var(--ink-3);font-size:.88rem}
 .slide .timing-badge{color:var(--accent);font-weight:800;letter-spacing:.06em}
 
+
+/* ── 한 장짜리 이미지 마운트 ───────────────────────────────────
+   어두운 마운트는 여러 장이 빈틈없이 채울 때(콘택트시트)만 성립한다.
+   세로 사진 한 장이 가로 마운트에 들어가면 좌우에 큰 검은 띠만 남는다.
+   그래서 단일 이미지 액자는 지면색 + 헤어라인으로 돌린다.                */
+.slide .srcpic,.slide .case-look,.slide .annotated-look,.slide .peer-visual-media,
+.slide .detail-analysis-look,.slide .evidence-look-pair,.slide .evidence-board,
+.slide .process-method-board,.slide .evidence-auth-overview,.slide .single-look{
+  background:var(--paper)!important;border:0!important;padding:0!important;
+  box-shadow:none!important}
+.slide .srcpic img,.slide .case-look img,.slide .annotated-look img,
+.slide .peer-visual-media img,.slide .detail-analysis-look img{
+  background:var(--paper)!important}
+
 /* ── 출처·주석: 더 조용하게 ──────────────────────────────────  */
 .slide .series-source,.slide .inline-source,.slide .evidence-source,
 .slide [class*="-source"]{color:var(--ink-3);font-size:.8rem;font-weight:600;letter-spacing:.01em;line-height:1.45}
@@ -878,6 +908,14 @@ body{font-family:'DeckNum',"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","S
 .slide .w08-tech-frame img{background:transparent!important}
 .slide .w08-tech-frame figcaption{background:transparent!important;color:var(--ink-2)!important;
   border-top:1px solid var(--rule);padding:.5rem 0 0;font-size:.9rem;font-weight:700;line-height:1.4}
+
+
+/* ── W06 계열 리듬 막대 ──────────────────────────────────────
+   막대 높이가 이미 리듬을 인코딩한다(4.1~10.2rem). 다섯 색은 그 위에 얹힌
+   순번 색일 뿐이라 정보가 없다. 정점만 먹으로, 나머지는 단일 액센트로.   */
+.slide .p29-mark{background:var(--accent)!important;border-top-color:#141414!important}
+.slide .p29-beat.accent .p29-mark{background:#141414!important}
+.slide .p29-beat em{color:var(--accent)!important}
 
 /* ── 크롬(내비게이션) ────────────────────────────────────────  */
 .nav-button{border:1px solid #2a2a2a;background:#141414}
