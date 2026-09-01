@@ -378,7 +378,7 @@ a[href]::after{content:none!important}
    全周次技术基线统一（2026-08-28 일괄 정비）
    W01·W02·W03 에서 세 번 검증된 지반을 그대로 적용한다. 교학 내용은 건드리지 않는다.
    ================================================================ */
-html{font-size:clamp(14px,calc(11.5px + 0.42vh),19px)}
+html{font-size:clamp(14px,calc(7.5px + 0.972vh),22px)}
 .slide.dark .weekline{color:#9aa3b0}
 .slide.dark .session{color:#9aa3b0}
 body.on-dark .progress{color:#9aa3b0}
@@ -703,4 +703,330 @@ if(hasAppendix){syncCounts();}else{modeControls.remove();}
 slides=activeSlides();
 syncMode();
 show(0);
-</script></body></html>
+</script>
+
+
+<style id="deck-design-layer">
+/* DECK_DESIGN_LAYER_START — 2026-09-01 · 전면 시각 재설계
+   ────────────────────────────────────────────────────────────
+   원본 CSS 는 건드리지 않는다. 이 블록을 마지막에 덧붙여 덮어쓴다.
+   (2026-08-28 「전 주차 기술 기반선 통일」과 같은 기법)
+
+   무엇을 고치는가 — 실측된 세 가지 원인
+   ① 모든 블록이 흰 배경 + 1px 테두리 상자 → 한 장에 같은 사각형 4~6개
+   ② 색이 의미가 아니라 순번(nth-child)으로 정해짐 → 뜻 없는 무지개
+   ③ 서체 대비 0 → 제목·본문·캡션·라벨이 전부 같은 얼굴
+
+   무엇을 지키는가
+   · 내용·구조·클래스 이름 불변. 넘침(SPILL) 0 유지. 자체완결(외부 참조 0).
+   · 도판 슬라이드(런웨이 스트립·복식사)는 이미 좋다 — 조율만 한다.
+   ──────────────────────────────────────────────────────────── */
+
+/* ── 숫자 전용 서체 ────────────────────────────────────────────
+   IBM Plex Mono(OFL)를 숫자와 약물만 서브셋(2.3KB×2). unicode-range 로
+   숫자에만 걸리므로 라틴 산문(브랜드명 등)은 기존 서체 그대로 흐른다.  */
+@font-face{font-family:'DeckNum';font-style:normal;font-weight:400;font-display:block;
+  src:url(data:font/woff2;base64,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) format('woff2');
+  unicode-range:U+0030-0039,U+002B,U+002C,U+002D,U+002E,U+002F,U+003A,U+0025}
+@font-face{font-family:'DeckNum';font-style:normal;font-weight:700;font-display:block;
+  src:url(data:font/woff2;base64,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) format('woff2');
+  unicode-range:U+0030-0039,U+002B,U+002C,U+002D,U+002E,U+002F,U+003A,U+0025}
+
+:root{
+  --paper:#f4f3ef;          /* 따뜻한 지면. 기존 회청색 화면톤을 인쇄톤으로 */
+  --ground:#eae8e1;         /* 흰 상자 대신 쓰는 두 번째 바탕 */
+  --ink:#131313;
+  --ink-2:#3c424a;          /* 본문 */
+  --ink-3:#6c737e;          /* 메타·캡션 */
+  --rule:#c6c3ba;           /* 헤어라인 */
+  --rule-2:#dcd9d1;
+  --accent:#1b3a8f;         /* 단일 액센트 — 판단·강조 */
+  --flag:#a8232f;           /* 실패신호에만 */
+  --line:var(--rule-2);     /* 원본 변수 재정의 */
+  --blue:var(--accent);
+  --red:var(--flag);
+  --muted:var(--ink-2);
+  --white:#fff;
+}
+
+html,body{background:var(--paper)}
+body{font-family:'DeckNum',"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",Arial,sans-serif;
+  color:var(--ink);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.slide{background:var(--paper);padding:2.5rem 3.4rem 4.4rem}
+.slide.dark{background:#101010}
+
+/* ── 마스트헤드 ───────────────────────────────────────────────
+   주차 표기 아래 헤어라인 한 줄. 모든 장에 같은 판형이 생긴다.      */
+.slide .weekline{color:var(--ink-3);font-size:.8rem;font-weight:800;letter-spacing:.1em;
+  border-bottom:1px solid var(--rule);padding-bottom:.26rem;margin-bottom:.7rem}
+.slide.dark .weekline{color:#8b929c;border-bottom-color:#2c2c2c}
+.slide .session{color:var(--ink-3);font-size:.78rem;font-weight:800;letter-spacing:.08em;top:2.62rem;right:3.4rem}
+.slide.dark .session{color:#8b929c}
+
+/* ── 라벨(구 칩) ──────────────────────────────────────────────
+   검은 알약 대신 액센트 세로선 + 자간 넓힌 소형 라벨.               */
+.slide .tag,.slide .tag.blue,.slide .tag.red{background:transparent!important;color:var(--ink)!important;
+  padding:.02rem 0 .02rem .6rem;margin-bottom:.85rem;border-left:3px solid var(--accent);
+  font-size:.82rem;font-weight:800;letter-spacing:.08em;line-height:1.5}
+.slide .tag.red{border-left-color:var(--flag)}
+.slide.dark .tag{color:#fff!important;border-left-color:#7ea0ff}
+
+/* ── 표제 ────────────────────────────────────────────────────
+   자간을 좁히고 행간을 붙인다. 크기는 그대로(넘침 위험 회피).        */
+.slide h1{letter-spacing:-.026em;line-height:1.02;font-weight:900;margin-bottom:1rem}
+.slide h2{letter-spacing:-.022em;line-height:1.08;font-weight:900;margin-bottom:.72rem}
+.slide h3{letter-spacing:-.012em;font-weight:800}
+.slide .lead{color:var(--ink-2);font-size:1.12rem;line-height:1.56;margin-bottom:.86rem;font-weight:400}
+.slide.dark .lead{color:#c3c8d0}
+
+/* ── 상자 해체 ────────────────────────────────────────────────
+   테두리·흰 배경·그림자·라운드를 걷어낸다. 이것이 이번 작업의 핵심.  */
+.slide .card,.slide .compare-panel,.slide .process-step,.slide .phase,
+.slide .visual-points p,.slide .series-points p,.slide .matrix-wrap,
+.slide [class*="-card"],.slide [class*="-panel"],
+.slide .panel,.slide .note,.slide .teacher-note,.slide .stack-list,
+.slide .phase-band,.slide .hint,.slide .task-row{
+  background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+
+/* ── 카드 격자 → 신문 단조판 ──────────────────────────────────
+   상자 대신 단 사이 헤어라인. 같은 사각형의 반복이 사라진다.          */
+.slide .cards-grid,.slide .compare-grid,.slide .process-grid,
+.slide .workshop-grid,.slide .phase-roadmap,.slide [class*="-card-grid"]{gap:0!important;column-gap:0!important}
+.slide .cards-grid>*,.slide .compare-grid>*,.slide .process-grid>*,
+.slide .workshop-grid>*,.slide .phase-roadmap>*,.slide [class*="-card-grid"]>*{
+  padding:.15rem 1.15rem .6rem;border-left:1px solid var(--rule)!important;min-height:0}
+.slide .cards-grid>*:first-child,.slide .compare-grid>*:first-child,
+.slide .process-grid>*:first-child,.slide .workshop-grid>*:first-child,
+.slide .phase-roadmap>*:first-child,.slide [class*="-card-grid"]>*:first-child{
+  border-left:0!important;padding-left:0}
+/* 2행으로 접히는 격자: 둘째 행 첫 칸의 세로선을 지우고 행 사이에 가로선 */
+.slide .cards-grid.count-6>*:nth-child(4),.slide .cards-grid.count-8>*:nth-child(5),
+.slide .process-grid.count-8>*:nth-child(5){border-left:0!important;padding-left:0}
+.slide .cards-grid.count-6>*:nth-child(n+4),.slide .cards-grid.count-8>*:nth-child(n+5),
+.slide .process-grid.count-8>*:nth-child(n+5){
+  border-top:1px solid var(--rule)!important;padding-top:.95rem;margin-top:.35rem}
+
+/* 단은 지면 전체 높이로 세운다 — 구분선이 끝까지 내려가야 남는 자리가
+   「빠진 것」이 아니라 「칸」으로 읽힌다. 글은 각 칸 위에서 시작한다.        */
+.slide .cards-grid,.slide .compare-grid,.slide .process-grid,.slide .workshop-grid{
+  align-content:stretch!important;align-items:stretch!important;margin-top:.35rem}
+.slide .cards-grid>*,.slide .compare-grid>*,.slide .process-grid>*,.slide .workshop-grid>*{
+  align-self:stretch}
+
+.slide .card p,.slide .compare-panel p,.slide .process-step p,.slide .phase p{
+  color:var(--ink-2);font-size:1.05rem;line-height:1.62}
+
+/* 덱 고유 격자(.fivew-grid 등)도 같은 판형으로 — 이름이 아니라 형태로 건다.
+   :has() 로 도판 격자(img·figure 를 품은 것)는 자동으로 제외한다.           */
+.slide [class$="-grid"]:not(:has(img)):not(:has(figure)):not(.ucm-grid){
+  align-content:stretch!important;align-items:stretch!important;
+  gap:0!important;column-gap:0!important}
+.slide [class$="-grid"]:not(:has(img)):not(:has(figure)):not(.ucm-grid)>*{
+  align-self:stretch;border-left:1px solid var(--rule)!important;
+  padding:.15rem 1.15rem .6rem!important;min-height:0}
+.slide [class$="-grid"]:not(:has(img)):not(:has(figure)):not(.ucm-grid)>*:first-child{
+  border-left:0!important;padding-left:0!important}
+/* 칸 안의 글은 위에서 시작한다 — 세로 가운데로 뜨면 「빠진 자리」로 읽힌다 */
+.slide [class$="-grid"]:not(:has(img)):not(:has(figure)):not(.ucm-grid)>*{
+  justify-content:flex-start!important;align-content:start!important}
+
+/* ── 수량 질의: 항목이 적으면 글자를 키운다 ─────────────────────
+   3칸짜리 장에 6칸짜리 글자 크기를 쓰니 지면이 비어 보였다.
+   클래스 이름이 아니라 **자식 개수**로 걸어야 17덱의 고유 격자에도 통한다.  */
+/* 항목 3개 이하 */
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(-n+3) h3,
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(-n+3)~* h3,
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(-n+3)>strong,
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(-n+3)~*>strong{
+  font-size:1.58rem;line-height:1.2;padding-bottom:.55rem;margin-bottom:.72rem}
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(-n+3) p,
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(-n+3)~* p{
+  font-size:1.22rem;line-height:1.62}
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(-n+3),
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(-n+3)~*{padding-right:1.8rem}
+/* 항목 4~5개 */
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(n+4):nth-last-child(-n+5) h3,
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(n+4):nth-last-child(-n+5)~* h3,
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(n+4):nth-last-child(-n+5)>strong,
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(n+4):nth-last-child(-n+5)~*>strong{
+  font-size:1.3rem;line-height:1.24}
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(n+4):nth-last-child(-n+5) p,
+.slide [class*="grid"]:not(:has(img)):not(:has(figure))>*:first-child:nth-last-child(n+4):nth-last-child(-n+5)~* p{
+  font-size:1.11rem;line-height:1.6}
+/* 도판 격자는 제외 — 캡션까지 커지면 안 된다 */
+.slide .series-grid p,.slide .visual-grid p,.slide .chain-figs p,
+.slide .series-grid figcaption,.slide .visual-grid figcaption{font-size:inherit}
+/* 단 제목: 본문과 크기·굵기가 같아 위계가 없었다. 키우고 아래 헤어라인. */
+.slide .card h3,.slide .compare-panel h3,
+.slide .process-step strong,.slide .phase strong,.slide .card>strong{
+  display:block;color:var(--ink);letter-spacing:-.012em;font-weight:900;
+  font-size:1.2rem;line-height:1.28;margin:0 0 .5rem;
+  padding-bottom:.42rem;border-bottom:1px solid var(--rule-2)}
+.slide .compare-panel h3{border-bottom:0;padding-bottom:0}
+
+/* 비교 판정: 색을 순번이 아니라 뜻으로. 초록(순번 사고)은 폐기.       */
+.slide .compare-panel:first-child{border-top:0!important}
+.slide .compare-panel:first-child h3{color:var(--flag)}
+.slide .compare-panel:first-child::before{content:"";display:block;width:2.2rem;height:3px;
+  background:var(--flag);margin:0 0 .7rem}
+.slide .compare-panel:not(:first-child)::before{content:"";display:block;width:2.2rem;height:3px;
+  background:var(--accent);margin:0 0 .7rem}
+.slide .compare-panel.good h3{color:var(--accent)}
+.slide .compare-panel.good::before{background:var(--accent)}
+
+/* ── 숫자를 주역으로 ─────────────────────────────────────────
+   01/02, 20分, 28分钟 — 도처에 있는 숫자를 크게, 모노로.            */
+.slide .card .score,.slide .process-step .no,.slide .phase .time,
+.slide .phase-no,.slide .no{
+  font-family:'DeckNum',ui-monospace,Menlo,Consolas,monospace;
+  font-weight:700;letter-spacing:-.02em;line-height:1;color:var(--ink);
+  font-size:2.5rem;margin-bottom:.5rem}
+.slide .phase .time{color:var(--accent)}
+.slide .process-step .no,.slide .phase-no{color:var(--rule);font-size:2.2rem}
+.slide .card .score{color:var(--accent)}
+
+/* ── 강조선(keyline) ─────────────────────────────────────────  */
+.slide .keyline{background:transparent;border-left:3px solid var(--accent);
+  padding:.15rem 0 .15rem .95rem;font-size:1.04rem;font-weight:800;line-height:1.5;color:var(--ink)}
+
+/* ── 표 ──────────────────────────────────────────────────────
+   세로선을 없애고 가로 헤어라인만. 머리행은 먹, 숫자는 자릿수 정렬.   */
+.slide .matrix-wrap{padding:0!important}
+.slide .matrix{font-size:1rem;border-collapse:collapse}
+.slide .matrix th,.slide .matrix td{border:0;border-bottom:1px solid var(--rule-2);
+  padding:.62rem .8rem;text-align:left}
+.slide .matrix th{background:transparent;color:var(--ink);border-bottom:2px solid var(--ink);
+  font-size:.82rem;font-weight:800;letter-spacing:.08em}
+.slide .matrix td:first-child{background:transparent;color:var(--ink);font-weight:800}
+.slide .matrix tr:last-child td{border-bottom:0}
+
+/* ── 도판: 이미 좋다. 검은 마운트만 진짜 검정으로 조이고 캡션 정리 ── */
+.slide .series-grid,.slide .visual-grid,.slide .chain-figs,
+.slide .yiny-effect-board,.slide .yiny-runway-grid{background:#101010;padding:4px;gap:4px}
+.slide .series-shell{background:transparent;border:0;box-shadow:none;padding:0}
+.slide .series-label{padding:0 0 .5rem;font-size:.84rem;letter-spacing:.05em;
+  border-bottom:1px solid var(--rule);margin-bottom:.55rem}
+.slide .series-label span{color:var(--ink-3);font-weight:800}
+.slide .series-grid figcaption,.slide .visual-grid figcaption,.slide .chain-figs figcaption{
+  background:rgba(10,10,10,.82);font-size:.76rem;font-weight:700;letter-spacing:.06em;
+  padding:.2rem .38rem;border-radius:0}
+.slide .visual-frame{background:transparent;border:0;padding:0}
+.slide .visual-points p,.slide .series-points p,.slide .chain-notes p{
+  border-left:2px solid var(--rule);padding:.1rem 0 .1rem .85rem;font-size:1.02rem;line-height:1.58;color:var(--ink-2)}
+.slide .visual-points p b,.slide .series-points p b,.slide .chain-notes p b{color:var(--ink)}
+.slide .chain-notes p.warn{border-left-color:var(--flag);background:transparent}
+
+/* ── 먹 띠(강조 스트립) ──────────────────────────────────────
+   원래 어두운 배경 + 흰 글자인 블록들. 지우면 흰 글자만 남아 안 읽힌다.
+   지면 위 유일한 먹면이므로 오히려 살려서 대비를 만든다.              */
+.slide .output,.slide .prompt-box,.slide .answer-strip,.slide .offline-box,
+.slide .mechanism-template,.slide .demo-strip,.slide .eval-fill.final,
+.slide .element-rule-panel{
+  background:#141414!important;color:#f2f2f0!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  letter-spacing:.01em}
+.slide .output b,.slide .prompt-box b,.slide .answer-strip b,
+.slide .offline-box b,.slide .mechanism-template b,.slide .demo-strip b{color:#fff}
+
+/* ── 잔존 회색 칩 정리 ───────────────────────────────────────
+   본문 안의 작은 박스들(분석 주석·힌트·흐름 주석)도 선 조판으로.      */
+.slide .analysis div,.slide .flow-note,.slide .class-only-note,
+.slide .hint,.slide .note,.slide .teacher-note,.slide .mechanism-no,
+.slide .eg,.slide .timing-badge{
+  background:transparent!important;border:0!important;box-shadow:none!important}
+.slide .analysis div{border-left:2px solid var(--rule)!important;padding:.05rem 0 .05rem .7rem;
+  font-size:.86rem;line-height:1.5;color:var(--ink-2)}
+.slide .analysis div b{color:var(--ink)}
+.slide .eg{color:var(--ink-3);font-size:.88rem}
+.slide .timing-badge{color:var(--accent);font-weight:800;letter-spacing:.06em}
+
+/* ── 출처·주석: 더 조용하게 ──────────────────────────────────  */
+.slide .series-source,.slide .inline-source,.slide .evidence-source,
+.slide [class*="-source"]{color:var(--ink-3);font-size:.8rem;font-weight:600;letter-spacing:.01em;line-height:1.45}
+.slide .week-context{border-top:1px solid var(--rule);background:transparent;
+  padding:.45rem 0 0;font-size:.95rem;line-height:1.45;color:var(--ink-2)}
+.slide .week-context b{color:var(--ink)}
+
+/* ── 어두운 장(구간 표지) ────────────────────────────────────  */
+.slide.dark{color:#f2f2f0}
+.slide.dark .divider-copy .eyebrow{color:#8fa9ff;letter-spacing:.12em;font-size:.86rem}
+.slide.dark .divider-copy h2{letter-spacing:-.03em}
+.slide.dark .divider-copy p{color:#b9bec6}
+.slide.dark .exit-list div{border-bottom-color:#2a2a2a}
+.slide.dark .exit-list b{color:#8fa9ff}
+.slide.dark .exit-prompt{border-left-color:#8fa9ff}
+
+/* ── 부속 자료 표시 ──────────────────────────────────────────  */
+.appendix-slide{background:var(--ground)}
+.appendix-slide::before{right:3.4rem;top:2.6rem;color:var(--ink-3);font-size:.78rem;
+  font-weight:800;letter-spacing:.12em}
+.appendix-slide .tag{border-left-color:var(--ink-3)!important}
+
+/* ── 十六周 총도 ─────────────────────────────────────────────
+   유일하게 상자·4색이 남아 있어 다른 문서처럼 보였다. 같은 판형으로.
+   4개 구간은 색상 4종이 아니라 **한 색의 농도 4단**으로 — 진행이 읽힌다.  */
+.unified-course-map.slide{background:var(--paper)!important;color:var(--ink)!important;
+  padding:2.5rem 3.4rem 4.4rem!important}
+.unified-course-map .ucm-meta{border-bottom:1px solid var(--rule);color:var(--ink-3);
+  font-size:.8rem;font-weight:800;letter-spacing:.1em;padding-bottom:.5rem}
+.unified-course-map .ucm-label{background:transparent!important;color:var(--ink)!important;
+  padding:.02rem 0 .02rem .6rem;border-left:3px solid var(--accent);
+  font-size:.82rem;font-weight:800;letter-spacing:.08em}
+.unified-course-map h2{letter-spacing:-.022em!important;line-height:1.1!important}
+.unified-course-map .ucm-lead{color:var(--ink-2)!important;font-size:1.06rem!important;line-height:1.6!important}
+.unified-course-map .ucm-grid{gap:0!important;margin-top:.9rem}
+.unified-course-map .ucm-phase,.unified-course-map .ucm-week{
+  background:transparent!important;border:0!important;border-right:1px solid var(--rule-2)!important;
+  border-bottom:1px solid var(--rule-2)!important;box-shadow:none!important;padding:.62rem .8rem!important}
+.unified-course-map .ucm-phase{border-left:3px solid var(--accent)!important;
+  padding-left:.7rem!important;margin-right:.7rem}
+.unified-course-map .ucm-phase.phase-1{border-left-color:#c3cee6!important}
+.unified-course-map .ucm-phase.phase-2{border-left-color:#8fa3cd!important}
+.unified-course-map .ucm-phase.phase-3{border-left-color:#4d68a8!important}
+.unified-course-map .ucm-phase.phase-4{border-left-color:var(--accent)!important}
+.unified-course-map .ucm-phase b{color:var(--ink-3);letter-spacing:.06em}
+.unified-course-map .ucm-phase strong{color:var(--ink)}
+.unified-course-map .ucm-week{border-top:0!important}
+.unified-course-map .ucm-week.phase-1,.unified-course-map .ucm-week.phase-2,
+.unified-course-map .ucm-week.phase-3,.unified-course-map .ucm-week.phase-4{border-top:0!important}
+.unified-course-map .ucm-week.past{background:transparent!important;color:var(--ink-3)!important}
+.unified-course-map .ucm-week.past .ucm-no{color:var(--rule)}
+.unified-course-map .ucm-week.future{color:var(--ink)!important}
+.unified-course-map .ucm-week.current{background:#141414!important;border-color:#141414!important;color:#fff!important}
+.unified-course-map .ucm-week.current .ucm-no{color:#fff}
+.unified-course-map .ucm-no{font-family:'DeckNum',ui-monospace,Consolas,monospace;
+  font-weight:700;color:var(--rule);letter-spacing:0}
+.unified-course-map .ucm-now{background:transparent;color:#fff;border:1px solid #4c4c4c;
+  font-size:.72rem;letter-spacing:.1em;padding:.16rem .38rem}
+.unified-course-map .ucm-week strong{font-weight:700}
+.unified-course-map .ucm-legend{color:var(--ink-3);border-top:1px solid var(--rule-2);
+  padding-top:.5rem;margin-top:.5rem}
+.unified-course-map .ucm-dot{border-color:var(--rule)}
+.unified-course-map .ucm-dot.past{background:var(--rule-2)}
+.unified-course-map .ucm-dot.now{background:#141414;border-color:#141414}
+
+/* ── 크롬(내비게이션) ────────────────────────────────────────  */
+.nav-button{border:1px solid #2a2a2a;background:#141414}
+.nav-button:hover{background:var(--accent)}
+.mode-button{font-weight:800;letter-spacing:.06em}
+.mode-button.active{background:#141414}
+.progress{letter-spacing:.08em}
+
+@media screen and (max-width:1000px){
+  .slide{padding:1.9rem 1.7rem 4.4rem}
+  .slide .session{right:1.7rem}
+  .slide .cards-grid>*,.slide .compare-grid>*,.slide .process-grid>*,
+  .slide .workshop-grid>*,.slide .phase-roadmap>*{border-left:0!important;
+    border-top:1px solid var(--rule)!important;padding:.7rem 0 .5rem}
+  .slide .cards-grid>*:first-child,.slide .compare-grid>*:first-child,
+  .slide .process-grid>*:first-child,.slide .workshop-grid>*:first-child{border-top:0!important}
+}
+/* DECK_DESIGN_LAYER_END */
+
+/* 순번 색상 폐기 — 색은 뜻으로만 쓴다 (덱 CSS 에서 30종 발견) */
+.card:nth-child(3n+2),.card:nth-child(3n),.goal-card:nth-child(2),.lens-card:nth-child(2),.term-card:nth-child(2),.tier-card:nth-child(2),.material-card:nth-child(2),.goal-card:nth-child(3),.lens-card:nth-child(3),.term-card:nth-child(3),.tier-card:nth-child(3),.material-card:nth-child(3),.goal-card:nth-child(4),.lens-card:nth-child(4),.term-card:nth-child(4),.tier-card:nth-child(4),.material-card:nth-child(4),.peer-question:nth-child(2),.peer-question:nth-child(3),.peer-question:nth-child(4),.material-evidence:nth-child(2),.material-evidence:nth-child(3),.material-evidence:nth-child(4),.ai-stage:nth-child(2),.ai-stage:nth-child(3),.ai-stage:nth-child(4),.ai-rule:nth-child(2),.ai-rule:nth-child(3),.ai-rule:nth-child(4),.context-step:nth-child(2),.context-step:nth-child(3),.context-step:nth-child(4),.demo-lens:nth-child(2),.demo-lens:nth-child(3),.demo-lens:nth-child(4),.demo-lens:nth-child(5),.mechanism-band:nth-child(2),.failure-column:nth-child(2),.failure-column:nth-child(3),.failure-column:nth-child(4),.preview-timeline div:nth-child(-n+3),.preview-timeline div:nth-child(n+4){border-top-color:var(--rule)!important;border-left-color:var(--rule)!important;border-right-color:var(--rule)!important;border-bottom-color:var(--rule)!important}
+/* 굵은 색 테두리 + 채운 상자 → 헤어라인 조판 (58종) */
+.roadmap-item,.card,.goal-card,.lens-card,.term-card,.tier-card,.material-card,.extract-demo,.evidence-step,.scenario-step,.peer-question,.bift-case-method,.material-evidence,.element-analysis-panel,.copy-extract-column,.ai-stage,.context-step,.demo-lens,.interface-item,.failure-column,.library-table,.w05-goal-step,.p,.lens article,.vars div,.ctx div,.tests div,.queue div,.concept-rule,.gzarts-gallery figure,.gzarts-compare div,.preview-bridge>div,.preview-step,.preview-timeline div{background:transparent!important;box-shadow:none!important;border:0!important;border-top:1px solid var(--rule)!important;border-radius:0!important}
+.outcome-strip,.formula-strip,.method-note,.rule-checks span,.gate-card,.next-note,.bift-compare div,.material-lab-strip>div:last-child,.ai-rule,.context-record>div,.demo-formula,.mechanism-band,.hybrid-result,.failure-column .repair,.library-record-footer>div,.context-fields span,.demo-details span,.dhu-rule,.dhu-copy-check div,.dhu1961-lens,.w05-goal-footer,.rules div,.notes div,.vars .wide,.hier div,.note,.conds div,.concept-judge,.gzarts-step,.bridge-stance{background:transparent!important;box-shadow:none!important;border:0!important;border-left:2px solid var(--rule)!important;border-radius:0!important}
+</style>
+</body></html>
