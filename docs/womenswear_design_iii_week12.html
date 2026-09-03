@@ -205,9 +205,10 @@ window.addEventListener('keydown',(event)=>{
   if(key==='Home'){show(0);return;}
   show(slides.length-1);
 });
-let touchX=0;
-window.addEventListener('touchstart',(event)=>{touchX=event.changedTouches[0].clientX;},{passive:true});
-window.addEventListener('touchend',(event)=>{const delta=event.changedTouches[0].clientX-touchX;if(Math.abs(delta)>55)show(current+(delta<0?1:-1));},{passive:true});
+/*<<MOBILE-SWIPE-GUARD>>*/
+let touchX=0,touchY=0;
+window.addEventListener('touchstart',(event)=>{touchX=event.changedTouches[0].clientX;touchY=event.changedTouches[0].clientY;},{passive:true});
+window.addEventListener('touchend',(event)=>{const dx=event.changedTouches[0].clientX-touchX;const dy=event.changedTouches[0].clientY-touchY;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.5)show(current+(dx<0?1:-1));},{passive:true});
 normalizeTags();
 if(hasAppendix){syncCounts();}else{modeControls.remove();}
 slides=activeSlides();
@@ -585,5 +586,136 @@ body{font-family:'DeckNum',"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","S
 /* 굵은 색 테두리 + 채운 상자 → 헤어라인 조판 (4종) */
 .phase-band,.card,.scase-notes p{background:transparent!important;box-shadow:none!important;border:0!important;border-top:1px solid var(--rule)!important;border-radius:0!important}
 .bridge-term{background:transparent!important;box-shadow:none!important;border:0!important;border-left:2px solid var(--rule)!important;border-radius:0!important}
-</style>
+/*<<MOBILE-LAYOUT-BEGIN>>*/
+/* === 모바일 조판 (≤768px) — _모바일조판/mobile.css 가 원본. apply.py 로 주입한다 === */
+/* 덱을 직접 고치지 말 것. 이 파일을 고치고 `python apply.py` 를 다시 돌린다.  */
+/*                                                                            */
+/* 왜 필요한가: 덱의 루트 글자 크기가 html{font-size:clamp(14px,7.5px+0.972vh,22px)}  */
+/* 로 **뷰포트 높이**에 묶여 있다. 16:9 프로젝터에서는 높이와 폭이 함께 움직이므로     */
+/* 문제가 없지만, 9:19.5 폰에서는 높이가 844px 라 루트가 15.7px 로 잡히는데 폭은      */
+/* 390px 뿐이다. 그래서 rem 으로 짜인 글자·여백·격자가 전부 폭을 넘친다.             */
+/* 아래 블록의 축은 「루트를 폭 기준으로 되돌린다」이고, 나머지는 그 보정이다.        */
+@media screen and (max-width:768px){
+
+  /* ── 1. 축: 루트를 폭 기준으로 ─────────────────────────────────── */
+  html{font-size:clamp(12.5px,3.4vw,17px)}
+
+  /* ── 2. 슬라이드 그릇 ─────────────────────────────────────────── */
+  :root{--barh:3.6rem}
+  .slide{
+    height:100dvh;                                    /* 주소창 접힘까지 반영 */
+    padding:.9rem .85rem calc(var(--barh) + .5rem);   /* 하단은 고정 바 높이만큼 */
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;                      /* 슬라이드 스크롤이 문서로 새지 않게 */
+  }
+  .session{position:static;text-align:right;font-size:.72rem;margin-bottom:.1rem}
+  .weekline{font-size:.74rem;margin-bottom:.45rem}
+
+  /* ── 2-1. 슬라이드를 「단일 스크롤러」로 되돌린다 ───────────────── */
+  /* 데스크탑에서 .slide 는 flex column 이고 안쪽 컨테이너가 flex:1 로 남은 높이를   */
+  /* 나눠 갖는다(한 화면에 딱 맞추는 조판). 폰에서는 그 압축 때문에 안쪽이 자체      */
+  /* 스크롤을 갖게 되고, 넘친 내용이 뒤 요소 위로 겹쳐 글자가 포개진다.             */
+  /* 그래서 자연 흐름으로 돌리고 스크롤은 .slide 하나만 담당하게 한다.              */
+  .slide.active{display:block}
+  .cover-layout,.cards-grid,.compare-grid,.process-grid,.visual-layout,.workshop-grid,
+  .divider-copy,.exit-layout,.g4,.phase-roadmap,.matrix-wrap,.roadmap-grid,.rubric-grid,
+  .scase-layout,.chain-body,.failure-grid,.peer-layout,.gzarts-case-layout,
+  .slide>.series-shell,.slide>.series-shell .series-grid,
+  .cover-layout>.series-shell .series-grid,.unified-course-map .ucm-grid{
+    flex:none;min-height:0;height:auto;overflow:visible;
+  }
+  /* 뷰포트 높이에 묶인 고정 높이 해제(.slide 자신은 제외 — 스크롤 그릇이어야 한다) */
+  .series-grid,.cover-layout .series-grid,.scase-grid,.scase-small,.chain-figs,
+  .mini-series .series-grid,.supp-series-layout .series-grid,.yiny-result-grid,
+  .yiny-runway-grid,.material-evidence .image-window,.relation-diagram,
+  .four-question-layout .series-grid,.youwu-board-grid,.material-proof-visual,
+  .china-case-grid{height:auto}
+
+  /* ── 3. 타이포 — 폭 390px 에서 한 줄에 10자 이상 들어가게 ────────── */
+  h1{font-size:2.35rem;line-height:1.14;margin-bottom:.65rem}
+  h2{font-size:1.6rem;line-height:1.2;margin-bottom:.5rem}
+  h3{font-size:1.02rem;line-height:1.3;margin-bottom:.3rem}
+  .lead{font-size:.98rem;line-height:1.5;max-width:none;margin-bottom:.65rem}
+  .keyline{font-size:.9rem;padding:.5rem .6rem;border-left-width:4px}
+  .tag{font-size:.72rem;padding:.24rem .5rem;margin-bottom:.45rem}
+
+  /* ── 4. 다단 격자 → 1열 ───────────────────────────────────────── */
+  /* !important 를 쓰는 이유: 덱에는 .cards-grid.count-5 / .visual-layout.moodboard-layout */
+  /* 처럼 2~3클래스짜리 규칙이 수십 개 있어 1클래스 선택자로는 특정도에서 진다.          */
+  /* 이 블록은 「폰에서 무조건 이겨야 하는」 덮어쓰기 계층이라 !important 가 맞다.        */
+  /* (덧붙이면 minmax(720px,…) 같은 최소폭도 여기서 함께 풀린다.)                       */
+  .cards-grid,.process-grid,.workshop-grid,.compare-grid,.rubric-grid,.roadmap-grid,
+  .phase-roadmap,.series-points,.glossary-grid,.g4,.cover-layout,.visual-layout,
+  .exit-layout,.supplement-grid,.chain-body,.chain-figs,.scase-grid,.scase-small,
+  .scase-layout,.failure-grid,.peer-layout,.gzarts-case-layout,.w08-bridge-grid,
+  .context-band,.yiny-result-grid,.yiny-runway-grid,.youwu-board-grid,
+  .china-case-grid,.four-question-layout,.material-proof-visual{
+    grid-template-columns:1fr!important;
+    gap:.5rem;
+  }
+
+  /* ── 5. 이미지 격자 — 1열이면 한 장이 화면을 다 먹는다. 2열로 묶는다 ── */
+  /* .ucm-grid(주차 지도)도 2열 — 기존 760px 규칙과 같은 판단이다. */
+  .series-grid,.visual-grid,.visual-layout.four .visual-grid,
+  .unified-course-map .ucm-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .series-grid,.visual-grid{height:auto;padding:4px;gap:4px}
+  .cover-layout .series-grid{height:auto}
+  .series-grid figure,.visual-grid figure{aspect-ratio:3/4}
+  .series-grid figcaption,.visual-grid figcaption{font-size:.7rem;padding:.16rem .3rem}
+
+  /* ── 6. 하단 고정 바 ──────────────────────────────────────────── */
+  /* 지금은 .progress / .mode-controls / .nav-controls 셋이 따로 떠서 본문을 덮는다. */
+  /* 배경이 있는 한 줄짜리 바로 묶고, 위 .slide 하단 여백과 높이를 맞춘다.          */
+  body::before{
+    content:'';position:fixed;left:0;right:0;bottom:0;height:var(--barh);
+    background:var(--paper);border-top:1px solid var(--line);z-index:999;
+  }
+  body.on-dark::before{background:#090909;border-top-color:#2a2a2a}
+  .progress{
+    left:.55rem;bottom:0;height:var(--barh);
+    display:flex;align-items:center;font-size:.68rem;letter-spacing:0;
+  }
+  .mode-controls{left:50%;right:auto;transform:translateX(-50%);bottom:.5rem}
+  .nav-controls{right:.55rem;bottom:0;height:var(--barh);align-items:center;gap:.4rem}
+  .nav-button{width:2.9rem;height:2.9rem;font-size:1.15rem}
+  .mode-button{height:2.6rem}
+
+  /* ── 7. 주차별 개별 레이아웃 ──────────────────────────────────── */
+  /* 공유 어휘(cards-grid 류) 밖의 것들. probe.py 전수 검사로 잡아낸 잔여분이다. */
+  /* 덱을 새로 만들거나 크게 고치면 프로브를 다시 돌려 이 목록을 갱신할 것.       */
+
+  /* (1) 고정 트랙을 가진 2단 레이아웃 — 340~520px 최소폭이 390px 화면을 넘긴다 */
+  .evidence-auth-layout,      /* W02 · cols[0px 420px]   */
+  .research-map-layout,       /* W03 · minmax(340px,…)   */
+  .peer-visual-grid,          /* W03 · 4열              */
+  .rel20-matrix,.rel20-examples,   /* W06 · 4열 / 2열    */
+  .student-hero-layout,       /* W08 · cols[0px 360px]   */
+  .w08-tech-layout,           /* W08 · cols[0px 420px] (.reverse 포함) */
+  .grid-cols-2,.grid-cols-3,.grid-cols-4,.grid-cols-5,.grid-cols-6{  /* W08 계열 · 유틸리티 */
+    grid-template-columns:1fr!important;
+  }
+  /* (2) 인라인 style 로 박힌 격자 — W08 계열 11곳, 전부 2단 본문이라 1열로 접는다 */
+  .slide [style*="grid-template-columns"]{grid-template-columns:1fr!important}
+
+  /* (3) 절대배치 도해: 부모가 높이를 잃으면 자식이 밖으로 새어 하단 바에 겹친다.
+         .research-map-board 는 높이가 flex 분배로만 정해져 있어 최소 높이를 준다. */
+  .research-map-board{height:auto;min-height:26rem}
+
+  /* (4) 고정 행비율 + overflow:hidden 카드 — 폰에서는 글자가 잘리거나 포개진다 */
+  .peer-visual-card{grid-template-rows:auto auto!important;overflow:visible}
+  .rel20-board{height:auto}
+
+  /* (5) W08 계열의 Tailwind h-full(height:100%) — 2-1 과 같은 이유로 푼다.
+         컨테이너 높이가 화면에 고정되면 넘친 내용이 아래로 새어 하단 바에 겹치고,
+         .slide 의 padding-bottom 이 그 부분을 밀어 올리지 못한다. */
+  .h-full{height:auto!important}
+
+  /* (6) W08 부속의 강조 확대(scale-110) — 1열에서는 폭의 110% 가 되어 양옆으로
+         18px 씩 삐져나간다. 데스크탑에서 카드 하나를 도드라지게 하려는 장식이므로
+         좁은 화면에서는 끈다(테두리·그림자는 그대로 남아 강조는 유지된다). */
+  .scale-110{transform:none!important}
+}
+/*<<MOBILE-LAYOUT-END>>*/</style>
 </body></html>
