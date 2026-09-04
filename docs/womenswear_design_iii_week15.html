@@ -791,6 +791,42 @@ body{font-family:'DeckNum',"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","S
   .cb-dia svg{max-width:100%}
   .cb-dia figcaption{font-size:.85rem}
 
+  /* (5-2) 「第二把尺子·设计判定」(사례집 v2) — 사진과 4단 판정표가 가로로 나란한
+           구조라 폰에서 그대로 두면 480px 짜리 줄이 생겨 화면 밖으로 나간다.
+           세로로 접고, 표는 카드 넉 장으로 읽게 한다. */
+  .dj-wrap{flex-direction:column;flex:none}
+  .dj-wrap .cb-figwrap img{max-width:100%;max-height:38vh}
+  .dj{flex:none;gap:.55rem}
+  .dj-draft{font-size:.76rem;line-height:1.4}
+  /* 4단 → 1단으로 접으면 행 순서가 그대로 「항목·증거·판단·追问」 카드가 된다.
+     다만 머리행이 라벨을 들고 있으므로, 머리행은 감추고 각 칸 앞에 라벨을 붙인다. */
+  .dj-grid{grid-template-rows:none;grid-auto-rows:auto}
+  .dj-grid>div:nth-child(-n+4){display:none}
+  .dj-grid>div{font-size:.94rem;padding:.5rem .6rem}
+  .dj-grid>div:nth-child(4n+1){background:#f4f2ec;border-top:2px solid var(--ink,#151515)}
+  .dj-grid .dj-k{flex-direction:row;align-items:center;gap:.5rem}
+  .dj-grid .dj-k small{font-size:.74rem}
+  .dj-v{align-self:center}
+  .dj-grid>div:nth-child(4n+2)::before{content:'照片上的证据 '}
+  .dj-grid>div:nth-child(4n+3)::before{content:'判断 '}
+  .dj-grid>div:nth-child(4n)::before{content:'评审还会问 '}
+  .dj-grid>div[class='']::before,
+  .dj-grid>div:nth-child(4n+2)::before,
+  .dj-grid>div:nth-child(4n+3)::before,
+  .dj-grid>div:nth-child(4n)::before{
+    display:block;font-size:.72rem;font-weight:900;color:#6c737e;letter-spacing:.04em}
+  .dj-sum{font-size:1rem;padding:.75rem .85rem}
+  .dj-rub,.dj-pair{flex:none}
+  .dj-rub>div,.dj-pair>div{font-size:.96rem}
+  .dj-rub h3{font-size:1.2rem}
+  .dj-rub .lv:first-of-type{margin-top:.45rem}
+  .dj-pair ul{display:block}
+  /* 2×2 판은 축 라벨이 세로 1열에서 의미를 잃는다 — 라벨을 칸 위 제목으로 돌린다. */
+  .dj-quad{grid-template-rows:none;flex:none}
+  .dj-quad .ax{display:none}
+  .dj-quad .cell{font-size:1rem;padding:.75rem .9rem}
+  .dj-quad .cell h3{font-size:1.15rem}
+
   /* (6) W08 부속의 강조 확대(scale-110) — 1열에서는 폭의 110% 가 되어 양옆으로
          18px 씩 삐져나간다. 데스크탑에서 카드 하나를 도드라지게 하려는 장식이므로
          좁은 화면에서는 끈다(테두리·그림자는 그대로 남아 강조는 유지된다). */
