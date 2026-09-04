@@ -953,16 +953,32 @@ body{font-family:'DeckNum',"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","S
 @media screen and (max-width:768px){
 
   /* ── 1. 축: 루트를 폭 기준으로 ─────────────────────────────────── */
-  html{font-size:clamp(12.5px,3.4vw,17px)}
+  /* 3.85vw = 390px 폭에서 15.0px. 덱의 본문은 대개 1.13rem 언저리라 약 17px 이 되고,
+     이는 iOS 본문 기본값과 같다. 처음엔 3.4vw(13.3px)로 잡았는데 실측해 보니
+     본문 글자의 20.7%가 13px 이하로 떨어져 한자 가독성이 무너졌다. */
+  html{font-size:clamp(13.5px,3.85vw,18px)}
 
   /* ── 2. 슬라이드 그릇 ─────────────────────────────────────────── */
   :root{--barh:3.6rem}
+  /* !important 인 이유: W05 에 `.slide{padding:2.3rem 3.4rem 4.4rem!important}` 가 있어
+     폰에서도 좌우 45px 을 먹었다(본문 폭 273px). 각 덱의 课程地图 장도 같은 상태였다.
+     390px 화면에서 좌우 45px 은 폭의 23% 다. */
   .slide{
     height:100dvh;                                    /* 주소창 접힘까지 반영 */
-    padding:.9rem .85rem calc(var(--barh) + .5rem);   /* 하단은 고정 바 높이만큼 */
+    padding:.85rem .8rem calc(var(--barh) + .5rem)!important;
     -webkit-overflow-scrolling:touch;
     overscroll-behavior:contain;                      /* 슬라이드 스크롤이 문서로 새지 않게 */
   }
+  /* 폰에서는 슬라이드가 반드시 굴러가야 한다. 덱에는 한 화면에 맞추려고
+       #slide-N{overflow:hidden}  +  @media(max-width:1000px){#slide-N{overflow:auto}}
+     식으로 장마다 짝을 지어 둔 곳이 많은데, 짝이 빠진 장이 있다(W06 #slide-15).
+     그러면 넘친 내용을 **손으로 볼 수 없다**. .slide.active 로 못박아 예외를 없앤다.
+     (특정도 0,2,0 + !important — id 규칙도, .unified-course-map.slide 도 이긴다) */
+  .slide.active{overflow-y:auto!important}
+  /* 课程地图 장은 `.unified-course-map.slide{padding:…!important}` 라 2클래스다.
+     내 `.slide`(1클래스)로는 특정도에서 져 15장이 여백 51px 로 남았다.
+     같은 2클래스로 맞춰 순서로 이긴다. */
+  .slide.active{padding:.85rem .8rem calc(var(--barh) + .5rem)!important}
   .session{position:static;text-align:right;font-size:.72rem;margin-bottom:.1rem}
   .weekline{font-size:.74rem;margin-bottom:.45rem}
 
@@ -986,39 +1002,52 @@ body{font-family:'DeckNum',"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","S
   .four-question-layout .series-grid,.youwu-board-grid,.material-proof-visual,
   .china-case-grid{height:auto}
 
-  /* ── 3. 타이포 — 폭 390px 에서 한 줄에 10자 이상 들어가게 ────────── */
-  h1{font-size:2.35rem;line-height:1.14;margin-bottom:.65rem}
-  h2{font-size:1.6rem;line-height:1.2;margin-bottom:.5rem}
-  h3{font-size:1.02rem;line-height:1.3;margin-bottom:.3rem}
-  .lead{font-size:.98rem;line-height:1.5;max-width:none;margin-bottom:.65rem}
-  .keyline{font-size:.9rem;padding:.5rem .6rem;border-left-width:4px}
-  .tag{font-size:.72rem;padding:.24rem .5rem;margin-bottom:.45rem}
+  /* ── 3. 타이포 ─────────────────────────────────────────────────
+     루트를 키운 만큼(3.4→3.85vw) 제목은 rem 값을 낮춰 되잡는다.
+     제목이 화면을 다 먹으면 본문이 밀려 오히려 안 읽힌다. */
+  h1{font-size:2.05rem;line-height:1.16;margin-bottom:.6rem}
+  h2{font-size:1.45rem;line-height:1.22;margin-bottom:.45rem}
+  h3{font-size:1rem;line-height:1.32;margin-bottom:.3rem}
+  .lead{font-size:.95rem;line-height:1.55;max-width:none;margin-bottom:.6rem}
+  .keyline{font-size:.88rem;padding:.5rem .6rem;border-left-width:4px}
+  .tag{font-size:.7rem;padding:.24rem .5rem;margin-bottom:.4rem}
+  /* 메타·캡션류가 12px 밑으로 내려가지 않게 바닥을 깐다 */
+  .session,.weekline,.series-label span,figcaption{font-size:max(.72rem,11.5px)}
 
-  /* ── 4. 다단 격자 → 1열 ───────────────────────────────────────── */
-  /* !important 를 쓰는 이유: 덱에는 .cards-grid.count-5 / .visual-layout.moodboard-layout */
-  /* 처럼 2~3클래스짜리 규칙이 수십 개 있어 1클래스 선택자로는 특정도에서 진다.          */
-  /* 이 블록은 「폰에서 무조건 이겨야 하는」 덮어쓰기 계층이라 !important 가 맞다.        */
-  /* (덧붙이면 minmax(720px,…) 같은 최소폭도 여기서 함께 풀린다.)                       */
+  /* ── 4. 다단 격자 → 1열 (규칙, 목록 아님) ───────────────────────
+     처음엔 클래스를 나열했는데 실측해 보니 390px 에서 2단 이상으로 남은 격자가
+     **165종**이었다(칸 폭 0~174px). 덱마다 고유 격자를 새로 만들어 쓰기 때문에
+     나열로는 따라잡을 수 없다. 그래서 「슬라이드 안의 모든 격자는 1열」로 규칙화한다.
+
+       · `*` 에 grid-template-columns 를 걸어도 display:grid 가 아닌 요소에는
+         아무 효과가 없다. 그래서 안전하다.
+       · grid-column 도 auto 로 되돌린다. 덱의 grid-column 42곳 중 34곳은 `1/-1`
+         (전체 폭)이라 1열에서도 결과가 같지만, 나머지 8곳의 `span 3`·`4/10` 같은
+         배치는 1열 격자에서 **암시적 열을 만들어 가로로 넘친다**. 그것을 막는다.
+       · !important 인 이유: .cards-grid.count-5 / .visual-layout.moodboard-layout
+         처럼 2~3클래스짜리 규칙이 수십 개라 특정도로는 못 이긴다.
+         minmax(720px,…) 같은 최소폭도 여기서 함께 풀린다. */
+  .slide.active *{
+    grid-template-columns:1fr!important;
+    grid-column:auto!important;
+  }
   .cards-grid,.process-grid,.workshop-grid,.compare-grid,.rubric-grid,.roadmap-grid,
   .phase-roadmap,.series-points,.glossary-grid,.g4,.cover-layout,.visual-layout,
-  .exit-layout,.supplement-grid,.chain-body,.chain-figs,.scase-grid,.scase-small,
-  .scase-layout,.failure-grid,.peer-layout,.gzarts-case-layout,.w08-bridge-grid,
-  .context-band,.yiny-result-grid,.yiny-runway-grid,.youwu-board-grid,
-  .china-case-grid,.four-question-layout,.material-proof-visual{
-    grid-template-columns:1fr!important;
-    gap:.5rem;
-  }
+  .exit-layout{gap:.5rem}
 
-  /* ── 5. 이미지 격자 — 1열이면 한 장이 화면을 다 먹는다. 2열로 묶는다 ── */
-  /* .ucm-grid(주차 지도)도 2열 — 기존 760px 규칙과 같은 판단이다. */
-  .series-grid,.visual-grid,.visual-layout.four .visual-grid,
-  .unified-course-map .ucm-grid{
+  /* ── 5. 이미지 격자 — 1열이면 한 장이 화면을 다 먹는다. 2열로 묶는다 ──
+     위 규칙(0,2,0)보다 특정도가 높아야(0,3,0) 되살아난다. */
+  .slide.active .series-grid,
+  .slide.active .visual-grid,
+  .slide.active .ucm-grid{
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
   }
   .series-grid,.visual-grid{height:auto;padding:4px;gap:4px}
   .cover-layout .series-grid{height:auto}
   .series-grid figure,.visual-grid figure{aspect-ratio:3/4}
-  .series-grid figcaption,.visual-grid figcaption{font-size:.7rem;padding:.16rem .3rem}
+  /* 자손 선택자라 위 61행의 바닥값을 이기므로 여기서도 같은 바닥을 깐다 */
+  .series-grid figcaption,.visual-grid figcaption{
+    font-size:max(.72rem,11.5px);padding:.16rem .3rem}
 
   /* ── 6. 하단 고정 바 ──────────────────────────────────────────── */
   /* 지금은 .progress / .mode-controls / .nav-controls 셋이 따로 떠서 본문을 덮는다. */
@@ -1041,18 +1070,8 @@ body{font-family:'DeckNum',"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","S
   /* 공유 어휘(cards-grid 류) 밖의 것들. probe.py 전수 검사로 잡아낸 잔여분이다. */
   /* 덱을 새로 만들거나 크게 고치면 프로브를 다시 돌려 이 목록을 갱신할 것.       */
 
-  /* (1) 고정 트랙을 가진 2단 레이아웃 — 340~520px 최소폭이 390px 화면을 넘긴다 */
-  .evidence-auth-layout,      /* W02 · cols[0px 420px]   */
-  .research-map-layout,       /* W03 · minmax(340px,…)   */
-  .peer-visual-grid,          /* W03 · 4열              */
-  .rel20-matrix,.rel20-examples,   /* W06 · 4열 / 2열    */
-  .student-hero-layout,       /* W08 · cols[0px 360px]   */
-  .w08-tech-layout,           /* W08 · cols[0px 420px] (.reverse 포함) */
-  .grid-cols-2,.grid-cols-3,.grid-cols-4,.grid-cols-5,.grid-cols-6{  /* W08 계열 · 유틸리티 */
-    grid-template-columns:1fr!important;
-  }
-  /* (2) 인라인 style 로 박힌 격자 — W08 계열 11곳, 전부 2단 본문이라 1열로 접는다 */
-  .slide [style*="grid-template-columns"]{grid-template-columns:1fr!important}
+  /* (1)(2) 는 4번 규칙이 통째로 흡수했다.
+         (고정 트랙 2단 레이아웃 · Tailwind grid-cols-N · 인라인 style 격자 모두)  */
 
   /* (3) 절대배치 도해: 부모가 높이를 잃으면 자식이 밖으로 새어 하단 바에 겹친다.
          .research-map-board 는 높이가 flex 분배로만 정해져 있어 최소 높이를 준다. */
@@ -1062,15 +1081,37 @@ body{font-family:'DeckNum',"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","S
   .peer-visual-card{grid-template-rows:auto auto!important;overflow:visible}
   .rel20-board{height:auto}
 
-  /* (5) W08 계열의 Tailwind h-full(height:100%) — 2-1 과 같은 이유로 푼다.
-         컨테이너 높이가 화면에 고정되면 넘친 내용이 아래로 새어 하단 바에 겹치고,
-         .slide 의 padding-bottom 이 그 부분을 밀어 올리지 못한다. */
-  .h-full{height:auto!important}
+  /* (5) W08 계열의 Tailwind 고정 높이 — 2-1 과 같은 이유로 푼다.
+         컨테이너 높이가 고정되면 넘친 내용이 아래로 새어 하단 바에 겹치고,
+         .slide 의 padding-bottom 이 그 부분을 밀어 올리지 못한다.
+         ※ h-8·h-5·h-4·h-1·h-0 은 아이콘·괘선 크기다. 건드리면 안 된다.
+            컨테이너로 쓰이는 것만 고른다. */
+  .h-full,.h-64,.h-48{height:auto!important}
 
   /* (6) W08 부속의 강조 확대(scale-110) — 1열에서는 폭의 110% 가 되어 양옆으로
          18px 씩 삐져나간다. 데스크탑에서 카드 하나를 도드라지게 하려는 장식이므로
          좁은 화면에서는 끈다(테두리·그림자는 그대로 남아 강조는 유지된다). */
   .scale-110{transform:none!important}
+
+  /* ── 8. 3단 표(.axis-table) ───────────────────────────────────
+     데스크탑은 [축이름 10rem][조작 설명][해당 주차] 3단이다. 390px 에서는
+     가운데 칸이 180px 로 눌리고, .axis-seen 이 nowrap 이라 오른쪽 끝에 붙어
+     가운데 글자와 겹쳐 보인다. 행을 flex 로 바꿔
+       1행: 축이름 …………… 주차
+       2행: 조작 설명(전체 폭)
+     로 접는다. 표의 의미(대립쌍 ↔ 무엇으로 확인 ↔ 언제)는 그대로 남는다. */
+  .axis-table,.axis-table tbody{display:block;width:100%}
+  .axis-table tr{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .5rem;
+    padding:.5rem 0;border-bottom:1px solid var(--rule-2,#dcd9d1);
+  }
+  .axis-table tr:last-child{border-bottom:0}
+  .axis-table td{display:block;border:0!important;padding:0!important}
+  /* DOM 순서는 이름·설명·주차다. order 를 주지 않으면 설명이 100% 폭이라
+     먼저 줄을 바꿔 버려서 주차가 셋째 줄로 떨어진다. */
+  .axis-name{order:1;width:auto!important;flex:1 1 auto;white-space:normal!important}
+  .axis-seen{order:2;flex:0 0 auto;margin-left:auto;text-align:right;white-space:nowrap}
+  .axis-op{order:3;flex:1 0 100%;margin-top:.15rem}
 }
 /*<<MOBILE-LAYOUT-END>>*/</style>
 </body></html>
