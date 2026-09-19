@@ -7,13 +7,18 @@ data=json.loads((OUT/'manifest.json').read_text(encoding='utf-8'))
 translations=json.loads((OUT/'translations.json').read_text(encoding='utf-8'))
 processes=json.loads((OUT/'processes.json').read_text(encoding='utf-8'))
 errors=[]
+total=len(data['designers'])
+image_total=sum(len(d['images']) for d in data['designers'])
+assert total==38 and image_total==634
+assert sum(d['school']=='LCF' for d in data['designers'])==15
 with sync_playwright() as p:
     b=p.chromium.launch(headless=True)
     page=b.new_page(viewport={'width':1440,'height':900})
     page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto((OUT/'index.html').as_uri())
-    assert page.locator('.slide').count()==23
-    assert page.locator('.image-link').count()==443
+    assert page.locator('.slide').count()==total
+    assert page.locator('.image-link').count()==image_total
+    assert page.locator('#designer optgroup').count()==2
     for d in data['designers']:
         page.locator('#designer').select_option(d['slug'])
         page.wait_for_function('(slug)=>document.querySelector(".slide.active").id===slug',arg=d['slug'])
@@ -24,6 +29,9 @@ with sync_playwright() as p:
         assert active.locator('.bilingual [lang=en] p').text_content()==translations[d['slug']]['en']
         assert active.locator('.bilingual [lang="zh-CN"] p').text_content()==translations[d['slug']]['zh']
         assert active.locator('.theme strong').count()==2
+        assert active.locator('.bilingual mark').count()>=1
+        sizes=active.locator('.bilingual>div').evaluate_all('els=>els.map(e=>parseFloat(getComputedStyle(e.querySelector("p")).fontSize))')
+        assert sizes[0]>=19 and sizes[0]>sizes[1]*1.5,(d['slug'],sizes)
         assert active.locator('.course-note').count()==1
         assert active.locator('.bilingual>div').evaluate_all('els=>els.every(e=>e.scrollHeight<=e.clientHeight+1)')
         assert not re.search('[\uac00-\ud7af]',active.inner_text())
@@ -52,8 +60,8 @@ with sync_playwright() as p:
     page.locator('#close').click()
     page.goto((OUT/'processes.html').as_uri())
     assert page.locator('.route-card').count()==8
-    assert page.locator('tbody tr').count()==23
+    assert page.locator('tbody tr').count()==total
     assert len(processes['routes'])==7
     b.close()
 assert not errors,errors
-print('PASS: 23 one-page views; complete EN/ZH descriptions; bold themes; no text overflow; all 443 images; 7 routes + unknown; 23 unique classifications; image/text zoom; mobile bounds; no JS errors.')
+print(f'PASS: {total} one-page views; complete EN/ZH text; larger Chinese; yellow highlights; no overflow; {image_total} images; school navigation; 7 routes + unknown; text/image zoom; mobile bounds; no JS errors.')

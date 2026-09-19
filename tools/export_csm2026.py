@@ -15,13 +15,16 @@ with sync_playwright() as p:
         rendered=page.locator('.slide').screenshot(type='jpeg',quality=93)
         target=pdf.new_page(width=1500,height=937.5)
         target.insert_image(target.rect,stream=rendered)
-        print(f'PDF {n+1}/23',flush=True)
+        print(f'PDF {n+1}/{len(data["designers"])}',flush=True)
     b.close()
-pdf.set_metadata({'title':'CSM MA 2026 - Chinese / English - 23 designers','subject':'One designer per page; 443 images; source: 1 Granary'})
-pdf.save(OUT/'CSM-MA-2026-ZH-EN.pdf',deflate=True)
-assert len(pdf)==23
+pdf.set_metadata({'title':'CSM + LCF MA 2026 - Chinese / English - 38 designers','subject':'One designer per page; 634 images; source: 1 Granary'})
+pdf.save(OUT/'CSM-LCF-MA-2026-ZH-EN.pdf',deflate=True)
+assert len(pdf)==38
+csm=fitz.open();csm.insert_pdf(pdf,from_page=0,to_page=22)
+csm.set_metadata({'title':'CSM MA 2026 - Chinese / English - 23 designers'})
+csm.save(OUT/'CSM-MA-2026-ZH-EN.pdf',deflate=True);csm.close()
 pdf.close()
 with zipfile.ZipFile(ROOT/'tmp/CSM-MA-2026.zip','w',compression=zipfile.ZIP_DEFLATED,compresslevel=1) as z:
     for path in OUT.rglob('*'):
         if path.is_file():z.write(path,Path('CSM-MA-2026')/path.relative_to(OUT))
-print('Saved 23-page PDF and updated ZIP.',flush=True)
+print('Saved 38-page combined PDF, updated 23-page CSM PDF and ZIP.',flush=True)
