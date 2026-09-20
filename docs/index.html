@@ -134,6 +134,15 @@
     .doc-link{display:block;padding:12px 14px;border:1px solid var(--line);
       background:#fff;color:inherit;text-decoration:none;font-size:16px}
     .doc-link:hover{border-color:var(--accent)}
+    .doc-link b{display:block;font-weight:700}
+    .doc-link small{display:block;margin-top:5px;color:var(--muted);font-size:14px;
+      line-height:1.45;font-weight:400}
+    /* `.student-extra h2` 가 (0,1,1) 이라 `.after-head` (0,1,0) 를 이긴다 ——
+       여백이 먹혀 제목이 위 칸에 붙었다. 태그를 붙여 특이도를 맞춘다. */
+    .student-extra h2.after-head{margin:30px 0 12px;font-size:20px}
+    /* 讲稿 는 제목 한 줄이라 180px 로 충분하지만, 이쪽은 설명이 한 줄 더
+       붙는다. 좁으면 제목이 두 줄로 꺾인다(잰 값). */
+    .doc-grid.after{grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
     .notice-line{margin:18px 0 0;font-size:16px}
   </style>
 <style>
@@ -281,6 +290,11 @@
         <a class="doc-link" href="jiangao/%E3%80%8A%E5%A5%B3%E8%A3%85%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%AC02%E5%91%A8_%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86%E8%AF%BE%E5%A0%82%E5%AE%8C%E6%95%B4%E8%AE%B2%E7%A8%BF_%E4%B8%AD%E6%96%87.docx">第02周 讲稿</a>
         <a class="doc-link" href="jiangao/%E3%80%8A%E5%A5%B3%E8%A3%85%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%AC03%E5%91%A8_%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86%E8%AF%BE%E5%A0%82%E5%AE%8C%E6%95%B4%E8%AE%B2%E7%A8%BF_%E4%B8%AD%E6%96%87.docx">第03周 讲稿</a>
         </div>
+        <h2 class="after-head">课后资料</h2>
+        <div class="doc-grid after">
+        <a class="doc-link" href="csm-ma-2026/processes.html"><b>七种设计流程 · 38位设计师分类表</b><small>第03周第19页的四个数字，在这张表上自己数。</small></a>
+        </div>
+
         <p class="notice-line"><a href="shiyong_shuoming.html">使用说明与版权声明</a> ·
            本站仅供本课程选课学生使用，请勿转发到课程之外。</p>
       </div>
