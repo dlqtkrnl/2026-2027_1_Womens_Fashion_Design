@@ -1,35 +1,21 @@
-# csm-ma-2026 —— 갤러리는 내려가 있다 (2026-09-20)
+# CSM + LCF MA 2026 · 中英双语 / Chinese–English
 
-이 폴더에는 지금 **분류표(`processes.html`)와 그 CSS 만** 있다.
-38명의 개별 페이지·`index.html`·597장의 이미지·PDF 는 공개본에서 내려
-저장소 **바깥**의 보류 폴더로 옮겼다:
+打开 `index.html`：每位设计师一页，共38页（CSM 23位、LCF 15位）。中文放大，英文作为小字号参照；中文核心观点用黄色底色、制作方法用粗体标出。每页含全部图片、英文介绍原文、中文全译、加粗主题句，以及第01/02周的课程连接。点击“放大文字”可放大阅读。
 
-    _아카이브_보류_20260920/csm-ma-2026/
+Open `index.html`: one designer per page, 38 pages total (23 CSM + 15 LCF). Chinese is larger, with yellow conceptual highlights and bold construction terms; English is smaller. Each page includes all supplied images, the full English description, Chinese translation, a bold theme and course links.
 
-## 왜
+- 点击图片放大；+/− 调整倍率，Esc 关闭。Click an image to enlarge; +/− to zoom, Esc to close.
+- 顶部菜单或左右箭头切换设计师。Use the top selector or arrows to change designer.
+- 全部634张图片可离线查看。All 634 images are available offline.
+- `CSM-LCF-MA-2026-ZH-EN.pdf` 为38页合辑；原CSM文件仍为23页。The combined PDF has 38 pages; the original CSM PDF retains 23.
+- `processes.html` 按第02周原有七种流程提供分类总览。The process overview uses the seven routes already taught in Week 2.
+- `manifest.json` 保留原图链接。The manifest preserves original image URLs.
 
-38명 중 8명(약 170장)을 육안 선별한 결과, 2학년 교실 배포물로 둘 수 없는
-것이 나왔다:
+来源 / Source: https://1granary.com/designers-3/graduate-shows/csm-ma-2026/
 
-| 사람 | 내용 |
-|---|---|
-| arielle-uno/12 | 1974년 《DRUM》 잡지 핀업 —— 상반신 전면 노출 |
-| tiger-peng/02  | 콘돔 포장과 실물이 스캔 전면에 콜라주 |
-| tiger-peng/01  | 상반신 노출(등·옆구리) |
-| tiger-peng 런웨이 | 13장 중 7장에 담배가 모자 장식으로 |
-| luca-fabry/04·07 | 비치는 옷으로 가슴 노출 |
-| oli-clarke/06·18 | 가슴에 「Cigarettes」 레터링 |
-| oli-clarke/11  | 1930년대 무도회 카드의 실명 약 20개 |
+LCF: https://1granary.com/designers-3/graduate-shows/lcf-ma-fashion-2026-the-body-under-pressure/
+LCF秀场摄影 / LCF runway photography: Roger Dean.
 
-**나머지 30명 약 430장은 아직 보지 않았다.**
+原文未提供的资料已标明。36位有独立介绍；Maxina Brewer只有导言相关文字；Yodea Marquel没有介绍。主题句与流程归类是教学分析，不是设计师的原话或已证实的工作顺序。⑥仅列候选，Yodea暂不归类。课堂实验为建议。图片版权归各权利人。
 
-## 되돌리려면
-
-남은 430장을 육안 선별해 문제 파일을 가려낸 뒤, 보류 폴더에서 되돌린다.
-되돌릴 때 `processes.html` 의 디자이너 이름도 다시 링크로 바꿔야 한다
-(`archive_hold_gallery.py` 의 `LINKS` 규칙을 거꾸로 적용).
-
-## 주의
-
-저장소는 공개이고 Pages 가 켜져 있다. 이번 조치는 **앞으로 서비스되지 않게**
-할 뿐이며, **과거 커밋에는 파일이 그대로 남아 있다.**
+There are 36 standalone descriptions; Maxina Brewer is covered by the introduction only and Yodea Marquel has no description. Themes and classifications are teaching interpretations, not designer quotations or verified process chronologies. Route 6 has a candidate only; Yodea is unclassified. Classroom tests are proposals. Images belong to their respective rights holders.
